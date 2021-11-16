@@ -9,9 +9,8 @@ public class TimeController : Singleton<TimeController>
     float timeScaleBeforePause;
     float t;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         defaultFixedDeltaTime = Time.fixedDeltaTime;
     }
 

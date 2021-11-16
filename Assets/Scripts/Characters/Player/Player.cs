@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            transform.position = Viewport.Instance.PlayerMoveablePosition(transform.position, paddingX, paddingY);
+            transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
 
             yield return null;
         }
