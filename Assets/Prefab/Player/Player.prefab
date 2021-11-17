@@ -29122,6 +29122,7 @@ GameObject:
   - component: {fileID: 943594447}
   - component: {fileID: 1222673852}
   - component: {fileID: 943594446}
+  - component: {fileID: 2849688098052659661}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29200,7 +29201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
   maxHealth: 100
-  showOnHeadHealthBar: 1
+  showOnHeadHealthBar: 0
   onHeadHealthBar: {fileID: 4468222160088447896}
   statsBar_HUD: {fileID: 0}
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
@@ -29225,6 +29226,20 @@ MonoBehaviour:
   overdriveDodgeFactor: 2
   overdriveSpeedFactor: 1.2
   overDriveFireFactor: 1.2
+--- !u!114 &2849688098052659661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435389010079767255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3612b968b4e00354687b755333fd6aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyBar: {fileID: 0}
+  overdriveInterval: 0.1
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class Enemy : Character
     public override void Die()
     {
         //ScoreManager.Instance.AddScore(scorePoint);
-        //PlayerEnergy.Instance.Obtain(deathEnergyBonus);
+        PlayerEnergy.Instance.Obtain(deathEnergyBonus);
         //EnemyManager.Instance.RemoveFromList(gameObject);
         base.Die();
     }

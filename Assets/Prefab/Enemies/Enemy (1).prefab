@@ -14675,7 +14675,7 @@ MonoBehaviour:
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 5690233177326256129}
   scorePoint: 100
-  deathEnergyBonus: 3
+  deathEnergyBonus: 4
 --- !u!1001 &4372417151475017643
 PrefabInstance:
   m_ObjectHideFlags: 0

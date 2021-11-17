@@ -2,19 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsBar_HUD : StatsBar
+public class ShieldStatsBar : StatsBar
 {
     [SerializeField] protected Text percentText;
 
     void SetPercentText()
     {
-        percentText.text = Mathf.RoundToInt(targetFillAmount * 100f) + "%";
-        percentText.text = targetFillAmount.ToString("p");
+        //percentText.text = Mathf.RoundToInt(targetFillAmount * 100f) + "%";
+        percentText.text = targetFillAmount.ToString("p0");
     }
 
     public override void Initialize(float currentValue, float maxValue)
     {
         base.Initialize(currentValue, maxValue);
+        Debug.Log(targetFillAmount);
         SetPercentText();
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
-    [SerializeField] private StatsBar_HUD statsBar_HUD;
+    [SerializeField] private ShieldStatsBar statsBar_HUD;
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
