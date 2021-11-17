@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
+    [SerializeField] private StatsBar_HUD statsBar_HUD;
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
@@ -42,6 +43,7 @@ public class Player : Character
 
     private bool isOverdriving = false;
 
+    private float coroutineTimer;
     private Coroutine moveCoroutine;
     private Coroutine healthRegenerateCoroutine;
 
@@ -87,13 +89,14 @@ public class Player : Character
     {
 
         input.EnableGameplayInput();
+        statsBar_HUD.Initialize(health, maxHealth);
     }
     #region HEALTH
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        //statsBar_HUD.UpdateStats(health, maxHealth);
-        TimeController.Instance.BulletTime(slowMotionDuration);
+        statsBar_HUD.UpdateStats(health, maxHealth);
+        //TimeController.Instance.BulletTime(slowMotionDuration);
 
         if (gameObject.activeSelf)
         {
@@ -114,14 +117,14 @@ public class Player : Character
     public override void RestoreHealth(float value)
     {
         base.RestoreHealth(value);
-        //statsBar_HUD.UpdateStats(health, maxHealth);
+        statsBar_HUD.UpdateStats(health, maxHealth);
     }
 
     public override void Die()
     {
         GameManager.onGameOver?.Invoke();
         GameManager.GameState = GameState.GameOver;
-        //statsBar_HUD.UpdateStats(0f, maxHealth);
+        statsBar_HUD.UpdateStats(0f, maxHealth);
         base.Die();
     }
     #endregion
@@ -164,17 +167,14 @@ public class Player : Character
     /// <returns></returns>
     IEnumerator MoveCoroutine(float duration, Vector2 moveVelocity, Quaternion moveRotation)
     {
-        float t = 0f;
-
-        //previousRotation = transform.rotation;
-
-        while (t < duration)
+        coroutineTimer = 0f;
+        while (coroutineTimer < duration)
         {
-            t += Time.fixedDeltaTime / duration;
-            playerRigidbody.velocity = Vector2.Lerp(playerRigidbody.velocity, moveVelocity, t / duration);
-            transform.rotation = Quaternion.Lerp(transform.rotation, moveRotation, t / duration);
+            coroutineTimer += Time.fixedDeltaTime;
+            playerRigidbody.velocity = Vector2.Lerp(playerRigidbody.velocity, moveVelocity, coroutineTimer / duration);
+            transform.rotation = Quaternion.Lerp(transform.rotation, moveRotation, coroutineTimer / duration);
 
-            yield return null;
+            yield return waitForFixedUpdate;
         }
     }
 

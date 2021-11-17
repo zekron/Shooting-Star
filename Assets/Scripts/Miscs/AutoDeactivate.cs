@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class AutoDeactivate : MonoBehaviour
 {
-    [SerializeField] private bool destroyGameObject;
-    [SerializeField] private float lifeLime = 3f;
+    [SerializeField] bool destroyGameObject;
+    [SerializeField] float lifetime = 3f;
 
-    WaitForSeconds waitLifeTime;
+    WaitForSeconds waitLifetime;
 
     void Awake()
     {
-        waitLifeTime = new WaitForSeconds(lifeLime);
+        waitLifetime = new WaitForSeconds(lifetime);
     }
 
     void OnEnable()
@@ -20,13 +20,13 @@ public class AutoDeactivate : MonoBehaviour
 
     IEnumerator DeactivateCoroutine()
     {
-        yield return waitLifeTime;
+        yield return waitLifetime;
 
         if (destroyGameObject)
         {
             Destroy(gameObject);
         }
-        else
+        else 
         {
             gameObject.SetActive(false);
         }

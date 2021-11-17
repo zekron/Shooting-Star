@@ -18,13 +18,13 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.gameObject.TryGetComponent<Character>(out Character character))
-        //{
-        //    character.TakeDamage(damage);
-        //    PoolManager.Release(hitVFX, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
-        //    AudioManager.Instance.PlayRandomSFX(hitSFX);
-        //    gameObject.SetActive(false);
-        //}
+        if (collision.gameObject.TryGetComponent<Character>(out Character character))
+        {
+            character.TakeDamage(damage);
+            ObjectPoolManager.Release(hitVFX, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
+            //AudioManager.Instance.PlayRandomSFX(hitSFX);
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator MoveDirectlyCoroutine()

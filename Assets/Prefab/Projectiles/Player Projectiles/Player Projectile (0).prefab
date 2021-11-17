@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2940735757800734}
   - component: {fileID: 7804902636597906642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,9 +147,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5390272512000304096}
+  - component: {fileID: 479342833450749246}
   - component: {fileID: 4740298331455090748}
   - component: {fileID: 9209005491634150412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Projectile (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +172,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &479342833450749246
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667453350895143958}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02, y: 0}
+  m_Size: {x: 0.3, y: 0.12}
+  m_Direction: 1
 --- !u!114 &4740298331455090748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89588c9c2918d5942997eb666690da09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitVFX: {fileID: 0}
-  damage: 0
+  hitVFX: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
+  damage: 1
   moveSpeed: 15
   moveDirection: {x: 1, y: 0.05}
 --- !u!114 &9209005491634150412
@@ -200,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyGameObject: 0
-  lifeLime: 3
+  lifetime: 3
 --- !u!1 &7630024414233637009
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +229,7 @@ GameObject:
   - component: {fileID: 5747290410760051606}
   - component: {fileID: 7609481829518580338}
   - component: {fileID: 7021565823413074809}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
