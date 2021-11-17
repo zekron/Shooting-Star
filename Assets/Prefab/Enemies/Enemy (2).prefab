@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 578449712315536098}
   - component: {fileID: 1544336168}
+  - component: {fileID: 1811371292644592213}
   m_Layer: 7
   m_Name: Enemy (2)
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,10 +50,29 @@ MonoBehaviour:
   moveSpeed: 1
   moveRotationAngle: 35
   projectiles:
-  - {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
+  - {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
+  - {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
+  - {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
   muzzle: {fileID: 932438790351565965}
   minFireInterval: 2
   maxFireInterval: 4
+--- !u!114 &1811371292644592213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578449712315536124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7df6dae4292a44d9f39932e8e4be55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathVFX: {fileID: 0}
+  maxHealth: 7
+  showOnHeadHealthBar: 1
+  scorePoint: 100
+  deathEnergyBonus: 3
 --- !u!1 &6141127440874144652
 GameObject:
   m_ObjectHideFlags: 0

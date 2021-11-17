@@ -29180,10 +29180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77120fe5ab6ae448aa192191bfabab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathVFX: {fileID: 0}
+  maxHealth: 100
+  showOnHeadHealthBar: 1
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
   regenerateHealth: 1
-  healthRegenerateTime: 0
-  healthRegeneratePercent: 0
+  healthRegenerateTime: 12
+  healthRegeneratePercent: 0.02
   moveSpeed: 6
   accelerationTime: 0.2
   decelerationTime: 0.2

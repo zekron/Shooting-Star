@@ -2,14 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
-    [SerializeField] bool regenerateHealth = true;
-    [SerializeField] float healthRegenerateTime;
-    [SerializeField, Range(0f, 1f)] float healthRegeneratePercent;
+    [SerializeField] private bool regenerateHealth = true;
+    [SerializeField] private float healthRegenerateTime;
+    [SerializeField, Range(0f, 1f)] private float healthRegeneratePercent;
 
     [Header("Move")]
     [SerializeField] private float moveSpeed = 20f;
@@ -30,20 +30,26 @@ public class Player : MonoBehaviour
     [SerializeField] private float overdriveSpeedFactor = 1.2f;
     [SerializeField] private float overDriveFireFactor = 1.2f;
 
-    private Quaternion previousRotation;
-
     private Rigidbody2D playerRigidbody;
+
+    private readonly float slowMotionDuration = 1f;
     private float paddingX;
     private float paddingY;
+
+    private Vector2 moveDirection;
+    private Vector2 previousVelocity;
+    private Quaternion previousRotation;
 
     private bool isOverdriving = false;
 
     private Coroutine moveCoroutine;
+    private Coroutine healthRegenerateCoroutine;
 
     private WaitForSeconds waitForFireInterval;
     private WaitForSeconds waitForOverdriveFireInterval;
     private WaitForSeconds waitHealthRegenerateTime;
     private WaitForSeconds waitDecelerationTime;
+    private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     private void Awake()
     {
@@ -60,8 +66,10 @@ public class Player : MonoBehaviour
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
         waitDecelerationTime = new WaitForSeconds(decelerationTime);
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         input.onMove += Move;
         input.onStopMove += StopMove;
         input.onFire += Fire;
@@ -80,10 +88,43 @@ public class Player : MonoBehaviour
 
         input.EnableGameplayInput();
     }
-
-    private void Update()
+    #region HEALTH
+    public override void TakeDamage(float damage)
     {
+        base.TakeDamage(damage);
+        //statsBar_HUD.UpdateStats(health, maxHealth);
+        TimeController.Instance.BulletTime(slowMotionDuration);
+
+        if (gameObject.activeSelf)
+        {
+            Move(moveDirection);
+
+            if (regenerateHealth)
+            {
+                if (healthRegenerateCoroutine != null)
+                {
+                    StopCoroutine(healthRegenerateCoroutine);
+                }
+
+                healthRegenerateCoroutine = StartCoroutine(HealthRegenerateCoroutine(waitHealthRegenerateTime, healthRegeneratePercent));
+            }
+        }
     }
+
+    public override void RestoreHealth(float value)
+    {
+        base.RestoreHealth(value);
+        //statsBar_HUD.UpdateStats(health, maxHealth);
+    }
+
+    public override void Die()
+    {
+        GameManager.onGameOver?.Invoke();
+        GameManager.GameState = GameState.GameOver;
+        //statsBar_HUD.UpdateStats(0f, maxHealth);
+        base.Die();
+    }
+    #endregion
 
     #region Move
     private void Move(Vector2 moveInput)
