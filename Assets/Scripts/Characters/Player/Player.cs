@@ -26,12 +26,12 @@ public class Player : Character
     [SerializeField] private GameObject[] projectiles;
     [SerializeField] private GameObject projectileOverdrive;
     [SerializeField] private Transform[] muzzles;
-    //[SerializeField] private AudioData projectileLaunchSFX;
+    [SerializeField] private AudioData projectileLaunchSFX;
     [SerializeField, Range(0, 2)] private int weaponPower = 0;
     [SerializeField] private float fireInterval = 0.2f;
 
     [Header("Dodge")]
-    //[SerializeField] private AudioData dodgeSFX;
+    [SerializeField] private AudioData dodgeSFX;
     [SerializeField, Range(0, 100)] private int dodgeEnergyCost = 25;
     [SerializeField] private float dodgeDuration = 2;
     [SerializeField] private float rollSpeed = 360f;
@@ -239,7 +239,7 @@ public class Player : Character
                     break;
             }
 
-            //AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
+            AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
 
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
@@ -256,7 +256,7 @@ public class Player : Character
     private IEnumerator DodgeCoroutine()
     {
         isDodging = true;
-        //AudioManager.Instance.PlayRandomSFX(dodgeSFX);
+        AudioManager.Instance.PlayRandomSFX(dodgeSFX);
         PlayerEnergy.Instance.Cost(dodgeEnergyCost);
         playerCollider.isTrigger = true;
         currentRoll = 0f;
