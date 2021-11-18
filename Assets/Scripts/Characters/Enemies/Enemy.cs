@@ -18,7 +18,7 @@ public class Enemy : Character
     {
         //ScoreManager.Instance.AddScore(scorePoint);
         PlayerEnergy.Instance.Obtain(deathEnergyBonus);
-        //EnemyManager.Instance.RemoveFromList(gameObject);
+        EnemyManager.Instance.RemoveFromList(gameObject);
         base.Die();
     }
 }
