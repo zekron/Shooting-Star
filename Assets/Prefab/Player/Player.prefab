@@ -29223,6 +29223,10 @@ MonoBehaviour:
   - {fileID: 10306434}
   weaponPower: 0
   fireInterval: 0.12
+  dodgeEnergyCost: 25
+  dodgeDuration: 1
+  rollSpeed: 360
+  dodgeScale: {x: 0.2, y: 0.2, z: 0.2}
   overdriveDodgeFactor: 2
   overdriveSpeedFactor: 1.2
   overDriveFireFactor: 1.2

@@ -47,7 +47,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
         energyBar.UpdateStats(energy, MAX);
     }
 
-    public void Use(int value)
+    public void Cost(int value)
     {
         energy -= value;
         energyBar.UpdateStats(energy, MAX);
@@ -83,7 +83,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
 
             // use 1% of max energy, every 1 second use 10% of max energy 
             // means that overdrive last for 10 seconds
-            Use(PERCENT);
+            Cost(PERCENT);
         }
     }
 }
