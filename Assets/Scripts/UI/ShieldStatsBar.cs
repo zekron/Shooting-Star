@@ -15,7 +15,6 @@ public class ShieldStatsBar : StatsBar
     public override void Initialize(float currentValue, float maxValue)
     {
         base.Initialize(currentValue, maxValue);
-        Debug.Log(targetFillAmount);
         SetPercentText();
     }
 

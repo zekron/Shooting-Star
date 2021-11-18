@@ -39,11 +39,11 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         while (spawnEnemy)
         {
-            //waveUI.SetActive(true);
+            waveUI.SetActive(true);
 
             yield return waitTimeBetweenWaves;
 
-            //waveUI.SetActive(false);
+            waveUI.SetActive(false);
 
             yield return StartCoroutine(nameof(RandomlySpawnCoroutine));
         }
