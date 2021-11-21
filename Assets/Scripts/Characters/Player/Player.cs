@@ -26,12 +26,12 @@ public class Player : Character
     [SerializeField] private GameObject[] projectiles;
     [SerializeField] private GameObject projectileOverdrive;
     [SerializeField] private Transform[] muzzles;
-    [SerializeField] private AudioData projectileLaunchSFX;
+    [SerializeField] private AudioDataSO projectileLaunchSFX;
     [SerializeField, Range(0, 2)] private int weaponPower = 0;
     [SerializeField] private float fireInterval = 0.2f;
 
     [Header("Dodge")]
-    [SerializeField] private AudioData dodgeSFX;
+    [SerializeField] private AudioDataSO dodgeSFX;
     [SerializeField, Range(0, 100)] private int dodgeEnergyCost = 25;
     [SerializeField] private float dodgeDuration = 2;
     [SerializeField] private float rollSpeed = 360f;
@@ -52,8 +52,8 @@ public class Player : Character
     private readonly float slowMotionDuration = 1f;
 
     private Vector2 moveDirection;
-    private Vector2 previousVelocity;
-    private Quaternion previousRotation;
+    private Vector2 tempPlayerVelocity;
+    private Quaternion tempPlayerRotation;
 
 
     private float coroutineTimer;
@@ -109,6 +109,7 @@ public class Player : Character
         input.EnableGameplayInput();
         statsBar_HUD.Initialize(health, maxHealth);
     }
+
     #region HEALTH
     public override void TakeDamage(float damage)
     {
@@ -176,6 +177,7 @@ public class Player : Character
         StopCoroutine(nameof(MoveRangeLimitCoroutine));
     }
 
+   
     /// <summary>
     /// ÒÆ¶¯Ð­³Ì
     /// </summary>
@@ -186,11 +188,14 @@ public class Player : Character
     IEnumerator MoveCoroutine(float duration, Vector2 moveVelocity, Quaternion moveRotation)
     {
         coroutineTimer = 0f;
+        tempPlayerVelocity = playerRigidbody.velocity;
+        tempPlayerRotation = transform.rotation;
+
         while (coroutineTimer < duration)
         {
             coroutineTimer += Time.fixedDeltaTime;
-            playerRigidbody.velocity = Vector2.Lerp(playerRigidbody.velocity, moveVelocity, coroutineTimer / duration);
-            transform.rotation = Quaternion.Lerp(transform.rotation, moveRotation, coroutineTimer / duration);
+            playerRigidbody.velocity = Vector2.Lerp(tempPlayerVelocity, moveVelocity, coroutineTimer / duration);
+            transform.rotation = Quaternion.Lerp(tempPlayerRotation, moveRotation, coroutineTimer / duration);
 
             yield return waitForFixedUpdate;
         }
@@ -239,7 +244,7 @@ public class Player : Character
                     break;
             }
 
-            AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
+            AudioManager.Instance.PlaySFX(projectileLaunchSFX);
 
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
@@ -256,7 +261,7 @@ public class Player : Character
     private IEnumerator DodgeCoroutine()
     {
         isDodging = true;
-        AudioManager.Instance.PlayRandomSFX(dodgeSFX);
+        AudioManager.Instance.PlaySFX(dodgeSFX);
         PlayerEnergy.Instance.Cost(dodgeEnergyCost);
         playerCollider.isTrigger = true;
         currentRoll = 0f;

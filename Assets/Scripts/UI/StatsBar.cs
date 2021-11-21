@@ -73,13 +73,13 @@ public class StatsBar : MonoBehaviour
             yield return waitForDelayFill;
         }
 
-        //previousFillAmount = currentFillAmount;
+        previousFillAmount = currentFillAmount;
         coroutineTimer = 0f;
 
         while (coroutineTimer < fillSpeed)
         {
             coroutineTimer += Time.deltaTime;
-            currentFillAmount = Mathf.Lerp(currentFillAmount, targetFillAmount, coroutineTimer / fillSpeed);
+            currentFillAmount = Mathf.Lerp(previousFillAmount, targetFillAmount, coroutineTimer / fillSpeed);
             image.fillAmount = currentFillAmount;
 
             yield return null;

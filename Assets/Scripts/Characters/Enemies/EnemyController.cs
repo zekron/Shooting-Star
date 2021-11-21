@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Move")]
     [SerializeField] private GameObject[] projectiles;
-    [SerializeField] private AudioData[] projectileLaunchSFX;
+    [SerializeField] private AudioDataSO projectileLaunchSFX;
     [SerializeField] private Transform muzzle;
     [SerializeField] private float minFireInterval;
     [SerializeField] private float maxFireInterval;
@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour
                 ObjectPoolManager.Release(projectile, muzzle.position);
             }
 
-            AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
+            AudioManager.Instance.PlaySFX(projectileLaunchSFX);
         }
     }
 }

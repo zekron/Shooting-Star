@@ -4,32 +4,40 @@ using UnityEngine;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
-    [SerializeField] AudioSource sFXPlayer;
+    [SerializeField] private AudioSource sFXPlayer;
+    [SerializeField] private AudioSource bGMPlayer;
 
-    const float MIN_PITCH = 0.9f;
-    const float MAX_PITCH = 1.1f;
+    private const float MIN_PITCH = 0.9f;
+    private const float MAX_PITCH = 1.1f;
+
+    public void PlaySFX(AudioDataSO audioData)
+    {
+        if (audioData.audioClip.Length > 1)
+        {
+            PlayRandomSFX(audioData);
+        }
+        else
+        {
+            PlaySFX(audioData.audioClip[0], audioData.volume);
+        }
+    }
+
+    public void PlayBGM(AudioDataSO audioData)
+    {
+        bGMPlayer.clip = audioData.audioClip[0];
+        bGMPlayer.Play();
+    }
 
     // Used for UI SFX
-    public void PlaySFX(AudioData audioData)
+    private void PlaySFX(AudioClip clip, float volume)
     {
-        sFXPlayer.PlayOneShot(audioData.audioClip, audioData.volume);
+        sFXPlayer.PlayOneShot(clip, volume);
     }
 
     // Used for repeat-play SFX
-    public void PlayRandomSFX(AudioData audioData)
+    private void PlayRandomSFX(AudioDataSO audioData)
     {
         sFXPlayer.pitch = Random.Range(MIN_PITCH, MAX_PITCH);
-        PlaySFX(audioData);
+        PlaySFX(audioData.audioClip[Random.Range(0, audioData.audioClip.Length)], audioData.volume);
     }
-
-    public void PlayRandomSFX(AudioData[] audioData)
-    {
-        PlayRandomSFX(audioData[Random.Range(0, audioData.Length)]);
-    }
-}
-
-[System.Serializable] public class AudioData
-{
-    public AudioClip audioClip;
-    public float volume;
 }

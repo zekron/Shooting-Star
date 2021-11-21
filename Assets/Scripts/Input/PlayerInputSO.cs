@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "Player Input SO")]
+[CreateAssetMenu(menuName = "Scriptable Object/Player Input SO")]
 public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActions, PlayerInputActions.IPauseMenuActions, PlayerInputActions.IGameOverScreenActions
 {
     public event UnityAction<Vector2> onMove = delegate { };

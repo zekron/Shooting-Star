@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private GameObject hitVFX;
-    [SerializeField] AudioData[] hitSFX;
+    [SerializeField] AudioDataSO hitSFX;
     [SerializeField] private float damage;
     [SerializeField] protected float moveSpeed = 10f;
     [SerializeField] protected Vector2 moveDirection;
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
         {
             character.TakeDamage(damage);
             ObjectPoolManager.Release(hitVFX, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
-            AudioManager.Instance.PlayRandomSFX(hitSFX);
+            AudioManager.Instance.PlaySFX(hitSFX);
             gameObject.SetActive(false);
         }
     }

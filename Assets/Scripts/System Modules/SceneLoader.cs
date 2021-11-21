@@ -4,14 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : PersistentSingleton<SceneLoader>
 {
-    [SerializeField] UnityEngine.UI.Image transitionImage;
-    [SerializeField] float fadeTime = 3.5f;
+    [SerializeField] private float fadeTime = 3.5f;
+    private UnityEngine.UI.Image transitionImage;
+    private Canvas canvas;
 
-    Color color;
+    private Color color;
 
-    const string GAMEPLAY = "Gameplay";
-    const string MAIN_MENU = "MainMenu";
-    const string SCORING = "Scoring";
+    private const string GAMEPLAY = "Gameplay";
+    private const string MAIN_MENU = "MainMenu";
+    private const string SCORING = "Scoring";
+
+    protected override void Awake()
+    {
+        base.Awake();
+        canvas = GetComponent<Canvas>();
+        transitionImage = GetComponent<UnityEngine.UI.Image>();
+    }
 
     IEnumerator LoadingCoroutine(string sceneName)
     {
@@ -21,7 +29,8 @@ public class SceneLoader : PersistentSingleton<SceneLoader>
         loadingOperation.allowSceneActivation = false;
 
         // Fade out
-        transitionImage.gameObject.SetActive(true);
+        canvas.enabled = true;
+        //transitionImage.gameObject.SetActive(true);
 
         while (color.a < 1f)
         {
@@ -45,7 +54,8 @@ public class SceneLoader : PersistentSingleton<SceneLoader>
             yield return null;
         }
 
-        transitionImage.gameObject.SetActive(false);
+        canvas.enabled = false;
+        //transitionImage.gameObject.SetActive(false);
     }
 
     public void LoadGameplayScene()
