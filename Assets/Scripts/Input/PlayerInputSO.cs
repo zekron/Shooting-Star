@@ -134,4 +134,12 @@ public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActio
             onConfirmGameOver.Invoke();
         }
     }
+
+    public void OnOverDrive(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onOverdrive.Invoke();
+        }
+    }
 }

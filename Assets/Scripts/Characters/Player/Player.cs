@@ -92,6 +92,10 @@ public class Player : Character
         input.onFire += Fire;
         input.onStopFire += StopFire;
         input.onDodge += Dodge;
+        input.onOverdrive += OverDrive;
+
+        PlayerOverdrive.On += OpenOverdrive;
+        PlayerOverdrive.Off += StopOverdrive;
     }
 
     private void OnDisable()
@@ -101,6 +105,10 @@ public class Player : Character
         input.onFire -= Fire;
         input.onStopFire -= StopFire;
         input.onDodge -= Dodge;
+        input.onOverdrive -= OverDrive;
+
+        PlayerOverdrive.On -= OpenOverdrive;
+        PlayerOverdrive.Off -= StopOverdrive;
     }
 
     private void Start()
@@ -177,7 +185,7 @@ public class Player : Character
         StopCoroutine(nameof(MoveRangeLimitCoroutine));
     }
 
-   
+
     /// <summary>
     /// ÒÆ¶¯Ð­³Ì
     /// </summary>
@@ -278,6 +286,29 @@ public class Player : Character
 
         playerCollider.isTrigger = false;
         isDodging = false;
+    }
+    #endregion
+
+    #region OverDrive
+    private void OverDrive()
+    {
+        if (!PlayerEnergy.Instance.IsEnough(PlayerEnergy.MAX)) return;
+
+        PlayerOverdrive.On.Invoke();
+    }
+
+    private void OpenOverdrive()
+    {
+        isOverdriving = true;
+        dodgeEnergyCost *= overdriveDodgeFactor;
+        moveSpeed *= overdriveSpeedFactor;
+    }
+
+    private void StopOverdrive()
+    {
+        isOverdriving = false;
+        dodgeEnergyCost /= overdriveDodgeFactor;
+        moveSpeed /= overdriveSpeedFactor;
     }
     #endregion
 }

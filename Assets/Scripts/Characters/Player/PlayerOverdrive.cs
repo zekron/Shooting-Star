@@ -3,40 +3,40 @@ using UnityEngine.Events;
 
 public class PlayerOverdrive : MonoBehaviour
 {
-    public static UnityAction on = delegate { };
-    public static UnityAction off = delegate { };
+    public static UnityAction On = delegate { };
+    public static UnityAction Off = delegate { };
 
-    [SerializeField] GameObject triggerVFX;
-    [SerializeField] GameObject engineVFXNormal;
-    [SerializeField] GameObject engineVFXOverdrive;
+    [SerializeField] private GameObject triggerVFX;
+    [SerializeField] private GameObject engineVFXNormal;
+    [SerializeField] private GameObject engineVFXOverdrive;
 
-    //[SerializeField] AudioData onSFX;
-    //[SerializeField] AudioData offSFX;
+    [SerializeField] private AudioDataSO openSFX;
+    [SerializeField] private AudioDataSO stopSFX;
 
-    void Awake()
+    private void Awake()
     {
-        on += On;
-        off += Off;
+        On += Open;
+        Off += Stop;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
-        on -= On;
-        off -= Off;
+        On -= Open;
+        Off -= Stop;
     }
 
-    void On()
+    private void Open()
     {
         triggerVFX.SetActive(true);
         engineVFXNormal.SetActive(false);
         engineVFXOverdrive.SetActive(true);
-        //AudioManager.Instance.PlayRandomSFX(onSFX);
+        AudioManager.Instance.PlaySFX(openSFX);
     }
 
-    void Off()
+    private void Stop()
     {
         engineVFXOverdrive.SetActive(false);
         engineVFXNormal.SetActive(true);
-        //AudioManager.Instance.PlayRandomSFX(offSFX);
+        AudioManager.Instance.PlaySFX(stopSFX);
     }
 }

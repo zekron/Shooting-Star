@@ -13,7 +13,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
     public const int PERCENT = 1;
     int energy;
 
-    WaitForSeconds waitForOverdriveInterval;
+    private WaitForSeconds waitForOverdriveInterval;
 
     protected override void Awake()
     {
@@ -23,14 +23,14 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
 
     void OnEnable()
     {
-        PlayerOverdrive.on += PlayerOverdriveOn;
-        PlayerOverdrive.off += PlayerOverdriveOff;
+        PlayerOverdrive.On += OpenPlayerOverdrive;
+        PlayerOverdrive.Off += StopPlayerOverdrive;
     }
 
     void OnDisable()
     {
-        PlayerOverdrive.on -= PlayerOverdriveOn;
-        PlayerOverdrive.off -= PlayerOverdriveOff;
+        PlayerOverdrive.On -= OpenPlayerOverdrive;
+        PlayerOverdrive.Off -= StopPlayerOverdrive;
     }
 
     void Start()
@@ -56,19 +56,19 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
         if (energy == 0 && !available)
         {
             // player stop overdriving
-            PlayerOverdrive.off.Invoke();
+            PlayerOverdrive.Off.Invoke();
         }
     }
 
     public bool IsEnough(int value) => energy >= value;
 
-    void PlayerOverdriveOn()
+    void OpenPlayerOverdrive()
     {
         available = false;
         StartCoroutine(nameof(KeepUsingCoroutine));
     }
 
-    void PlayerOverdriveOff()
+    void StopPlayerOverdrive()
     {
         available = true;
         StopCoroutine(nameof(KeepUsingCoroutine));
