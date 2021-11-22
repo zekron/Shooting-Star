@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerProjectileOverdrive : PlayerProjectile
 {
     [SerializeField] ProjectileGuidanceSystem guidanceSystem;
-    
+
     protected override void OnEnable()
     {
-        //SetTarget(EnemyManager.Instance.RandomEnemy);
+        SetTarget(EnemyManager.Instance.RandomEnemy);
         transform.rotation = Quaternion.identity;
 
         if (target == null)
         {
             base.OnEnable();
         }
-        else 
+        else
         {
             StartCoroutine(guidanceSystem.HomingCoroutine(target));
         }

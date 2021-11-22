@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class TimeController : Singleton<TimeController>
 {
-    [SerializeField, Range(0f, 1f)] float bulletTimeScale = 0.1f;
+    [SerializeField, Range(0f, 1f)] private float bulletTimeScale = 0.1f;
 
-    float defaultFixedDeltaTime;
-    float timeScaleBeforePause;
-    float t;
+    private float defaultFixedDeltaTime;
+    private float timeScaleBeforePause;
+    private float defaultTimeScale;
+    private float timer;
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         defaultFixedDeltaTime = Time.fixedDeltaTime;
+        defaultTimeScale = Time.timeScale;
     }
 
     public void Pause()
@@ -68,14 +71,14 @@ public class TimeController : Singleton<TimeController>
 
     IEnumerator SlowInCoroutine(float duration)
     {
-        t = 0f;
+        timer = 0f;
 
-        while (t < 1f)
+        while (timer < duration)
         {
             if (GameManager.GameState != GameState.Paused)
             {
-                t += Time.unscaledDeltaTime / duration;
-                Time.timeScale = Mathf.Lerp(1f, bulletTimeScale, t);
+                timer += Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Lerp(defaultTimeScale, bulletTimeScale, timer / duration);
                 Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
             }
 
@@ -85,14 +88,14 @@ public class TimeController : Singleton<TimeController>
 
     IEnumerator SlowOutCoroutine(float duration)
     {
-        t = 0f;
+        timer = 0f;
 
-        while (t < 1f)
+        while (timer < duration)
         {
             if (GameManager.GameState != GameState.Paused)
             {
-                t += Time.unscaledDeltaTime / duration;
-                Time.timeScale = Mathf.Lerp(bulletTimeScale, 1f, t);
+                timer += Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Lerp(bulletTimeScale, defaultTimeScale, timer / duration);
                 Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
             }
 

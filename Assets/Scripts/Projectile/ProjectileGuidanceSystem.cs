@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class ProjectileGuidanceSystem : MonoBehaviour
 {
-    [SerializeField] Projectile projectile;
-    [SerializeField] float minBallisticAngle = 50f;
-    [SerializeField] float maxBallisticAngle = 75f;
+    [SerializeField] private Projectile projectile;
+    [SerializeField] private float minBallisticAngle = 50f;
+    [SerializeField] private float maxBallisticAngle = 75f;
 
-    float ballisticAngle;
+    private float ballisticAngle;
 
-    Vector3 targetDirection;
+    private Vector3 targetDirection;
 
     public IEnumerator HomingCoroutine(GameObject target)
     {
@@ -24,7 +24,7 @@ public class ProjectileGuidanceSystem : MonoBehaviour
                 transform.rotation *= Quaternion.Euler(0f, 0f, ballisticAngle);
                 projectile.Move();
             }
-            else 
+            else
             {
                 projectile.Move();
             }

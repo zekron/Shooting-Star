@@ -123,7 +123,7 @@ public class Player : Character
     {
         base.TakeDamage(damage);
         statsBar_HUD.UpdateStats(health, maxHealth);
-        //TimeController.Instance.BulletTime(slowMotionDuration);
+        TimeController.Instance.BulletTime(slowMotionDuration);
 
         if (gameObject.activeSelf)
         {
@@ -170,7 +170,8 @@ public class Player : Character
             moveInput * moveSpeed,
             Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right)));
 
-        StartCoroutine(nameof(MoveRangeLimitCoroutine));
+        StopCoroutine(nameof(DecelerationCoroutine));
+        StartCoroutine(nameof(MoveRangeLimatationCoroutine));
     }
 
     private void StopMove()
@@ -182,7 +183,7 @@ public class Player : Character
 
         moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
 
-        StopCoroutine(nameof(MoveRangeLimitCoroutine));
+        StartCoroutine(nameof(DecelerationCoroutine));
     }
 
 
@@ -209,7 +210,7 @@ public class Player : Character
         }
     }
 
-    IEnumerator MoveRangeLimitCoroutine()
+    IEnumerator MoveRangeLimatationCoroutine()
     {
         while (true)
         {
@@ -217,6 +218,13 @@ public class Player : Character
 
             yield return null;
         }
+    }
+
+    IEnumerator DecelerationCoroutine()
+    {
+        yield return waitDecelerationTime;
+
+        StopCoroutine(nameof(MoveRangeLimatationCoroutine));
     }
     #endregion
 
@@ -273,7 +281,7 @@ public class Player : Character
         PlayerEnergy.Instance.Cost(dodgeEnergyCost);
         playerCollider.isTrigger = true;
         currentRoll = 0f;
-        //TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
+        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
 
         while (currentRoll < maxRoll)
         {
@@ -302,6 +310,7 @@ public class Player : Character
         isOverdriving = true;
         dodgeEnergyCost *= overdriveDodgeFactor;
         moveSpeed *= overdriveSpeedFactor;
+        TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
     }
 
     private void StopOverdrive()
