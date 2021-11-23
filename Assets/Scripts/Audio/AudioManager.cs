@@ -12,11 +12,11 @@ public class AudioManager : PersistentSingleton<AudioManager>
     {
         if (audioData.audioClip.Length > 1)
         {
-            PlayRandomSFX(audioData);
+            PlayRandomClipSFX(audioData);
         }
         else
         {
-            PlaySFX(audioData.audioClip[0], audioData.volume);
+            PlayRandomPitchSFX(audioData.audioClip[0], audioData.volume);
         }
     }
 
@@ -27,15 +27,21 @@ public class AudioManager : PersistentSingleton<AudioManager>
     }
 
     // Used for UI SFX
-    private void PlaySFX(AudioClip clip, float volume)
+    private void PlayNormalPitchSFX(AudioClip clip, float volume)
     {
+        sFXPlayer.pitch = 1;
+        sFXPlayer.PlayOneShot(clip, volume);
+    }
+
+    private void PlayRandomPitchSFX(AudioClip clip, float volume)
+    {
+        sFXPlayer.pitch = Random.Range(MIN_PITCH, MAX_PITCH);
         sFXPlayer.PlayOneShot(clip, volume);
     }
 
     // Used for repeat-play SFX
-    private void PlayRandomSFX(AudioDataSO audioData)
+    private void PlayRandomClipSFX(AudioDataSO audioData)
     {
-        sFXPlayer.pitch = Random.Range(MIN_PITCH, MAX_PITCH);
-        PlaySFX(audioData.audioClip[Random.Range(0, audioData.audioClip.Length)], audioData.volume);
+        PlayNormalPitchSFX(audioData.audioClip[Random.Range(0, audioData.audioClip.Length)], audioData.volume);
     }
 }

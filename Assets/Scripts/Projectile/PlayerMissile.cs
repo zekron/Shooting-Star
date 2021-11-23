@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class PlayerMissile : PlayerProjectileOverdrive
 {
-    //[SerializeField] AudioData targetAcquiredVoice = null;
+    [SerializeField] private AudioDataSO targetAcquiredVoice = null;
 
     [Header("==== SPEED CHANGE ====")]
-    [SerializeField] float lowSpeed = 8f;
-    [SerializeField] float highSpeed = 25f;
-    [SerializeField] float variableSpeedDelay = 0.5f;
+    [SerializeField] private float lowSpeed = 8f;
+    [SerializeField] private float highSpeed = 25f;
+    [SerializeField] private float variableSpeedDelay = 0.5f;
 
     [Header("==== EXPLOSION ====")]
-    [SerializeField] GameObject explosionVFX = null;
-    //[SerializeField] AudioData explosionSFX = null;
+    [SerializeField] private GameObject explosionVFX = null;
+    [SerializeField] private AudioDataSO explosionSFX = null;
+    [SerializeField] private LayerMask enemyLayerMask = default;
+    [SerializeField] private float explosionRadius = 3f;
+    [SerializeField] private float explosionDamage = 100f;
 
-    WaitForSeconds waitVariableSpeedDelay;
-    
+    private WaitForSeconds waitVariableSpeedDelay;
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,11 +35,12 @@ public class PlayerMissile : PlayerProjectileOverdrive
     {
         base.OnCollisionEnter2D(collision);
         // Spawn a explosion VFX
-        //PoolManager.Release(explosionVFX, transform.position);
+        ObjectPoolManager.Release(explosionVFX, transform.position);
         // Play explosion SFX
-        //AudioManager.Instance.PlayRandomSFX(explosionSFX);
+        AudioManager.Instance.PlaySFX(explosionSFX);
+        PhysicsOverlapDetection();
     }
-    
+
     IEnumerator VariableSpeedCoroutine()
     {
         moveSpeed = lowSpeed;
@@ -47,8 +51,27 @@ public class PlayerMissile : PlayerProjectileOverdrive
 
         if (target != null)
         {
-            //AudioManager.Instance.PlayRandomSFX(targetAcquiredVoice);
+            AudioManager.Instance.PlaySFX(targetAcquiredVoice);
         }
+    }
+    void PhysicsOverlapDetection()
+    {
+        // Enemies within explosion radius take AOE damage
+        var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayerMask);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.TakeDamage(explosionDamage);
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 
     // * AOE Damage Implementation 2
@@ -74,30 +97,30 @@ public class PlayerMissile : PlayerProjectileOverdrive
     //         }
     //     }
     // }
-    
+
     // * AOE Damage Implementation 3
     // * 范围伤害实现方法3
-    // [SerializeField] LayerMask enemyLayerMask = default;
-    // [SerializeField] float explosionRadius = 3f;
-    // [SerializeField] float explosionDamage = 100f;
+    //[SerializeField] LayerMask enemyLayerMask = default;
+    //[SerializeField] float explosionRadius = 3f;
+    //[SerializeField] float explosionDamage = 100f;
 
-    // void PhysicsOverlapDetection()
-    // {
-    //     // Enemies within explosion radius take AOE damage
-    //     var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayerMask);
+    //void PhysicsOverlapDetection()
+    //{
+    //    // Enemies within explosion radius take AOE damage
+    //    var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayerMask);
 
-    //     foreach (var collider in colliders)
-    //     {
-    //         if (collider.TryGetComponent<Enemy>(out Enemy enemy))
-    //         {
-    //             enemy.TakeDamage(explosionDamage);
-    //         }
-    //     }
-    // }
+    //    foreach (var collider in colliders)
+    //    {
+    //        if (collider.TryGetComponent<Enemy>(out Enemy enemy))
+    //        {
+    //            enemy.TakeDamage(explosionDamage);
+    //        }
+    //    }
+    //}
 
-    // void OnDrawGizmosSelected()
-    // {
-    //     Gizmos.color = Color.yellow;
-    //     Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    // }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    //}
 }

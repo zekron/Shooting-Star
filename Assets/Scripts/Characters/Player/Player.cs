@@ -44,6 +44,7 @@ public class Player : Character
     [SerializeField] private int overdriveDodgeFactor = 2;
     [SerializeField] private float overdriveSpeedFactor = 1.2f;
     [SerializeField] private float overDriveFireFactor = 1.2f;
+    MissileSystem missile;
     private bool isOverdriving = false;
 
     private Rigidbody2D playerRigidbody;
@@ -70,6 +71,7 @@ public class Player : Character
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        missile = GetComponent<MissileSystem>();
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -93,6 +95,7 @@ public class Player : Character
         input.onStopFire += StopFire;
         input.onDodge += Dodge;
         input.onOverdrive += OverDrive;
+        input.onLaunchMissile += LaunchMissile;
 
         PlayerOverdrive.On += OpenOverdrive;
         PlayerOverdrive.Off += StopOverdrive;
@@ -106,6 +109,7 @@ public class Player : Character
         input.onStopFire -= StopFire;
         input.onDodge -= Dodge;
         input.onOverdrive -= OverDrive;
+        input.onLaunchMissile -= LaunchMissile;
 
         PlayerOverdrive.On -= OpenOverdrive;
         PlayerOverdrive.Off -= StopOverdrive;
@@ -318,6 +322,13 @@ public class Player : Character
         isOverdriving = false;
         dodgeEnergyCost /= overdriveDodgeFactor;
         moveSpeed /= overdriveSpeedFactor;
+    }
+    #endregion
+
+    #region Launch Missile
+    private void LaunchMissile()
+    {
+        missile.Launch(muzzles[1]);
     }
     #endregion
 }

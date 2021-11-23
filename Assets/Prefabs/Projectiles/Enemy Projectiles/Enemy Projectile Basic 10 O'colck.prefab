@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyGameObject: 0
-  lifetime: 3
+  lifetime: 4
 --- !u!114 &8577287969644404618
 MonoBehaviour:
   m_ObjectHideFlags: 0
