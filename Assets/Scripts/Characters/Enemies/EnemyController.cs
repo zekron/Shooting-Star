@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minFireInterval, maxFireInterval));
 
-            if (GameManager.GameState == GameState.GameOver) yield break;
+            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
 
             foreach (var projectile in projectiles)
             {

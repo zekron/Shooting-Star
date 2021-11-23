@@ -6,9 +6,9 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     public static System.Action onGameOver;
 
-    public static GameState GameState { get => Instance.gameState; set => Instance.gameState = value; }
+    public static GameState CurrentGameState { get => Instance.gameState; set => Instance.gameState = value; }
 
-    [SerializeField] GameState gameState = GameState.Playing;
+    [SerializeField] private GameState gameState = GameState.Playing;
 
     private void OnEnable()
     {
