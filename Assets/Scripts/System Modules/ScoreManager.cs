@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,8 +46,8 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
 
     #region HIGH SCORE SYSTEM
 
-    [System.Serializable]
-    public class PlayerScore
+    [Serializable]
+    public class PlayerScore : IComparable<PlayerScore>
     {
         public int score;
         public string playerName;
@@ -56,18 +57,30 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
             this.score = score;
             this.playerName = playerName;
         }
+
+        public int CompareTo(PlayerScore playerScore)
+        {
+            if (score > playerScore.score)
+                return 1;
+            else if (score == playerScore.score)
+                return 0;
+            else
+                return -1;
+        }
     }
 
-    [System.Serializable]
+    private const int HIGH_SCORE_AMOUNT = 10;
+
+    [Serializable]
     public class PlayerScoreData
     {
-        public List<PlayerScore> list = new List<PlayerScore>();
+        public List<PlayerScore> PlayerScoreList = new List<PlayerScore>(HIGH_SCORE_AMOUNT);
     }
 
     readonly string SaveFileName = "player_score.json";
     string playerName = "No Name";
 
-    public bool HasNewHighScore => score > LoadPlayerScoreData().list[9].score;
+    public bool HasNewHighScore => score > LoadPlayerScoreData().PlayerScoreList[HIGH_SCORE_AMOUNT - 1].score;
 
     public void SetPlayerName(string newName)
     {
@@ -78,8 +91,8 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
     {
         var playerScoreData = LoadPlayerScoreData();
 
-        playerScoreData.list.Add(new PlayerScore(score, playerName));
-        playerScoreData.list.Sort((x, y) => y.score.CompareTo(x.score));
+        playerScoreData.PlayerScoreList.Add(new PlayerScore(score, playerName));
+        playerScoreData.PlayerScoreList.Sort((x, y) => y.CompareTo(x));
 
         SaveSystem.Save(SaveFileName, playerScoreData);
     }
@@ -94,16 +107,14 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
         }
         else
         {
-            while (playerScoreData.list.Count < 10)
+            while (playerScoreData.PlayerScoreList.Count < HIGH_SCORE_AMOUNT)
             {
-                playerScoreData.list.Add(new PlayerScore(0, playerName));
+                playerScoreData.PlayerScoreList.Add(new PlayerScore(0, playerName));
             }
 
             SaveSystem.Save(SaveFileName, playerScoreData);
         }
-
         return playerScoreData;
     }
-
     #endregion
 }

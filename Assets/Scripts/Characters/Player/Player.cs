@@ -168,7 +168,7 @@ public class Player : Character
             StopCoroutine(moveCoroutine);
         }
 
-        //moveDirection = moveInput.normalized;
+        moveDirection = moveInput;
         moveCoroutine = StartCoroutine(MoveCoroutine(
             accelerationTime,
             moveInput * moveSpeed,
@@ -185,6 +185,7 @@ public class Player : Character
             StopCoroutine(moveCoroutine);
         }
 
+        moveDirection = Vector2.zero;
         moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
 
         StartCoroutine(nameof(DecelerationCoroutine));

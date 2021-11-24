@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 8486845899802996450}
   - component: {fileID: 1424973819}
   m_Layer: 5
-  m_Name: UI Game Over Screen
+  m_Name: Canvas_GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,5 +385,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-  HUDCanvas: {fileID: 0}
+  canvasHUD: {fileID: 0}
   confirmGameOverSound: {fileID: 11400000, guid: 7a8235f652144204393c163f63f358c2, type: 2}

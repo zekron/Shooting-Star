@@ -78,7 +78,7 @@ public class ScoringUIController : MonoBehaviour
 
     void UpdateHighScoreLeaderboard()
     {
-        var playerScoreList = ScoreManager.Instance.LoadPlayerScoreData().list;
+        var playerScoreList = ScoreManager.Instance.LoadPlayerScoreData().PlayerScoreList;
 
         for (int i = 0; i < highScoreLeaderboardContainer.childCount; i++)
         {
