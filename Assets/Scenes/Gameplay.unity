@@ -2398,7 +2398,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 8652643179162552701}
     m_Modifications:
     - target: {fileID: 1424973819, guid: 1c1ed3cbf79b2e74fa659b2bb24b6195, type: 3}
-      propertyPath: HUDCanvas
+      propertyPath: canvasHUD
       value: 
       objectReference: {fileID: 204519350}
     - target: {fileID: 8486845899802996448, guid: 1c1ed3cbf79b2e74fa659b2bb24b6195, type: 3}

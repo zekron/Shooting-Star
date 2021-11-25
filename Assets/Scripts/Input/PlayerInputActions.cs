@@ -311,6 +311,61 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""WASD"",
+                    ""id"": ""2af34c49-a76c-4b3d-aece-57903f194dc1"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4f16080b-6483-49e6-852b-1c1e503adc0b"",
+                    ""path"": ""<Touchscreen>/position/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""TouchScreen"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9d2e6a2c-1639-4055-9fb6-6ca9a15f2e5d"",
+                    ""path"": ""<Touchscreen>/position/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""TouchScreen"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""84a3eb3a-e089-4742-af5a-7ef056e15548"",
+                    ""path"": ""<Touchscreen>/position/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""TouchScreen"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""17c21a86-f02f-4497-a36d-741571d36c89"",
+                    ""path"": ""<Touchscreen>/position/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""TouchScreen"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""4a8b30db-b3ad-42b6-b307-ecd97d151b61"",
                     ""path"": ""<Touchscreen>/primaryTouch/tap"",
@@ -616,6 +671,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""ConfirmGameOver"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7f0fc90-fa3d-4385-b2b4-d9a61c1c904d"",
+                    ""path"": ""<Touchscreen>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""TouchScreen"",
+                    ""action"": ""ConfirmGameOver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -637,6 +703,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""TouchScreen"",
+            ""bindingGroup"": ""TouchScreen"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -849,6 +926,15 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         {
             if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
             return asset.controlSchemes[m_PCSchemeIndex];
+        }
+    }
+    private int m_TouchScreenSchemeIndex = -1;
+    public InputControlScheme TouchScreenScheme
+    {
+        get
+        {
+            if (m_TouchScreenSchemeIndex == -1) m_TouchScreenSchemeIndex = asset.FindControlSchemeIndex("TouchScreen");
+            return asset.controlSchemes[m_TouchScreenSchemeIndex];
         }
     }
     public interface IGameplayActions

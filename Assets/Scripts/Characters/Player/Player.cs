@@ -120,6 +120,10 @@ public class Player : Character
 
         input.EnableGameplayInput();
         statsBar_HUD.Initialize(health, maxHealth);
+
+#if UNITY_ANDROID
+        StartCoroutine(nameof(FireCoroutine));
+#endif
     }
 
     #region HEALTH
