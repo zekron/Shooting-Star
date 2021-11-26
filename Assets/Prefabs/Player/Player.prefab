@@ -29158,6 +29158,7 @@ GameObject:
   - component: {fileID: 2849688098052659661}
   - component: {fileID: 1615680337040834775}
   - component: {fileID: 851059584}
+  - component: {fileID: 1115189248577498978}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29239,27 +29240,23 @@ MonoBehaviour:
   maxHealth: 100
   showOnHeadHealthBar: 0
   onHeadHealthBar: {fileID: 4468222160088447896}
-  statsBar_HUD: {fileID: 0}
-  input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-  regenerateHealth: 1
-  healthRegenerateTime: 12
-  healthRegeneratePercent: 0.02
-  moveSpeed: 6
-  accelerationTime: 0.35
-  decelerationTime: 0.75
-  moveRotationAngle: 28
   projectiles:
   - {fileID: 3667453350895143958, guid: a4ed366cb23700b45a59d2a935bb07a0, type: 3}
   - {fileID: 3667453350895143958, guid: 6d00a8e8b669b0449adfc6d38f6af22b, type: 3}
   - {fileID: 3667453350895143958, guid: b0457887851df3b4587e72c4aa5cb83d, type: 3}
-  projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
   muzzles:
   - {fileID: 4133662792975852540}
   - {fileID: 1991849378}
   - {fileID: 10306434}
   projectileLaunchSFX: {fileID: 11400000, guid: b7bdaea13f7a86d4ca72cf399d634451, type: 2}
-  weaponPower: 2
   fireInterval: 0.12
+  shieldStatsBar_HUD: {fileID: 0}
+  input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
+  regenerateHealth: 1
+  healthRegenerateTime: 12
+  healthRegeneratePercent: 0.02
+  projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
+  weaponPower: 2
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
   dodgeEnergyCost: 25
   dodgeDuration: 1
@@ -29316,6 +29313,22 @@ MonoBehaviour:
   missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
   missileDisplay: {fileID: 0}
+--- !u!114 &1115189248577498978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435389010079767255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e72af77bc43d5469c99ee53fef1b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
+  moveSpeed: 5
+  shiftFactor: 1
+  moveRotationAngle: 50
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

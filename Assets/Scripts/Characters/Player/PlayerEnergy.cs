@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEnergy : Singleton<PlayerEnergy>
+public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
 {
     [SerializeField] private EnergyStatsBar energyBar;
     [SerializeField] private float overdriveInterval = 0.1f;
@@ -36,10 +36,10 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
     void Start()
     {
         energyBar.Initialize(energy, MAX);
-        Obtain(MAX);
+        GainEnergy(MAX);
     }
 
-    public void Obtain(int value)
+    public void GainEnergy(int value)
     {
         if (energy == MAX || !available || !gameObject.activeSelf) return;
 
@@ -47,7 +47,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
         energyBar.UpdateStats(energy, MAX);
     }
 
-    public void Cost(int value)
+    public void DrainEnergy(int value)
     {
         energy -= value;
         energyBar.UpdateStats(energy, MAX);
@@ -83,7 +83,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>
 
             // use 1% of max energy, every 1 second use 10% of max energy 
             // means that overdrive last for 10 seconds
-            Cost(PERCENT);
+            DrainEnergy(PERCENT);
         }
     }
 }

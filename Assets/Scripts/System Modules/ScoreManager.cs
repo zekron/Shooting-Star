@@ -77,7 +77,7 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
         public List<PlayerScore> PlayerScoreList = new List<PlayerScore>(HIGH_SCORE_AMOUNT);
     }
 
-    readonly string SaveFileName = "player_score.json";
+    readonly static string SaveFileName = "player_score.json";
     string playerName = "No Name";
 
     public bool HasNewHighScore => score > LoadPlayerScoreData().PlayerScoreList[HIGH_SCORE_AMOUNT - 1].score;
@@ -115,6 +115,12 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
             SaveSystem.Save(SaveFileName, playerScoreData);
         }
         return playerScoreData;
+    }
+
+    [UnityEditor.MenuItem("Custom Menu/Save System/Delete Save File")]
+    public static void DeletePlayerScoreData()
+    {
+        SaveSystem.DeleteSaveFile(SaveFileName);
     }
     #endregion
 }

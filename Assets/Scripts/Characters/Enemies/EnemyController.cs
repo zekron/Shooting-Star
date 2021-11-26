@@ -7,12 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float moveRotationAngle = 25f;
 
-    [Header("Move")]
-    [SerializeField] private GameObject[] projectiles;
-    [SerializeField] private AudioDataSO projectileLaunchSFX;
-    [SerializeField] private Transform muzzle;
-    [SerializeField] private float minFireInterval;
-    [SerializeField] private float maxFireInterval;
+    private Character character;
 
     private float paddingX;
     private float paddingY;
@@ -21,6 +16,8 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
+        character = GetComponent<Character>();
+
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
@@ -29,7 +26,6 @@ public class EnemyController : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(nameof(RandomlyMovingCoroutine));
-        StartCoroutine(nameof(RandomlyFireCoroutine));
     }
 
     void OnDisable()
@@ -49,9 +45,10 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPosition) >= moveSpeed * Time.fixedDeltaTime)
             {
                 // keep moving to targetPosition
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
+                character.Move(Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.fixedDeltaTime));
                 // make enemy rotate with x axis while moving
-                transform.rotation = Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.right);
+                character.Rotate(Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.right));
+
             }
             else
             {
@@ -59,24 +56,7 @@ public class EnemyController : MonoBehaviour
                 targetPosition = Viewport.RandomRightHalfPosition(paddingX, paddingY);
             }
 
-            yield return waitForFixedUpdate;
-        }
-    }
-
-    IEnumerator RandomlyFireCoroutine()
-    {
-        while (gameObject.activeSelf)
-        {
-            yield return new WaitForSeconds(Random.Range(minFireInterval, maxFireInterval));
-
-            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
-
-            foreach (var projectile in projectiles)
-            {
-                ObjectPoolManager.Release(projectile, muzzle.position);
-            }
-
-            AudioManager.Instance.PlaySFX(projectileLaunchSFX);
+            yield return null;
         }
     }
 }

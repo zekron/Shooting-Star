@@ -414,12 +414,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8902161890877637981, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
+      propertyPath: inputEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
     - target: {fileID: 851059584, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
       propertyPath: missileDisplay
       value: 
       objectReference: {fileID: 663292173}
     - target: {fileID: 943594446, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-      propertyPath: statsBar_HUD
+      propertyPath: shieldStatsBar_HUD
       value: 
       objectReference: {fileID: 8652643179514650794}
     - target: {fileID: 2849688098052659661, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}

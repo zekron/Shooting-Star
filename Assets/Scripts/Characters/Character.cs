@@ -12,6 +12,14 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
 
+    [Header("---- FIRE ----")]
+    [SerializeField] protected GameObject[] projectiles;
+    [SerializeField] protected Transform[] muzzles;
+    [SerializeField] protected AudioDataSO projectileLaunchSFX;
+    [SerializeField] protected float fireInterval = 0.2f;
+
+    protected WaitForSeconds waitForFireInterval;
+
     private float paddingX;
     private float paddingY;
 
@@ -21,14 +29,16 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     {
         health = maxHealth;
 
-        //SetOnHeadHealthBar(showOnHeadHealthBar);
+        SetOnHeadHealthBar(showOnHeadHealthBar);
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
+
+        waitForFireInterval = new WaitForSeconds(fireInterval);
     }
 
     public void SetOnHeadHealthBar(bool flag)
@@ -41,6 +51,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
         }
     }
 
+    #region Health
     public virtual void GetDamage(float damage)
     {
         health -= damage;
@@ -97,21 +108,43 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
             GetDamage(maxHealth * percent);
         }
     }
+    #endregion
 
+    #region Fire
     public void Fire()
     {
-        throw new System.NotImplementedException();
+        StartCoroutine(nameof(FireCoroutine));
     }
 
-    public void Move(Vector3 deltaMovement)
+    public void StopFire()
+    {
+        StopCoroutine(nameof(FireCoroutine));
+    }
+
+    protected virtual IEnumerator FireCoroutine()
+    {
+        while (true)
+        {
+            ObjectPoolManager.Release(projectiles[0], muzzles[0].position);
+
+            AudioManager.Instance.PlaySFX(projectileLaunchSFX);
+
+            yield return waitForFireInterval;
+        }
+    }
+    #endregion
+
+    #region Move
+    public virtual void Move(Vector3 deltaMovement)
     {
         deltaMovement.z = 0;
         transform.Translate(deltaMovement, Space.World);
         transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
     }
 
-    public void Rotate(Quaternion moveRotation)
+    public virtual void Rotate(Quaternion moveRotation)
     {
         transform.rotation = moveRotation;
     }
+    #endregion
 }

@@ -89,14 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   moveRotationAngle: 35
-  projectiles:
-  - {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
-  - {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
-  - {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
-  projectileLaunchSFX: {fileID: 11400000, guid: 22c84fdf81f5ba646bc3f5ffc308a857, type: 2}
-  muzzle: {fileID: 932438790351565965}
-  minFireInterval: 2
-  maxFireInterval: 4
 --- !u!114 &1811371292644592213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,8 +106,18 @@ MonoBehaviour:
   maxHealth: 7
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 4293371644935024408}
+  projectiles:
+  - {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
+  - {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
+  - {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
+  muzzles:
+  - {fileID: 932438790351565965}
+  projectileLaunchSFX: {fileID: 11400000, guid: 22c84fdf81f5ba646bc3f5ffc308a857, type: 2}
+  fireInterval: 0.2
   scorePoint: 100
   deathEnergyBonus: 3
+  minFireInterval: 2
+  maxFireInterval: 4
 --- !u!1 &6141127440874144652
 GameObject:
   m_ObjectHideFlags: 0

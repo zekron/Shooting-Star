@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : PersistentSingleton<GameManager>
@@ -13,6 +11,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnEnable()
     {
         Viewport.Initialize();
+        Application.targetFrameRate = 60;
     }
 }
 

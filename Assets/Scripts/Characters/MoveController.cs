@@ -2,13 +2,16 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Character))]
+[RequireComponent(typeof(Player))]
 public class MoveController : MonoBehaviour
 {
     [SerializeField] private PlayerInputSO inputEvent;
+
     [Header("Move")]
     [SerializeField] private float moveSpeed = 20f;
-    [SerializeField] private float accelerationTime = 3f;
+    /// <summary>
+    /// 变速因子
+    /// </summary>
     [SerializeField, Range(0, 5f)] private float shiftFactor = 3f;
     [SerializeField] private float moveRotationAngle = 50f;
 
@@ -35,7 +38,6 @@ public class MoveController : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
         character = GetComponent<Character>();
 
         inputEvent.EnableGameplayInput();
@@ -75,6 +77,15 @@ public class MoveController : MonoBehaviour
         shiftTimer = 0;
         finalMoveDirection = Vector2.zero;
         finalMoveRotation = Quaternion.identity;
+    }
+
+    public void SetMoveSpeedByValue(int value)
+    {
+        moveSpeed += value;
+    }
+    public void SetMoveSpeedByFactor(float factor)
+    {
+        moveSpeed *= factor;
     }
     #endregion
 }

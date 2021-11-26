@@ -89,12 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
   moveRotationAngle: 35
-  projectiles:
-  - {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
-  projectileLaunchSFX: {fileID: 11400000, guid: 6264692ded298854bb620f29f4ceea0a, type: 2}
-  muzzle: {fileID: 2024880981705822256}
-  minFireInterval: 0.5
-  maxFireInterval: 3
 --- !u!114 &5722177892142842647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,8 +106,16 @@ MonoBehaviour:
   maxHealth: 12
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 2827430479141476786}
+  projectiles:
+  - {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
+  muzzles:
+  - {fileID: 2024880981705822256}
+  projectileLaunchSFX: {fileID: 11400000, guid: 6264692ded298854bb620f29f4ceea0a, type: 2}
+  fireInterval: 0.2
   scorePoint: 100
   deathEnergyBonus: 5
+  minFireInterval: 0.5
+  maxFireInterval: 3
 --- !u!1 &2100968527171872563
 GameObject:
   m_ObjectHideFlags: 0
