@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 {
     [Header("---- DEATH ----")]
     [SerializeField] private GameObject deathVFX;
@@ -12,13 +12,23 @@ public class Character : MonoBehaviour
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
 
+    private float paddingX;
+    private float paddingY;
+
     protected float health;
 
     protected virtual void OnEnable()
     {
         health = maxHealth;
 
-        SetOnHeadHealthBar(showOnHeadHealthBar);
+        //SetOnHeadHealthBar(showOnHeadHealthBar);
+    }
+
+    private void Awake()
+    {
+        var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
+        paddingX = size.x / 2f;
+        paddingY = size.y / 2f;
     }
 
     public void SetOnHeadHealthBar(bool flag)
@@ -31,7 +41,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual void GetDamage(float damage)
     {
         health -= damage;
 
@@ -42,17 +52,17 @@ public class Character : MonoBehaviour
 
         if (health <= 0f)
         {
-            Die();
+            GetDie();
         }
     }
 
-    public virtual void RestoreHealth(float value)
+    public virtual void GetHealing(float healing)
     {
         if (health == maxHealth) return;
 
         // health += value;
         // health = Mathf.Clamp(health, 0f, maxHealth);
-        health = Mathf.Clamp(health + value, 0f, maxHealth);
+        health = Mathf.Clamp(health + healing, 0f, maxHealth);
 
         if (showOnHeadHealthBar)
         {
@@ -60,7 +70,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public virtual void Die()
+    public virtual void GetDie()
     {
         health = 0f;
         AudioManager.Instance.PlaySFX(deathSFX);
@@ -74,7 +84,7 @@ public class Character : MonoBehaviour
         {
             yield return waitTime;
 
-            RestoreHealth(maxHealth * percent);
+            GetHealing(maxHealth * percent);
         }
     }
 
@@ -84,7 +94,24 @@ public class Character : MonoBehaviour
         {
             yield return waitTime;
 
-            TakeDamage(maxHealth * percent);
+            GetDamage(maxHealth * percent);
         }
+    }
+
+    public void Fire()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Move(Vector3 deltaMovement)
+    {
+        deltaMovement.z = 0;
+        transform.Translate(deltaMovement, Space.World);
+        transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
+    }
+
+    public void Rotate(Quaternion moveRotation)
+    {
+        transform.rotation = moveRotation;
     }
 }

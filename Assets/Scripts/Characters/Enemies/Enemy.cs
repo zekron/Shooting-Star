@@ -9,16 +9,16 @@ public class Enemy : Character
     {
         if (other.gameObject.TryGetComponent<Player>(out Player player))
         {
-            player.Die();
-            Die();
+            player.GetDie();
+            GetDie();
         }
     }
 
-    public override void Die()
+    public override void GetDie()
     {
         ScoreManager.Instance.AddScore(scorePoint);
         PlayerEnergy.Instance.Obtain(deathEnergyBonus);
         EnemyManager.Instance.RemoveFromList(gameObject);
-        base.Die();
+        base.GetDie();
     }
 }

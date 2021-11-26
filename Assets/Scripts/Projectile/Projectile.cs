@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Character>(out Character character))
         {
-            character.TakeDamage(damage);
+            character.GetDamage(damage);
             ObjectPoolManager.Release(hitVFX, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
             AudioManager.Instance.PlaySFX(hitSFX);
             gameObject.SetActive(false);

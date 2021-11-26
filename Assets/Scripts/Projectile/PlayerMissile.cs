@@ -63,7 +63,7 @@ public class PlayerMissile : PlayerProjectileOverdrive
         {
             if (collider.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                enemy.TakeDamage(explosionDamage);
+                enemy.GetDamage(explosionDamage);
             }
         }
     }

@@ -19,8 +19,9 @@ public class Player : Character
     [SerializeField] private float accelerationTime = 3f;
     [SerializeField] private float decelerationTime = 3f;
     [SerializeField] private float moveRotationAngle = 50f;
-    private float paddingX;
-    private float paddingY;
+    private Vector2 moveDirection;
+    private Vector2 tempPlayerVelocity;
+    private Quaternion tempPlayerRotation;
 
     [Header("Fire")]
     [SerializeField] private GameObject[] projectiles;
@@ -52,11 +53,6 @@ public class Player : Character
 
     private readonly float slowMotionDuration = 1f;
 
-    private Vector2 moveDirection;
-    private Vector2 tempPlayerVelocity;
-    private Quaternion tempPlayerRotation;
-
-
     private float coroutineTimer;
     private Coroutine moveCoroutine;
     private Coroutine healthRegenerateCoroutine;
@@ -72,10 +68,6 @@ public class Player : Character
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         missile = GetComponent<MissileSystem>();
-
-        var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
-        paddingX = size.x / 2f;
-        paddingY = size.y / 2f;
 
         maxRoll = dodgeDuration * rollSpeed;
         playerRigidbody.gravityScale = 0;
@@ -127,9 +119,9 @@ public class Player : Character
     }
 
     #region HEALTH
-    public override void TakeDamage(float damage)
+    public override void GetDamage(float damage)
     {
-        base.TakeDamage(damage);
+        base.GetDamage(damage);
         statsBar_HUD.UpdateStats(health, maxHealth);
         TimeController.Instance.BulletTime(slowMotionDuration);
 
@@ -149,18 +141,18 @@ public class Player : Character
         }
     }
 
-    public override void RestoreHealth(float value)
+    public override void GetHealing(float value)
     {
-        base.RestoreHealth(value);
+        base.GetHealing(value);
         statsBar_HUD.UpdateStats(health, maxHealth);
     }
 
-    public override void Die()
+    public override void GetDie()
     {
         GameManager.onGameOver?.Invoke();
         GameManager.CurrentGameState = GameState.GameOver;
         statsBar_HUD.UpdateStats(0f, maxHealth);
-        base.Die();
+        base.GetDie();
     }
     #endregion
 
@@ -223,7 +215,7 @@ public class Player : Character
     {
         while (true)
         {
-            transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
+            //transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
 
             yield return null;
         }
