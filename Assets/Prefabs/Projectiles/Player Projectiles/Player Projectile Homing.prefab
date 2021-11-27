@@ -150,9 +150,8 @@ GameObject:
   - component: {fileID: 479342833450749246}
   - component: {fileID: 9209005491634150412}
   - component: {fileID: 1688332640970977289}
-  - component: {fileID: 2866163438171571836}
   m_Layer: 8
-  m_Name: Player Projectile Overdrive
+  m_Name: Player Projectile Homing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,20 +219,6 @@ MonoBehaviour:
   damage: 1
   moveSpeed: 20
   moveDirection: {x: 1, y: 0}
-  guidanceSystem: {fileID: 2866163438171571836}
---- !u!114 &2866163438171571836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3667453350895143958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcc8f4efa553c7428a6174d2161528a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 1688332640970977289}
   minBallisticAngle: -40
   maxBallisticAngle: 40
 --- !u!1 &7630024414233637009

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMissile : PlayerProjectileOverdrive
+public class PlayerMissile : PlayerProjectileHoming
 {
     [SerializeField] private AudioDataSO targetAcquiredVoice = null;
 

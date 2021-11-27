@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour, IMoveable
     {
         while (gameObject.activeSelf)
         {
-            Move();
+            Move(moveDirection * moveSpeed * Time.deltaTime);
 
             yield return null;
         }
@@ -39,11 +39,10 @@ public class Projectile : MonoBehaviour, IMoveable
 
     protected void SetTarget(GameObject target) => this.target = target;
 
-    public void Move() => transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
-
-    public virtual void Move(Vector2 movement)
+    public virtual void Move(Vector2 deltaMovement)
     {
-        transform.position = movement;
+        transform.Translate(deltaMovement, Space.World);
+        //transform.position = deltaMovement;
     }
 
     public virtual void Rotate(Quaternion moveRotation)

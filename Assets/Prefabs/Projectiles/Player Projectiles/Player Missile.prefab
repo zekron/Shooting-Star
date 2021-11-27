@@ -4885,7 +4885,6 @@ GameObject:
   - component: {fileID: 2523096243714385162}
   - component: {fileID: 4644234059992257282}
   - component: {fileID: 1513304308}
-  - component: {fileID: 1513304309}
   - component: {fileID: 1513304310}
   m_Layer: 8
   m_Name: Player Missile
@@ -4942,7 +4941,8 @@ MonoBehaviour:
   damage: 50
   moveSpeed: 10
   moveDirection: {x: 1, y: 0}
-  guidanceSystem: {fileID: 1513304309}
+  minBallisticAngle: -40
+  maxBallisticAngle: 40
   targetAcquiredVoice: {fileID: 11400000, guid: d8db24677cfaff6438517133c4c6882f, type: 2}
   lowSpeed: 8
   highSpeed: 35
@@ -4954,21 +4954,6 @@ MonoBehaviour:
     m_Bits: 128
   explosionRadius: 3
   explosionDamage: 100
---- !u!114 &1513304309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2523096243714385163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcc8f4efa553c7428a6174d2161528a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 1513304308}
-  minBallisticAngle: -40
-  maxBallisticAngle: 40
 --- !u!114 &1513304310
 MonoBehaviour:
   m_ObjectHideFlags: 0
