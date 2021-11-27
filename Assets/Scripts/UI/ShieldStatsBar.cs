@@ -8,7 +8,6 @@ public class ShieldStatsBar : StatsBar
 
     void SetPercentText()
     {
-        //percentText.text = Mathf.RoundToInt(targetFillAmount * 100f) + "%";
         percentText.text = targetFillAmount.ToString("p0");
     }
 

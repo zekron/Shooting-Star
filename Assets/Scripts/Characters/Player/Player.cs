@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(MoveController))]
 public class Player : Character
 {
-    [SerializeField] private ShieldStatsBar shieldStatsBar_HUD;
+    [SerializeField] private FloatEventChannelSO shieldInitEventSO;
+    [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
@@ -95,7 +96,7 @@ public class Player : Character
     {
 
         input.EnableGameplayInput();
-        shieldStatsBar_HUD.Initialize(health, maxHealth);
+        shieldInitEventSO.RaiseEvent(maxHealth);
 
 #if UNITY_ANDROID
         StartCoroutine(nameof(FireCoroutine));
@@ -106,7 +107,7 @@ public class Player : Character
     public override void GetDamage(float damage)
     {
         base.GetDamage(damage);
-        shieldStatsBar_HUD.UpdateStats(health, maxHealth);
+        shieldUpdateEventSO.RaiseEvent(health);
         TimeController.Instance.BulletTime(slowMotionDuration);
 
         if (gameObject.activeSelf)
@@ -126,14 +127,14 @@ public class Player : Character
     public override void GetHealing(float value)
     {
         base.GetHealing(value);
-        shieldStatsBar_HUD.UpdateStats(health, maxHealth);
+        shieldUpdateEventSO.RaiseEvent(health);
     }
 
     public override void GetDie()
     {
         GameManager.onGameOver?.Invoke();
         GameManager.CurrentGameState = GameState.GameOver;
-        shieldStatsBar_HUD.UpdateStats(0f, maxHealth);
+        shieldUpdateEventSO.RaiseEvent(health = 0);
         base.GetDie();
     }
     #endregion

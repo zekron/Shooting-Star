@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
 {
-    [SerializeField] private EnergyStatsBar energyBar;
     [SerializeField] private float overdriveInterval = 0.1f;
+    [SerializeField] private IntEventChannelSO energyInitEventSO;
+    [SerializeField] private IntEventChannelSO energyUpdateEventSO;
 
     bool available = true;
 
@@ -35,7 +36,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
 
     void Start()
     {
-        energyBar.Initialize(energy, MAX);
+        energyInitEventSO.RaiseEvent(MAX);
         GainEnergy(MAX);
     }
 
@@ -44,13 +45,13 @@ public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
         if (energy == MAX || !available || !gameObject.activeSelf) return;
 
         energy = Mathf.Clamp(energy + value, 0, MAX);
-        energyBar.UpdateStats(energy, MAX);
+        energyUpdateEventSO.RaiseEvent(energy);
     }
 
     public void DrainEnergy(int value)
     {
         energy -= value;
-        energyBar.UpdateStats(energy, MAX);
+        energyUpdateEventSO.RaiseEvent(energy);
 
         // if player is overdriving and energy = 0
         if (energy == 0 && !available)

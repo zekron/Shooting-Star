@@ -414,22 +414,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8902161890877637981, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-      propertyPath: inputEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-    - target: {fileID: 851059584, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-      propertyPath: missileDisplay
-      value: 
-      objectReference: {fileID: 663292173}
-    - target: {fileID: 943594446, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-      propertyPath: shieldStatsBar_HUD
-      value: 
-      objectReference: {fileID: 8652643179514650794}
-    - target: {fileID: 2849688098052659661, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-      propertyPath: energyBar
-      value: 
-      objectReference: {fileID: 458327432}
     - target: {fileID: 6435389010079767248, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3912,6 +3896,7 @@ GameObject:
   - component: {fileID: 8652643179162552700}
   - component: {fileID: 8652643179162552703}
   - component: {fileID: 8652643179162552690}
+  - component: {fileID: 8652643179162552691}
   m_Layer: 5
   m_Name: Canvas_Main
   m_TagString: Untagged
@@ -3939,6 +3924,27 @@ MonoBehaviour:
   resumeButton: {fileID: 1959433354}
   optionsButton: {fileID: 754216462}
   mainMenuButton: {fileID: 1715702810}
+--- !u!114 &8652643179162552691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652643179162552689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94116e06f84556e4cafea97c872270e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldBar: {fileID: 8652643179514650794}
+  energyBar: {fileID: 458327432}
+  missileDisplay: {fileID: 663292173}
+  shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
+  shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
+  energyInitEventSO: {fileID: 11400000, guid: 27449d7f18274054b877bd2a14241d0f, type: 2}
+  energyUpdateEventSO: {fileID: 11400000, guid: 469ac5717f30b394e834acfd5979edac, type: 2}
+  missileUpdateEventSO: {fileID: 11400000, guid: df53a1ba6c376b244b6d67a5ca082219, type: 2}
+  missileCooldownTimeEventSO: {fileID: 11400000, guid: 31aada15e1a484d4699df57775086261, type: 2}
 --- !u!223 &8652643179162552700
 Canvas:
   m_ObjectHideFlags: 0

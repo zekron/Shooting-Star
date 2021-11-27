@@ -11,6 +11,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] protected float maxHealth;
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
+    protected float health;
 
     [Header("---- FIRE ----")]
     [SerializeField] protected GameObject[] projectiles;
@@ -21,8 +22,6 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     private float paddingX;
     private float paddingY;
-
-    protected float health;
 
     protected virtual void OnEnable()
     {

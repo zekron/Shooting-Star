@@ -29249,13 +29249,14 @@ MonoBehaviour:
   - {fileID: 1991849378}
   - {fileID: 10306434}
   projectileLaunchSFX: {fileID: 11400000, guid: b7bdaea13f7a86d4ca72cf399d634451, type: 2}
-  fireInterval: 0.12
-  shieldStatsBar_HUD: {fileID: 0}
+  shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
+  shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
   regenerateHealth: 1
   healthRegenerateTime: 12
   healthRegeneratePercent: 0.02
   projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
+  fireInterval: 0.12
   weaponPower: 2
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
   dodgeEnergyCost: 25
@@ -29293,8 +29294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3612b968b4e00354687b755333fd6aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyBar: {fileID: 0}
   overdriveInterval: 0.1
+  energyInitEventSO: {fileID: 11400000, guid: 27449d7f18274054b877bd2a14241d0f, type: 2}
+  energyUpdateEventSO: {fileID: 11400000, guid: 469ac5717f30b394e834acfd5979edac, type: 2}
 --- !u!114 &1615680337040834775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29328,7 +29330,8 @@ MonoBehaviour:
   cooldownTime: 1
   missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
-  missileDisplay: {fileID: 0}
+  missileUpdateEventSO: {fileID: 11400000, guid: df53a1ba6c376b244b6d67a5ca082219, type: 2}
+  missileCooldownTimeEventSO: {fileID: 11400000, guid: 31aada15e1a484d4699df57775086261, type: 2}
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

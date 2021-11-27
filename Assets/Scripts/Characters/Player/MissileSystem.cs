@@ -8,7 +8,11 @@ public class MissileSystem : MonoBehaviour
     [SerializeField] private float cooldownTime = 1f;
     [SerializeField] private GameObject missilePrefab = null;
     [SerializeField] private AudioDataSO launchSFX = null;
-    [SerializeField] private MissileDisplay missileDisplay;
+
+    [SerializeField] private IntEventChannelSO missileUpdateEventSO;
+    [SerializeField] private FloatEventChannelSO missileCooldownTimeEventSO;
+
+    private WaitForSeconds waitForCooldownInterval;
 
     private bool isReady = true;
     private int amount;
@@ -16,11 +20,14 @@ public class MissileSystem : MonoBehaviour
     void Awake()
     {
         amount = defaultAmount;
+
+        waitForCooldownInterval = new WaitForSeconds(cooldownTime);
     }
 
     void Start()
     {
-        missileDisplay.UpdateAmountText(amount);
+        missileUpdateEventSO.RaiseEvent(amount);
+        missileCooldownTimeEventSO.RaiseEvent(cooldownTime);
     }
 
     public void Launch(Transform muzzleTransform)
@@ -31,29 +38,16 @@ public class MissileSystem : MonoBehaviour
         ObjectPoolManager.Release(missilePrefab, muzzleTransform.position);
         AudioManager.Instance.PlaySFX(launchSFX);
         amount--;
-        missileDisplay.UpdateAmountText(amount);
+        missileUpdateEventSO.RaiseEvent(amount);
 
-        if (amount == 0)
-        {
-            missileDisplay.UpdateCooldownImage(1f);
-        }
-        else
-        {
-            StartCoroutine(CooldownCoroutine());
-        }
+        StartCoroutine(nameof(CooldownCoroutine));
     }
 
     IEnumerator CooldownCoroutine()
     {
-        var cooldownValue = cooldownTime;
+        if (amount == 0) yield break;
 
-        while (cooldownValue > 0f)
-        {
-            missileDisplay.UpdateCooldownImage(cooldownValue / cooldownTime);
-            cooldownValue = Mathf.Max(cooldownValue - Time.deltaTime, 0f);
-
-            yield return null;
-        }
+        yield return waitForCooldownInterval;
 
         isReady = true;
     }
