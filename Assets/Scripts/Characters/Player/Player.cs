@@ -16,6 +16,7 @@ public class Player : Character
 
     [Header("Fire")]
     [SerializeField] private GameObject projectileOverdrive;
+    [SerializeField] protected float fireInterval = 0.2f;
     [SerializeField, Range(0, 2)] private int weaponPower = 0;
 
     [Header("Dodge")]
@@ -85,7 +86,7 @@ public class Player : Character
         maxRoll = dodgeDuration * rollSpeed;
         playerRigidbody.gravityScale = 0;
 
-        //waitForFireInterval = new WaitForSeconds(fireInterval);
+        waitForFireInterval = new WaitForSeconds(fireInterval);
         waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overDriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }

@@ -29155,10 +29155,10 @@ GameObject:
   - component: {fileID: 943594447}
   - component: {fileID: 1222673852}
   - component: {fileID: 943594446}
+  - component: {fileID: 1115189248577498978}
   - component: {fileID: 2849688098052659661}
   - component: {fileID: 1615680337040834775}
   - component: {fileID: 851059584}
-  - component: {fileID: 1115189248577498978}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29265,6 +29265,22 @@ MonoBehaviour:
   overdriveDodgeFactor: 2
   overdriveSpeedFactor: 1.2
   overDriveFireFactor: 1.2
+--- !u!114 &1115189248577498978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435389010079767255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e72af77bc43d5469c99ee53fef1b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
+  moveSpeed: 5
+  shiftFactor: 1
+  moveRotationAngle: 50
 --- !u!114 &2849688098052659661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29313,22 +29329,6 @@ MonoBehaviour:
   missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
   missileDisplay: {fileID: 0}
---- !u!114 &1115189248577498978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435389010079767255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1e72af77bc43d5469c99ee53fef1b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-  moveSpeed: 5
-  shiftFactor: 1
-  moveRotationAngle: 50
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

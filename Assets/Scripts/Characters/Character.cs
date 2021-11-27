@@ -16,9 +16,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] protected GameObject[] projectiles;
     [SerializeField] protected Transform[] muzzles;
     [SerializeField] protected AudioDataSO projectileLaunchSFX;
-    [SerializeField] protected float fireInterval = 0.2f;
 
-    protected WaitForSeconds waitForFireInterval;
+    protected WaitForSeconds waitForFireInterval = new WaitForSeconds(0.5f);
 
     private float paddingX;
     private float paddingY;
@@ -37,8 +36,6 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
-
-        waitForFireInterval = new WaitForSeconds(fireInterval);
     }
 
     public void SetOnHeadHealthBar(bool flag)
