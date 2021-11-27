@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPosition) >= moveSpeed * Time.fixedDeltaTime)
             {
                 // keep moving to targetPosition
-                character.Move(Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.fixedDeltaTime));
+                character.Move(Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.fixedDeltaTime));
                 // make enemy rotate with x axis while moving
                 character.Rotate(Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.right));
 

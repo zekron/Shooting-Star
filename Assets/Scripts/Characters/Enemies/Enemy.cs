@@ -56,7 +56,7 @@ public class Enemy : Character
         base.GetDie();
     }
 
-    public override void Move(Vector3 movement)
+    public override void Move(Vector2 movement)
     {
         transform.position = movement;
     }

@@ -2,6 +2,6 @@
 
 public interface IMoveable
 {
-    void Move(Vector3 moveDirection);
+    void Move(Vector2 moveDirection);
     void Rotate(Quaternion moveRotation);
 }

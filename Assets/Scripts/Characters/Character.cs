@@ -131,9 +131,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     #endregion
 
     #region Move
-    public virtual void Move(Vector3 deltaMovement)
+    public virtual void Move(Vector2 deltaMovement)
     {
-        deltaMovement.z = 0;
         transform.Translate(deltaMovement, Space.World);
         transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
     }

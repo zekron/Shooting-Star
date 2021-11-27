@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IMoveable
 {
     [SerializeField] private GameObject hitVFX;
     [SerializeField] AudioDataSO hitSFX;
@@ -40,4 +40,14 @@ public class Projectile : MonoBehaviour
     protected void SetTarget(GameObject target) => this.target = target;
 
     public void Move() => transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+
+    public virtual void Move(Vector2 movement)
+    {
+        transform.position = movement;
+    }
+
+    public virtual void Rotate(Quaternion moveRotation)
+    {
+        transform.rotation = moveRotation;
+    }
 }
