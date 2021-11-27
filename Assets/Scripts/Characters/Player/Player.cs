@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(MoveController))]
 public class Player : Character
 {
+    [Header("Player")]
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
     [SerializeField] private PlayerInputSO input;

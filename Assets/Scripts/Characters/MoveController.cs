@@ -22,7 +22,6 @@ public class MoveController : MonoBehaviour
 
     private Character character;
 
-    private float shiftTimer;
     private bool canMove = false;
 
     private void OnEnable()
@@ -66,7 +65,6 @@ public class MoveController : MonoBehaviour
     private void Move(Vector2 moveInput)
     {
         canMove = true;
-        shiftTimer = 0;
         finalMoveDirection = moveInput * moveSpeed;
         finalMoveRotation = Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right);
     }
@@ -74,7 +72,6 @@ public class MoveController : MonoBehaviour
     private void StopMove()
     {
         canMove = false;
-        shiftTimer = 0;
         finalMoveDirection = Vector2.zero;
         finalMoveRotation = Quaternion.identity;
     }
