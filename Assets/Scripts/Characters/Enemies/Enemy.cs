@@ -60,8 +60,9 @@ public class Enemy : Character
     {
         transform.position = movement;
     }
-    public override void Rotate(Quaternion moveRotation)
-    {
-        transform.rotation = moveRotation;
-    }
+
+    //public override void Rotate(Quaternion moveRotation)
+    //{
+    //    transform.rotation = moveRotation;
+    //}
 }

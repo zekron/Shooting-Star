@@ -113,7 +113,6 @@ MonoBehaviour:
   muzzles:
   - {fileID: 932438790351565965}
   projectileLaunchSFX: {fileID: 11400000, guid: 22c84fdf81f5ba646bc3f5ffc308a857, type: 2}
-  fireInterval: 0.2
   scorePoint: 100
   deathEnergyBonus: 3
   minFireInterval: 2
@@ -4977,7 +4976,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 1
@@ -9687,8 +9686,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6141617693678641812}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.85, y: 0.015, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2231412495327590349}
@@ -9709,7 +9708,7 @@ GameObject:
   - component: {fileID: 6365510965873138987}
   - component: {fileID: 6376492814830475651}
   m_Layer: 7
-  m_Name: StarSparrow13
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9722,13 +9721,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6352596849068333985}
-  m_LocalRotation: {x: 0.00000001545431, y: -0.7071068, z: 0.00000001545431, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 578449712315536098}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!33 &6365510965873138987
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9801,8 +9800,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6718922604942333500}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -0.045, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 0, y: -1, z: 0.044999838}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 578449712315536098}
@@ -14667,7 +14666,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 0
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 1
@@ -14689,6 +14688,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 578449712315536098}
     m_Modifications:
+    - target: {fileID: 4624428750509141088, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624428751573496277, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624428751741092239, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14735,7 +14746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14759,7 +14770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.4
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14776,6 +14787,10 @@ PrefabInstance:
     - target: {fileID: 4624428752572433848, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
       propertyPath: m_Name
       value: UI_Health Bar on Head_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624428752572433848, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5249ca101189e2042b92d1cf5ba45590, type: 3}

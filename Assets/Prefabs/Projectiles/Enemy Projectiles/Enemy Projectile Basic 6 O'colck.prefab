@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5405699397602422562}
-  - component: {fileID: -6346006278915549402}
+  - component: {fileID: 8984000340760239373}
   - component: {fileID: 2300696857176163116}
   - component: {fileID: 8577287969644404618}
   m_Layer: 9
-  m_Name: Enemy Projectile Basic 10 O'colck
+  m_Name: Enemy Projectile Basic 6 O'colck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &-6346006278915549402
+--- !u!70 &8984000340760239373
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,7 +80,7 @@ MonoBehaviour:
   hitSFX: {fileID: 11400000, guid: 38b27ebb7f263844abc2863e85e60782, type: 2}
   damage: 7
   moveSpeed: 6
-  moveDirection: {x: -1, y: 0.1667}
+  moveDirection: {x: 0, y: -1}
 --- !u!1 &8152783154008083542
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2031879205655382452}
   - component: {fileID: 1328144600810649629}
   - component: {fileID: 5542505764990162336}
+  - component: {fileID: 5319402150656767314}
   m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
@@ -106,13 +107,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8152783154008083542}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5405699397602422562}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1328144600810649629
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -162,3 +163,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!70 &5319402150656767314
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152783154008083542}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

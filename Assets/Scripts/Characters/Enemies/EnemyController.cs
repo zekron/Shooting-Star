@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     {
         transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
 
-        Vector3 targetPosition = Viewport.RandomRightHalfPosition(paddingX, paddingY);
+        Vector3 targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
 
         while (gameObject.activeSelf)
         {
@@ -47,13 +47,13 @@ public class EnemyController : MonoBehaviour
                 // keep moving to targetPosition
                 character.Move(Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.fixedDeltaTime));
                 // make enemy rotate with x axis while moving
-                character.Rotate(Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.right));
+                character.Rotate(Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.up));
 
             }
             else
             {
                 // set a new targetPosition
-                targetPosition = Viewport.RandomRightHalfPosition(paddingX, paddingY);
+                targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
             }
 
             yield return null;

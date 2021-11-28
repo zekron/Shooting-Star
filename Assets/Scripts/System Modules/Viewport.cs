@@ -7,6 +7,7 @@ public class Viewport
     private static float minY;
     private static float maxY;
     private static float middleX;
+    private static float middleY;
 
     public static void Initialize()
     {
@@ -16,6 +17,7 @@ public class Viewport
         Vector2 topRight = mainCamera.ViewportToWorldPoint(Vector3.one);
 
         middleX = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0f)).x;
+        middleY = mainCamera.ViewportToWorldPoint(new Vector3(0f, 0.5f)).y;
 
         minX = bottomLeft.x;
         minY = bottomLeft.y;
@@ -37,18 +39,18 @@ public class Viewport
     {
         Vector3 position = Vector3.zero;
 
-        position.x = maxX + paddingX;
-        position.y = Random.Range(minY + paddingY, maxY - paddingY);
+        position.x = Random.Range(minX + paddingX, maxX - paddingX);
+        position.y = maxY + paddingY;
 
         return position;
     }
 
-    public static Vector3 RandomRightHalfPosition(float paddingX, float paddingY)
+    public static Vector3 RandomTopHalfPosition(float paddingX, float paddingY)
     {
         Vector3 position = Vector3.zero;
 
-        position.x = Random.Range(middleX, maxX - paddingX);
-        position.y = Random.Range(minY + paddingY, maxY - paddingY);
+        position.x = Random.Range(minX + paddingX, maxX - paddingX);
+        position.y = Random.Range(middleY, maxY - paddingY);
 
         return position;
     }

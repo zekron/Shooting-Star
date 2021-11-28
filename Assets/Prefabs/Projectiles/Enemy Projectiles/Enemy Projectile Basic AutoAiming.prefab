@@ -161,4 +161,4 @@ MonoBehaviour:
   hitSFX: {fileID: 11400000, guid: 38b27ebb7f263844abc2863e85e60782, type: 2}
   damage: 8
   moveSpeed: 5
-  moveDirection: {x: -1, y: 0}
+  moveDirection: {x: 0, y: -1}

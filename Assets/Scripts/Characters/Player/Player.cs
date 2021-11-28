@@ -140,6 +140,12 @@ public class Player : Character
     }
     #endregion
 
+    public override void Move(Vector2 deltaMovement)
+    {
+        base.Move(deltaMovement);
+        transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
+    }
+
     #region Fire
     protected override IEnumerator FireCoroutine()
     {
@@ -192,7 +198,7 @@ public class Player : Character
         while (currentRoll < maxRoll)
         {
             currentRoll += rollSpeed * Time.fixedDeltaTime;
-            transform.rotation = Quaternion.AngleAxis(currentRoll, Vector3.right);
+            transform.rotation = Quaternion.AngleAxis(currentRoll, Vector3.up);
             transform.localScale = BezierCurve.QuadraticPoint(Vector3.one, Vector3.one, dodgeScale, currentRoll / maxRoll);
 
             yield return waitForFixedUpdate;

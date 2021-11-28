@@ -20,8 +20,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected WaitForSeconds waitForFireInterval = new WaitForSeconds(0.5f);
 
-    private float paddingX;
-    private float paddingY;
+    protected float paddingX;
+    protected float paddingY;
 
     protected virtual void OnEnable()
     {
@@ -134,7 +134,6 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     public virtual void Move(Vector2 deltaMovement)
     {
         transform.Translate(deltaMovement, Space.World);
-        transform.position = Viewport.PlayerMoveablePosition(transform.position, paddingX, paddingY);
     }
 
     public virtual void Rotate(Quaternion moveRotation)

@@ -66,7 +66,7 @@ public class MoveController : MonoBehaviour
     {
         canMove = true;
         finalMoveDirection = moveInput * moveSpeed;
-        finalMoveRotation = Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right);
+        finalMoveRotation = Quaternion.AngleAxis(moveRotationAngle * moveInput.x, Vector3.up);
     }
 
     private void StopMove()

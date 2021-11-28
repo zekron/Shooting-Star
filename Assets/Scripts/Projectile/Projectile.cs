@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour, IMoveable
 
     public virtual void Move(Vector2 deltaMovement)
     {
-        transform.Translate(deltaMovement, Space.World);
+        transform.Translate(deltaMovement);
         //transform.position = deltaMovement;
     }
 

@@ -14,7 +14,7 @@ public class PlayerProjectileHoming : PlayerProjectile
 
     protected override void OnEnable()
     {
-        SetTarget(EnemyManager.Instance.RandomEnemy);
+        SetTarget(GameObject.FindGameObjectWithTag("Enemy"));
         transform.rotation = Quaternion.identity;
 
         if (target == null)
@@ -37,10 +37,8 @@ public class PlayerProjectileHoming : PlayerProjectile
             {
                 targetDirection = target.transform.position - transform.position;
                 Debug.DrawLine(target.transform.position, transform.position, Color.red);
-                tempRotation = Quaternion.AngleAxis(Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg, Vector3.forward)
+                tempRotation = Quaternion.AngleAxis((Mathf.Atan2(targetDirection.y, targetDirection.x) - Mathf.PI / 2) * Mathf.Rad2Deg, Vector3.forward)
                     * Quaternion.Euler(0f, 0f, ballisticAngle);
-                //transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg, Vector3.forward);
-                //transform.rotation *= Quaternion.Euler(0f, 0f, ballisticAngle);
                 Rotate(tempRotation);
             }
 
