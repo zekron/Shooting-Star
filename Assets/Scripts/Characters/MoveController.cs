@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 public class MoveController : MonoBehaviour
 {
     [SerializeField] private PlayerInputSO inputEvent;
