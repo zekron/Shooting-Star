@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ScoreDisplay : MonoBehaviour
 {
-    private static Text scoreText;
+    private Text scoreText;
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public class ScoreDisplay : MonoBehaviour
         ScoreManager.Instance.ResetScore();
     }
 
-    public static void UpdateText(int score) => scoreText.text = score.ToString();
+    public void UpdateText(int score) => scoreText.text = score.ToString();
 
-    public static void ScaleText(Vector3 targetScale) => scoreText.rectTransform.localScale = targetScale;
+    public void ScaleText(Vector3 targetScale) => scoreText.rectTransform.localScale = targetScale;
 }

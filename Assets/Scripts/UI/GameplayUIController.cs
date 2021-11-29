@@ -17,13 +17,26 @@ public class GameplayUIController : MonoBehaviour
     [SerializeField] private Canvas hUDCanvas;
     [SerializeField] private Canvas menusCanvas;
     [SerializeField] private WaveUI waveUI;
+    [SerializeField] private ScoreDisplay scoreDisplay;
+    /// <summary>
+    /// 当前总得分
+    /// </summary>
+    private int totalScore;
+    /// <summary>
+    /// 当前显示分数
+    /// </summary>
+    private int currentScore = -1;
 
     [Header("==== BUTTONS ====")]
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button mainMenuButton;
 
+    [Header("==== EVENTS ====")]
     [SerializeField] private IntEventChannelSO updateWaveEventSO;
+    [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
+
+    private Vector3 scoreTextScale = new Vector3(1.2f, 1.2f, 1.2f);
 
     private int buttonPressedParameterID = Animator.StringToHash("Pressed");
 
@@ -33,6 +46,7 @@ public class GameplayUIController : MonoBehaviour
         playerInput.onUnpause += Unpause;
 
         updateWaveEventSO.OnEventRaised += UpdateWave;
+        updateTotalScoreEventSO.OnEventRaised += UpdateScoreText;
 
         ButtonPressedBehavior.buttonFunctionTable.Add(resumeButton.gameObject.name, OnResumeButtonClick);
         ButtonPressedBehavior.buttonFunctionTable.Add(optionsButton.gameObject.name, OnOptionsButtonClick);
@@ -92,5 +106,26 @@ public class GameplayUIController : MonoBehaviour
     private void UpdateWave(int value)
     {
         waveUI.gameObject.SetActive(true);
+    }
+
+    private void UpdateScoreText(int value)
+    {
+        totalScore += value;
+        StartCoroutine(nameof(AddScoreCoroutine));
+    }
+
+    private IEnumerator AddScoreCoroutine()
+    {
+        scoreDisplay.ScaleText(scoreTextScale);
+
+        while (totalScore > currentScore)
+        {
+            currentScore += 1;
+            scoreDisplay.UpdateText(currentScore);
+
+            yield return null;
+        }
+
+        scoreDisplay.ScaleText(Vector3.one);
     }
 }

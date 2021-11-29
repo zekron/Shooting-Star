@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87faa70f7999f81439125f103f900439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}

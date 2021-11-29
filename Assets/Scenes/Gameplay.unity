@@ -414,6 +414,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 943594447, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6435389010079767248, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3208,12 +3212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0560cd51f56a33d41a17985b4773a002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemy: 1
   enemyPrefabs:
   - {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
   - {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
-  timeBetweenSpawns: 1
   timeBetweenWaves: 3
   minEnemyAmount: 4
   maxEnemyAmount: 10
@@ -3926,10 +3928,12 @@ MonoBehaviour:
   hUDCanvas: {fileID: 204519350}
   menusCanvas: {fileID: 1514433143}
   waveUI: {fileID: 1711520196}
+  scoreDisplay: {fileID: 583677987}
   resumeButton: {fileID: 1959433354}
   optionsButton: {fileID: 754216462}
   mainMenuButton: {fileID: 1715702810}
   updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
+  updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
 --- !u!114 &8652643179162552691
 MonoBehaviour:
   m_ObjectHideFlags: 0

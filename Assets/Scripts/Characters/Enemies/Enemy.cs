@@ -10,6 +10,7 @@ public class Enemy : Character
     [SerializeField] private float maxFireInterval;
 
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
+    [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
     protected override void OnEnable()
     {
@@ -51,9 +52,9 @@ public class Enemy : Character
 
     public override void GetDie()
     {
-        ScoreManager.Instance.AddScore(scorePoint);
         PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
         base.GetDie();
+        updateTotalScoreEventSO.RaiseEvent(scorePoint);
         enemyDestroyEventSO.RaiseEvent();
     }
 

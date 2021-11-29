@@ -6,40 +6,31 @@ using UnityEngine;
 public class ScoreManager : PersistentSingleton<ScoreManager>
 {
     #region SCORE DISPLAY
+    [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
-    public int Score => score;
+    public int Score => totalScore;
 
-    private int score;
-    private int currentScore;
+    /// <summary>
+    /// 当前总得分
+    /// </summary>
+    private int totalScore;
 
-    private Vector3 scoreTextScale = new Vector3(1.2f, 1.2f, 1.2f);
+    protected override void Awake()
+    {
+        base.Awake();
+
+        updateTotalScoreEventSO.OnEventRaised += AddTotalScore;
+    }
 
     public void ResetScore()
     {
-        score = 0;
-        currentScore = 0;
-        ScoreDisplay.UpdateText(score);
+        totalScore = 0;
+        updateTotalScoreEventSO.RaiseEvent(totalScore);
     }
 
-    public void AddScore(int scorePoint)
+    private void AddTotalScore(int scorePoint)
     {
-        currentScore += scorePoint;
-        StartCoroutine(nameof(AddScoreCoroutine));
-    }
-
-    private IEnumerator AddScoreCoroutine()
-    {
-        ScoreDisplay.ScaleText(scoreTextScale);
-
-        while (score < currentScore)
-        {
-            score += 1;
-            ScoreDisplay.UpdateText(score);
-
-            yield return null;
-        }
-
-        ScoreDisplay.ScaleText(Vector3.one);
+        totalScore += scorePoint;
     }
 
     #endregion
@@ -80,7 +71,7 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
     readonly static string SaveFileName = "player_score.json";
     string playerName = "No Name";
 
-    public bool HasNewHighScore => score > LoadPlayerScoreData().PlayerScoreList[HIGH_SCORE_AMOUNT - 1].score;
+    public bool HasNewHighScore => totalScore > LoadPlayerScoreData().PlayerScoreList[HIGH_SCORE_AMOUNT - 1].score;
 
     public void SetPlayerName(string newName)
     {
@@ -91,7 +82,7 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
     {
         var playerScoreData = LoadPlayerScoreData();
 
-        playerScoreData.PlayerScoreList.Add(new PlayerScore(score, playerName));
+        playerScoreData.PlayerScoreList.Add(new PlayerScore(totalScore, playerName));
         playerScoreData.PlayerScoreList.Sort((x, y) => y.CompareTo(x));
 
         SaveSystem.Save(SaveFileName, playerScoreData);
