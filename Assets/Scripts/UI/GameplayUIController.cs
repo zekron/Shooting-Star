@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +16,14 @@ public class GameplayUIController : MonoBehaviour
     [Header("==== CANVAS ====")]
     [SerializeField] private Canvas hUDCanvas;
     [SerializeField] private Canvas menusCanvas;
+    [SerializeField] private WaveUI waveUI;
 
     [Header("==== BUTTONS ====")]
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button optionsButton;
     [SerializeField] private Button mainMenuButton;
+
+    [SerializeField] private IntEventChannelSO updateWaveEventSO;
 
     private int buttonPressedParameterID = Animator.StringToHash("Pressed");
 
@@ -27,6 +31,8 @@ public class GameplayUIController : MonoBehaviour
     {
         playerInput.onPause += Pause;
         playerInput.onUnpause += Unpause;
+
+        updateWaveEventSO.OnEventRaised += UpdateWave;
 
         ButtonPressedBehavior.buttonFunctionTable.Add(resumeButton.gameObject.name, OnResumeButtonClick);
         ButtonPressedBehavior.buttonFunctionTable.Add(optionsButton.gameObject.name, OnOptionsButtonClick);
@@ -81,5 +87,10 @@ public class GameplayUIController : MonoBehaviour
     {
         menusCanvas.enabled = false;
         SceneLoader.Instance.LoadMainMenuScene();
+    }
+
+    private void UpdateWave(int value)
+    {
+        waveUI.gameObject.SetActive(true);
     }
 }

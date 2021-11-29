@@ -4941,8 +4941,8 @@ MonoBehaviour:
   damage: 50
   moveSpeed: 10
   moveDirection: {x: 0, y: 1}
-  minBallisticAngle: 0
-  maxBallisticAngle: 0
+  minBallisticAngle: -40
+  maxBallisticAngle: 40
   targetAcquiredVoice: {fileID: 11400000, guid: d8db24677cfaff6438517133c4c6882f, type: 2}
   lowSpeed: 8
   highSpeed: 35

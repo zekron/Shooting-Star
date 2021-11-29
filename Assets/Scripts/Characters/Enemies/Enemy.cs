@@ -9,6 +9,7 @@ public class Enemy : Character
     [SerializeField] private float minFireInterval;
     [SerializeField] private float maxFireInterval;
 
+    [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
 
     protected override void OnEnable()
     {
@@ -52,8 +53,8 @@ public class Enemy : Character
     {
         ScoreManager.Instance.AddScore(scorePoint);
         PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
-        EnemyManager.Instance.RemoveFromList(gameObject);
         base.GetDie();
+        enemyDestroyEventSO.RaiseEvent();
     }
 
     public override void Move(Vector2 movement)

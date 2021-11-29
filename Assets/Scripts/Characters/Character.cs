@@ -23,9 +23,12 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     protected float paddingX;
     protected float paddingY;
 
+    protected bool isAlive;
+
     protected virtual void OnEnable()
     {
         health = maxHealth;
+        isAlive = true;
 
         SetOnHeadHealthBar(showOnHeadHealthBar);
     }
@@ -57,8 +60,9 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
             onHeadHealthBar.UpdateStats(health, maxHealth);
         }
 
-        if (health <= 0f)
+        if (health <= 0f && isAlive)
         {
+            isAlive = false;
             GetDie();
         }
     }

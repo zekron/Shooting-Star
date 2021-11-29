@@ -231,7 +231,7 @@ MonoBehaviour:
   - prefab: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
     size: 7
   - prefab: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 5060298685065931927, guid: 4ae5f9473779fab4386aa5e30a25fb17, type: 3}
     size: 20
   - prefab: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
@@ -3142,6 +3142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bea3df47d7cec48809723af5ac942d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
+  animationClipFinishedEventSO: {fileID: 11400000, guid: 69ac34fb1692e5f46a568e039132f56f, type: 2}
 --- !u!95 &1711520199
 Animator:
   serializedVersion: 3
@@ -3207,7 +3209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEnemy: 1
-  waveUI: {fileID: 1711520194}
   enemyPrefabs:
   - {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
@@ -3216,6 +3217,9 @@ MonoBehaviour:
   timeBetweenWaves: 3
   minEnemyAmount: 4
   maxEnemyAmount: 10
+  updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
+  enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
+  animationClipFinishedEventSO: {fileID: 11400000, guid: 69ac34fb1692e5f46a568e039132f56f, type: 2}
 --- !u!4 &1720380483
 Transform:
   m_ObjectHideFlags: 0
@@ -3921,9 +3925,11 @@ MonoBehaviour:
   unpauseSFX: {fileID: 11400000, guid: 7aef0b0e672fb4b42b83f52ba9a5118d, type: 2}
   hUDCanvas: {fileID: 204519350}
   menusCanvas: {fileID: 1514433143}
+  waveUI: {fileID: 1711520196}
   resumeButton: {fileID: 1959433354}
   optionsButton: {fileID: 754216462}
   mainMenuButton: {fileID: 1715702810}
+  updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
 --- !u!114 &8652643179162552691
 MonoBehaviour:
   m_ObjectHideFlags: 0

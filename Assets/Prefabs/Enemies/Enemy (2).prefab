@@ -117,6 +117,7 @@ MonoBehaviour:
   deathEnergyBonus: 3
   minFireInterval: 2
   maxFireInterval: 4
+  enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
 --- !u!1 &6141127440874144652
 GameObject:
   m_ObjectHideFlags: 0
