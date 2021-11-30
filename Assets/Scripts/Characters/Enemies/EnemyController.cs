@@ -17,7 +17,6 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         character = GetComponent<Character>();
-        SetMoveProfile();
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -26,6 +25,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        SetMoveProfile();
         StartCoroutine(nameof(RandomlyMovingCoroutine));
     }
 

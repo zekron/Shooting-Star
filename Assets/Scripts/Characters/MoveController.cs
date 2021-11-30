@@ -7,12 +7,12 @@ public class MoveController : MonoBehaviour
     [SerializeField] private PlayerInputSO inputEvent;
 
     [Header("Move")]
-    [SerializeField] private float moveSpeed = 20f;
+    private float moveSpeed = 20f;
+    private float moveRotationAngle = 50f;
     /// <summary>
     /// 变速因子
     /// </summary>
     [SerializeField, Range(0, 5f)] private float shiftFactor = 3f;
-    [SerializeField] private float moveRotationAngle = 50f;
 
     private Vector2 finalMoveDirection;
     private Quaternion finalMoveRotation;
@@ -32,10 +32,6 @@ public class MoveController : MonoBehaviour
     {
         inputEvent.onMove -= Move;
         inputEvent.onStopMove -= StopMove;
-    }
-
-    public void OnValidate()
-    {
     }
 
     private void Awake()

@@ -19,7 +19,6 @@ public class Player : Character
 
     [Header("Fire")]
     [SerializeField] private GameObject projectileOverdrive;
-    [SerializeField] protected float fireInterval = 0.2f;
     [SerializeField, Range(0, 2)] private int weaponPower = 0;
 
     [Header("Dodge")]
@@ -32,11 +31,7 @@ public class Player : Character
     private float currentRoll;
     private float maxRoll;
 
-    [Header("OverDrive")]
-    [SerializeField] private int overdriveDodgeFactor = 2;
-    [SerializeField] private float overdriveSpeedFactor = 1.2f;
-    [SerializeField] private float overdriveFireFactor = 1.2f;
-    MissileSystem missile;
+    private MissileSystem missile;
     private bool isOverdriving = false;
 
     private Rigidbody2D playerRigidbody;
@@ -97,8 +92,8 @@ public class Player : Character
         maxRoll = dodgeDuration * rollSpeed;
         playerRigidbody.gravityScale = 0;
 
-        waitForFireInterval = new WaitForSeconds(fireInterval);
-        waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overdriveFireFactor);
+        waitForFireInterval = new WaitForSeconds(playerProfile.FireInterval);
+        waitForOverdriveFireInterval = new WaitForSeconds(playerProfile.FireInterval / playerProfile.OverdriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }
 
@@ -123,18 +118,13 @@ public class Player : Character
         MoveRotationAngle = playerProfile.MoveRotationAngle;
         moveController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
 
-        fireInterval = playerProfile.FireInterval;
-
-        overdriveDodgeFactor = playerProfile.OverdriveDodgeFactor;
-        overdriveSpeedFactor = playerProfile.OverdriveSpeedFactor;
-        overdriveFireFactor = playerProfile.OverdriveFireFactor;
     }
 
     #region HEALTH
     public override void GetDamage(float damage)
     {
         base.GetDamage(damage);
-        shieldUpdateEventSO.RaiseEvent(health);
+        shieldUpdateEventSO.RaiseEvent(Health);
         TimeController.Instance.BulletTime(slowMotionDuration);
 
         if (gameObject.activeSelf)
@@ -154,14 +144,14 @@ public class Player : Character
     public override void GetHealing(float value)
     {
         base.GetHealing(value);
-        shieldUpdateEventSO.RaiseEvent(health);
+        shieldUpdateEventSO.RaiseEvent(Health);
     }
 
     public override void GetDie()
     {
         GameManager.onGameOver?.Invoke();
         GameManager.CurrentGameState = GameState.GameOver;
-        shieldUpdateEventSO.RaiseEvent(health = 0);
+        shieldUpdateEventSO.RaiseEvent(Health = 0);
         base.GetDie();
     }
     #endregion
@@ -246,16 +236,16 @@ public class Player : Character
     private void OpenOverdrive()
     {
         isOverdriving = true;
-        dodgeEnergyCost *= overdriveDodgeFactor;
-        moveController.SetMoveSpeedByFactor(overdriveSpeedFactor);
+        dodgeEnergyCost *= playerProfile.OverdriveDodgeFactor;
+        moveController.SetMoveSpeedByFactor(playerProfile.OverdriveSpeedFactor);
         TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
     }
 
     private void StopOverdrive()
     {
         isOverdriving = false;
-        dodgeEnergyCost /= overdriveDodgeFactor;
-        moveController.SetMoveSpeedByFactor(1 / overdriveSpeedFactor);
+        dodgeEnergyCost /= playerProfile.OverdriveDodgeFactor;
+        moveController.SetMoveSpeedByFactor(1 / playerProfile.OverdriveSpeedFactor);
     }
     #endregion
 

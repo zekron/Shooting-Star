@@ -11,7 +11,7 @@ public class Enemy : Character
     {
         base.OnEnable();
 
-        health = enemyProfile.MaxHealth;
+        Health = enemyProfile.MaxHealth;
         MoveSpeed = enemyProfile.MoveSpeed;
         MoveRotationAngle = enemyProfile.MoveRotationAngle;
 

@@ -29220,7 +29220,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03, y: -0.04}
+  m_Offset: {x: 0, y: -0.23}
   m_Size: {x: 1, y: 0.42}
   m_Direction: 1
 --- !u!114 &943594446
@@ -29256,16 +29256,12 @@ MonoBehaviour:
   healthRegenerateTime: 12
   healthRegeneratePercent: 0.02
   projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-  fireInterval: 0.12
   weaponPower: 2
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
   dodgeEnergyCost: 25
   dodgeDuration: 1
   rollSpeed: 360
   dodgeScale: {x: 0.2, y: 0.2, z: 0.2}
-  overdriveDodgeFactor: 2
-  overdriveSpeedFactor: 1.2
-  overdriveFireFactor: 1.2
 --- !u!114 &1115189248577498978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29279,9 +29275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-  moveSpeed: 5
   shiftFactor: 1
-  moveRotationAngle: 50
 --- !u!114 &2849688098052659661
 MonoBehaviour:
   m_ObjectHideFlags: 0

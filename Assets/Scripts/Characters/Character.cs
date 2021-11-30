@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 {
@@ -11,7 +12,16 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
     protected float maxHealth;
-    protected float health;
+    public float Health
+    {
+        get => health; 
+        set
+        {
+            health = value;
+            onHealthChanged.Invoke(showOnHeadHealthBar);
+        }
+    }
+    private float health;
 
     [Header("---- FIRE ----")]
     [SerializeField] protected GameObject[] projectiles;
@@ -23,6 +33,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected WaitForSeconds waitForFireInterval = new WaitForSeconds(0.5f);
 
+    private UnityEvent<bool> onHealthChanged = new UnityEvent<bool>();
+
     protected float paddingX;
     protected float paddingY;
 
@@ -30,10 +42,10 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected virtual void OnEnable()
     {
-        health = maxHealth;
-        isAlive = true;
+        onHealthChanged.AddListener(SetOnHeadHealthBar);
 
-        SetOnHeadHealthBar(showOnHeadHealthBar);
+        Health = maxHealth;
+        isAlive = true;
     }
 
     protected virtual void Awake()
@@ -47,23 +59,18 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     {
         onHeadHealthBar.gameObject.SetActive(flag);
 
-        if (flag)
+        if (flag && gameObject.activeSelf)
         {
-            onHeadHealthBar.Initialize(health, maxHealth);
+            onHeadHealthBar.Initialize(Health, maxHealth);
         }
     }
 
     #region Health
     public virtual void GetDamage(float damage)
     {
-        health -= damage;
+        Health -= damage;
 
-        if (showOnHeadHealthBar && gameObject.activeSelf)
-        {
-            onHeadHealthBar.UpdateStats(health, maxHealth);
-        }
-
-        if (health <= 0f && isAlive)
+        if (Health <= 0f && isAlive)
         {
             isAlive = false;
             GetDie();
@@ -72,21 +79,16 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     public virtual void GetHealing(float healing)
     {
-        if (health == maxHealth) return;
+        if (Health == maxHealth) return;
 
         // health += value;
         // health = Mathf.Clamp(health, 0f, maxHealth);
-        health = Mathf.Clamp(health + healing, 0f, maxHealth);
-
-        if (showOnHeadHealthBar)
-        {
-            onHeadHealthBar.UpdateStats(health, maxHealth);
-        }
+        Health = Mathf.Clamp(Health + healing, 0f, maxHealth);
     }
 
     public virtual void GetDie()
     {
-        health = 0f;
+        Health = 0f;
         AudioManager.Instance.PlaySFX(deathSFX);
         ObjectPoolManager.Release(deathVFX, transform.position);
         gameObject.SetActive(false);
@@ -94,7 +96,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected IEnumerator HealthRegenerateCoroutine(WaitForSeconds waitTime, float percent)
     {
-        while (health < maxHealth)
+        while (Health < maxHealth)
         {
             yield return waitTime;
 
@@ -104,7 +106,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected IEnumerator DamageOverTimeCoroutine(WaitForSeconds waitTime, float percent)
     {
-        while (health > 0f)
+        while (Health > 0f)
         {
             yield return waitTime;
 
