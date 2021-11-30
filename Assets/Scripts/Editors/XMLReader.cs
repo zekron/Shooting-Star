@@ -7,7 +7,7 @@ using System.Xml;
 using UnityEditor;
 using UnityEngine;
 
-public class XMLReader : MonoBehaviour
+public class XMLReader
 {
     static string xmlPath = "CharacterProfile";
     static List<string> enemyProfiles = new List<string>();
@@ -23,8 +23,8 @@ public class XMLReader : MonoBehaviour
     static string enemyFileName = "/EnemyProfile SO";
     static string playerFileName = "/PlayerProfile SO";
 
-    [MenuItem("Custom Menu/XML Reader/Load test.xml")]
-    static void Test()
+    [MenuItem("Custom Menu/XML Reader/Load Character Profiles")]
+    static void LoadXMLToSO()
     {
         TextAsset xml;
         if (!CheckXML(out xml)) return;
@@ -113,6 +113,7 @@ public class XMLReader : MonoBehaviour
                     float.Parse(datas[dataIndex++]),
                     int.Parse(datas[dataIndex++]),
                     int.Parse(datas[dataIndex]));
+                EditorUtility.SetDirty(enemyProfile);
                 break;
             #endregion
             case XMLElement.Player:
@@ -136,6 +137,8 @@ public class XMLReader : MonoBehaviour
                     int.Parse(datas[dataIndex++]),
                     float.Parse(datas[dataIndex++]),
                     float.Parse(datas[dataIndex]));
+
+                EditorUtility.SetDirty(playerProfile);
                 break;
             #endregion
             default:

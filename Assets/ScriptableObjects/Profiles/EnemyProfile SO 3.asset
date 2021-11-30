@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b565243efc08a2241b3e76d106f613d0, type: 3}
   m_Name: EnemyProfile SO 3
   m_EditorClassIdentifier: 
+  MaxHealth: 7
+  MoveSpeed: 1
+  MoveRotationAngle: 35
+  MinFireInterval: 2
+  MaxFireInterval: 4
+  ScorePoint: 100
+  DeathEnergyBonus: 3

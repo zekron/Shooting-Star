@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058dc5b8c83ef5142a68f1286822975d, type: 3}
   m_Name: PlayerProfile SO 1
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  MoveSpeed: 0
-  MoveRotationAngle: 0
-  FireInterval: 0
-  OverdriveDodgeFactor: 0
-  OverdriveSpeedFactor: 0
-  OverdriveFireFactor: 0
+  MaxHealth: 100
+  MoveSpeed: 5
+  MoveRotationAngle: 50
+  FireInterval: 0.12
+  OverdriveDodgeFactor: 2
+  OverdriveSpeedFactor: 1.2
+  OverdriveFireFactor: 1.2

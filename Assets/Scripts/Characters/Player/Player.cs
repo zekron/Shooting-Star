@@ -20,6 +20,7 @@ public class Player : Character
     [Header("Fire")]
     [SerializeField] private GameObject projectileOverdrive;
     [SerializeField, Range(0, 2)] private int weaponPower = 0;
+    protected float fireInterval = 0.2f;
 
     [Header("Dodge")]
     [SerializeField] private AudioDataSO dodgeSFX;
@@ -31,6 +32,10 @@ public class Player : Character
     private float currentRoll;
     private float maxRoll;
 
+    [Header("OverDrive")]
+    private int overdriveDodgeFactor = 2;
+    private float overdriveSpeedFactor = 1.2f;
+    private float overdriveFireFactor = 1.2f;
     private MissileSystem missile;
     private bool isOverdriving = false;
 
@@ -92,8 +97,8 @@ public class Player : Character
         maxRoll = dodgeDuration * rollSpeed;
         playerRigidbody.gravityScale = 0;
 
-        waitForFireInterval = new WaitForSeconds(playerProfile.FireInterval);
-        waitForOverdriveFireInterval = new WaitForSeconds(playerProfile.FireInterval / playerProfile.OverdriveFireFactor);
+        waitForFireInterval = new WaitForSeconds(fireInterval);
+        waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overdriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }
 
@@ -108,7 +113,7 @@ public class Player : Character
 #endif
     }
 
-    private void SetProfile()
+    protected override void SetProfile()
     {
         moveController = GetComponent<MoveController>();
 
@@ -118,6 +123,11 @@ public class Player : Character
         MoveRotationAngle = playerProfile.MoveRotationAngle;
         moveController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
 
+        fireInterval = playerProfile.FireInterval;
+
+        overdriveDodgeFactor = playerProfile.OverdriveDodgeFactor;
+        overdriveSpeedFactor = playerProfile.OverdriveSpeedFactor;
+        overdriveFireFactor = playerProfile.OverdriveFireFactor;
     }
 
     #region HEALTH
@@ -236,16 +246,16 @@ public class Player : Character
     private void OpenOverdrive()
     {
         isOverdriving = true;
-        dodgeEnergyCost *= playerProfile.OverdriveDodgeFactor;
-        moveController.SetMoveSpeedByFactor(playerProfile.OverdriveSpeedFactor);
+        dodgeEnergyCost *= overdriveDodgeFactor;
+        moveController.SetMoveSpeedByFactor(overdriveSpeedFactor);
         TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
     }
 
     private void StopOverdrive()
     {
         isOverdriving = false;
-        dodgeEnergyCost /= playerProfile.OverdriveDodgeFactor;
-        moveController.SetMoveSpeedByFactor(1 / playerProfile.OverdriveSpeedFactor);
+        dodgeEnergyCost /= overdriveDodgeFactor;
+        moveController.SetMoveSpeedByFactor(1 / overdriveSpeedFactor);
     }
     #endregion
 

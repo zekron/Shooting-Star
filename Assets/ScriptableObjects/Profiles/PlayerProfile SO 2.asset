@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b565243efc08a2241b3e76d106f613d0, type: 3}
-  m_Name: EnemyProfile SO 2
+  m_Script: {fileID: 11500000, guid: 058dc5b8c83ef5142a68f1286822975d, type: 3}
+  m_Name: PlayerProfile SO 2
   m_EditorClassIdentifier: 
-  MaxHealth: 8
-  MoveSpeed: 1.2
-  MoveRotationAngle: 35
-  MinFireInterval: 1
-  MaxFireInterval: 3.5
-  ScorePoint: 100
-  DeathEnergyBonus: 4
+  MaxHealth: 50
+  MoveSpeed: 6
+  MoveRotationAngle: 50
+  FireInterval: 0.1
+  OverdriveDodgeFactor: 2
+  OverdriveSpeedFactor: 1.5
+  OverdriveFireFactor: 1.3

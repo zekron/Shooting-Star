@@ -43,7 +43,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     protected virtual void OnEnable()
     {
         onHealthChanged.AddListener(SetOnHeadHealthBar);
-
+        SetProfile();
         Health = maxHealth;
         isAlive = true;
     }
@@ -54,6 +54,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
     }
+
+    protected virtual void SetProfile() { }
 
     public void SetOnHeadHealthBar(bool flag)
     {

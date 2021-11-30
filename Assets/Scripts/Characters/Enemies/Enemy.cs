@@ -7,15 +7,28 @@ public class Enemy : Character
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
+
+    private int deathEnergyBonus;
+    private int scorePoint;
+    private float minFireInterval;
+    private float maxFireInterval;
+
     protected override void OnEnable()
     {
         base.OnEnable();
 
+        StartCoroutine(nameof(FireCoroutine));
+    }
+
+    protected override void SetProfile()
+    {
         Health = enemyProfile.MaxHealth;
         MoveSpeed = enemyProfile.MoveSpeed;
         MoveRotationAngle = enemyProfile.MoveRotationAngle;
-
-        StartCoroutine(nameof(FireCoroutine));
+        minFireInterval = enemyProfile.MinFireInterval;
+        maxFireInterval = enemyProfile.MaxFireInterval;
+        deathEnergyBonus = enemyProfile.DeathEnergyBonus;
+        scorePoint = enemyProfile.ScorePoint;
     }
 
     void OnDisable()
@@ -27,7 +40,7 @@ public class Enemy : Character
     {
         while (gameObject.activeSelf)
         {
-            yield return new WaitForSeconds(Random.Range(enemyProfile.MinFireInterval, enemyProfile.MaxFireInterval));
+            yield return new WaitForSeconds(Random.Range(minFireInterval, maxFireInterval));
 
             if (GameManager.CurrentGameState == GameState.GameOver) yield break;
 
@@ -51,9 +64,9 @@ public class Enemy : Character
 
     public override void GetDie()
     {
-        PlayerEnergy.Instance.GainEnergy(enemyProfile.DeathEnergyBonus);
+        PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
         base.GetDie();
-        updateTotalScoreEventSO.RaiseEvent(enemyProfile.ScorePoint);
+        updateTotalScoreEventSO.RaiseEvent(scorePoint);
         enemyDestroyEventSO.RaiseEvent();
     }
 
