@@ -10,6 +10,7 @@ public class Player : Character
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
     [SerializeField] private PlayerInputSO input;
+    [SerializeField] private PlayerProfileSO playerProfile;
 
     [Header("Regeneration")]
     [SerializeField] private bool regenerateHealth = true;
@@ -34,7 +35,7 @@ public class Player : Character
     [Header("OverDrive")]
     [SerializeField] private int overdriveDodgeFactor = 2;
     [SerializeField] private float overdriveSpeedFactor = 1.2f;
-    [SerializeField] private float overDriveFireFactor = 1.2f;
+    [SerializeField] private float overdriveFireFactor = 1.2f;
     MissileSystem missile;
     private bool isOverdriving = false;
 
@@ -64,6 +65,8 @@ public class Player : Character
 
         PlayerOverdrive.On += OpenOverdrive;
         PlayerOverdrive.Off += StopOverdrive;
+
+        SetProfile();
     }
 
     private void OnDisable()
@@ -77,6 +80,12 @@ public class Player : Character
         PlayerOverdrive.On -= OpenOverdrive;
         PlayerOverdrive.Off -= StopOverdrive;
     }
+
+    private void OnValidate()
+    {
+        SetProfile();
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -89,7 +98,7 @@ public class Player : Character
         playerRigidbody.gravityScale = 0;
 
         waitForFireInterval = new WaitForSeconds(fireInterval);
-        waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overDriveFireFactor);
+        waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overdriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
     }
 
@@ -102,6 +111,23 @@ public class Player : Character
 #if UNITY_ANDROID
         StartCoroutine(nameof(FireCoroutine));
 #endif
+    }
+
+    private void SetProfile()
+    {
+        moveController = GetComponent<MoveController>();
+
+        maxHealth = playerProfile.MaxHealth;
+
+        MoveSpeed = playerProfile.MoveSpeed;
+        MoveRotationAngle = playerProfile.MoveRotationAngle;
+        moveController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
+
+        fireInterval = playerProfile.FireInterval;
+
+        overdriveDodgeFactor = playerProfile.OverdriveDodgeFactor;
+        overdriveSpeedFactor = playerProfile.OverdriveSpeedFactor;
+        overdriveFireFactor = playerProfile.OverdriveFireFactor;
     }
 
     #region HEALTH

@@ -14,26 +14,32 @@ public class EnemyController : MonoBehaviour
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    void Awake()
+    private void Awake()
     {
         character = GetComponent<Character>();
+        SetMoveProfile();
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         StartCoroutine(nameof(RandomlyMovingCoroutine));
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         StopAllCoroutines();
     }
 
-    IEnumerator RandomlyMovingCoroutine()
+    private void OnValidate()
+    {
+        SetMoveProfile();
+    }
+
+    private IEnumerator RandomlyMovingCoroutine()
     {
         transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
 
@@ -58,5 +64,12 @@ public class EnemyController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void SetMoveProfile()
+    {
+        character = GetComponent<Character>();
+        moveSpeed = character.MoveSpeed;
+        moveRotationAngle = character.MoveRotationAngle;
     }
 }

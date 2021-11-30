@@ -103,7 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
   deathSFX: {fileID: 11400000, guid: 212493452c1c6b647b831cfe4f1375b5, type: 2}
-  maxHealth: 7
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 4293371644935024408}
   projectiles:
@@ -113,12 +112,9 @@ MonoBehaviour:
   muzzles:
   - {fileID: 932438790351565965}
   projectileLaunchSFX: {fileID: 11400000, guid: 22c84fdf81f5ba646bc3f5ffc308a857, type: 2}
-  scorePoint: 100
-  deathEnergyBonus: 3
-  minFireInterval: 2
-  maxFireInterval: 4
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
+  enemyProfile: {fileID: 11400000, guid: 4772ee3970dc82d46b4c1f26dea3ab52, type: 2}
 --- !u!1 &6141127440874144652
 GameObject:
   m_ObjectHideFlags: 0

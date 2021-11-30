@@ -8,15 +8,18 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] private AudioDataSO deathSFX;
 
     [Header("---- HEALTH ----")]
-    [SerializeField] protected float maxHealth;
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
+    protected float maxHealth;
     protected float health;
 
     [Header("---- FIRE ----")]
     [SerializeField] protected GameObject[] projectiles;
     [SerializeField] protected Transform[] muzzles;
     [SerializeField] protected AudioDataSO projectileLaunchSFX;
+
+    [SerializeField] public float MoveSpeed { get; protected set; }
+    [SerializeField] public float MoveRotationAngle { get; protected set; }
 
     protected WaitForSeconds waitForFireInterval = new WaitForSeconds(0.5f);
 

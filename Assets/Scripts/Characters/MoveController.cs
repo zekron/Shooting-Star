@@ -34,6 +34,10 @@ public class MoveController : MonoBehaviour
         inputEvent.onStopMove -= StopMove;
     }
 
+    public void OnValidate()
+    {
+    }
+
     private void Awake()
     {
         character = GetComponent<Character>();
@@ -73,6 +77,12 @@ public class MoveController : MonoBehaviour
         canMove = false;
         finalMoveDirection = Vector2.zero;
         finalMoveRotation = Quaternion.identity;
+    }
+
+    public void SetMoveProfile(float moveSpeed, float moveRotationAngle)
+    {
+        this.moveSpeed = moveSpeed;
+        this.moveRotationAngle = moveRotationAngle;
     }
 
     public void SetMoveSpeedByValue(int value)

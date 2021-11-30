@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    [SerializeField] int scorePoint = 100;
-    [SerializeField] int deathEnergyBonus = 3;
-
-    [SerializeField] private float minFireInterval;
-    [SerializeField] private float maxFireInterval;
-
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
+    [SerializeField] protected EnemyProfileSO enemyProfile;
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        health = enemyProfile.MaxHealth;
+        MoveSpeed = enemyProfile.MoveSpeed;
+        MoveRotationAngle = enemyProfile.MoveRotationAngle;
 
         StartCoroutine(nameof(FireCoroutine));
     }
@@ -28,7 +27,7 @@ public class Enemy : Character
     {
         while (gameObject.activeSelf)
         {
-            yield return new WaitForSeconds(Random.Range(minFireInterval, maxFireInterval));
+            yield return new WaitForSeconds(Random.Range(enemyProfile.MinFireInterval, enemyProfile.MaxFireInterval));
 
             if (GameManager.CurrentGameState == GameState.GameOver) yield break;
 
@@ -52,9 +51,9 @@ public class Enemy : Character
 
     public override void GetDie()
     {
-        PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
+        PlayerEnergy.Instance.GainEnergy(enemyProfile.DeathEnergyBonus);
         base.GetDie();
-        updateTotalScoreEventSO.RaiseEvent(scorePoint);
+        updateTotalScoreEventSO.RaiseEvent(enemyProfile.ScorePoint);
         enemyDestroyEventSO.RaiseEvent();
     }
 
