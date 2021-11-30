@@ -12,15 +12,6 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
     protected float maxHealth;
-    public float Health
-    {
-        get => health; 
-        set
-        {
-            health = value;
-            onHealthChanged.Invoke(showOnHeadHealthBar);
-        }
-    }
     private float health;
 
     [Header("---- FIRE ----")]
@@ -40,12 +31,14 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
 
     protected bool isAlive;
 
-    protected virtual void OnEnable()
+    public float Health
     {
-        onHealthChanged.AddListener(SetOnHeadHealthBar);
-        SetProfile();
-        Health = maxHealth;
-        isAlive = true;
+        get => health;
+        set
+        {
+            health = value;
+            onHealthChanged.Invoke(showOnHeadHealthBar);
+        }
     }
 
     protected virtual void Awake()
@@ -53,6 +46,15 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
         paddingY = size.y / 2f;
+
+        SetProfile();
+    }
+
+    protected virtual void OnEnable()
+    {
+        onHealthChanged.AddListener(SetOnHeadHealthBar);
+        Health = maxHealth;
+        isAlive = true;
     }
 
     protected virtual void SetProfile() { }
@@ -70,6 +72,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     #region Health
     public virtual void GetDamage(float damage)
     {
+        if (health <= 0) return;
+
         Health -= damage;
 
         if (Health <= 0f && isAlive)

@@ -8,10 +8,18 @@ public class Enemy : Character
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
 
+    private EnemyController enemyController;
+
     private int deathEnergyBonus;
     private int scorePoint;
-    private float minFireInterval;
-    private float maxFireInterval;
+    protected float minFireInterval;
+    protected float maxFireInterval;
+
+    protected override void Awake()
+    {
+        enemyController = GetComponent<EnemyController>();
+        base.Awake();
+    }
 
     protected override void OnEnable()
     {
@@ -22,9 +30,10 @@ public class Enemy : Character
 
     protected override void SetProfile()
     {
-        Health = enemyProfile.MaxHealth;
+        maxHealth = enemyProfile.MaxHealth;
         MoveSpeed = enemyProfile.MoveSpeed;
         MoveRotationAngle = enemyProfile.MoveRotationAngle;
+        enemyController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
         minFireInterval = enemyProfile.MinFireInterval;
         maxFireInterval = enemyProfile.MaxFireInterval;
         deathEnergyBonus = enemyProfile.DeathEnergyBonus;
@@ -53,7 +62,7 @@ public class Enemy : Character
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.TryGetComponent<Player>(out Player player))
         {

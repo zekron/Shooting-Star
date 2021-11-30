@@ -9,19 +9,21 @@ using UnityEngine;
 
 public class XMLReader
 {
-    static string xmlPath = "CharacterProfile";
-    static List<string> enemyProfiles = new List<string>();
-    static List<string> playerProfiles = new List<string>();
-    static string scriptableObjectPath = "/ScriptableObjects/Profiles";
+    private static string xmlPath = "CharacterProfile";
+    private static List<string> enemyProfiles = new List<string>();
+    private static List<string> playerProfiles = new List<string>();
+    private static List<string> bossProfiles = new List<string>();
+    private static string scriptableObjectPath = "/ScriptableObjects/Profiles";
 
 
-    static string fullPath = Application.dataPath + scriptableObjectPath;
-    static string relativePath = "Assets" + scriptableObjectPath;
-    static string expansionName = ".asset";
-    static string fullName;
-    static string assetPath;
-    static string enemyFileName = "/EnemyProfile SO";
-    static string playerFileName = "/PlayerProfile SO";
+    private static string fullPath = Application.dataPath + scriptableObjectPath;
+    private static string relativePath = "Assets" + scriptableObjectPath;
+    private static string expansionName = ".asset";
+    private static string fullName;
+    private static string assetPath;
+    private static string enemyFileName = "/EnemyProfile SO";
+    private static string playerFileName = "/PlayerProfile SO";
+    private static string bossFileName = "/BossrProfile SO";
 
     [MenuItem("Custom Menu/XML Reader/Load Character Profiles")]
     static void LoadXMLToSO()
@@ -33,11 +35,10 @@ public class XMLReader
         StringBuilder sb = new StringBuilder();
         playerProfiles.Clear();
         enemyProfiles.Clear();
+        bossProfiles.Clear();
 
         xmlDoc.LoadXml(xml.text);
         XmlNodeList nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
-        int enemyIndex = 0;
-        int playerIndex = 0;
         for (int i = 0; i < nodeList.Count; i++)
         {
             sb.Clear();
@@ -46,11 +47,15 @@ public class XMLReader
             {
                 case "Enemy":
                     UpdateEnemyProfiles(sb, xmlElement);
-                    PutInProfileSO(XMLElement.Enemy, enemyIndex++);
+                    PutInProfileSO(XMLElement.Enemy, enemyProfiles.Count - 1);
                     break;
                 case "Player":
                     UpdatePlayerProfiles(sb, xmlElement);
-                    PutInProfileSO(XMLElement.Player, playerIndex++);
+                    PutInProfileSO(XMLElement.Player, playerProfiles.Count - 1);
+                    break;
+                case "Boss":
+                    UpdateBossProfiles(sb, xmlElement);
+                    PutInProfileSO(XMLElement.Boss, bossProfiles.Count - 1);
                     break;
                 default:
                     break;
@@ -81,7 +86,19 @@ public class XMLReader
         Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
     }
 
-    static void PutInProfileSO(XMLElement element, int index)
+    private static void UpdateBossProfiles(StringBuilder sb, XmlElement xmlElement)
+    {
+        XmlNodeList bosses = xmlElement.ChildNodes;
+        Debug.Log(xmlElement.ToString());
+        for (int i = 0; i < bosses.Count; i++)
+        {
+            sb.Append(string.Format(i <= bosses.Count - 2 ? "{0}," : "{0}", bosses[i].InnerText));
+        }
+        bossProfiles.Add(sb.ToString());
+        Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
+    }
+
+    private static void PutInProfileSO(XMLElement element, int index)
     {
         DirectoryInfo dirInfo = new DirectoryInfo(relativePath);
         if (!dirInfo.Exists)
@@ -114,8 +131,33 @@ public class XMLReader
                     int.Parse(datas[dataIndex++]),
                     int.Parse(datas[dataIndex]));
                 EditorUtility.SetDirty(enemyProfile);
+                #endregion
                 break;
-            #endregion
+            case XMLElement.Boss:
+                #region Boss
+                CheckFileExists(index, bossFileName, typeof(BossProfileSO));
+
+                BossProfileSO bossProfile = AssetDatabase.LoadAssetAtPath(assetPath, typeof(BossProfileSO)) as BossProfileSO;
+                if (!bossProfile)
+                {
+                    Debug.LogError(string.Format("Can't Load Asset ={0}", assetPath));
+                    return;
+                }
+
+                datas = bossProfiles[index].Split(',');
+                dataIndex = 0;
+                bossProfile.Initialize(
+                    int.Parse(datas[dataIndex++]),
+                    float.Parse(datas[dataIndex++]),
+                    float.Parse(datas[dataIndex++]),
+                    float.Parse(datas[dataIndex++]),
+                    float.Parse(datas[dataIndex++]),
+                    int.Parse(datas[dataIndex++]),
+                    int.Parse(datas[dataIndex++]),
+                    float.Parse(datas[dataIndex]));
+                EditorUtility.SetDirty(bossProfile);
+                #endregion
+                break;
             case XMLElement.Player:
                 #region Player
                 CheckFileExists(index, playerFileName, typeof(PlayerProfileSO));
@@ -139,8 +181,8 @@ public class XMLReader
                     float.Parse(datas[dataIndex]));
 
                 EditorUtility.SetDirty(playerProfile);
+                #endregion
                 break;
-            #endregion
             default:
                 break;
         }
@@ -176,4 +218,5 @@ public enum XMLElement
 {
     Enemy,
     Player,
+    Boss,
 }

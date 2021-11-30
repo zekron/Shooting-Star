@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Move")]
-    [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float moveRotationAngle = 25f;
+    private float moveSpeed = 2f;
+    private float moveRotationAngle = 25f;
 
     private Character character;
 
@@ -25,18 +24,12 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        SetMoveProfile();
         StartCoroutine(nameof(RandomlyMovingCoroutine));
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
-    }
-
-    private void OnValidate()
-    {
-        SetMoveProfile();
     }
 
     private IEnumerator RandomlyMovingCoroutine()
@@ -66,10 +59,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void SetMoveProfile()
+    public void SetMoveProfile(float moveSpeed, float moveRotationAngle)
     {
-        character = GetComponent<Character>();
-        moveSpeed = character.MoveSpeed;
-        moveRotationAngle = character.MoveRotationAngle;
+        this.moveSpeed = moveSpeed;
+        this.moveRotationAngle = moveRotationAngle;
     }
 }

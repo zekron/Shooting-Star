@@ -6,7 +6,7 @@ public class ShieldStatsBar : StatsBar
 {
     [SerializeField] protected Text percentText;
 
-    void SetPercentText()
+    protected virtual void SetPercentText()
     {
         percentText.text = targetFillAmount.ToString("p0");
     }

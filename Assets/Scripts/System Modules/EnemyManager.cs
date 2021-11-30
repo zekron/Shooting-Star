@@ -7,6 +7,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public GameObject RandomEnemy => enemyList.Count == 0 ? null : enemyList[Random.Range(0, enemyList.Count)];
     public float TimeBetweenWaves => timeBetweenWaves;
 
+    [SerializeField] private bool spawnEnemy = true;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float timeBetweenWaves = 1f;
     [SerializeField] private int minEnemyAmount = 4;
@@ -38,6 +39,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void RandomlySpawnEnemies()
     {
+        if (!spawnEnemy || GameManager.CurrentGameState != GameState.Playing) return;
+
         currentEnemyAmount = enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / 3, maxEnemyAmount);
 
         for (int i = 0; i < enemyAmount; i++)
