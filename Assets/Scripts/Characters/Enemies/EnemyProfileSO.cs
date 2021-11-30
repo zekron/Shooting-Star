@@ -32,4 +32,18 @@ public class EnemyProfileSO : CharacterProfileSO
         }
         return isSuccess;
     }
+
+    public override bool InitializeByString(string dataString)
+    {
+        string[] datas = dataString.Split(',');
+        int dataIndex = 0;
+        return Initialize(
+            int.Parse(datas[dataIndex++]),
+            float.Parse(datas[dataIndex++]),
+            float.Parse(datas[dataIndex++]),
+            float.Parse(datas[dataIndex++]),
+            float.Parse(datas[dataIndex++]),
+            int.Parse(datas[dataIndex++]),
+            int.Parse(datas[dataIndex]));
+    }
 }

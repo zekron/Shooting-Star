@@ -9,190 +9,136 @@ using UnityEngine;
 
 public class XMLReader
 {
-    private static string xmlPath = "CharacterProfile";
-    private static List<string> enemyProfiles = new List<string>();
-    private static List<string> playerProfiles = new List<string>();
-    private static List<string> bossProfiles = new List<string>();
-    private static string scriptableObjectPath = "/ScriptableObjects/Profiles";
+    private static TextAsset xml;
+    private static XmlDocument xmlDoc = new XmlDocument();
+    private static StringBuilder sb = new StringBuilder();
+    private static XmlNodeList nodeList;
 
-
-    private static string fullPath = Application.dataPath + scriptableObjectPath;
-    private static string relativePath = "Assets" + scriptableObjectPath;
-    private static string expansionName = ".asset";
     private static string fullName;
     private static string assetPath;
-    private static string enemyFileName = "/EnemyProfile SO";
-    private static string playerFileName = "/PlayerProfile SO";
-    private static string bossFileName = "/BossrProfile SO";
 
-    [MenuItem("Custom Menu/XML Reader/Load Character Profiles")]
-    static void LoadXMLToSO()
+    private static string fullPath = Application.dataPath + PATH_TO_SCRIPTABLEOBJECT;
+    private const string RELATIVE_PATH = "Assets" + PATH_TO_SCRIPTABLEOBJECT;
+    private const string PATH_TO_SCRIPTABLEOBJECT = "/ScriptableObjects/Profiles";
+    private const string EXPANSION_NAME = ".asset";
+
+    [MenuItem("Custom Menu/XML Reader/Load All Character Profiles")]
+    private static void LoadXMLToSO()
     {
-        TextAsset xml;
-        if (!CheckXML(out xml)) return;
+        LoadEnemyXMLToSO();
+        LoadPlayerXMLToSO();
+        LoadBossXMLToSO();
+    }
 
-        XmlDocument xmlDoc = new XmlDocument();
-        StringBuilder sb = new StringBuilder();
-        playerProfiles.Clear();
+    #region Enemy
+    private static List<string> enemyProfiles = new List<string>();
+    private const string PATH_TO_ENEMYXML = "EnemyProfile";
+    private const string FILE_NAME_ENEMY = "/EnemyProfile SO";
+    [MenuItem("Custom Menu/XML Reader/Load Enemy Profiles")]
+    private static void LoadEnemyXMLToSO()
+    {
+        if (!CheckXML(out xml, PATH_TO_ENEMYXML)) return;
+
         enemyProfiles.Clear();
-        bossProfiles.Clear();
 
         xmlDoc.LoadXml(xml.text);
-        XmlNodeList nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
         for (int i = 0; i < nodeList.Count; i++)
         {
             sb.Clear();
             XmlElement xmlElement = nodeList[i] as XmlElement;
-            switch (xmlElement.Name)
-            {
-                case "Enemy":
-                    UpdateEnemyProfiles(sb, xmlElement);
-                    PutInProfileSO(XMLElement.Enemy, enemyProfiles.Count - 1);
-                    break;
-                case "Player":
-                    UpdatePlayerProfiles(sb, xmlElement);
-                    PutInProfileSO(XMLElement.Player, playerProfiles.Count - 1);
-                    break;
-                case "Boss":
-                    UpdateBossProfiles(sb, xmlElement);
-                    PutInProfileSO(XMLElement.Boss, bossProfiles.Count - 1);
-                    break;
-                default:
-                    break;
-            }
+            UpdateProfiles(sb, xmlElement, enemyProfiles);
+            PutInProfileSO<EnemyProfileSO>(XMLElement.Enemy, enemyProfiles, FILE_NAME_ENEMY);
         }
-        Debug.Log(string.Format("<color=green>Load XML<color=red>{0}</color> success!</color>", xml.name));
+        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
     }
+    #endregion
 
-    private static void UpdatePlayerProfiles(StringBuilder sb, XmlElement xmlElement)
+    #region Player
+    private static List<string> playerProfiles = new List<string>();
+    private const string PATH_TO_PLAYERXML = "PlayerProfile";
+    private const string FILE_NAME_PLAYER = "/PlayerProfile SO";
+    [MenuItem("Custom Menu/XML Reader/Load Player Profiles")]
+    private static void LoadPlayerXMLToSO()
+    {
+        if (!CheckXML(out xml, PATH_TO_PLAYERXML)) return;
+
+        playerProfiles.Clear();
+
+        xmlDoc.LoadXml(xml.text);
+        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+        for (int i = 0; i < nodeList.Count; i++)
+        {
+            sb.Clear();
+            XmlElement xmlElement = nodeList[i] as XmlElement;
+            UpdateProfiles(sb, xmlElement, playerProfiles);
+            PutInProfileSO<PlayerProfileSO>(XMLElement.Player, playerProfiles, FILE_NAME_PLAYER);
+        }
+        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+    }
+    #endregion
+
+    #region Boss
+    private static List<string> bossProfiles = new List<string>();
+    private const string PATH_TO_BOSSXML = "BossProfile";
+    private const string FILE_NAME_BOSS = "/BossrProfile SO";
+    [MenuItem("Custom Menu/XML Reader/Load Boss Profiles")]
+    private static void LoadBossXMLToSO()
+    {
+        if (!CheckXML(out xml, PATH_TO_BOSSXML)) return;
+
+        bossProfiles.Clear();
+
+        xmlDoc.LoadXml(xml.text);
+        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+        for (int i = 0; i < nodeList.Count; i++)
+        {
+            sb.Clear();
+            XmlElement xmlElement = nodeList[i] as XmlElement;
+            UpdateProfiles(sb, xmlElement, bossProfiles);
+            PutInProfileSO<BossProfileSO>(XMLElement.Boss, bossProfiles, FILE_NAME_BOSS);
+        }
+        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+    }
+    #endregion
+
+    private static void UpdateProfiles(StringBuilder sb, XmlElement xmlElement, List<string> profileList)
     {
         XmlNodeList players = xmlElement.ChildNodes;
         for (int i = 0; i < players.Count; i++)
         {
             sb.Append(string.Format(i <= players.Count - 2 ? "{0}," : "{0}", players[i].InnerText));
         }
-        playerProfiles.Add(sb.ToString());
+        profileList.Add(sb.ToString());
         Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
     }
 
-    private static void UpdateEnemyProfiles(StringBuilder sb, XmlElement xmlElement)
+    private static void PutInProfileSO<T>(XMLElement element, List<string> profileList, string fileName) where T : CharacterProfileSO
     {
-        XmlNodeList enemies = xmlElement.ChildNodes;
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            sb.Append(string.Format(i <= enemies.Count - 2 ? "{0}," : "{0}", enemies[i].InnerText));
-        }
-        enemyProfiles.Add(sb.ToString());
-        Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
-    }
-
-    private static void UpdateBossProfiles(StringBuilder sb, XmlElement xmlElement)
-    {
-        XmlNodeList bosses = xmlElement.ChildNodes;
-        Debug.Log(xmlElement.ToString());
-        for (int i = 0; i < bosses.Count; i++)
-        {
-            sb.Append(string.Format(i <= bosses.Count - 2 ? "{0}," : "{0}", bosses[i].InnerText));
-        }
-        bossProfiles.Add(sb.ToString());
-        Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
-    }
-
-    private static void PutInProfileSO(XMLElement element, int index)
-    {
-        DirectoryInfo dirInfo = new DirectoryInfo(relativePath);
+        DirectoryInfo dirInfo = new DirectoryInfo(RELATIVE_PATH);
         if (!dirInfo.Exists)
         {
-            Debug.LogError(string.Format("Can't found path={0}", relativePath));
+            Debug.LogError(string.Format("Can't found path={0}", RELATIVE_PATH));
             return;
         }
 
-        switch (element)
+        CheckFileExists(profileList.Count - 1, fileName, typeof(T));
+
+        T profile = AssetDatabase.LoadAssetAtPath(assetPath, typeof(T)) as T;
+        if (!profile)
         {
-            case XMLElement.Enemy:
-                #region Enemy
-                CheckFileExists(index, enemyFileName, typeof(EnemyProfileSO));
-
-                EnemyProfileSO enemyProfile = AssetDatabase.LoadAssetAtPath(assetPath, typeof(EnemyProfileSO)) as EnemyProfileSO;
-                if (!enemyProfile)
-                {
-                    Debug.LogError(string.Format("Can't Load Asset ={0}", assetPath));
-                    return;
-                }
-
-                string[] datas = enemyProfiles[index].Split(',');
-                int dataIndex = 0;
-                enemyProfile.Initialize(
-                    int.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    int.Parse(datas[dataIndex++]),
-                    int.Parse(datas[dataIndex]));
-                EditorUtility.SetDirty(enemyProfile);
-                #endregion
-                break;
-            case XMLElement.Boss:
-                #region Boss
-                CheckFileExists(index, bossFileName, typeof(BossProfileSO));
-
-                BossProfileSO bossProfile = AssetDatabase.LoadAssetAtPath(assetPath, typeof(BossProfileSO)) as BossProfileSO;
-                if (!bossProfile)
-                {
-                    Debug.LogError(string.Format("Can't Load Asset ={0}", assetPath));
-                    return;
-                }
-
-                datas = bossProfiles[index].Split(',');
-                dataIndex = 0;
-                bossProfile.Initialize(
-                    int.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    int.Parse(datas[dataIndex++]),
-                    int.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex]));
-                EditorUtility.SetDirty(bossProfile);
-                #endregion
-                break;
-            case XMLElement.Player:
-                #region Player
-                CheckFileExists(index, playerFileName, typeof(PlayerProfileSO));
-
-                PlayerProfileSO playerProfile = AssetDatabase.LoadAssetAtPath(assetPath, typeof(PlayerProfileSO)) as PlayerProfileSO;
-                if (!playerProfile)
-                {
-                    Debug.LogError(string.Format("Can't Load Asset ={0}", assetPath));
-                    return;
-                }
-
-                datas = playerProfiles[index].Split(',');
-                dataIndex = 0;
-                playerProfile.Initialize(
-                    int.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    int.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex++]),
-                    float.Parse(datas[dataIndex]));
-
-                EditorUtility.SetDirty(playerProfile);
-                #endregion
-                break;
-            default:
-                break;
+            Debug.LogError(string.Format("Can't Load Asset = {0}", assetPath));
+            return;
         }
-        Debug.Log(fullPath + fullName);
+
+        profile.InitializeByString(profileList[profileList.Count - 1]);
+        EditorUtility.SetDirty(profile);
     }
 
-    private static void CheckFileExists(int index, string fileName, Type type)
+    private static void CheckFileExists(int fileIndex, string fileName, Type type)
     {
-        fullName = string.Format("{0} {1}{2}", fileName, index + 1, expansionName);
-        assetPath = string.Format("{0}/{1}", relativePath, fullName);
+        fullName = string.Format("{0} {1}{2}", fileName, fileIndex + 1, EXPANSION_NAME);
+        assetPath = string.Format("{0}{1}", RELATIVE_PATH, fullName);
         if (!File.Exists(fullPath + fullName))
         {
             var data = ScriptableObject.CreateInstance(type);
@@ -202,7 +148,7 @@ public class XMLReader
         }
     }
 
-    static bool CheckXML(out TextAsset xml)
+    static bool CheckXML(out TextAsset xml, string xmlPath)
     {
         xml = Resources.Load<TextAsset>(xmlPath);
         if (!xml)

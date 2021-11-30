@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Player ID="1">
+		<MaxHealth>100</MaxHealth>
+		<MoveSpeed>5</MoveSpeed>
+		<MoveRotationAngle>50</MoveRotationAngle>
+		<FireInterval>0.12</FireInterval>
+		<OverdriveDodgeFactor>2</OverdriveDodgeFactor>
+		<OverdriveSpeedFactor>1.2</OverdriveSpeedFactor>
+		<OverdriveFireFactor>1.2</OverdriveFireFactor>
+	</Player>
+	<Player ID="2">
+		<MaxHealth>50</MaxHealth>
+		<MoveSpeed>6</MoveSpeed>
+		<MoveRotationAngle>50</MoveRotationAngle>
+		<FireInterval>0.1</FireInterval>
+		<OverdriveDodgeFactor>2</OverdriveDodgeFactor>
+		<OverdriveSpeedFactor>1.5</OverdriveSpeedFactor>
+		<OverdriveFireFactor>1.3</OverdriveFireFactor>
+	</Player>
+</root>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Boss ID="1">
+		<MaxHealth>1200</MaxHealth>
+		<MoveSpeed>1.5</MoveSpeed>
+		<MoveRotationAngle>25</MoveRotationAngle>
+		<MinFireInterval>0.2</MinFireInterval>
+		<MaxFireInterval>1</MaxFireInterval>
+		<ScorePoint>1000</ScorePoint>
+		<DeathEnergyBonus>100</DeathEnergyBonus>
+		<ContinuousFireDuration>1.5</ContinuousFireDuration>
+	</Boss>
+</root>

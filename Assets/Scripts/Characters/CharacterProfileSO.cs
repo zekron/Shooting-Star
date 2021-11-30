@@ -8,4 +8,6 @@ public class CharacterProfileSO : ScriptableObject
 
     public float MoveSpeed;
     public float MoveRotationAngle;
+
+    public virtual bool InitializeByString(string dataString) { return true; }
 }
