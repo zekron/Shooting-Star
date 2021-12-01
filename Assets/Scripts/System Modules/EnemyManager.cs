@@ -9,6 +9,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     [SerializeField] private bool spawnEnemy = true;
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject[] bossPrefabs;
     [SerializeField] private float timeBetweenWaves = 1f;
     [SerializeField] private int minEnemyAmount = 4;
     [SerializeField] private int maxEnemyAmount = 10;
@@ -41,11 +42,18 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         if (!spawnEnemy || GameManager.CurrentGameState != GameState.Playing) return;
 
-        currentEnemyAmount = enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / 3, maxEnemyAmount);
-
-        for (int i = 0; i < enemyAmount; i++)
+        if (waveNumber % 5 == 0)
         {
-            ObjectPoolManager.Release(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
+            ObjectPoolManager.Release(bossPrefabs[Random.Range(0, bossPrefabs.Length)]);
+        }
+        else
+        {
+            currentEnemyAmount = enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / 3, maxEnemyAmount);
+
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                ObjectPoolManager.Release(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
+            }
         }
     }
 

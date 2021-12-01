@@ -237,6 +237,8 @@ MonoBehaviour:
     size: 15
   - prefab: {fileID: 3292915022085376402, guid: a1c517236c5eff245877c6c6ee730119, type: 3}
     size: 20
+  - prefab: {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
+    size: 1
   vFXPools:
   - prefab: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
     size: 1
@@ -1204,63 +1206,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685747344}
   m_CullTransparentMesh: 1
---- !u!1001 &694386566
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_RootOrder
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532430, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
-      propertyPath: m_Name
-      value: Boss The S.H.A.R.K
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
 --- !u!224 &754216460 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8016435272377521550, guid: 65e241a91aa90054caef2cb51d062b27, type: 3}
@@ -3282,11 +3227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0560cd51f56a33d41a17985b4773a002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemy: 0
+  spawnEnemy: 1
   enemyPrefabs:
   - {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
   - {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
+  bossPrefabs:
+  - {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
   timeBetweenWaves: 3
   minEnemyAmount: 4
   maxEnemyAmount: 10
@@ -3659,7 +3606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 626547449752382441, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
       propertyPath: weaponPower
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5908416648923392752, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
       propertyPath: m_Name
@@ -3667,7 +3614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5908416648923392759, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5908416648923392759, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
       propertyPath: m_LocalPosition.x

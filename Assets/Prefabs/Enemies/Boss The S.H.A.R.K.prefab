@@ -19313,7 +19313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5735159873588532430
 Transform:
   m_ObjectHideFlags: 0
@@ -19417,6 +19417,7 @@ MonoBehaviour:
   - {fileID: 3292915022085376402, guid: ac9c24e9acc06e04696443498bf6cb63, type: 3}
   muzzles:
   - {fileID: 5735159872610144748}
+  multiMuzzles: []
   projectileLaunchSFX: {fileID: 11400000, guid: c0570a469f9bd4f45bdacc4da57dfaf4, type: 2}
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
