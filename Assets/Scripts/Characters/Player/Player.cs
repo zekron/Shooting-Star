@@ -177,23 +177,23 @@ public class Player : Character
     {
         while (true)
         {
+            LoadProjectiles(weaponPower);
             switch (weaponPower)
             {
                 case 0:
-                    ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], muzzles[1].position);
+                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Double));
+                    for (int i = 0; i < 3; i++)
+                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Double));
                     break;
                 case 1:
-                    ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], muzzles[0].position);
-                    ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], muzzles[2].position);
+                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Triple));
+                    for (int i = 0; i < 5; i++)
+                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Triple));
                     break;
                 case 2:
+                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Quadruple));
                     for (int i = 0; i < projectiles.Length; i++)
-                    {
-                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], muzzles[i].position);
-                    }
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], muzzles[1].position);
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[0], muzzles[0].position);
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[2], muzzles[2].position);
+                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Quadruple));
                     break;
                 default:
                     break;
@@ -202,6 +202,10 @@ public class Player : Character
             AudioManager.Instance.PlaySFX(projectileLaunchSFX);
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
+    }
+    private void LoadProjectiles(int weaponPower)
+    {
+
     }
     #endregion
 

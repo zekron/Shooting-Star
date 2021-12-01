@@ -17,6 +17,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [Header("---- FIRE ----")]
     [SerializeField] protected GameObject[] projectiles;
     [SerializeField] protected Transform[] muzzles;
+    [SerializeField] protected Muzzle[] multiMuzzles;
     [SerializeField] protected AudioDataSO projectileLaunchSFX;
 
     [SerializeField] public float MoveSpeed { get; protected set; }

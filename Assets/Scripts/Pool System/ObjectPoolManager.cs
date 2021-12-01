@@ -117,6 +117,19 @@ public class ObjectPoolManager : MonoBehaviour
         return objectPoolDictionary[prefab].PreparedObject(position);
     }
 
+    public static GameObject[] Release(GameObject prefab, Vector3[] position)
+    {
+#if UNITY_EDITOR
+        if (!objectPoolDictionary.ContainsKey(prefab))
+        {
+            Debug.LogError("Pool Manager could NOT find prefab: " + prefab.name);
+
+            return null;
+        }
+#endif
+        return objectPoolDictionary[prefab].PreparedObject(position);
+    }
+
     /// <summary>
     /// <para>Release a specified <paramref name="prefab"></paramref> gameObject in the pool at specified <paramref name="position"></paramref> and <paramref name="rotation"></paramref>.</para>
     /// <para>根据传入的 <paramref name="prefab"></paramref> 参数和 <paramref name="rotation"></paramref> 参数，在 <paramref name="position"></paramref> 参数位置释放对象池中预备好的游戏对象。</para> 

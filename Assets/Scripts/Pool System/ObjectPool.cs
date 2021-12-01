@@ -72,6 +72,20 @@ public class ObjectPool
         return preparedObject;
     }
 
+    public GameObject[] PreparedObject(Vector3[] positions)
+    {
+        GameObject[] preparedObjects = new GameObject[positions.Length];
+
+        for (int i = 0; i < positions.Length; i++)
+        {
+            preparedObjects[i] = GetAvailableObject();
+            preparedObjects[i].SetActive(true);
+            preparedObjects[i].transform.position = positions[i];
+        }
+
+        return preparedObjects;
+    }
+
     public GameObject PreparedObject(Vector3 position, Quaternion rotation)
     {
         GameObject preparedObject = GetAvailableObject();

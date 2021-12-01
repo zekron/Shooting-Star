@@ -4494,15 +4494,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f32275092de3a84091855dda8a7ea43, type: 3}
   - {fileID: 21300000, guid: 0fe67e1abe95e2547892b2a565875872, type: 3}
   - {fileID: 21300000, guid: 9f0bee5d7cb432340abe4026294a7cdf, type: 3}
-  - {fileID: 21300000, guid: e134074b3add93f4bb34134e8edc6f24, type: 3}
   - {fileID: 21300000, guid: 0b4e88bebdc9d144eafd85a88772ff08, type: 3}
   - {fileID: 21300000, guid: 2242c756a0fef1840af2bf9d00e8e4f1, type: 3}
-  - {fileID: 21300000, guid: a88f0b24abf0f2d4ab486555af70048a, type: 3}
   - {fileID: 21300000, guid: dbf4bc4ca265e4440bb2f56b09544f46, type: 3}
   - {fileID: 21300000, guid: 8b3b390241f1f294285916157de6d37d, type: 3}
   - {fileID: 21300000, guid: e730f3fc1f020684f8eb1e29c9adf9ef, type: 3}
   - {fileID: 21300000, guid: 16a143f50a26a3d4cb9c14d90e740c72, type: 3}
-  - {fileID: 21300000, guid: 656d2eff8917921448ad0fa382fd34d4, type: 3}
   scoringScreenCanvas: {fileID: 5470189990287755962}
   playerScoreText: {fileID: 5470189989580434454}
   buttonMainMenu: {fileID: 8420460728137675866}
