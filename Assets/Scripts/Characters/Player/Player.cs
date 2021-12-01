@@ -268,7 +268,7 @@ public class Player : Character
     #region Launch Missile
     private void LaunchMissile()
     {
-        missile.Launch(muzzles[1]);
+        missile.Launch(multiMuzzles[0].muzzle);
     }
     #endregion
 }
