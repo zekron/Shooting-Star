@@ -19,7 +19,7 @@ public class Player : Character
 
     [Header("Fire")]
     [SerializeField] private GameObject projectileOverdrive;
-    [SerializeField, Range(0, 2)] private int weaponPower = 0;
+    [SerializeField, Range(0, (int)WeaponPower.Level7)] private int weaponPower = 0;
     protected float fireInterval = 0.2f;
 
     [Header("Dodge")]
@@ -177,35 +177,37 @@ public class Player : Character
     {
         while (true)
         {
-            LoadProjectiles(weaponPower);
-            switch (weaponPower)
-            {
-                case 0:
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Double));
-                    for (int i = 0; i < 3; i++)
-                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Double));
-                    break;
-                case 1:
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Triple));
-                    for (int i = 0; i < 5; i++)
-                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Triple));
-                    break;
-                case 2:
-                    //ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[1], multiMuzzles[0].GetMuzzle(MuzzlePower.Quadruple));
-                    for (int i = 0; i < projectiles.Length; i++)
-                        ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i], multiMuzzles[i].GetMuzzle(MuzzlePower.Quadruple));
-                    break;
-                default:
-                    break;
-            }
+            LoadProjectiles((WeaponPower)weaponPower);
 
             AudioManager.Instance.PlaySFX(projectileLaunchSFX);
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
     }
-    private void LoadProjectiles(int weaponPower)
+    private void LoadProjectiles(WeaponPower weaponPower)
     {
+        int muzzleAmount;
+        if (weaponPower >= WeaponPower.Level6 || weaponPower == WeaponPower.DEBUG)
+        {
+            muzzleAmount = multiMuzzles.Length;
+        }
+        else if (weaponPower >= WeaponPower.Level3)
+        {
+            muzzleAmount = multiMuzzles.Length - 2;
+        }
+        else if (weaponPower >= WeaponPower.Level1)
+        {
+            muzzleAmount = multiMuzzles.Length - 4;
+        }
+        else
+        {
+            muzzleAmount = 1;
+        }
 
+        for (int i = 0; i < muzzleAmount; i++)
+        {
+            ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i],
+                  multiMuzzles[i].GetMuzzle(StaticData.GetShotGunPower(weaponPower)));
+        }
     }
     #endregion
 
