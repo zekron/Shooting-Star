@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IMoveable
+public class Projectile : MonoBehaviour, IMoveable, IRotate
 {
     [SerializeField] private GameObject hitVFX;
     [SerializeField] AudioDataSO hitSFX;
     [SerializeField] private float damage;
-    [SerializeField] protected float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 10f;
     [SerializeField] protected Vector2 moveDirection;
 
     protected GameObject target;
+
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     protected virtual void OnEnable()
     {

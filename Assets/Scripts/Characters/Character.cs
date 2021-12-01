@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
+public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
 {
     [Header("---- DEATH ----")]
     [SerializeField] private GameObject deathVFX;
@@ -20,8 +20,8 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable
     [SerializeField] protected Muzzle[] multiMuzzles;
     [SerializeField] protected AudioDataSO projectileLaunchSFX;
 
-    [SerializeField] public float MoveSpeed { get; protected set; }
-    [SerializeField] public float MoveRotationAngle { get; protected set; }
+    public float MoveSpeed { get; set; }
+    public float MoveRotationAngle { get; set; }
 
     protected WaitForSeconds waitForFireInterval = new WaitForSeconds(0.5f);
 

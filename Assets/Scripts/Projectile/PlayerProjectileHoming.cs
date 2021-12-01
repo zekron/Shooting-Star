@@ -42,7 +42,7 @@ public class PlayerProjectileHoming : PlayerProjectile
                 Rotate(tempRotation);
             }
 
-            Move(moveDirection * moveSpeed * Time.deltaTime);
+            Move(moveDirection * MoveSpeed * Time.deltaTime);
 
             yield return null;
         }

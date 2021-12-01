@@ -36,3 +36,8 @@ public enum WeaponPower
     Level6,
     Level7,
 }
+public enum WeaponType
+{
+    ShotGun,
+    Laser,
+}

@@ -18,7 +18,10 @@ public class Player : Character
     [SerializeField, Range(0f, 1f)] private float healthRegeneratePercent;
 
     [Header("Fire")]
+    [SerializeField] private IntEventChannelSO upgradeWeaponPowerEventSO;
+    [SerializeField] private IntEventChannelSO setWeaponTypeEventSO;
     [SerializeField] private GameObject projectileOverdrive;
+    [SerializeField] private WeaponType weaponType;
     [SerializeField, Range(0, (int)WeaponPower.Level7)] private int weaponPower = 0;
     protected float fireInterval = 0.2f;
 
@@ -66,6 +69,9 @@ public class Player : Character
         PlayerOverdrive.On += OpenOverdrive;
         PlayerOverdrive.Off += StopOverdrive;
 
+        setWeaponTypeEventSO.OnEventRaised += SetWeaponType;
+        upgradeWeaponPowerEventSO.OnEventRaised += UpgradeWeaponPower;
+
         SetProfile();
     }
 
@@ -111,6 +117,14 @@ public class Player : Character
 #if UNITY_ANDROID
         StartCoroutine(nameof(FireCoroutine));
 #endif
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+        {
+            interactable.Activate(this);
+        }
     }
 
     protected override void SetProfile()
@@ -208,6 +222,16 @@ public class Player : Character
             ObjectPoolManager.Release(isOverdriving ? projectileOverdrive : projectiles[i],
                   multiMuzzles[i].GetMuzzle(StaticData.GetShotGunPower(weaponPower)));
         }
+    }
+
+    private void UpgradeWeaponPower(int levelToUp)
+    {
+        weaponPower += levelToUp;
+    }
+
+    private void SetWeaponType(int type)
+    {
+        weaponType = (WeaponType)type;
     }
     #endregion
 

@@ -29247,6 +29247,7 @@ MonoBehaviour:
   - {fileID: 4133662792975852540}
   - {fileID: 1991849378}
   - {fileID: 10306434}
+  multiMuzzles: []
   projectileLaunchSFX: {fileID: 11400000, guid: b7bdaea13f7a86d4ca72cf399d634451, type: 2}
   shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
   shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
@@ -29255,7 +29256,10 @@ MonoBehaviour:
   regenerateHealth: 1
   healthRegenerateTime: 12
   healthRegeneratePercent: 0.02
+  upgradeWeaponPowerEventSO: {fileID: 11400000, guid: 2b8adadc37cbd954da7df24cea4c96ed, type: 2}
+  setWeaponTypeEventSO: {fileID: 11400000, guid: 74f277886eaa5a54f8d25e1a431fcbd5, type: 2}
   projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
+  weaponType: 0
   weaponPower: 2
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
   dodgeEnergyCost: 25

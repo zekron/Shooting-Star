@@ -43,11 +43,11 @@ public class PlayerMissile : PlayerProjectileHoming
 
     IEnumerator VariableSpeedCoroutine()
     {
-        moveSpeed = lowSpeed;
+        MoveSpeed = lowSpeed;
 
         yield return waitVariableSpeedDelay;
 
-        moveSpeed = highSpeed;
+        MoveSpeed = highSpeed;
 
         if (target != null)
         {

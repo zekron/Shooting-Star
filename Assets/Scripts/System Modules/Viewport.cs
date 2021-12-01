@@ -55,6 +55,16 @@ public class Viewport
         return position;
     }
 
+    public static Vector3 RandomPosition(float paddingX, float paddingY)
+    {
+        Vector3 position = Vector3.zero;
+
+        position.x = Random.Range(minX + paddingX, maxX - paddingX);
+        position.y = Random.Range(minY + paddingY, maxY - paddingY);
+
+        return position;
+    }
+
     public static Vector3 RandomEnemyMovePosition(float paddingX, float paddingY)
     {
         Vector3 position = Vector3.zero;
