@@ -87,8 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a172a60fd4b54940aed36b18b80ac5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  moveRotationAngle: 35
 --- !u!114 &1811371292644592213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
   deathSFX: {fileID: 11400000, guid: 212493452c1c6b647b831cfe4f1375b5, type: 2}
-  showOnHeadHealthBar: 1
+  showOnHeadHealthBar: 0
   onHeadHealthBar: {fileID: 4293371644935024408}
   projectiles:
   - {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
@@ -111,6 +109,7 @@ MonoBehaviour:
   - {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
   muzzles:
   - {fileID: 932438790351565965}
+  multiMuzzles: []
   projectileLaunchSFX: {fileID: 11400000, guid: 22c84fdf81f5ba646bc3f5ffc308a857, type: 2}
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
