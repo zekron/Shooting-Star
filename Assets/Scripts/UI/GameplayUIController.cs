@@ -58,6 +58,9 @@ public class GameplayUIController : MonoBehaviour
         playerInput.onPause -= Pause;
         playerInput.onUnpause -= Unpause;
 
+        updateWaveEventSO.OnEventRaised -= UpdateWave;
+        updateTotalScoreEventSO.OnEventRaised -= UpdateScoreText;
+
         ButtonPressedBehavior.buttonFunctionTable.Clear();
     }
 

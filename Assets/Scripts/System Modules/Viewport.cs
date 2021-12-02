@@ -19,6 +19,9 @@ public class Viewport
         middleX = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0f)).x;
         middleY = mainCamera.ViewportToWorldPoint(new Vector3(0f, 0.5f)).y;
 
+        Debug.Log(Display.main.renderingWidth);
+        Debug.Log(Display.main.renderingHeight);
+
         minX = bottomLeft.x;
         minY = bottomLeft.y;
         maxX = topRight.x;

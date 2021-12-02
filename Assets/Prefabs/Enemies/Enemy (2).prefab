@@ -106,7 +106,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
   - {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
-  - {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
+  - {fileID: 3292915022085376402, guid: b2e1b1a20eb509548a70d05798f72b68, type: 3}
   muzzles:
   - {fileID: 932438790351565965}
   multiMuzzles: []

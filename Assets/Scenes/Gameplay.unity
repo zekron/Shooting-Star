@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d1e2ea6e0edc95e449bccbc195488a55, type: 2}
-  m_Color: {r: 0, g: 0.65882355, b: 0.8784314, a: 1}
+  m_Color: {r: 0.8784314, g: 0.11764706, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -521,8 +521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -250, y: -100}
-  m_SizeDelta: {x: 400, y: 100}
+  m_AnchoredPosition: {x: -250, y: -124.99994}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207340899
 MonoBehaviour:
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d1e2ea6e0edc95e449bccbc195488a55, type: 2}
-  m_Color: {r: 0, g: 0.65882355, b: 0.8784314, a: 1}
+  m_Color: {r: 0.8784314, g: 0.11546798, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '-  WAVE 01 -'
+  m_Text: '-  WARNING -'
 --- !u!222 &319534324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3087,7 +3087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d1e2ea6e0edc95e449bccbc195488a55, type: 2}
-  m_Color: {r: 0, g: 0.65882355, b: 0.8784314, a: 1}
+  m_Color: {r: 0.8784314, g: 0.11764706, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3664,6 +3664,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 846157672924215264, guid: 8834d7a6309102d44a2066c7cf30be4f, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5976628406566106873, guid: 8834d7a6309102d44a2066c7cf30be4f, type: 3}
       propertyPath: m_Name
       value: Player 3

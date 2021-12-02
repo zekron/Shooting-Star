@@ -226,6 +226,8 @@ public class Player : Character
 
     private void UpgradeWeaponPower(int levelToUp)
     {
+        if (weaponPower == (int)WeaponPower.Level7) return;
+
         weaponPower += levelToUp;
     }
 

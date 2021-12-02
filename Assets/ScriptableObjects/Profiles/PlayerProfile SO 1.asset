@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   MoveSpeed: 5
-  MoveRotationAngle: 50
-  FireInterval: 0.12
+  MoveRotationAngle: 40
+  FireInterval: 0.13
+  defaultWeaponType: 0
   OverdriveDodgeFactor: 2
   OverdriveSpeedFactor: 1.2
   OverdriveFireFactor: 1.2

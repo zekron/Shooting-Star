@@ -108,10 +108,13 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
         return playerScoreData;
     }
 
+#if UNITY_EDITOR
+
     [UnityEditor.MenuItem("Custom Menu/Save System/Delete Save File")]
     public static void DeletePlayerScoreData()
     {
         SaveSystem.DeleteSaveFile(SaveFileName);
     }
+#endif
     #endregion
 }

@@ -35,7 +35,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void Start()
     {
-        updateWaveEventSO.RaiseEvent(waveNumber);
+        //updateWaveEventSO.RaiseEvent(waveNumber);
+        RandomlySpawnEnemies();
     }
 
     private void RandomlySpawnEnemies()
@@ -62,7 +63,10 @@ public class EnemyManager : Singleton<EnemyManager>
         currentEnemyAmount--;
         if (currentEnemyAmount <= 0)
         {
-            updateWaveEventSO.RaiseEvent(++waveNumber);
+            if (++waveNumber % 5 == 0)
+                updateWaveEventSO.RaiseEvent(waveNumber);
+            else
+                RandomlySpawnEnemies();
         }
     }
 }

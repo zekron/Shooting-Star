@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
 
 public class XMLReader
 {
@@ -185,3 +186,4 @@ public enum XMLElement
     Player,
     Boss,
 }
+#endif

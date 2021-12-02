@@ -1,65 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &10306433
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 10306434}
-  m_Layer: 6
-  m_Name: Muzzle (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &10306434
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10306433}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.95, y: -0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9098751005735781759}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1991849377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1991849378}
-  m_Layer: 6
-  m_Name: Muzzle (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1991849378
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991849377}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9098751005735781759}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172888352342442900
 GameObject:
   m_ObjectHideFlags: 0
@@ -14777,36 +14717,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1 &1362513340018496940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4133662792975852540}
-  m_Layer: 6
-  m_Name: Muzzle (0)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4133662792975852540
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362513340018496940}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9098751005735781759}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517229256210752467
 GameObject:
   m_ObjectHideFlags: 0
@@ -15323,39 +15233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 9120645837735877877}
---- !u!1 &2962519532731337075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9098751005735781759}
-  m_Layer: 6
-  m_Name: Muzzles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9098751005735781759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962519532731337075}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4133662792975852540}
-  - {fileID: 1991849378}
-  - {fileID: 10306434}
-  m_Father: {fileID: 6435389010079767248}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &3016911344019935443
 GameObject:
   m_ObjectHideFlags: 0
@@ -31405,7 +31282,6 @@ Transform:
   - {fileID: 6435389009007492522}
   - {fileID: 755919190238866735}
   - {fileID: 7508769848441179696}
-  - {fileID: 9098751005735781759}
   - {fileID: 897663034030659974}
   - {fileID: 5021901102351956206}
   m_Father: {fileID: 0}
@@ -31473,9 +31349,13 @@ MonoBehaviour:
   - {fileID: 3667453350895143958, guid: 1a5f35e67a0c9f74aa7e4a0a5d75971a, type: 3}
   - {fileID: 3667453350895143958, guid: eefc2e853add3d847bfe0769cc42e50c, type: 3}
   muzzles:
-  - {fileID: 4133662792975852540}
-  - {fileID: 1991849378}
-  - {fileID: 10306434}
+  - {fileID: 2586034426363494342}
+  - {fileID: 5342715841644463573}
+  - {fileID: 3980122638175096425}
+  - {fileID: 4940090064757486746}
+  - {fileID: 8886036636543988498}
+  - {fileID: 1866884948680765355}
+  - {fileID: 2829048230691033438}
   multiMuzzles:
   - {fileID: 5516420726203674503}
   - {fileID: 1878377862164234256}
@@ -41224,7 +41104,7 @@ Transform:
   - {fileID: 1866884948680765355}
   - {fileID: 2829048230691033438}
   m_Father: {fileID: 6435389010079767248}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &6928528080207556057
 GameObject:
@@ -46573,14 +46453,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0943553854878d44988f105f0edaa1f, type: 3}
---- !u!4 &755919190238866735 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2832587655287487451, guid: f0943553854878d44988f105f0edaa1f, type: 3}
-  m_PrefabInstance: {fileID: 3256893119740221172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &755919190238866732 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2832587655287487448, guid: f0943553854878d44988f105f0edaa1f, type: 3}
+  m_PrefabInstance: {fileID: 3256893119740221172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &755919190238866735 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2832587655287487451, guid: f0943553854878d44988f105f0edaa1f, type: 3}
   m_PrefabInstance: {fileID: 3256893119740221172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5501259881019825202
@@ -46600,7 +46480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: b45c51e1950ad1a418d31c65da0cc80f, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4624428752572433844, guid: b45c51e1950ad1a418d31c65da0cc80f, type: 3}
       propertyPath: m_AnchorMax.x

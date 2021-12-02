@@ -19,7 +19,7 @@ public class WaveUI : MonoBehaviour
 
     private void UpdateWave(int value)
     {
-        waveText.text = $"- WAVE {value} -";
+        //waveText.text = $"- WAVE {value} -";
     }
 
     private void OnAnimationFinished()

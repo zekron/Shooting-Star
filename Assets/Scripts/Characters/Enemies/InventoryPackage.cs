@@ -29,7 +29,9 @@ public class InventoryPackage : ScriptableObject
             }
             else totalRate += inventoryDropRate[i];
         }
+#if UNITY_EDITOR
         EditorUtility.SetDirty(this);
+#endif
     }
 
     public Inventory CanDrop()

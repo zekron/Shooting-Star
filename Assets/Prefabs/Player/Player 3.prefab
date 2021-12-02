@@ -70788,7 +70788,7 @@ MonoBehaviour:
   shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
   shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
-  playerProfile: {fileID: 11400000, guid: c3cc9e27c3520ca43aa9be8c87c957cf, type: 2}
+  playerProfile: {fileID: 11400000, guid: 9a07e7d85722c824ba7589a778ed8b9f, type: 2}
   regenerateHealth: 1
   healthRegenerateTime: 12
   healthRegeneratePercent: 0.02
