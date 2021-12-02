@@ -37,20 +37,26 @@ public class XMLReader
     [MenuItem("Custom Menu/XML Reader/Load Enemy Profiles")]
     private static void LoadEnemyXMLToSO()
     {
-        if (!CheckXML(out xml, PATH_TO_ENEMYXML)) return;
-
-        enemyProfiles.Clear();
-
-        xmlDoc.LoadXml(xml.text);
-        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
-        for (int i = 0; i < nodeList.Count; i++)
+        bool isSuccess = false;
+        if (CheckXML(out xml, PATH_TO_ENEMYXML))
         {
-            sb.Clear();
-            XmlElement xmlElement = nodeList[i] as XmlElement;
-            UpdateProfiles(sb, xmlElement, enemyProfiles);
-            PutInProfileSO<EnemyProfileSO>(XMLElement.Enemy, enemyProfiles, FILE_NAME_ENEMY);
+            enemyProfiles.Clear();
+
+            xmlDoc.LoadXml(xml.text);
+            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                sb.Clear();
+                XmlElement xmlElement = nodeList[i] as XmlElement;
+                UpdateProfiles(sb, xmlElement, enemyProfiles);
+                isSuccess = PutInProfileSO<EnemyProfileSO>(XMLElement.Enemy, enemyProfiles, FILE_NAME_ENEMY);
+            }
         }
-        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+
+        if (isSuccess)
+            Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+        else
+            Debug.LogError(string.Format("<color=red>Fail to load <color=yellow>{0}.xml</color> into profile!</color>", xml.name));
     }
     #endregion
 
@@ -61,20 +67,25 @@ public class XMLReader
     [MenuItem("Custom Menu/XML Reader/Load Player Profiles")]
     private static void LoadPlayerXMLToSO()
     {
-        if (!CheckXML(out xml, PATH_TO_PLAYERXML)) return;
-
-        playerProfiles.Clear();
-
-        xmlDoc.LoadXml(xml.text);
-        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
-        for (int i = 0; i < nodeList.Count; i++)
+        bool isSuccess = false;
+        if (CheckXML(out xml, PATH_TO_PLAYERXML))
         {
-            sb.Clear();
-            XmlElement xmlElement = nodeList[i] as XmlElement;
-            UpdateProfiles(sb, xmlElement, playerProfiles);
-            PutInProfileSO<PlayerProfileSO>(XMLElement.Player, playerProfiles, FILE_NAME_PLAYER);
+            playerProfiles.Clear();
+
+            xmlDoc.LoadXml(xml.text);
+            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                sb.Clear();
+                XmlElement xmlElement = nodeList[i] as XmlElement;
+                UpdateProfiles(sb, xmlElement, playerProfiles);
+                isSuccess = PutInProfileSO<PlayerProfileSO>(XMLElement.Player, playerProfiles, FILE_NAME_PLAYER);
+            }
         }
-        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+        if (isSuccess)
+            Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+        else
+            Debug.LogError(string.Format("<color=red>Fail to load <color=yellow>{0}.xml</color> into profile!</color>", xml.name));
     }
     #endregion
 
@@ -85,20 +96,26 @@ public class XMLReader
     [MenuItem("Custom Menu/XML Reader/Load Boss Profiles")]
     private static void LoadBossXMLToSO()
     {
-        if (!CheckXML(out xml, PATH_TO_BOSSXML)) return;
-
-        bossProfiles.Clear();
-
-        xmlDoc.LoadXml(xml.text);
-        nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
-        for (int i = 0; i < nodeList.Count; i++)
+        bool isSuccess = false;
+        if (CheckXML(out xml, PATH_TO_BOSSXML))
         {
-            sb.Clear();
-            XmlElement xmlElement = nodeList[i] as XmlElement;
-            UpdateProfiles(sb, xmlElement, bossProfiles);
-            PutInProfileSO<BossProfileSO>(XMLElement.Boss, bossProfiles, FILE_NAME_BOSS);
+            bossProfiles.Clear();
+
+            xmlDoc.LoadXml(xml.text);
+            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                sb.Clear();
+                XmlElement xmlElement = nodeList[i] as XmlElement;
+                UpdateProfiles(sb, xmlElement, bossProfiles);
+                isSuccess = PutInProfileSO<BossProfileSO>(XMLElement.Boss, bossProfiles, FILE_NAME_BOSS);
+            }
         }
-        Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+
+        if (isSuccess)
+            Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+        else
+            Debug.LogError(string.Format("<color=red>Fail to load <color=yellow>{0}.xml</color> into profile!</color>", xml.name));
     }
     #endregion
 
@@ -113,13 +130,14 @@ public class XMLReader
         Debug.Log(string.Format("Fetch xml data: {0}", sb.ToString()));
     }
 
-    private static void PutInProfileSO<T>(XMLElement element, List<string> profileList, string fileName) where T : CharacterProfileSO
+    private static bool PutInProfileSO<T>(XMLElement element, List<string> profileList, string fileName) where T : CharacterProfileSO
     {
+        bool isSuccess = false;
         DirectoryInfo dirInfo = new DirectoryInfo(RELATIVE_PATH);
         if (!dirInfo.Exists)
         {
             Debug.LogError(string.Format("Can't found path={0}", RELATIVE_PATH));
-            return;
+            return isSuccess;
         }
 
         CheckFileExists(profileList.Count - 1, fileName, typeof(T));
@@ -128,11 +146,12 @@ public class XMLReader
         if (!profile)
         {
             Debug.LogError(string.Format("Can't Load Asset = {0}", assetPath));
-            return;
+            return isSuccess;
         }
 
-        profile.InitializeByString(profileList[profileList.Count - 1]);
+        isSuccess = profile.InitializeByString(profileList[profileList.Count - 1]);
         EditorUtility.SetDirty(profile);
+        return isSuccess;
     }
 
     private static void CheckFileExists(int fileIndex, string fileName, Type type)

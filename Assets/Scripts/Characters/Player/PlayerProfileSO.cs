@@ -7,12 +7,13 @@ using UnityEngine;
 public class PlayerProfileSO : CharacterProfileSO
 {
     public float FireInterval;
+    public WeaponType defaultWeaponType;
 
     public int OverdriveDodgeFactor;
     public float OverdriveSpeedFactor;
     public float OverdriveFireFactor;
 
-    public bool Initialize(int maxHealth, float moveSpeed, float moveRotationAngle, float fireInterval, int overdriveDodgeFactor, float overdriveSpeedFactor, float overdriveFireFactor)
+    public bool Initialize(int maxHealth, float moveSpeed, float moveRotationAngle, float fireInterval, int overdriveDodgeFactor, float overdriveSpeedFactor, float overdriveFireFactor, int weaponType)
     {
         bool isSuccess = true;
         try
@@ -23,6 +24,7 @@ public class PlayerProfileSO : CharacterProfileSO
             MoveRotationAngle = moveRotationAngle;
 
             FireInterval = fireInterval;
+            defaultWeaponType = (WeaponType)weaponType;
 
             OverdriveDodgeFactor = overdriveDodgeFactor;
             OverdriveSpeedFactor = overdriveSpeedFactor;
@@ -40,13 +42,21 @@ public class PlayerProfileSO : CharacterProfileSO
     {
         string[] datas = dataString.Split(',');
         int dataIndex = 0;
-        return Initialize(
-            int.Parse(datas[dataIndex++]),
-            float.Parse(datas[dataIndex++]),
-            float.Parse(datas[dataIndex++]),
-            float.Parse(datas[dataIndex++]),
-            int.Parse(datas[dataIndex++]),
-            float.Parse(datas[dataIndex++]),
-            float.Parse(datas[dataIndex]));
+        try
+        {
+            return Initialize(
+                int.Parse(datas[dataIndex++]),
+                float.Parse(datas[dataIndex++]),
+                float.Parse(datas[dataIndex++]),
+                float.Parse(datas[dataIndex++]),
+                int.Parse(datas[dataIndex++]),
+                float.Parse(datas[dataIndex++]),
+                float.Parse(datas[dataIndex++]),
+                int.Parse(datas[dataIndex++]));
+        }
+        catch (System.Exception exception)
+        {
+            Debug.LogError(string.Format("Fail to Initialize profile: {0}", exception)); return false;
+        }
     }
 }
