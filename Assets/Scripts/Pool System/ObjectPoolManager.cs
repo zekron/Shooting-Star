@@ -7,6 +7,7 @@ public class ObjectPoolManager : MonoBehaviour
     [SerializeField] private ObjectPool[] playerProjectilePools;
     [SerializeField] private ObjectPool[] enemyProjectilePools;
     [SerializeField] private ObjectPool[] vFXPools;
+    [SerializeField] private ObjectPool[] itemPools;
 
     private static Dictionary<GameObject, ObjectPool> objectPoolDictionary;
 
@@ -18,6 +19,7 @@ public class ObjectPoolManager : MonoBehaviour
         Initialize(playerProjectilePools);
         Initialize(enemyProjectilePools);
         Initialize(vFXPools);
+        Initialize(itemPools);
     }
 
 #if UNITY_EDITOR
@@ -27,6 +29,7 @@ public class ObjectPoolManager : MonoBehaviour
         CheckPoolSize(playerProjectilePools);
         CheckPoolSize(enemyProjectilePools);
         CheckPoolSize(vFXPools);
+        CheckPoolSize(itemPools);
     }
 #endif
 

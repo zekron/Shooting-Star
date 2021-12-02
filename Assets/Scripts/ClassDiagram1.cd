@@ -33,7 +33,7 @@
   <Class Name="Enemy" Collapsed="true">
     <Position X="11.25" Y="14" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAABAAAEIAAgAAAAAAAQAAIAAAAAACIAIBgAAAgiEA=</HashCode>
+      <HashCode>AEAABAAAEIAAgAAAAAAgQAAIAAAAAACIAIBgAAAgiEA=</HashCode>
       <FileName>Assets\Scripts\Characters\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -162,7 +162,7 @@
   <Class Name="ObjectPoolManager" Collapsed="true">
     <Position X="27.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACBAAAAAAAAAUAAAAAAEAAAAAAAAAAAAEAAABQIAEA=</HashCode>
+      <HashCode>AACBAAAAAAAAAUAAAIAAEAAAAAAAAAAAAEAAABQIAEA=</HashCode>
       <FileName>Assets\Scripts\Pool System\ObjectPoolManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -469,7 +469,7 @@
       <FileName>Assets\Scripts\UI\BossHealthBar.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BonusItem" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="BonusInventory" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="1.25" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAEA=</HashCode>
@@ -477,7 +477,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Item" Collapsed="true">
+  <Class Name="Inventory" Collapsed="true">
     <Position X="2.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEIAAABAAAAAAAAAAUAAAAAAEAAAAAAIACEA=</HashCode>
@@ -485,7 +485,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="MainWeaponItem" Collapsed="true">
+  <Class Name="MainWeaponInventory" Collapsed="true">
     <Position X="3.5" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgBAAAACAAAAAAQBAAAAAAAAAAAAAAA=</HashCode>

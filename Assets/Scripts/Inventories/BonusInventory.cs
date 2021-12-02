@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BonusItem : Item, IInteractable
+public class BonusInventory : Inventory, IInteractable
 {
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 

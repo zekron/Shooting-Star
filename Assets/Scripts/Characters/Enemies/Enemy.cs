@@ -7,8 +7,10 @@ public class Enemy : Character
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
+    [SerializeField] protected InventoryPackage inventoryPackage;
 
     private EnemyController enemyController;
+    private Inventory currentDropInventory;
 
     private int deathEnergyBonus;
     private int scorePoint;
@@ -25,6 +27,7 @@ public class Enemy : Character
     {
         base.OnEnable();
 
+        SetDropInventory();
         StartCoroutine(nameof(FireCoroutine));
     }
 
@@ -75,6 +78,7 @@ public class Enemy : Character
     {
         PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
         base.GetDie();
+        DropInventory();
         updateTotalScoreEventSO.RaiseEvent(scorePoint);
         enemyDestroyEventSO.RaiseEvent();
     }
@@ -88,4 +92,16 @@ public class Enemy : Character
     //{
     //    transform.rotation = moveRotation;
     //}
+
+    private void SetDropInventory()
+    {
+        currentDropInventory = inventoryPackage.CanDrop();
+    }
+
+    private void DropInventory()
+    {
+        if (!currentDropInventory) return;
+
+        ObjectPoolManager.Release(currentDropInventory.gameObject, transform.position);
+    }
 }

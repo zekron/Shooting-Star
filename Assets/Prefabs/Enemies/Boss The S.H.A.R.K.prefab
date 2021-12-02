@@ -19422,6 +19422,7 @@ MonoBehaviour:
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
   enemyProfile: {fileID: 11400000, guid: 3ef3c29a9ae937e43b054b4b98482f2b, type: 2}
+  inventoryPackage: {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
   continuousFireDuration: 1.5
   playerDetectionTransform: {fileID: 6777184693290456823}
   playerDetectionSize: {x: 1, y: 15, z: 0}

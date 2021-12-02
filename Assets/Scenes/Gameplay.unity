@@ -198,11 +198,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPools:
   - prefab: {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
-    size: 5
+    size: 10
   - prefab: {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
-    size: 5
+    size: 10
   - prefab: {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
-    size: 5
+    size: 10
   playerProjectilePools:
   - prefab: {fileID: 3667453350895143958, guid: 671b036955107b34caead1ece7a7e305, type: 3}
     size: 116
@@ -251,6 +251,13 @@ MonoBehaviour:
   - prefab: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
     size: 3
   - prefab: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287, type: 3}
+    size: 5
+  itemPools:
+  - prefab: {fileID: 1248574742199784, guid: 71af532755e61c7439f07e35d89278f8, type: 3}
+    size: 5
+  - prefab: {fileID: 1473933667410898, guid: 20df3b3bdddb94f47b7d2e59e491ff51, type: 3}
+    size: 5
+  - prefab: {fileID: 1993272356339634, guid: e3df14a44368b9c47a6175eebd31535d, type: 3}
     size: 5
 --- !u!4 &155163122
 Transform:
@@ -3227,7 +3234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0560cd51f56a33d41a17985b4773a002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemy: 0
+  spawnEnemy: 1
   enemyPrefabs:
   - {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
@@ -3236,7 +3243,7 @@ MonoBehaviour:
   - {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
   timeBetweenWaves: 3
   minEnemyAmount: 4
-  maxEnemyAmount: 10
+  maxEnemyAmount: 30
   updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   animationClipFinishedEventSO: {fileID: 11400000, guid: 69ac34fb1692e5f46a568e039132f56f, type: 2}

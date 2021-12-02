@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Item : MonoBehaviour, IMoveable, IRotate
+[System.Serializable]
+public class Inventory : MonoBehaviour, IMoveable, IRotate
 {
     [SerializeField] private float moveSpeed;
 

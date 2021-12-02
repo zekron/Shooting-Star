@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MainWeaponItem : Item, IInteractable
+public class MainWeaponInventory : Inventory, IInteractable
 {
     [SerializeField] private IntEventChannelSO upgradeWeaponPowerEventSO;
     [SerializeField] private IntEventChannelSO setWeaponTypeEventSO;

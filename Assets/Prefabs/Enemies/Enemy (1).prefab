@@ -14676,6 +14676,7 @@ MonoBehaviour:
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
   enemyProfile: {fileID: 11400000, guid: 2c331a72e8163504d91a446b3b995e35, type: 2}
+  inventoryPackage: {fileID: 11400000, guid: c0591e2b6d1bb3f4da15a37ffb07d7c6, type: 2}
 --- !u!1001 &4372417151475017643
 PrefabInstance:
   m_ObjectHideFlags: 0
