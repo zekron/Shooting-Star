@@ -1,16 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class MainWeaponInventory : Inventory, IInteractable
+public class MainWeaponInventory : WeaponPowerInventory
 {
-    [SerializeField] private IntEventChannelSO upgradeWeaponPowerEventSO;
-    [SerializeField] private IntEventChannelSO setWeaponTypeEventSO;
-    [SerializeField] private WeaponType type;
-    [SerializeField] private int levelToUpgrade;
 
-    public void Activate(Player player)
+    private const int UPGRADE_LEVEL = 1;
+    private MainWeaponType type;
+
+    public override void Activate(Player player)
     {
         setWeaponTypeEventSO.RaiseEvent((int)type);
-        upgradeWeaponPowerEventSO.RaiseEvent(levelToUpgrade);
-        gameObject.SetActive(false);
+
+        if (player.CanUpgradeMainWeaponPower(UPGRADE_LEVEL))
+        {
+            upgradeWeaponPowerEventSO.RaiseEvent(UPGRADE_LEVEL);
+            gameObject.SetActive(false);
+        }
+        else
+            base.Activate(player);
+    }
+    protected override IEnumerator ChangeType()
+    {
+        while (gameObject.activeSelf)
+        {
+            StaticData.GetNextMainWeaponType(type);
+            inventoryRenderer.material = materials[(int)type];
+            yield return waitForChangeType;
+        }
     }
 }

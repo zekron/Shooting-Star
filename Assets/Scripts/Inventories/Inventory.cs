@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Inventory : MonoBehaviour, IMoveable, IRotate
 {
+    [Header("Basic Inventory")]
     [SerializeField] private float moveSpeed;
 
     protected float paddingX;

@@ -72,10 +72,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
+  bonusScore: 2000
   upgradeWeaponPowerEventSO: {fileID: 11400000, guid: 2b8adadc37cbd954da7df24cea4c96ed, type: 2}
   setWeaponTypeEventSO: {fileID: 11400000, guid: 74f277886eaa5a54f8d25e1a431fcbd5, type: 2}
-  type: 0
-  levelToUpgrade: 1
+  materials:
+  - {fileID: 2100000, guid: 9e821f0f773f0114e9df5ba24a0abad5, type: 2}
+  - {fileID: 2100000, guid: 44b8a132a403d364f932fd0c715f5bce, type: 2}
+  inventoryRenderer: {fileID: 1374965781346780378}
+  changeTypeInterval: 3
 --- !u!1 &1388604800573655860
 GameObject:
   m_ObjectHideFlags: 0

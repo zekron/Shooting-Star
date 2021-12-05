@@ -31372,11 +31372,15 @@ MonoBehaviour:
   regenerateHealth: 1
   healthRegenerateTime: 12
   healthRegeneratePercent: 0.02
-  upgradeWeaponPowerEventSO: {fileID: 11400000, guid: 2b8adadc37cbd954da7df24cea4c96ed, type: 2}
-  setWeaponTypeEventSO: {fileID: 11400000, guid: 74f277886eaa5a54f8d25e1a431fcbd5, type: 2}
+  upgradeMainWeaponPowerEventSO: {fileID: 11400000, guid: 2b8adadc37cbd954da7df24cea4c96ed, type: 2}
+  upgradeSubWeaponPowerEventSO: {fileID: 11400000, guid: 1cd44ee216a25844fae04feacffa9c47, type: 2}
+  setMainWeaponTypeEventSO: {fileID: 11400000, guid: 74f277886eaa5a54f8d25e1a431fcbd5, type: 2}
+  setSubWeaponTypeEventSO: {fileID: 11400000, guid: 852ecd8a121e9ab40a9d2aa98ca8895d, type: 2}
   projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-  weaponType: 0
-  weaponPower: 2
+  mainWeaponType: 0
+  subWeaponType: 0
+  mainWeaponPower: 0
+  subWeaponPower: 0
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
   dodgeEnergyCost: 25
   dodgeDuration: 1

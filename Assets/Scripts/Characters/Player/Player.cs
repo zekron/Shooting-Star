@@ -17,13 +17,21 @@ public class Player : Character
     [SerializeField] private float healthRegenerateTime;
     [SerializeField, Range(0f, 1f)] private float healthRegeneratePercent;
 
-    [Header("Fire")]
-    [SerializeField] private IntEventChannelSO upgradeWeaponPowerEventSO;
-    [SerializeField] private IntEventChannelSO setWeaponTypeEventSO;
+    [Header("MainWeapon")]
+    [SerializeField] private IntEventChannelSO upgradeMainWeaponPowerEventSO;
+    [SerializeField] private IntEventChannelSO setMainWeaponTypeEventSO;
     [SerializeField] private GameObject projectileOverdrive;
-    [SerializeField] private WeaponType weaponType;
-    [SerializeField, Range(0, (int)WeaponPower.Level7)] private int weaponPower = 0;
+    [SerializeField] private MainWeaponType mainWeaponType;
+    [SerializeField, Range(0, (int)MainWeaponPower.MAX - 1)] private int mainWeaponPower = 0;
     protected float fireInterval = 0.2f;
+
+    [Header("SubWeapon")]
+    [SerializeField] private IntEventChannelSO upgradeSubWeaponPowerEventSO;
+    [SerializeField] private IntEventChannelSO setSubWeaponTypeEventSO;
+    [SerializeField] private SubWeaponType subWeaponType;
+    [SerializeField, Range(0, (int)SubWeaponPower.MAX - 1)] private int subWeaponPower;
+    private SubWeaponSystem subWeaponSystem;
+
 
     [Header("Dodge")]
     [SerializeField] private AudioDataSO dodgeSFX;
@@ -69,8 +77,10 @@ public class Player : Character
         PlayerOverdrive.On += OpenOverdrive;
         PlayerOverdrive.Off += StopOverdrive;
 
-        setWeaponTypeEventSO.OnEventRaised += SetWeaponType;
-        upgradeWeaponPowerEventSO.OnEventRaised += UpgradeWeaponPower;
+        setMainWeaponTypeEventSO.OnEventRaised += SetMainWeaponType;
+        setSubWeaponTypeEventSO.OnEventRaised += SetSubWeaponType;
+        upgradeMainWeaponPowerEventSO.OnEventRaised += UpgradeMainWeaponPower;
+        upgradeSubWeaponPowerEventSO.OnEventRaised += UpgradeSubWeaponPower;
 
         SetProfile();
     }
@@ -85,6 +95,11 @@ public class Player : Character
 
         PlayerOverdrive.On -= OpenOverdrive;
         PlayerOverdrive.Off -= StopOverdrive;
+
+        setMainWeaponTypeEventSO.OnEventRaised -= SetMainWeaponType;
+        setSubWeaponTypeEventSO.OnEventRaised -= SetSubWeaponType;
+        upgradeMainWeaponPowerEventSO.OnEventRaised -= UpgradeMainWeaponPower;
+        upgradeSubWeaponPowerEventSO.OnEventRaised -= UpgradeSubWeaponPower;
     }
 
     private void OnValidate()
@@ -98,6 +113,7 @@ public class Player : Character
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         moveController = GetComponent<MoveController>();
+        subWeaponSystem = GetComponent<SubWeaponSystem>();
         missile = GetComponent<MissileSystem>();
 
         maxRoll = dodgeDuration * rollSpeed;
@@ -191,24 +207,25 @@ public class Player : Character
     {
         while (true)
         {
-            LoadProjectiles((WeaponPower)weaponPower);
+            LoadProjectiles((MainWeaponPower)mainWeaponPower);
+            subWeaponSystem.Launch(multiMuzzles, (SubWeaponPower)subWeaponPower);
 
             AudioManager.Instance.PlaySFX(projectileLaunchSFX);
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
     }
-    private void LoadProjectiles(WeaponPower weaponPower)
+    private void LoadProjectiles(MainWeaponPower weaponPower)
     {
         int muzzleAmount;
-        if (weaponPower >= WeaponPower.Level6 || weaponPower == WeaponPower.DEBUG)
+        if (weaponPower >= MainWeaponPower.Level6 || weaponPower == MainWeaponPower.DEBUG)
         {
             muzzleAmount = multiMuzzles.Length;
         }
-        else if (weaponPower >= WeaponPower.Level3)
+        else if (weaponPower >= MainWeaponPower.Level3)
         {
             muzzleAmount = multiMuzzles.Length - 2;
         }
-        else if (weaponPower >= WeaponPower.Level1)
+        else if (weaponPower >= MainWeaponPower.Level1)
         {
             muzzleAmount = multiMuzzles.Length - 4;
         }
@@ -224,16 +241,38 @@ public class Player : Character
         }
     }
 
-    private void UpgradeWeaponPower(int levelToUp)
+    private void UpgradeMainWeaponPower(int levelToUp)
     {
-        if (weaponPower == (int)WeaponPower.Level7) return;
+        if (!CanUpgradeMainWeaponPower(levelToUp)) return;
 
-        weaponPower += levelToUp;
+        mainWeaponPower += levelToUp;
     }
 
-    private void SetWeaponType(int type)
+    public bool CanUpgradeMainWeaponPower(int levelToUp)
     {
-        weaponType = (WeaponType)type;
+        return mainWeaponPower + levelToUp < (int)MainWeaponPower.MAX;
+    }
+
+    private void UpgradeSubWeaponPower(int levelToUp)
+    {
+        if (!CanUpgradeSubWeaponPower(levelToUp)) return;
+
+        subWeaponPower += levelToUp;
+    }
+
+    public bool CanUpgradeSubWeaponPower(int levelToUp)
+    {
+        return subWeaponPower + levelToUp >= (int)SubWeaponPower.MAX;
+    }
+
+    private void SetMainWeaponType(int type)
+    {
+        mainWeaponType = (MainWeaponType)type;
+    }
+
+    private void SetSubWeaponType(int type)
+    {
+        subWeaponType = (SubWeaponType)type;
     }
     #endregion
 

@@ -15,7 +15,9 @@ MonoBehaviour:
   packageDropRate: 0.3
   inventoryList:
   - {fileID: 6153858220289259279, guid: 20df3b3bdddb94f47b7d2e59e491ff51, type: 3}
+  - {fileID: 8742659870157108696, guid: 398ff2800ce102447b9489a90ae5be5f, type: 3}
   - {fileID: 3146512395167347104, guid: 71af532755e61c7439f07e35d89278f8, type: 3}
   inventoryDropRate:
-  - 0.5
   - 0.3
+  - 0.3
+  - 0.2

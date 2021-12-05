@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerProfileSO : CharacterProfileSO
 {
     public float FireInterval;
-    public WeaponType defaultWeaponType;
+    public MainWeaponType defaultWeaponType;
 
     public int OverdriveDodgeFactor;
     public float OverdriveSpeedFactor;
@@ -24,7 +24,7 @@ public class PlayerProfileSO : CharacterProfileSO
             MoveRotationAngle = moveRotationAngle;
 
             FireInterval = fireInterval;
-            defaultWeaponType = (WeaponType)weaponType;
+            defaultWeaponType = (MainWeaponType)weaponType;
 
             OverdriveDodgeFactor = overdriveDodgeFactor;
             OverdriveSpeedFactor = overdriveSpeedFactor;

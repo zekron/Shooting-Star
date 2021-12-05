@@ -4,27 +4,36 @@ using UnityEngine;
 
 public static class StaticData
 {
-    public static MuzzlePower GetShotGunPower(WeaponPower weaponPower)
+    public static MuzzlePower GetShotGunPower(MainWeaponPower weaponPower)
     {
         switch (weaponPower)
         {
-            case WeaponPower.Level1:
-            case WeaponPower.Level3:
+            case MainWeaponPower.Level1:
+            case MainWeaponPower.Level3:
                 return MuzzlePower.Double;
-            case WeaponPower.Level2:
-            case WeaponPower.Level4:
-            case WeaponPower.Level6:
+            case MainWeaponPower.Level2:
+            case MainWeaponPower.Level4:
+            case MainWeaponPower.Level6:
                 return MuzzlePower.Triple;
-            case WeaponPower.DEBUG:
-            case WeaponPower.Level5:
-            case WeaponPower.Level7:
+            case MainWeaponPower.DEBUG:
+            case MainWeaponPower.Level5:
+            case MainWeaponPower.Level7:
                 return MuzzlePower.Quadruple;
             default:
                 return MuzzlePower.Single;
         }
     }
+
+    public static MainWeaponType GetNextMainWeaponType(MainWeaponType mainWeaponType)
+    {
+        return mainWeaponType + 1 >= MainWeaponType.MAX ? 0 : mainWeaponType + 1;
+    }
+    public static SubWeaponType GetNextSubWeaponType(SubWeaponType subWeaponType)
+    {
+        return subWeaponType + 1 >= SubWeaponType.MAX ? 0 : subWeaponType + 1;
+    }
 }
-public enum WeaponPower
+public enum MainWeaponPower
 {
     DEBUG = -1,
 
@@ -35,9 +44,34 @@ public enum WeaponPower
     Level5,
     Level6,
     Level7,
+
+    MAX,
 }
-public enum WeaponType
+public enum SubWeaponPower
+{
+    DEBUG = -1,
+
+    None,
+    Level1,
+    Level2,
+    Level3,
+    Level4,
+
+    MAX,
+}
+public enum MainWeaponType
 {
     ShotGun,
     Laser,
+
+    MAX,
+}
+public enum SubWeaponType
+{
+    NULL,
+
+    Homing,
+    Missile,
+
+    MAX,
 }
