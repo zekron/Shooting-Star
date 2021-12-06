@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    protected const int LEVELUP_FACTOR = 2;
+    
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
+    [SerializeField] private IntEventChannelSO enemyLevelUpEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
     [SerializeField] protected InventoryPackage inventoryPackage;
 
-    private EnemyController enemyController;
+    protected EnemyController enemyController;
     private Inventory currentDropInventory;
 
     private int deathEnergyBonus;
@@ -20,6 +23,8 @@ public class Enemy : Character
     protected override void Awake()
     {
         enemyController = GetComponent<EnemyController>();
+
+        enemyLevelUpEventSO.OnEventRaised += EnemyLevelUp;
         base.Awake();
     }
 
@@ -62,6 +67,7 @@ public class Enemy : Character
             }
 
             AudioManager.Instance.PlaySFX(projectileLaunchSFX);
+            muzzleVFX.Play();
         }
     }
 
@@ -92,6 +98,11 @@ public class Enemy : Character
     //{
     //    transform.rotation = moveRotation;
     //}
+
+    protected virtual void EnemyLevelUp(int value)
+    {
+        maxHealth += value / LEVELUP_FACTOR;
+    }
 
     private void SetDropInventory()
     {

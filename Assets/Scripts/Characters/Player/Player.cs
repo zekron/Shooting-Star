@@ -32,7 +32,6 @@ public class Player : Character
     [SerializeField, Range(0, (int)SubWeaponPower.MAX - 1)] private int subWeaponPower;
     private SubWeaponSystem subWeaponSystem;
 
-
     [Header("Dodge")]
     [SerializeField] private AudioDataSO dodgeSFX;
     [SerializeField, Range(0, 100)] private int dodgeEnergyCost = 25;
@@ -55,6 +54,7 @@ public class Player : Character
     private MoveController moveController;
 
     private readonly float slowMotionDuration = 1f;
+    private readonly float invincibleTime = 1f;
 
     private float coroutineTimer;
     private Coroutine moveCoroutine;
@@ -62,6 +62,7 @@ public class Player : Character
 
     private WaitForSeconds waitForOverdriveFireInterval;
     private WaitForSeconds waitHealthRegenerateTime;
+    private WaitForSeconds waitInvincibleTime;
     private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     protected override void OnEnable()
@@ -122,6 +123,7 @@ public class Player : Character
         waitForFireInterval = new WaitForSeconds(fireInterval);
         waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overdriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
+        waitInvincibleTime = new WaitForSeconds(invincibleTime);
     }
 
     private void Start()
@@ -169,6 +171,7 @@ public class Player : Character
 
         if (gameObject.activeSelf)
         {
+            StartCoroutine(nameof(InvincibleCoroutine));
             if (regenerateHealth)
             {
                 if (healthRegenerateCoroutine != null)
@@ -193,6 +196,13 @@ public class Player : Character
         GameManager.CurrentGameState = GameState.GameOver;
         shieldUpdateEventSO.RaiseEvent(Health = 0);
         base.GetDie();
+    }
+
+    private IEnumerator InvincibleCoroutine()
+    {
+        playerCollider.isTrigger = true;
+        yield return waitInvincibleTime;
+        playerCollider.isTrigger = false;
     }
     #endregion
 
@@ -271,7 +281,7 @@ public class Player : Character
     {
         if (!laser) return;
 
-        laser.SetPlayer(transform);
+        laser.SetPlayer(multiMuzzles[0].transform.parent);
         laser.SetLaserWidth(StaticData.SetLaserWidth((MainWeaponPower)mainWeaponPower));
         laser.SetLaserDamage(mainWeaponPower + 1);
     }

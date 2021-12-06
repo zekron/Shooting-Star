@@ -8,14 +8,17 @@ public class EnemyController : MonoBehaviour
 
     private Character character;
 
-    private float paddingX;
-    private float paddingY;
+    private Transform playerTransform;
+    protected Vector3 targetPosition;
+    protected float paddingX;
+    protected float paddingY;
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    private void Awake()
+    protected virtual void Awake()
     {
         character = GetComponent<Character>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -36,24 +39,37 @@ public class EnemyController : MonoBehaviour
     {
         transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
 
-        Vector3 targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
+        targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
 
         while (gameObject.activeSelf)
         {
-            // if has not arrived targetPosition
             if (Vector3.Distance(transform.position, targetPosition) >= moveSpeed * Time.deltaTime)
             {
-                // keep moving to targetPosition
                 character.Move(Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime));
-                // make enemy rotate with x axis while moving
                 character.Rotate(Quaternion.AngleAxis((targetPosition - transform.position).normalized.y * moveRotationAngle, Vector3.up));
-
             }
             else
             {
-                // set a new targetPosition
                 targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
             }
+
+            yield return null;
+        }
+    }
+    public void StartChasingPlayer()
+    {
+        StartCoroutine(nameof(ChasingPlayerCoroutine));
+    }
+    public void StopChasingPlayer()
+    {
+        StopCoroutine(nameof(ChasingPlayerCoroutine));
+    }
+    private IEnumerator ChasingPlayerCoroutine()
+    {
+        while (isActiveAndEnabled)
+        {
+            targetPosition.x = playerTransform.position.x;
+            targetPosition.y = Viewport.MaxY - paddingY;
 
             yield return null;
         }

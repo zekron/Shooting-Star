@@ -9,6 +9,8 @@ public class Viewport
     private static float middleX;
     private static float middleY;
 
+    public static float MaxY => maxY;
+
     public static void Initialize()
     {
         Camera mainCamera = Camera.main;

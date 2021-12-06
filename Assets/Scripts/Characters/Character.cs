@@ -19,6 +19,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
     [SerializeField] protected Transform[] muzzles;
     [SerializeField] protected Muzzle[] multiMuzzles;
     [SerializeField] protected AudioDataSO projectileLaunchSFX;
+    [SerializeField] protected ParticleSystem muzzleVFX;
 
     public float MoveSpeed { get; set; }
     public float MoveRotationAngle { get; set; }
@@ -125,11 +126,13 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
     #region Fire
     public void Fire()
     {
+        muzzleVFX.Play();
         StartCoroutine(nameof(FireCoroutine));
     }
 
     public virtual void StopFire()
     {
+        muzzleVFX.Stop();
         StopCoroutine(nameof(FireCoroutine));
     }
 

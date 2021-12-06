@@ -11,10 +11,12 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private GameObject[] bossPrefabs;
     [SerializeField] private float timeBetweenWaves = 1f;
+    [SerializeField] private int bossWave = 5;
     [SerializeField] private int minEnemyAmount = 4;
     [SerializeField] private int maxEnemyAmount = 10;
 
     [SerializeField] private IntEventChannelSO updateWaveEventSO;
+    [SerializeField] private IntEventChannelSO enemyLevelUpEventSO;
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private VoidEventChannelSO animationClipFinishedEventSO;
 
@@ -43,13 +45,13 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         if (!spawnEnemy || GameManager.CurrentGameState != GameState.Playing) return;
 
-        if (waveNumber % 5 == 0)
+        if (waveNumber % bossWave == 0)
         {
             ObjectPoolManager.Release(bossPrefabs[Random.Range(0, bossPrefabs.Length)]);
         }
         else
         {
-            currentEnemyAmount = enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / 3, maxEnemyAmount);
+            currentEnemyAmount = enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / bossWave, maxEnemyAmount);
 
             for (int i = 0; i < enemyAmount; i++)
             {
@@ -63,7 +65,8 @@ public class EnemyManager : Singleton<EnemyManager>
         currentEnemyAmount--;
         if (currentEnemyAmount <= 0)
         {
-            if (++waveNumber % 5 == 0)
+            enemyLevelUpEventSO.RaiseEvent(++waveNumber);
+            if (waveNumber % bossWave == 0)
                 updateWaveEventSO.RaiseEvent(waveNumber);
             else
                 RandomlySpawnEnemies();

@@ -11,10 +11,19 @@ public class Boss : Enemy
     [SerializeField] Vector3 playerDetectionSize;
     [SerializeField] LayerMask playerLayer;
 
+    [Header("---- Beam Weapon ----")]
+    [SerializeField] private float beamCooldownInterval = 12f;
+    [SerializeField] private AudioDataSO beamChargingSFX;
+    [SerializeField] private AudioDataSO beamLaunchSFX;
+    private bool isBeamReady;
+
     private BossHealthBar healthBar;
     private Canvas healthBarCanvas;
+    private Animator beamAnimator;
+    private int launchBeamID = Animator.StringToHash("launchBeam");
 
     private WaitForSeconds waitForContinuousFireInterval;
+    private WaitForSeconds waitForBeamCooldown;
 
     private List<GameObject> magazine;
 
@@ -24,9 +33,11 @@ public class Boss : Enemy
 
         healthBar = FindObjectOfType<BossHealthBar>();
         healthBarCanvas = healthBar.GetComponentInChildren<Canvas>();
+        beamAnimator = GetComponent<Animator>();
 
         waitForContinuousFireInterval = new WaitForSeconds(minFireInterval);
         waitForFireInterval = new WaitForSeconds(maxFireInterval);
+        waitForBeamCooldown = new WaitForSeconds(beamCooldownInterval);
 
         magazine = new List<GameObject>(projectiles.Length);
     }
@@ -34,8 +45,13 @@ public class Boss : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
+
         healthBar.Initialize(Health, maxHealth);
         healthBarCanvas.enabled = true;
+        muzzleVFX.Stop();
+
+        isBeamReady = false;
+        StartCoroutine(nameof(BeamCooldownCoroutine));
     }
     protected override void SetProfile()
     {
@@ -71,10 +87,16 @@ public class Boss : Enemy
 
     protected override IEnumerator FireCoroutine()
     {
-        if (GameManager.CurrentGameState == GameState.GameOver) yield break;
-
         while (isActiveAndEnabled)
         {
+            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
+
+            if (isBeamReady)
+            {
+                ActivateBeamWeapon();
+                enemyController.StartChasingPlayer();
+                yield break;
+            }
             yield return waitForFireInterval;
             yield return StartCoroutine(nameof(ContinuousFireCoroutine));
         }
@@ -104,9 +126,34 @@ public class Boss : Enemy
         }
     }
 
+    private void ActivateBeamWeapon()
+    {
+        beamAnimator.SetTrigger(launchBeamID);
+        isBeamReady = false;
+        AudioManager.Instance.PlaySFX(beamChargingSFX);
+    }
+
+    protected override void EnemyLevelUp(int value)
+    {
+        maxHealth += value * LEVELUP_FACTOR;
+    }
+
+    private void AnimationEventLaunchBeam()
+    {
+        AudioManager.Instance.PlaySFX(beamLaunchSFX);
+    }
+
+    private void AnimationEventStopBeam()
+    {
+        enemyController.StopChasingPlayer();
+        StartCoroutine(nameof(BeamCooldownCoroutine));
+        StartCoroutine(nameof(FireCoroutine));
+    }
+
     private IEnumerator ContinuousFireCoroutine()
     {
         LoadProjectiles();
+        muzzleVFX.Play();
 
         float continuousFireTimer = 0f;
 
@@ -122,5 +169,12 @@ public class Boss : Enemy
 
             yield return waitForContinuousFireInterval;
         }
+        muzzleVFX.Stop();
+    }
+
+    private IEnumerator BeamCooldownCoroutine()
+    {
+        yield return waitForBeamCooldown;
+        isBeamReady = true;
     }
 }

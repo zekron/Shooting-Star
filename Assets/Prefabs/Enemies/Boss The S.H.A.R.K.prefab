@@ -14479,7 +14479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3491971375420873102}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -2.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.13, z: 0}
   m_LocalScale: {x: 0.20000002, y: 0.2, z: 0.20000002}
   m_Children: []
   m_Father: {fileID: 5735159872610144748}
@@ -19313,7 +19313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5735159873588532430
 Transform:
   m_ObjectHideFlags: 0
@@ -19419,8 +19419,10 @@ MonoBehaviour:
   - {fileID: 5735159872610144748}
   multiMuzzles: []
   projectileLaunchSFX: {fileID: 11400000, guid: c0570a469f9bd4f45bdacc4da57dfaf4, type: 2}
+  muzzleVFX: {fileID: 8560713571061942720}
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
+  enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyProfile: {fileID: 11400000, guid: 3ef3c29a9ae937e43b054b4b98482f2b, type: 2}
   inventoryPackage: {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
   continuousFireDuration: 1.5
@@ -19429,6 +19431,9 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  beamCooldownInterval: 12
+  beamChargingSFX: {fileID: 11400000, guid: 17a352d2c2fb0b14aa892aa5107952d1, type: 2}
+  beamLaunchSFX: {fileID: 11400000, guid: 462f47f0196d1614eaae8e20ee207878, type: 2}
 --- !u!114 &2911527273350757786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24382,7 +24387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6777184692760701544}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -2.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.13, z: 0}
   m_LocalScale: {x: 0.20000002, y: 0.2, z: 0.20000002}
   m_Children: []
   m_Father: {fileID: 5735159872610144748}
@@ -34112,6 +34117,7 @@ GameObject:
   - component: {fileID: 6777184693504505543}
   - component: {fileID: 8965626045995070401}
   - component: {fileID: 6777184693504505536}
+  - component: {fileID: 8001296146369827868}
   m_Layer: 7
   m_Name: Beam
   m_TagString: Enemy Beam
@@ -34181,6 +34187,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 0.25}
   m_EdgeRadius: 0.1
+--- !u!114 &8001296146369827868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6777184693504505542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d70aae2f523eba4a80392f85144d669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
+  hitVFX: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
 --- !u!1 &8136977872067818088
 GameObject:
   m_ObjectHideFlags: 0
@@ -34292,7 +34312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6312347931672350837, guid: bcdfcb20bdfc97f44a4f585803958b75, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 6312347931672350837, guid: bcdfcb20bdfc97f44a4f585803958b75, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34363,6 +34383,11 @@ PrefabInstance:
 --- !u!4 &8560713571047787648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6312347931672350837, guid: bcdfcb20bdfc97f44a4f585803958b75, type: 3}
+  m_PrefabInstance: {fileID: 2401603174913531125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8560713571061942720 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6312347931691750709, guid: bcdfcb20bdfc97f44a4f585803958b75, type: 3}
   m_PrefabInstance: {fileID: 2401603174913531125}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4142914972958927957
