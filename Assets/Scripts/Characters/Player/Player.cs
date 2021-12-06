@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 public class Player : Character
 {
     [Header("Player")]
+    [SerializeField] private PlayerProfileSO playerProfile;
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
     [SerializeField] private PlayerInputSO input;
-    [SerializeField] private PlayerProfileSO playerProfile;
 
     [Header("Regeneration")]
     [SerializeField] private bool regenerateHealth = true;
@@ -207,14 +207,27 @@ public class Player : Character
     {
         while (true)
         {
-            LoadProjectiles((MainWeaponPower)mainWeaponPower);
-            subWeaponSystem.Launch(multiMuzzles, (SubWeaponPower)subWeaponPower);
+            if (mainWeaponType == MainWeaponType.ShotGun)
+            {
+                CloseLaser();
+
+                ReloadShotGun((MainWeaponPower)mainWeaponPower);
+            }
+            else
+                ReloadLaser();
+            subWeaponSystem.Launch(multiMuzzles, subWeaponType, (SubWeaponPower)subWeaponPower);
 
             AudioManager.Instance.PlaySFX(projectileLaunchSFX);
             yield return isOverdriving ? waitForOverdriveFireInterval : waitForFireInterval;
         }
     }
-    private void LoadProjectiles(MainWeaponPower weaponPower)
+    public override void StopFire()
+    {
+        base.StopFire();
+        CloseLaser();
+    }
+
+    private void ReloadShotGun(MainWeaponPower weaponPower)
     {
         int muzzleAmount;
         if (weaponPower >= MainWeaponPower.Level6 || weaponPower == MainWeaponPower.DEBUG)
@@ -241,11 +254,44 @@ public class Player : Character
         }
     }
 
+    PlayerLaser laser;
+    private void ReloadLaser()
+    {
+        if (!laser)
+        {
+            laser = ObjectPoolManager.Release(
+                 isOverdriving ? projectileOverdrive : projectiles[projectiles.Length - 1],
+                 multiMuzzles[0].muzzle.position).GetComponent<PlayerLaser>();
+        }
+
+        SetLaser();
+    }
+
+    private void SetLaser()
+    {
+        if (!laser) return;
+
+        laser.SetPlayer(transform);
+        laser.SetLaserWidth(StaticData.SetLaserWidth((MainWeaponPower)mainWeaponPower));
+        laser.SetLaserDamage(mainWeaponPower + 1);
+    }
+
+    private void CloseLaser()
+    {
+        if (laser)
+        {
+            laser.gameObject.SetActive(false);
+            laser = null;
+        }
+    }
+
     private void UpgradeMainWeaponPower(int levelToUp)
     {
         if (!CanUpgradeMainWeaponPower(levelToUp)) return;
 
         mainWeaponPower += levelToUp;
+
+        if (mainWeaponType == MainWeaponType.Laser) SetLaser();
     }
 
     public bool CanUpgradeMainWeaponPower(int levelToUp)
@@ -262,7 +308,7 @@ public class Player : Character
 
     public bool CanUpgradeSubWeaponPower(int levelToUp)
     {
-        return subWeaponPower + levelToUp >= (int)SubWeaponPower.MAX;
+        return subWeaponPower + levelToUp < (int)SubWeaponPower.MAX;
     }
 
     private void SetMainWeaponType(int type)

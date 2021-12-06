@@ -12,7 +12,10 @@ public class SubWeaponInventory : WeaponPowerInventory
         setWeaponTypeEventSO.RaiseEvent((int)type);
 
         if (player.CanUpgradeSubWeaponPower(UPGRADE_LEVEL))
+        {
             upgradeWeaponPowerEventSO.RaiseEvent(UPGRADE_LEVEL);
+            gameObject.SetActive(false);
+        }
         else
             base.Activate(player);
     }
@@ -20,7 +23,7 @@ public class SubWeaponInventory : WeaponPowerInventory
     {
         while (gameObject.activeSelf)
         {
-            StaticData.GetNextSubWeaponType(type);
+            type = StaticData.GetNextSubWeaponType(type);
             inventoryRenderer.material = materials[(int)type];
             yield return waitForChangeType;
         }

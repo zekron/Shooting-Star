@@ -411,12 +411,14 @@ MonoBehaviour:
     size: 116
   - prefab: {fileID: 3667453350895143958, guid: eefc2e853add3d847bfe0769cc42e50c, type: 3}
     size: 116
+  - prefab: {fileID: 3989932396471808366, guid: 145842f0d93b6794eaed7d853dde5f77, type: 3}
+    size: 2
   - prefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
     size: 5
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
     size: 339
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
-    size: 5
+    size: 29
   enemyProjectilePools:
   - prefab: {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
     size: 20

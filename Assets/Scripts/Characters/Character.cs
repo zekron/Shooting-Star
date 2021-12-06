@@ -128,7 +128,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
         StartCoroutine(nameof(FireCoroutine));
     }
 
-    public void StopFire()
+    public virtual void StopFire()
     {
         StopCoroutine(nameof(FireCoroutine));
     }

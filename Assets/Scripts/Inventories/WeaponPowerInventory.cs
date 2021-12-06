@@ -16,6 +16,10 @@ public class WeaponPowerInventory : BonusInventory
         base.Awake();
 
         waitForChangeType = new WaitForSeconds(changeTypeInterval);
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         StartCoroutine(nameof(ChangeType));
     }
     public override void Activate(Player player)

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IMoveable, IRotate
 {
-    [SerializeField] private GameObject hitVFX;
-    [SerializeField] AudioDataSO hitSFX;
-    [SerializeField] private float damage;
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] protected GameObject hitVFX;
+    [SerializeField] protected AudioDataSO hitSFX;
+    [SerializeField] protected float damage;
+    [SerializeField] protected float moveSpeed = 10f;
     [SerializeField] protected Vector2 moveDirection;
 
     protected GameObject target;

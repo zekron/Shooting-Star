@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,24 @@ public static class StaticData
         }
     }
 
+    public static float SetLaserWidth(MainWeaponPower mainWeaponPower)
+    {
+        switch (mainWeaponPower)
+        {
+            case MainWeaponPower.Level1:
+            case MainWeaponPower.Level2:
+            case MainWeaponPower.Level3:
+            case MainWeaponPower.Level4:
+            case MainWeaponPower.Level5:
+            case MainWeaponPower.Level6:
+            case MainWeaponPower.Level7:
+                return 0.05f * (int)mainWeaponPower + 0.2f;
+            case MainWeaponPower.MAX:
+            case MainWeaponPower.DEBUG:
+                return 1;
+        }
+        return -1;
+    }
     public static MainWeaponType GetNextMainWeaponType(MainWeaponType mainWeaponType)
     {
         return mainWeaponType + 1 >= MainWeaponType.MAX ? 0 : mainWeaponType + 1;
@@ -32,6 +51,7 @@ public static class StaticData
     {
         return subWeaponType + 1 >= SubWeaponType.MAX ? 0 : subWeaponType + 1;
     }
+
 }
 public enum MainWeaponPower
 {
@@ -68,7 +88,7 @@ public enum MainWeaponType
 }
 public enum SubWeaponType
 {
-    NULL,
+    NULL = -1,
 
     Homing,
     Missile,

@@ -16,12 +16,12 @@ public class PlayerProjectile : Projectile
 
     void OnDisable()
     {
-        trail.Clear();
+        trail?.Clear();
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-        PlayerEnergy.Instance.GainEnergy(PlayerEnergy.PERCENT);
-    }
+    //protected override void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    base.OnCollisionEnter2D(collision);
+    //    PlayerEnergy.Instance.GainEnergy(PlayerEnergy.PERCENT);
+    //}
 }

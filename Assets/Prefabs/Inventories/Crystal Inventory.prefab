@@ -76,13 +76,11 @@ MonoBehaviour:
   bonusScore: 1000
   upgradeWeaponPowerEventSO: {fileID: 11400000, guid: 1cd44ee216a25844fae04feacffa9c47, type: 2}
   setWeaponTypeEventSO: {fileID: 11400000, guid: 852ecd8a121e9ab40a9d2aa98ca8895d, type: 2}
-  changeTypeInterval: 3
-  type: 0
-  levelToUpgrade: 1
   materials:
   - {fileID: 2100000, guid: 9d8103c4f549e304ebbc88c0779b2349, type: 2}
   - {fileID: 2100000, guid: 08383afdf5e4c7f4aa3b1158056238b1, type: 2}
   inventoryRenderer: {fileID: 7623825421757132216}
+  changeTypeInterval: 3
 --- !u!1 &7610065168802226176
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7610065168802226176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.799, z: 0.496}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 184886043079059421}

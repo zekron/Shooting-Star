@@ -23,7 +23,7 @@ public class MainWeaponInventory : WeaponPowerInventory
     {
         while (gameObject.activeSelf)
         {
-            StaticData.GetNextMainWeaponType(type);
+            type = StaticData.GetNextMainWeaponType(type);
             inventoryRenderer.material = materials[(int)type];
             yield return waitForChangeType;
         }
