@@ -70808,6 +70808,9 @@ MonoBehaviour:
   dodgeDuration: 1
   rollSpeed: 360
   dodgeScale: {x: 0.2, y: 0.2, z: 0.2}
+  laserMaterials:
+  - {fileID: 2100000, guid: b0a2ce8628373864c9be203fff1837ec, type: 2}
+  - {fileID: 2100000, guid: 2694f347c83ac4f4591713ffa4ddb498, type: 2}
 --- !u!114 &344478492671050572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70868,7 +70871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAmount: 5
   cooldownTime: 1
-  missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
+  missilePrefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
   missileUpdateEventSO: {fileID: 11400000, guid: df53a1ba6c376b244b6d67a5ca082219, type: 2}
   missileCooldownTimeEventSO: {fileID: 11400000, guid: 31aada15e1a484d4699df57775086261, type: 2}

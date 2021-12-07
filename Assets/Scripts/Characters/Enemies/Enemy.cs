@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    protected const int LEVELUP_FACTOR = 2;
-    
+    [Header("---- Enemy ----")]
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
     [SerializeField] private IntEventChannelSO enemyLevelUpEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
     [SerializeField] protected InventoryPackage inventoryPackage;
+
+    [SerializeField] protected int levelUpFactor = 2;
 
     protected EnemyController enemyController;
     private Inventory currentDropInventory;
@@ -101,7 +102,7 @@ public class Enemy : Character
 
     protected virtual void EnemyLevelUp(int value)
     {
-        maxHealth += value / LEVELUP_FACTOR;
+        maxHealth += value / levelUpFactor;
     }
 
     private void SetDropInventory()

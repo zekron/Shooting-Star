@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerMiniNuke : PlayerProjectile
 {
-    [SerializeField] private AudioDataSO targetAcquiredVoice = null;
-
     [Header("==== SPEED CHANGE ====")]
     [SerializeField] private float lowSpeed = 8f;
     [SerializeField] private float highSpeed = 25f;
@@ -13,9 +11,9 @@ public class PlayerMiniNuke : PlayerProjectile
     [Header("==== EXPLOSION ====")]
     [SerializeField] private GameObject explosionVFX = null;
     [SerializeField] private AudioDataSO explosionSFX = null;
-    [SerializeField] private LayerMask enemyLayerMask = default;
-    [SerializeField] private float explosionRadius = 3f;
-    [SerializeField] private float explosionDamage = 100f;
+    [SerializeField] protected LayerMask enemyLayerMask = default;
+    [SerializeField] protected float explosionRadius = 3f;
+    [SerializeField] protected float explosionDamage = 100f;
 
     private WaitForSeconds waitVariableSpeedDelay;
 
@@ -48,13 +46,8 @@ public class PlayerMiniNuke : PlayerProjectile
         yield return waitVariableSpeedDelay;
 
         MoveSpeed = highSpeed;
-
-        if (target != null)
-        {
-            AudioManager.Instance.PlaySFX(targetAcquiredVoice);
-        }
     }
-    void PhysicsOverlapDetection()
+    protected virtual void PhysicsOverlapDetection()
     {
         // Enemies within explosion radius take AOE damage
         var colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayerMask);

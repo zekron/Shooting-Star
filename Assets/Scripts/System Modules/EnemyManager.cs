@@ -65,7 +65,9 @@ public class EnemyManager : Singleton<EnemyManager>
         currentEnemyAmount--;
         if (currentEnemyAmount <= 0)
         {
-            enemyLevelUpEventSO.RaiseEvent(++waveNumber);
+            if ((++waveNumber - bossWave) % bossWave == 1)
+                enemyLevelUpEventSO.RaiseEvent(waveNumber);
+
             if (waveNumber % bossWave == 0)
                 updateWaveEventSO.RaiseEvent(waveNumber);
             else

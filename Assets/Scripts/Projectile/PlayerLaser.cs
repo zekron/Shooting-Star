@@ -5,6 +5,8 @@ public class PlayerLaser : PlayerProjectile
 {
     [SerializeField] private LineRenderer laserRenderer;
     [SerializeField] private RaycastHit2D hitInfo;
+    [SerializeField] private LayerMask layerMask;
+
     private BoxCollider2D laserCollider;
 
     private const float DEFAULT_LENGTH = 50;
@@ -33,7 +35,7 @@ public class PlayerLaser : PlayerProjectile
         {
             transform.position = movefollow.position;
 
-            hitInfo = Physics2D.Raycast(transform.position, Vector2.up, DEFAULT_LENGTH, LayerMask.GetMask("Enemy"));
+            hitInfo = Physics2D.Raycast(transform.position, Vector2.up, DEFAULT_LENGTH, layerMask);
             if (hitInfo)
             {
                 laserRenderer.SetPosition(0, transform.position);
@@ -112,5 +114,9 @@ public class PlayerLaser : PlayerProjectile
     public void SetPlayer(Transform player)
     {
         movefollow = player;
+    }
+    public void SetLineRenderer(Material material)
+    {
+        laserRenderer.material = material;
     }
 }

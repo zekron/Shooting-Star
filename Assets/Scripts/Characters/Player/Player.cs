@@ -43,6 +43,7 @@ public class Player : Character
     private float maxRoll;
 
     [Header("OverDrive")]
+    [SerializeField] private Material[] laserMaterials;
     private int overdriveDodgeFactor = 2;
     private float overdriveSpeedFactor = 1.2f;
     private float overdriveFireFactor = 1.2f;
@@ -283,7 +284,8 @@ public class Player : Character
 
         laser.SetPlayer(multiMuzzles[0].transform.parent);
         laser.SetLaserWidth(StaticData.SetLaserWidth((MainWeaponPower)mainWeaponPower));
-        laser.SetLaserDamage(mainWeaponPower + 1);
+        laser.SetLaserDamage(isOverdriving ? (mainWeaponPower + 1) * 2 : mainWeaponPower + 1);
+        laser.SetLineRenderer(laserMaterials[isOverdriving ? 1 : 0]);
     }
 
     private void CloseLaser()

@@ -19313,7 +19313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5735159873588532430
 Transform:
   m_ObjectHideFlags: 0
@@ -19425,6 +19425,7 @@ MonoBehaviour:
   enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyProfile: {fileID: 11400000, guid: 3ef3c29a9ae937e43b054b4b98482f2b, type: 2}
   inventoryPackage: {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
+  levelUpFactor: 50
   continuousFireDuration: 1.5
   playerDetectionTransform: {fileID: 6777184693290456823}
   playerDetectionSize: {x: 1, y: 15, z: 0}

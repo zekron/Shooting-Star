@@ -414,11 +414,13 @@ MonoBehaviour:
   - prefab: {fileID: 3989932396471808366, guid: 145842f0d93b6794eaed7d853dde5f77, type: 3}
     size: 2
   - prefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
-    size: 40
+    size: 48
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
     size: 339
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
     size: 29
+  - prefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
+    size: 3
   enemyProjectilePools:
   - prefab: {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
     size: 20
@@ -1342,7 +1344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MISSILE
+  m_Text: BOMB
 --- !u!222 &685747347
 CanvasRenderer:
   m_ObjectHideFlags: 0

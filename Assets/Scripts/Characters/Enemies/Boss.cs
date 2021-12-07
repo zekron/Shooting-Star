@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
+    [Header("---- Boss ----")]
     [SerializeField] float continuousFireDuration = 1.5f;
 
     [Header("---- Player Detection ----")]
@@ -135,7 +136,7 @@ public class Boss : Enemy
 
     protected override void EnemyLevelUp(int value)
     {
-        maxHealth += value * LEVELUP_FACTOR;
+        maxHealth += value * levelUpFactor;
     }
 
     private void AnimationEventLaunchBeam()
