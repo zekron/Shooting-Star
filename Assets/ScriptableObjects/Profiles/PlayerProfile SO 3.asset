@@ -15,8 +15,9 @@ MonoBehaviour:
   MaxHealth: 70
   MoveSpeed: 8
   MoveRotationAngle: 60
-  FireInterval: 0.17
-  defaultWeaponType: 0
+  FireInterval: 0.2
+  DodgeCost: 15
+  defaultWeaponType: 1
   OverdriveDodgeFactor: 1
   OverdriveSpeedFactor: 1.8
   OverdriveFireFactor: 1.1
