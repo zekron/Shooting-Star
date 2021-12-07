@@ -21,11 +21,12 @@ public class ObjectPoolManager : MonoBehaviour
         Initialize(enemyProjectilePools);
         Initialize(vFXPools);
         Initialize(itemPools);
+        Initialize(playerModelPools);
 
 #if UNITY_EDITOR
         if (!GameObject.FindGameObjectWithTag("Player"))
         {
-            if (!GameManager.Instance.CurrentPlayerModel)
+            if (GameManager.Instance.CurrentPlayerModel)
                 Release(GameManager.Instance.CurrentPlayerModel);
             else
                 Release(playerModelPools[0].Prefab);

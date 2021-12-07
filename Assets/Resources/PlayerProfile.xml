@@ -4,7 +4,8 @@
 		<MaxHealth>100</MaxHealth>
 		<MoveSpeed>5</MoveSpeed>
 		<MoveRotationAngle>40</MoveRotationAngle>
-		<FireInterval>0.13</FireInterval>
+		<FireInterval>0.15</FireInterval>
+		<DodgeCost>20</DodgeCost>
 		<OverdriveDodgeFactor>2</OverdriveDodgeFactor>
 		<OverdriveSpeedFactor>1.2</OverdriveSpeedFactor>
 		<OverdriveFireFactor>1.2</OverdriveFireFactor>
@@ -15,19 +16,21 @@
 		<MoveSpeed>6</MoveSpeed>
 		<MoveRotationAngle>50</MoveRotationAngle>
 		<FireInterval>0.1</FireInterval>
+		<DodgeCost>25</DodgeCost>
 		<OverdriveDodgeFactor>2</OverdriveDodgeFactor>
-		<OverdriveSpeedFactor>1.5</OverdriveSpeedFactor>
+		<OverdriveSpeedFactor>1.3</OverdriveSpeedFactor>
 		<OverdriveFireFactor>1.3</OverdriveFireFactor>
-		<DefaultWeaponType>0</DefaultWeaponType>
+		<DefaultWeaponType>1</DefaultWeaponType>
 	</Player>
 	<Player ID="3">
 		<MaxHealth>70</MaxHealth>
 		<MoveSpeed>8</MoveSpeed>
 		<MoveRotationAngle>60</MoveRotationAngle>
-		<FireInterval>0.17</FireInterval>
+		<FireInterval>0.2</FireInterval>
+		<DodgeCost>15</DodgeCost>
 		<OverdriveDodgeFactor>1</OverdriveDodgeFactor>
 		<OverdriveSpeedFactor>1.8</OverdriveSpeedFactor>
 		<OverdriveFireFactor>1.1</OverdriveFireFactor>
-		<DefaultWeaponType>0</DefaultWeaponType>
+		<DefaultWeaponType>1</DefaultWeaponType>
 	</Player>
 </root>

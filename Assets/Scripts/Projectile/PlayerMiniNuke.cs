@@ -9,8 +9,6 @@ public class PlayerMiniNuke : PlayerProjectile
     [SerializeField] private float variableSpeedDelay = 0.5f;
 
     [Header("==== EXPLOSION ====")]
-    [SerializeField] private GameObject explosionVFX = null;
-    [SerializeField] private AudioDataSO explosionSFX = null;
     [SerializeField] protected LayerMask enemyLayerMask = default;
     [SerializeField] protected float explosionRadius = 3f;
     [SerializeField] protected float explosionDamage = 100f;
@@ -32,10 +30,6 @@ public class PlayerMiniNuke : PlayerProjectile
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        // Spawn a explosion VFX
-        ObjectPoolManager.Release(explosionVFX, transform.position);
-        // Play explosion SFX
-        AudioManager.Instance.PlaySFX(explosionSFX);
         PhysicsOverlapDetection();
     }
 

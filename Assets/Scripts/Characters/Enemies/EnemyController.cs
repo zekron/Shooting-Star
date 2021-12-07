@@ -18,7 +18,6 @@ public class EnemyController : MonoBehaviour
     protected virtual void Awake()
     {
         character = GetComponent<Character>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -27,6 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         StartCoroutine(nameof(RandomlyMovingCoroutine));
     }
 

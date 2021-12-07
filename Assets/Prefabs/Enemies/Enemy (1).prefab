@@ -14584,7 +14584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8921546478736950316
 Transform:
   m_ObjectHideFlags: 0
@@ -14680,6 +14680,7 @@ MonoBehaviour:
   enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyProfile: {fileID: 11400000, guid: 2c331a72e8163504d91a446b3b995e35, type: 2}
   inventoryPackage: {fileID: 11400000, guid: c0591e2b6d1bb3f4da15a37ffb07d7c6, type: 2}
+  levelUpFactor: 2
 --- !u!1001 &4372417151475017643
 PrefabInstance:
   m_ObjectHideFlags: 0

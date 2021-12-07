@@ -5,11 +5,11 @@ public class EnemyProjectile_Aiming : Projectile
 {
     void Awake()
     {
-        SetTarget(GameObject.FindGameObjectWithTag("Player"));
     }
 
     protected override void OnEnable()
     {
+        SetTarget(GameObject.FindGameObjectWithTag("Player"));
         StartCoroutine(nameof(MoveDirectionCoroutine));
         base.OnEnable();
     }

@@ -30,9 +30,18 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         base.Awake();
         enemyList = new List<GameObject>();
+    }
 
+    private void OnEnable()
+    {
         animationClipFinishedEventSO.OnEventRaised += RandomlySpawnEnemies;
         enemyDestroyEventSO.OnEventRaised += RemoveFromList;
+    }
+
+    private void OnDisable()
+    {
+        animationClipFinishedEventSO.OnEventRaised -= RandomlySpawnEnemies;
+        enemyDestroyEventSO.OnEventRaised -= RemoveFromList;
     }
 
     private void Start()

@@ -21,8 +21,8 @@ public class Player : Character
     [SerializeField] private IntEventChannelSO upgradeMainWeaponPowerEventSO;
     [SerializeField] private IntEventChannelSO setMainWeaponTypeEventSO;
     [SerializeField] private GameObject projectileOverdrive;
-    [SerializeField] private MainWeaponType mainWeaponType;
     [SerializeField, Range(0, (int)MainWeaponPower.MAX - 1)] private int mainWeaponPower = 0;
+    private MainWeaponType mainWeaponType;
     protected float fireInterval = 0.2f;
 
     [Header("SubWeapon")]
@@ -34,10 +34,10 @@ public class Player : Character
 
     [Header("Dodge")]
     [SerializeField] private AudioDataSO dodgeSFX;
-    [SerializeField, Range(0, 100)] private int dodgeEnergyCost = 25;
     [SerializeField] private float dodgeDuration = 2;
     [SerializeField] private float rollSpeed = 360f;
     [SerializeField] private Vector3 dodgeScale = new Vector3(0.5f, 0.5f, 0.5f);
+    private int dodgeEnergyCost = 25;
     private bool isDodging = false;
     private float currentRoll;
     private float maxRoll;
@@ -157,6 +157,8 @@ public class Player : Character
         moveController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
 
         fireInterval = playerProfile.FireInterval;
+        mainWeaponType = playerProfile.defaultWeaponType;
+        dodgeEnergyCost = playerProfile.DodgeCost;
 
         overdriveDodgeFactor = playerProfile.OverdriveDodgeFactor;
         overdriveSpeedFactor = playerProfile.OverdriveSpeedFactor;

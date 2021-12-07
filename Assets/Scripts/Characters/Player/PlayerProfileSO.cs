@@ -7,13 +7,14 @@ using UnityEngine;
 public class PlayerProfileSO : CharacterProfileSO
 {
     public float FireInterval;
+    public int DodgeCost;
     public MainWeaponType defaultWeaponType;
 
     public int OverdriveDodgeFactor;
     public float OverdriveSpeedFactor;
     public float OverdriveFireFactor;
 
-    public bool Initialize(int maxHealth, float moveSpeed, float moveRotationAngle, float fireInterval, int overdriveDodgeFactor, float overdriveSpeedFactor, float overdriveFireFactor, int weaponType)
+    public bool Initialize(int maxHealth, float moveSpeed, float moveRotationAngle, float fireInterval, int dodgeCost, int overdriveDodgeFactor, float overdriveSpeedFactor, float overdriveFireFactor, int weaponType)
     {
         bool isSuccess = true;
         try
@@ -25,6 +26,8 @@ public class PlayerProfileSO : CharacterProfileSO
 
             FireInterval = fireInterval;
             defaultWeaponType = (MainWeaponType)weaponType;
+
+            DodgeCost = dodgeCost;
 
             OverdriveDodgeFactor = overdriveDodgeFactor;
             OverdriveSpeedFactor = overdriveSpeedFactor;
@@ -49,6 +52,7 @@ public class PlayerProfileSO : CharacterProfileSO
                 float.Parse(datas[dataIndex++]),
                 float.Parse(datas[dataIndex++]),
                 float.Parse(datas[dataIndex++]),
+                int.Parse(datas[dataIndex++]),
                 int.Parse(datas[dataIndex++]),
                 float.Parse(datas[dataIndex++]),
                 float.Parse(datas[dataIndex++]),

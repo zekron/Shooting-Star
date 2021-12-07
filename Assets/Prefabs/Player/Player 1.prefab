@@ -31260,6 +31260,7 @@ GameObject:
   - component: {fileID: 2849688098052659661}
   - component: {fileID: 1615680337040834775}
   - component: {fileID: 851059584}
+  - component: {fileID: 5383685564074654027}
   m_Layer: 6
   m_Name: Player 1
   m_TagString: Player
@@ -31348,6 +31349,7 @@ MonoBehaviour:
   - {fileID: 3667453350895143958, guid: c7ed13d33dcd825429c6b58fbc7f6127, type: 3}
   - {fileID: 3667453350895143958, guid: 1a5f35e67a0c9f74aa7e4a0a5d75971a, type: 3}
   - {fileID: 3667453350895143958, guid: eefc2e853add3d847bfe0769cc42e50c, type: 3}
+  - {fileID: 3989932396471808366, guid: 145842f0d93b6794eaed7d853dde5f77, type: 3}
   muzzles:
   - {fileID: 2586034426363494342}
   - {fileID: 5342715841644463573}
@@ -31454,6 +31456,23 @@ MonoBehaviour:
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
   missileUpdateEventSO: {fileID: 11400000, guid: df53a1ba6c376b244b6d67a5ca082219, type: 2}
   missileCooldownTimeEventSO: {fileID: 11400000, guid: 31aada15e1a484d4699df57775086261, type: 2}
+--- !u!114 &5383685564074654027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435389010079767255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fce02135d904324a85331939d03f0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subWeaponPrefab:
+  - {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
+  - {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
+  launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}
+  cooldownTime: 0.5
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0
