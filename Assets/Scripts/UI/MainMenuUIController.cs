@@ -4,23 +4,37 @@ using UnityEngine.UI;
 public class MainMenuUIController : MonoBehaviour
 {
     [Header("==== CANVAS ====")]
-    [SerializeField] Canvas mainMenuCanvas;
+    [SerializeField] private Canvas mainMenuCanvas;
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private Canvas playerSelectionCanvas;
 
     [Header("==== BUTTONS ====")]
-    [SerializeField] Button buttonStart;
-    [SerializeField] Button buttonOptions;
-    [SerializeField] Button buttonQuit;
+    [SerializeField] private Button buttonStart;
+    [SerializeField] private Button buttonOptions;
+    [SerializeField] private Button buttonQuit;
+
+    [Header("==== PLAYERSELECTION ====")]
+    [SerializeField] private ProfileEventChannelSO profileEventSO;
+    [SerializeField] private Text textProfile;
+    [SerializeField] private Button buttonSubmit;
+    [SerializeField] private Button buttonCancel;
 
     void OnEnable()
     {
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonStart.gameObject.name, OnButtonStartClicked);
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonOptions.gameObject.name, OnButtonOptionsClicked);
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonQuit.gameObject.name, OnButtonQuitClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.name, OnButtonSubmitClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.name, OnButtonCancelClicked);
+
+        profileEventSO.OnEventRaised += RefreshSelectionPanel;
     }
 
     void OnDisable()
     {
         ButtonPressedBehavior.buttonFunctionTable.Clear();
+
+        profileEventSO.OnEventRaised -= RefreshSelectionPanel;
     }
 
     void Start()
@@ -33,7 +47,10 @@ public class MainMenuUIController : MonoBehaviour
     void OnButtonStartClicked()
     {
         mainMenuCanvas.enabled = false;
-        SceneLoader.Instance.LoadGameplayScene();
+        playerModel.SetActive(true);
+        UIInput.Instance.SelectUI(buttonSubmit);
+        //playerSelectionCanvas.enabled = true;
+        //SceneLoader.Instance.LoadGameplayScene();
     }
 
     void OnButtonOptionsClicked()
@@ -43,10 +60,29 @@ public class MainMenuUIController : MonoBehaviour
 
     void OnButtonQuitClicked()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
         Application.Quit();
-    #endif
+#endif
+    }
+
+    private void RefreshSelectionPanel(PlayerProfileSO profile)
+    {
+        playerSelectionCanvas.enabled = true;
+        textProfile.text = string.Format($"Max Health: {profile.MaxHealth}\nMove Speed: {profile.MoveSpeed}\nFire Interval: {profile.FireInterval}\nWeapon Type: {profile.defaultWeaponType}");
+
+        UIInput.Instance.SelectUI(buttonSubmit);
+    }
+    private void OnButtonSubmitClicked()
+    {
+        playerSelectionCanvas.enabled = false;
+        playerModel.SetActive(false);
+        SceneLoader.Instance.LoadGameplayScene();
+    }
+    private void OnButtonCancelClicked()
+    {
+        playerSelectionCanvas.enabled = false;
+        UIInput.Instance.SelectUI(buttonSubmit);
     }
 }
