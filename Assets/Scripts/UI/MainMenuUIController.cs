@@ -5,8 +5,9 @@ public class MainMenuUIController : MonoBehaviour
 {
     [Header("==== CANVAS ====")]
     [SerializeField] private Canvas mainMenuCanvas;
-    [SerializeField] private GameObject playerModel;
     [SerializeField] private Canvas playerSelectionCanvas;
+    [SerializeField] private Canvas tipsCanvas;
+    [SerializeField] private GameObject playerModel;
 
     [Header("==== BUTTONS ====")]
     [SerializeField] private Button buttonStart;
@@ -49,7 +50,7 @@ public class MainMenuUIController : MonoBehaviour
         mainMenuCanvas.enabled = false;
         playerModel.SetActive(true);
         UIInput.Instance.SelectUI(buttonSubmit);
-        //playerSelectionCanvas.enabled = true;
+        tipsCanvas.enabled = true;
         //SceneLoader.Instance.LoadGameplayScene();
     }
 
@@ -77,7 +78,9 @@ public class MainMenuUIController : MonoBehaviour
     private void OnButtonSubmitClicked()
     {
         playerSelectionCanvas.enabled = false;
+        tipsCanvas.enabled = false;
         playerModel.SetActive(false);
+
         SceneLoader.Instance.LoadGameplayScene();
     }
     private void OnButtonCancelClicked()

@@ -12,11 +12,11 @@ public class ModelRotation : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        profileEventSO.RaiseEvent(profile);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        profileEventSO.RaiseEvent(profile);
         canRotate = false;
     }
 
