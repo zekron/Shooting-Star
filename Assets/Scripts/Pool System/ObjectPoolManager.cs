@@ -8,6 +8,7 @@ public class ObjectPoolManager : MonoBehaviour
     [SerializeField] private ObjectPool[] enemyProjectilePools;
     [SerializeField] private ObjectPool[] vFXPools;
     [SerializeField] private ObjectPool[] itemPools;
+    [SerializeField] private ObjectPool[] playerModelPools;
 
     private static Dictionary<GameObject, ObjectPool> objectPoolDictionary;
 
@@ -20,6 +21,18 @@ public class ObjectPoolManager : MonoBehaviour
         Initialize(enemyProjectilePools);
         Initialize(vFXPools);
         Initialize(itemPools);
+
+#if UNITY_EDITOR
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            if (!GameManager.Instance.CurrentPlayerModel)
+                Release(GameManager.Instance.CurrentPlayerModel);
+            else
+                Release(playerModelPools[0].Prefab);
+        }
+#else
+        Release(GameManager.Instance.CurrentPlayerModel);
+#endif
     }
 
 #if UNITY_EDITOR

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class ModelRotation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private PlayerProfileSO profile;
+    [SerializeField] private GameObject playerPrefab;
     [SerializeField] private ProfileEventChannelSO profileEventSO;
 
     private bool canRotate = true;
@@ -16,7 +17,7 @@ public class ModelRotation : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        profileEventSO.RaiseEvent(profile);
+        profileEventSO.RaiseEvent(profile, playerPrefab);
         canRotate = false;
     }
 

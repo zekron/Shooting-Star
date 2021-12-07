@@ -68,10 +68,11 @@ public class MainMenuUIController : MonoBehaviour
 #endif
     }
 
-    private void RefreshSelectionPanel(PlayerProfileSO profile)
+    private void RefreshSelectionPanel(PlayerProfileSO profile, GameObject gameObject)
     {
         playerSelectionCanvas.enabled = true;
         textProfile.text = string.Format($"Max Health: {profile.MaxHealth}\nMove Speed: {profile.MoveSpeed}\nFire Interval: {profile.FireInterval}\nWeapon Type: {profile.defaultWeaponType}");
+        GameManager.Instance.CurrentPlayerModel = gameObject;
 
         UIInput.Instance.SelectUI(buttonSubmit);
     }

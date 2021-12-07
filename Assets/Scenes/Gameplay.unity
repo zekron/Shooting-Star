@@ -460,6 +460,13 @@ MonoBehaviour:
     size: 5
   - prefab: {fileID: 181565217884288539, guid: 398ff2800ce102447b9489a90ae5be5f, type: 3}
     size: 5
+  playerModelPools:
+  - prefab: {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
+    size: 1
+  - prefab: {fileID: 5908416648923392752, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
+    size: 1
+  - prefab: {fileID: 5976628406566106873, guid: 8834d7a6309102d44a2066c7cf30be4f, type: 3}
+    size: 1
 --- !u!4 &155163122
 Transform:
   m_ObjectHideFlags: 0
