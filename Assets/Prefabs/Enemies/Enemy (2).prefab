@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
   deathSFX: {fileID: 11400000, guid: 212493452c1c6b647b831cfe4f1375b5, type: 2}
+  setHealthBarEventSO: {fileID: 11400000, guid: d4c2d2df8e628bb4e899d29e63f3d45c, type: 2}
   showOnHeadHealthBar: 0
   onHeadHealthBar: {fileID: 4293371644935024408}
   projectiles:

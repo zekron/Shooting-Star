@@ -2,11 +2,37 @@ using UnityEngine;
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
+    [Header("Components")]
     [SerializeField] private AudioSource sFXPlayer;
     [SerializeField] private AudioSource bGMPlayer;
 
+    [Header("Events")]
+    [SerializeField] private FloatEventChannelSO changeSFXVolumeEventSO;
+    [SerializeField] private FloatEventChannelSO changeBGMVolumeEventSO;
+
     private const float MIN_PITCH = 0.9f;
     private const float MAX_PITCH = 1.1f;
+
+    private void OnEnable()
+    {
+        changeSFXVolumeEventSO.OnEventRaised += SetSFXVolume;
+        changeBGMVolumeEventSO.OnEventRaised += SetBGMVolume;
+    }
+
+    private void OnDisable()
+    {
+        changeSFXVolumeEventSO.OnEventRaised -= SetSFXVolume;
+        changeBGMVolumeEventSO.OnEventRaised -= SetBGMVolume;
+    }
+
+    private void SetSFXVolume(float value)
+    {
+        sFXPlayer.volume = value;
+    }
+    private void SetBGMVolume(float value)
+    {
+        bGMPlayer.volume = value;
+    }
 
     public void PlaySFX(AudioDataSO audioData)
     {

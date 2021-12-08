@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ButtonPressedBehavior : StateMachineBehaviour
 {
-    public static Dictionary<string, System.Action> buttonFunctionTable;
+    public static Dictionary<int, System.Action> buttonFunctionTable;
 
     void Awake()
     {
-        buttonFunctionTable = new Dictionary<string, System.Action>();
+        buttonFunctionTable = new Dictionary<int, System.Action>();
     }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -17,6 +17,6 @@ public class ButtonPressedBehavior : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        buttonFunctionTable[animator.gameObject.name].Invoke();
+        buttonFunctionTable[animator.gameObject.GetInstanceID()].Invoke();
     }
 }

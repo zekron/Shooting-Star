@@ -31339,6 +31339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathVFX: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
   deathSFX: {fileID: 11400000, guid: 423a8d5470bda2948a44a96e6c3c5620, type: 2}
+  setHealthBarEventSO: {fileID: 11400000, guid: d4c2d2df8e628bb4e899d29e63f3d45c, type: 2}
   showOnHeadHealthBar: 0
   onHeadHealthBar: {fileID: 4468222160088447896}
   projectiles:
@@ -31378,14 +31379,12 @@ MonoBehaviour:
   upgradeMainWeaponPowerEventSO: {fileID: 11400000, guid: 2b8adadc37cbd954da7df24cea4c96ed, type: 2}
   setMainWeaponTypeEventSO: {fileID: 11400000, guid: 74f277886eaa5a54f8d25e1a431fcbd5, type: 2}
   projectileOverdrive: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-  mainWeaponType: 0
   mainWeaponPower: 0
   upgradeSubWeaponPowerEventSO: {fileID: 11400000, guid: 1cd44ee216a25844fae04feacffa9c47, type: 2}
   setSubWeaponTypeEventSO: {fileID: 11400000, guid: 852ecd8a121e9ab40a9d2aa98ca8895d, type: 2}
   subWeaponType: 0
   subWeaponPower: 0
   dodgeSFX: {fileID: 11400000, guid: ee516b32bf0177b4d9d47c1a94c29d84, type: 2}
-  dodgeEnergyCost: 25
   dodgeDuration: 1
   rollSpeed: 360
   dodgeScale: {x: 0.2, y: 0.2, z: 0.2}

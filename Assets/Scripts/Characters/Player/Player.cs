@@ -87,7 +87,7 @@ public class Player : Character
         SetProfile();
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         input.onFire -= Fire;
         input.onStopFire -= StopFire;
@@ -102,6 +102,8 @@ public class Player : Character
         setSubWeaponTypeEventSO.OnEventRaised -= SetSubWeaponType;
         upgradeMainWeaponPowerEventSO.OnEventRaised -= UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised -= UpgradeSubWeaponPower;
+
+        base.OnDisable();
     }
 
     private void OnValidate()

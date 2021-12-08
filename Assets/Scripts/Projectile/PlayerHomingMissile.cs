@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerHomingMissile : PlayerProjectileHoming
 {
-    [SerializeField] private AudioDataSO targetAcquiredVoice = null;
-
     [Header("==== SPEED CHANGE ====")]
     [SerializeField] private float lowSpeed = 8f;
     [SerializeField] private float highSpeed = 25f;
@@ -48,11 +46,6 @@ public class PlayerHomingMissile : PlayerProjectileHoming
         yield return waitVariableSpeedDelay;
 
         MoveSpeed = highSpeed;
-
-        if (target != null)
-        {
-            AudioManager.Instance.PlaySFX(targetAcquiredVoice);
-        }
     }
     void PhysicsOverlapDetection()
     {

@@ -36,6 +36,10 @@ public class GameplayUIController : MonoBehaviour
     [SerializeField] private IntEventChannelSO updateWaveEventSO;
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
 
+    [Header("Options")]
+    [SerializeField] private Canvas optionCanvas;
+    [SerializeField] private VoidEventChannelSO optionQuitEventSO;
+
     private Vector3 scoreTextScale = new Vector3(1.2f, 1.2f, 1.2f);
 
     private int buttonPressedParameterID = Animator.StringToHash("Pressed");
@@ -47,10 +51,11 @@ public class GameplayUIController : MonoBehaviour
 
         updateWaveEventSO.OnEventRaised += UpdateWave;
         updateTotalScoreEventSO.OnEventRaised += UpdateScoreText;
+        optionQuitEventSO.OnEventRaised += CloseOptionCanvas;
 
-        ButtonPressedBehavior.buttonFunctionTable.Add(resumeButton.gameObject.name, OnResumeButtonClick);
-        ButtonPressedBehavior.buttonFunctionTable.Add(optionsButton.gameObject.name, OnOptionsButtonClick);
-        ButtonPressedBehavior.buttonFunctionTable.Add(mainMenuButton.gameObject.name, OnMainMenuButtonClick);
+        ButtonPressedBehavior.buttonFunctionTable.Add(resumeButton.gameObject.GetInstanceID(), OnResumeButtonClick);
+        ButtonPressedBehavior.buttonFunctionTable.Add(optionsButton.gameObject.GetInstanceID(), OnOptionsButtonClick);
+        ButtonPressedBehavior.buttonFunctionTable.Add(mainMenuButton.gameObject.GetInstanceID(), OnMainMenuButtonClick);
     }
 
     private void OnDisable()
@@ -60,6 +65,7 @@ public class GameplayUIController : MonoBehaviour
 
         updateWaveEventSO.OnEventRaised -= UpdateWave;
         updateTotalScoreEventSO.OnEventRaised -= UpdateScoreText;
+        optionQuitEventSO.OnEventRaised -= CloseOptionCanvas;
 
         ButtonPressedBehavior.buttonFunctionTable.Clear();
     }
@@ -96,6 +102,8 @@ public class GameplayUIController : MonoBehaviour
     private void OnOptionsButtonClick()
     {
         // TODO
+        optionCanvas.enabled = true;
+        menusCanvas.enabled = false;
         UIInput.Instance.SelectUI(optionsButton);
         playerInput.EnablePauseMenuInput();
     }
@@ -115,6 +123,13 @@ public class GameplayUIController : MonoBehaviour
     {
         totalScore += value;
         StartCoroutine(nameof(AddScoreCoroutine));
+    }
+
+    private void CloseOptionCanvas()
+    {
+        optionCanvas.enabled = false;
+        menusCanvas.enabled = true;
+        UIInput.Instance.SelectUI(resumeButton);
     }
 
     private IEnumerator AddScoreCoroutine()

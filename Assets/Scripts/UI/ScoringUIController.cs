@@ -37,9 +37,9 @@ public class ScoringUIController : MonoBehaviour
             ShowScoringScreen();
         }
 
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonMainMenu.gameObject.name, OnButtonMainMenuClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.name, OnButtonSubmitClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.name, HideNewHighScoreScreen);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonMainMenu.gameObject.GetInstanceID(), OnButtonMainMenuClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.GetInstanceID(), OnButtonSubmitClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.GetInstanceID(), HideNewHighScoreScreen);
 
         GameManager.CurrentGameState = GameState.Scoring;
     }

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sFXPlayer: {fileID: 654481239401506336}
   bGMPlayer: {fileID: 654481238920994714}
+  changeSFXVolumeEventSO: {fileID: 11400000, guid: f83748b4dd51f4e48a9e4fe0657418ed, type: 2}
+  changeBGMVolumeEventSO: {fileID: 11400000, guid: d40c710625cf77e4cbc96e829c0ac7f4, type: 2}
 --- !u!1 &654481238920994716
 GameObject:
   m_ObjectHideFlags: 0

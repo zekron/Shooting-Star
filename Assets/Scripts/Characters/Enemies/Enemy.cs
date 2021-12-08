@@ -49,9 +49,10 @@ public class Enemy : Character
         scorePoint = enemyProfile.ScorePoint;
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
         StopAllCoroutines();
+        base.OnDisable();
     }
 
     protected override IEnumerator FireCoroutine()

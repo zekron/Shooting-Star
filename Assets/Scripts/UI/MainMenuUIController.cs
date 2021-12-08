@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,15 +21,20 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Button buttonSubmit;
     [SerializeField] private Button buttonCancel;
 
+    [Header("Options")]
+    [SerializeField] private Canvas optionCanvas;
+    [SerializeField] private VoidEventChannelSO optionQuitEventSO;
+
     void OnEnable()
     {
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonStart.gameObject.name, OnButtonStartClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonOptions.gameObject.name, OnButtonOptionsClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonQuit.gameObject.name, OnButtonQuitClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.name, OnButtonSubmitClicked);
-        ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.name, OnButtonCancelClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonStart.gameObject.GetInstanceID(), OnButtonStartClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonOptions.gameObject.GetInstanceID(), OnButtonOptionsClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonQuit.gameObject.GetInstanceID(), OnButtonQuitClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.GetInstanceID(), OnButtonSubmitClicked);
+        ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.GetInstanceID(), OnButtonCancelClicked);
 
         profileEventSO.OnEventRaised += RefreshSelectionPanel;
+        optionQuitEventSO.OnEventRaised += CloseOptionCanvas;
     }
 
     void OnDisable()
@@ -36,6 +42,7 @@ public class MainMenuUIController : MonoBehaviour
         ButtonPressedBehavior.buttonFunctionTable.Clear();
 
         profileEventSO.OnEventRaised -= RefreshSelectionPanel;
+        optionQuitEventSO.OnEventRaised -= CloseOptionCanvas;
     }
 
     void Start()
@@ -45,27 +52,35 @@ public class MainMenuUIController : MonoBehaviour
         UIInput.Instance.SelectUI(buttonStart);
     }
 
-    void OnButtonStartClicked()
+    private void OnButtonStartClicked()
     {
         mainMenuCanvas.enabled = false;
         playerModel.SetActive(true);
         UIInput.Instance.SelectUI(buttonSubmit);
         tipsCanvas.enabled = true;
-        //SceneLoader.Instance.LoadGameplayScene();
     }
 
-    void OnButtonOptionsClicked()
+    private void OnButtonOptionsClicked()
     {
+        optionCanvas.enabled = true;
+        mainMenuCanvas.enabled = false;
         UIInput.Instance.SelectUI(buttonOptions);
     }
 
-    void OnButtonQuitClicked()
+    private void OnButtonQuitClicked()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+    }
+
+    private void CloseOptionCanvas()
+    {
+        optionCanvas.enabled = false;
+        mainMenuCanvas.enabled = true;
+        UIInput.Instance.SelectUI(buttonStart);
     }
 
     private void RefreshSelectionPanel(PlayerProfileSO profile, GameObject gameObject)

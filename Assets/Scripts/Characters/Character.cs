@@ -9,6 +9,7 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
     [SerializeField] private AudioDataSO deathSFX;
 
     [Header("---- HEALTH ----")]
+    [SerializeField] private BooleanEventChannelSO setHealthBarEventSO;
     [SerializeField] private bool showOnHeadHealthBar = true;
     [SerializeField] private StatsBar onHeadHealthBar;
     protected float maxHealth;
@@ -43,6 +44,12 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
         }
     }
 
+    public bool ShowOnHeadHealthBar
+    {
+        get => showOnHeadHealthBar;
+        set => setHealthBarEventSO.RaiseEvent(showOnHeadHealthBar = value);
+    }
+
     protected virtual void Awake()
     {
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
@@ -55,15 +62,23 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
     protected virtual void OnEnable()
     {
         onHealthChanged.AddListener(SetOnHeadHealthBar);
+        setHealthBarEventSO.OnEventRaised += SetOnHeadHealthBar;
+
+        ShowOnHeadHealthBar = OptionManager.OptionData.NeedShowHealthBar;
         Health = maxHealth;
         isAlive = true;
+    }
+    protected virtual void OnDisable()
+    {
+        onHealthChanged.RemoveListener(SetOnHeadHealthBar);
+        setHealthBarEventSO.OnEventRaised -= SetOnHeadHealthBar;
     }
 
     protected virtual void SetProfile() { }
 
     public void SetOnHeadHealthBar(bool flag)
     {
-        onHeadHealthBar.gameObject.SetActive(flag);
+        onHeadHealthBar.gameObject.SetActive(showOnHeadHealthBar = flag);
 
         if (flag && gameObject.activeSelf)
         {

@@ -34,7 +34,7 @@ public class XMLReader
     #region Enemy
     private static List<string> enemyProfiles = new List<string>();
     private const string PATH_TO_ENEMYXML = "EnemyProfile";
-    private const string FILE_NAME_ENEMY = "/EnemyProfile SO";
+    private const string FILE_NAME_ENEMY = "EnemyProfile SO";
     [MenuItem("Custom Menu/XML Reader/Load Enemy Profiles")]
     private static void LoadEnemyXMLToSO()
     {
@@ -64,7 +64,7 @@ public class XMLReader
     #region Player
     private static List<string> playerProfiles = new List<string>();
     private const string PATH_TO_PLAYERXML = "PlayerProfile";
-    private const string FILE_NAME_PLAYER = "/PlayerProfile SO";
+    private const string FILE_NAME_PLAYER = "PlayerProfile SO";
     [MenuItem("Custom Menu/XML Reader/Load Player Profiles")]
     private static void LoadPlayerXMLToSO()
     {
@@ -93,7 +93,7 @@ public class XMLReader
     #region Boss
     private static List<string> bossProfiles = new List<string>();
     private const string PATH_TO_BOSSXML = "BossProfile";
-    private const string FILE_NAME_BOSS = "/BossrProfile SO";
+    private const string FILE_NAME_BOSS = "BossrProfile SO";
     [MenuItem("Custom Menu/XML Reader/Load Boss Profiles")]
     private static void LoadBossXMLToSO()
     {
@@ -158,8 +158,8 @@ public class XMLReader
     private static void CheckFileExists(int fileIndex, string fileName, Type type)
     {
         fullName = string.Format("{0} {1}{2}", fileName, fileIndex + 1, EXPANSION_NAME);
-        assetPath = string.Format("{0}{1}", RELATIVE_PATH, fullName);
-        if (!File.Exists(fullPath + fullName))
+        assetPath = Path.Combine(RELATIVE_PATH, fullName);
+        if (!File.Exists(Path.Combine(fullPath, fullName)))
         {
             var data = ScriptableObject.CreateInstance(type);
 
