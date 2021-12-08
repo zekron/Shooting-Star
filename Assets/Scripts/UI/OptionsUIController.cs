@@ -33,14 +33,14 @@ public class OptionsUIController : MonoBehaviour
         sliderSFXVolume.onValueChanged.AddListener(ChangeSFXVolume);
         sliderBGMVolume.onValueChanged.AddListener(ChangeBGMVolume);
         toggleShowHealthBar.onValueChanged.AddListener(SetShowHealthBar);
-
+    }
+    private void Start()
+    {
         data = OptionManager.LoadPlayerOptionData();
         sliderBGMVolume.value = previousBGMVolume = data.BGMVolume;
         sliderSFXVolume.value = previousSFXVolume = data.SFXVolume;
         toggleShowHealthBar.isOn = previousNeedShow = data.NeedShowHealthBar;
-    }
-    private void Start()
-    {
+
         changeBGMVolumeEventSO.RaiseEvent(previousBGMVolume);
         changeSFXVolumeEventSO.RaiseEvent(previousSFXVolume);
         setHealthBarEventSO.RaiseEvent(previousNeedShow);
