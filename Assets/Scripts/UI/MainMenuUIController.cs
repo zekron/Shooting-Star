@@ -102,7 +102,10 @@ public class MainMenuUIController : MonoBehaviour
     }
     private void OnButtonCancelClicked()
     {
+        playerModel.SetActive(false);
         playerSelectionCanvas.enabled = false;
-        UIInput.Instance.SelectUI(buttonSubmit);
+        tipsCanvas.enabled = false;
+        mainMenuCanvas.enabled = true;
+        UIInput.Instance.SelectUI(buttonStart);
     }
 }
