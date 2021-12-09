@@ -10,6 +10,7 @@ public class Player : Character
     [SerializeField] private PlayerProfileSO playerProfile;
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
+    [SerializeField] private IntEventChannelSO updatePlayerEnergyEventSO;
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
@@ -53,6 +54,7 @@ public class Player : Character
     private Rigidbody2D playerRigidbody;
     private Collider2D playerCollider;
     private MoveController moveController;
+    private PlayerEnergy playerEnergy;
 
     private readonly float slowMotionDuration = 1f;
     private readonly float invincibleTime = 1f;
@@ -83,6 +85,7 @@ public class Player : Character
         setSubWeaponTypeEventSO.OnEventRaised += SetSubWeaponType;
         upgradeMainWeaponPowerEventSO.OnEventRaised += UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised += UpgradeSubWeaponPower;
+        updatePlayerEnergyEventSO.OnEventRaised += GetEnergy;
 
         SetProfile();
     }
@@ -102,6 +105,7 @@ public class Player : Character
         setSubWeaponTypeEventSO.OnEventRaised -= SetSubWeaponType;
         upgradeMainWeaponPowerEventSO.OnEventRaised -= UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised -= UpgradeSubWeaponPower;
+        updatePlayerEnergyEventSO.OnEventRaised -= GetEnergy;
 
         base.OnDisable();
     }
@@ -119,6 +123,7 @@ public class Player : Character
         moveController = GetComponent<MoveController>();
         subWeaponSystem = GetComponent<SubWeaponSystem>();
         missile = GetComponent<MissileSystem>();
+        playerEnergy = GetComponent<PlayerEnergy>();
 
         maxRoll = dodgeDuration * rollSpeed;
         playerRigidbody.gravityScale = 0;
@@ -165,6 +170,11 @@ public class Player : Character
         overdriveDodgeFactor = playerProfile.OverdriveDodgeFactor;
         overdriveSpeedFactor = playerProfile.OverdriveSpeedFactor;
         overdriveFireFactor = playerProfile.OverdriveFireFactor;
+    }
+
+    private void GetEnergy(int value)
+    {
+        playerEnergy.GainEnergy(value);
     }
 
     #region HEALTH
@@ -341,15 +351,14 @@ public class Player : Character
     #region Dodge
     private void Dodge()
     {
-        if (isDodging || !PlayerEnergy.Instance.IsEnough(dodgeEnergyCost)) return;
-
+        if (isDodging || !playerEnergy.IsEnough(dodgeEnergyCost)) return;
         StartCoroutine(nameof(DodgeCoroutine));
     }
     private IEnumerator DodgeCoroutine()
     {
         isDodging = true;
         AudioManager.Instance.PlaySFX(dodgeSFX);
-        PlayerEnergy.Instance.DrainEnergy(dodgeEnergyCost);
+        playerEnergy.DrainEnergy(dodgeEnergyCost);
         playerCollider.isTrigger = true;
         currentRoll = 0f;
         TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
@@ -371,7 +380,7 @@ public class Player : Character
     #region OverDrive
     private void OverDrive()
     {
-        if (!PlayerEnergy.Instance.IsEnough(PlayerEnergy.MAX)) return;
+        if (!playerEnergy.IsEnough(PlayerEnergy.MAX)) return;
 
         PlayerOverdrive.On.Invoke();
     }

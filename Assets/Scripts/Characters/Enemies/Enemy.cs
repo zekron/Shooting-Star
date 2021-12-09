@@ -6,6 +6,7 @@ public class Enemy : Character
     [Header("---- Enemy ----")]
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private IntEventChannelSO updateTotalScoreEventSO;
+    [SerializeField] private IntEventChannelSO updatePlayerEnergyEventSO;
     [SerializeField] private IntEventChannelSO enemyLevelUpEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
@@ -84,7 +85,7 @@ public class Enemy : Character
 
     public override void GetDie()
     {
-        PlayerEnergy.Instance.GainEnergy(deathEnergyBonus);
+        updatePlayerEnergyEventSO.RaiseEvent(deathEnergyBonus);
         base.GetDie();
         DropInventory();
         updateTotalScoreEventSO.RaiseEvent(scorePoint);

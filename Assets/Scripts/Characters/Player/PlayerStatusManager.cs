@@ -54,7 +54,7 @@ public class PlayerStatusManager : MonoBehaviour
     private void InitEnergy(int value)
     {
         maxEnergy = value;
-        energyBar.Initialize(value, maxEnergy);
+        energyBar.Initialize(0, maxEnergy);
     }
 
     private void UpdateEnergy(int value)

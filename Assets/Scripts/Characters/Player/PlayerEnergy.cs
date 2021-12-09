@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
+public class PlayerEnergy : MonoBehaviour, IEnergy
 {
     [SerializeField] private float overdriveInterval = 0.1f;
     [SerializeField] private IntEventChannelSO energyInitEventSO;
@@ -16,9 +16,8 @@ public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
 
     private WaitForSeconds waitForOverdriveInterval;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         waitForOverdriveInterval = new WaitForSeconds(overdriveInterval);
     }
 
@@ -37,7 +36,7 @@ public class PlayerEnergy : Singleton<PlayerEnergy>, IEnergy
     void Start()
     {
         energyInitEventSO.RaiseEvent(MAX);
-        GainEnergy(MAX);
+        //GainEnergy(MAX);
     }
 
     public void GainEnergy(int value)
