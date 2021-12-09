@@ -19427,8 +19427,8 @@ MonoBehaviour:
   enemyProfile: {fileID: 11400000, guid: 3ef3c29a9ae937e43b054b4b98482f2b, type: 2}
   inventoryPackage: {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
   levelUpFactor: 50
-  continuousFireDuration: 1.5
-  playerDetectionTransform: {fileID: 6777184693290456823}
+  playerDetectionTransform:
+  - {fileID: 6777184693290456823}
   playerDetectionSize: {x: 1, y: 15, z: 0}
   playerLayer:
     serializedVersion: 2
@@ -19448,6 +19448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4539d3a39f3251344ba816e0fa855fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRandomlyMove: 1
+  defaultPosition: {x: 0, y: 0}
 --- !u!1 &6227986278507711899
 GameObject:
   m_ObjectHideFlags: 0

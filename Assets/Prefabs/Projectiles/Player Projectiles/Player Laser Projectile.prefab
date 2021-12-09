@@ -139,7 +139,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5725314611867623064}
   - component: {fileID: 1799089592031775425}
-  - component: {fileID: 8824393009548501364}
   - component: {fileID: 3423434967380594433}
   m_Layer: 8
   m_Name: Player Laser Projectile
@@ -189,20 +188,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &8824393009548501364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3989932396471808366}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b5f7379fc3e59144bf1f0f30d8a22ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyGameObject: 0
-  lifetime: 3
 --- !u!114 &3423434967380594433
 MonoBehaviour:
   m_ObjectHideFlags: 0

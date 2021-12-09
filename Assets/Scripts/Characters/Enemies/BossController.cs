@@ -28,7 +28,7 @@ public class BossController : EnemyController
         }
         else
         {
-            base.RandomlyMovingCoroutine();
+            yield return base.RandomlyMovingCoroutine();
         }
     }
     public override void StopChasingPlayer()

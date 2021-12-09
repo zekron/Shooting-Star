@@ -9,7 +9,7 @@ public class PlayerLaser : PlayerProjectile
 
     private BoxCollider2D laserCollider;
 
-    private const float DEFAULT_LENGTH = 50;
+    private const float DEFAULT_LENGTH = 15;
     private float laserWidth = 0.5f;
     private Vector2 defaultOffset = new Vector2(0, DEFAULT_LENGTH / 2);
     private Vector2 defaultSize = new Vector2(0.2f, DEFAULT_LENGTH);
@@ -22,11 +22,6 @@ public class PlayerLaser : PlayerProjectile
         laserCollider.size = defaultSize;
 
         base.OnEnable();
-    }
-
-    private void OnDisable()
-    {
-        //movefollow = null;
     }
 
     public override void Move(Vector2 deltaMovement)
