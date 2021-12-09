@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossrProfile SO 2
   m_EditorClassIdentifier: 
   MaxHealth: 1500
-  MoveSpeed: 1.5
+  MoveSpeed: 1
   MoveRotationAngle: 10
   MinFireInterval: 0.15
   MaxFireInterval: 1

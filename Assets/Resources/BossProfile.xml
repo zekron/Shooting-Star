@@ -12,7 +12,7 @@
 	</Boss>
 	<Boss ID="2">
 		<MaxHealth>1500</MaxHealth>
-		<MoveSpeed>1.5</MoveSpeed>
+		<MoveSpeed>1</MoveSpeed>
 		<MoveRotationAngle>10</MoveRotationAngle>
 		<MinFireInterval>0.15</MinFireInterval>
 		<MaxFireInterval>1</MaxFireInterval>

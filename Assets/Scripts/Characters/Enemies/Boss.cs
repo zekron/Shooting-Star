@@ -165,9 +165,12 @@ public class Boss : Enemy
         while (continuousFireTimer < continuousFireDuration)
         {
             if (GameManager.CurrentGameState == GameState.GameOver) yield break;
-            foreach (var projectile in magazine)
+            for (int i = 0; i < muzzles.Length; i++)
             {
-                ObjectPoolManager.Release(projectile, muzzles[0].position);
+                foreach (var projectile in magazine)
+                {
+                    ObjectPoolManager.Release(projectile, muzzles[i].position);
+                }
             }
 
             continuousFireTimer += minFireInterval;

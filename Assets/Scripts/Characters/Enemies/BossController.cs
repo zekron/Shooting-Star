@@ -17,6 +17,12 @@ public class BossController : EnemyController
                 {
                     character.Move(Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime));
                 }
+                else
+                {
+                    if (!playerTransform) TryGetPlayerTransform();
+
+                    targetPosition.x = playerTransform.position.x;
+                }
                 yield return null;
             }
         }
@@ -29,6 +35,6 @@ public class BossController : EnemyController
     {
         base.StopChasingPlayer();
 
-        targetPosition = defaultPosition;
+        //targetPosition = defaultPosition;
     }
 }
