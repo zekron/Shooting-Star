@@ -403,44 +403,44 @@ MonoBehaviour:
     size: 10
   playerProjectilePools:
   - prefab: {fileID: 3667453350895143958, guid: 671b036955107b34caead1ece7a7e305, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: 9f1a2b812c52aac429b2a810b94a3b62, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: ff53911a3ca982c4a84d3bef3991a779, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: 200a316b35175824891f12110227d61a, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: c7ed13d33dcd825429c6b58fbc7f6127, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: 1a5f35e67a0c9f74aa7e4a0a5d75971a, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3667453350895143958, guid: eefc2e853add3d847bfe0769cc42e50c, type: 3}
-    size: 116
+    size: 50
   - prefab: {fileID: 3989932396471808366, guid: 145842f0d93b6794eaed7d853dde5f77, type: 3}
     size: 2
   - prefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
-    size: 48
+    size: 32
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-    size: 339
+    size: 139
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
-    size: 40
+    size: 24
   - prefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
     size: 3
   enemyProjectilePools:
   - prefab: {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
     size: 28
   - prefab: {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: b2e1b1a20eb509548a70d05798f72b68, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: ac9c24e9acc06e04696443498bf6cb63, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: a1c517236c5eff245877c6c6ee730119, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
     size: 1
   - prefab: {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
@@ -449,7 +449,7 @@ MonoBehaviour:
   - prefab: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
     size: 1
   - prefab: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
-    size: 18
+    size: 25
   - prefab: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
     size: 104
   - prefab: {fileID: 5060298685065931927, guid: 4ae5f9473779fab4386aa5e30a25fb17, type: 3}
