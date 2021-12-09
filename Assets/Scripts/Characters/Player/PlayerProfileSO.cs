@@ -41,6 +41,11 @@ public class PlayerProfileSO : CharacterProfileSO
         return isSuccess;
     }
 
+    public float[] DataNormalization(float maxHealth, float maxSpeed, float fireInterval, float dodgeCost)
+    {
+        return new float[] { maxHealth / 100, maxSpeed / 10, 1 / fireInterval / 10, 1 - dodgeCost / 100 };
+    }
+
     public override bool InitializeByString(string dataString)
     {
         string[] datas = dataString.Split(',');

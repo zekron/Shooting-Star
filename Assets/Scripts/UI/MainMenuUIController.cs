@@ -17,7 +17,7 @@ public class MainMenuUIController : MonoBehaviour
 
     [Header("==== PLAYERSELECTION ====")]
     [SerializeField] private ProfileEventChannelSO profileEventSO;
-    [SerializeField] private Text textProfile;
+    [SerializeField] private PlayerProfileGraphic profileGraphic;
     [SerializeField] private Button buttonSubmit;
     [SerializeField] private Button buttonCancel;
 
@@ -86,7 +86,8 @@ public class MainMenuUIController : MonoBehaviour
     private void RefreshSelectionPanel(PlayerProfileSO profile, GameObject gameObject)
     {
         playerSelectionCanvas.enabled = true;
-        textProfile.text = string.Format($"Max Health: {profile.MaxHealth}\nMove Speed: {profile.MoveSpeed}\nFire Interval: {profile.FireInterval}\nWeapon Type: {profile.defaultWeaponType}");
+        //TODO
+        profileGraphic.SetValues(profile.DataNormalization(profile.MaxHealth, profile.MoveSpeed, profile.FireInterval, profile.DodgeCost));
         GameManager.Instance.CurrentPlayerModel = gameObject;
 
         UIInput.Instance.SelectUI(buttonSubmit);

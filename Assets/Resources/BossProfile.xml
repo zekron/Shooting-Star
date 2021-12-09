@@ -10,4 +10,14 @@
 		<DeathEnergyBonus>100</DeathEnergyBonus>
 		<ContinuousFireDuration>1.5</ContinuousFireDuration>
 	</Boss>
+	<Boss ID="2">
+		<MaxHealth>1500</MaxHealth>
+		<MoveSpeed>1.5</MoveSpeed>
+		<MoveRotationAngle>10</MoveRotationAngle>
+		<MinFireInterval>0.15</MinFireInterval>
+		<MaxFireInterval>1</MaxFireInterval>
+		<ScorePoint>2000</ScorePoint>
+		<DeathEnergyBonus>100</DeathEnergyBonus>
+		<ContinuousFireDuration>2</ContinuousFireDuration>
+	</Boss>
 </root>

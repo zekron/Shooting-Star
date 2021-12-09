@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3718bf144513f624eba7ca145c81bfab, type: 3}
   m_Name: BossShark Inventory Package
   m_EditorClassIdentifier: 
-  packageDropRate: 0.3
+  packageDropRate: 0.5
   inventoryList:
   - {fileID: 6153858220289259279, guid: 20df3b3bdddb94f47b7d2e59e491ff51, type: 3}
   - {fileID: 8742659870157108696, guid: 398ff2800ce102447b9489a90ae5be5f, type: 3}

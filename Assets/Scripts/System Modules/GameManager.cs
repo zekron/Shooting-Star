@@ -12,6 +12,7 @@ public class GameManager : PersistentSingleton<GameManager>
     private void OnEnable()
     {
         Viewport.Initialize();
+        OptionManager.LoadPlayerOptionData();
 #if !UNITY_EDITOR
         Application.targetFrameRate = 60;
 #endif

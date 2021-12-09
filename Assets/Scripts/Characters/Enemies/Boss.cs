@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    [Header("---- Boss ----")]
-    [SerializeField] float continuousFireDuration = 1.5f;
-
     [Header("---- Player Detection ----")]
     [SerializeField] Transform playerDetectionTransform;
     [SerializeField] Vector3 playerDetectionSize;
@@ -18,6 +15,7 @@ public class Boss : Enemy
     [SerializeField] private AudioDataSO beamLaunchSFX;
     private bool isBeamReady;
 
+    private float continuousFireDuration = 1.5f;
     private BossHealthBar healthBar;
     private Canvas healthBarCanvas;
     private Animator beamAnimator;
@@ -54,6 +52,12 @@ public class Boss : Enemy
         isBeamReady = false;
         StartCoroutine(nameof(BeamCooldownCoroutine));
     }
+    protected override void OnDisable()
+    {
+        StopCoroutine(nameof(BeamCooldownCoroutine));
+        base.OnDisable();
+    }
+
     protected override void SetProfile()
     {
         base.SetProfile();

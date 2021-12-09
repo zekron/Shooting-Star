@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private float moveSpeed = 2f;
+    protected float moveSpeed = 2f;
     private float moveRotationAngle = 25f;
 
-    private Character character;
+    protected Character character;
 
-    private Transform playerTransform;
+    protected Transform playerTransform;
     protected Vector3 targetPosition;
     protected float paddingX;
     protected float paddingY;
@@ -26,8 +26,15 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        TryGetPlayerTransform();
+        transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
+
         StartCoroutine(nameof(RandomlyMovingCoroutine));
+    }
+
+    protected void TryGetPlayerTransform()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     private void OnDisable()
@@ -35,10 +42,8 @@ public class EnemyController : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator RandomlyMovingCoroutine()
+    protected virtual IEnumerator RandomlyMovingCoroutine()
     {
-        transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
-
         targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
 
         while (gameObject.activeSelf)
@@ -60,14 +65,17 @@ public class EnemyController : MonoBehaviour
     {
         StartCoroutine(nameof(ChasingPlayerCoroutine));
     }
-    public void StopChasingPlayer()
+    public virtual void StopChasingPlayer()
     {
         StopCoroutine(nameof(ChasingPlayerCoroutine));
     }
-    private IEnumerator ChasingPlayerCoroutine()
+
+    protected IEnumerator ChasingPlayerCoroutine()
     {
         while (isActiveAndEnabled)
         {
+            if (!playerTransform) TryGetPlayerTransform();
+
             targetPosition.x = playerTransform.position.x;
             targetPosition.y = Viewport.MaxY - paddingY;
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
-  bonusScore: 1000
+  bonusScore: 10000
 --- !u!61 &3146512395167347106
 BoxCollider2D:
   m_ObjectHideFlags: 0

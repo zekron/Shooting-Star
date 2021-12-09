@@ -418,25 +418,27 @@ MonoBehaviour:
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
     size: 339
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
-    size: 29
+    size: 40
   - prefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
     size: 3
   enemyProjectilePools:
   - prefab: {fileID: 3292915022085376402, guid: 7a3d19c2f0d1373459c2eaf85f7f8d9d, type: 3}
-    size: 20
+    size: 28
   - prefab: {fileID: 3292915022085376402, guid: ab3caef905cf80849a27fef28eeb2aa2, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 3292915022085376402, guid: b2e1b1a20eb509548a70d05798f72b68, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 3292915022085376402, guid: f898832225b98f64193a21df2a2e68a3, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 3292915022085376402, guid: dd042eb5b9dfc584286173dcd8a331a1, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 3292915022085376402, guid: ac9c24e9acc06e04696443498bf6cb63, type: 3}
-    size: 15
+    size: 20
   - prefab: {fileID: 3292915022085376402, guid: a1c517236c5eff245877c6c6ee730119, type: 3}
     size: 20
   - prefab: {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
+    size: 1
+  - prefab: {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
     size: 1
   vFXPools:
   - prefab: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
@@ -3388,8 +3390,9 @@ MonoBehaviour:
   - {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
   bossPrefabs:
   - {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
+  - {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
   timeBetweenWaves: 3
-  bossWave: 5
+  bossWave: 7
   minEnemyAmount: 4
   maxEnemyAmount: 30
   updateWaveEventSO: {fileID: 11400000, guid: f7880f2d1f45bb741ad1454f7c8032b0, type: 2}
