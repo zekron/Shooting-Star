@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Player Missile
+  - Enemy Beam
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Player Projectile
   - Enemy Projectile
   - Interactable
-  - 
+  - Border
   - 
   - 
   - 

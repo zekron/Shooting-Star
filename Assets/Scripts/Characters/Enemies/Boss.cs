@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : Enemy
 {
     [Header("---- Player Detection ----")]
-    [SerializeField] Transform playerDetectionTransform;
+    [SerializeField] Transform[] playerDetectionTransform;
     [SerializeField] Vector3 playerDetectionSize;
     [SerializeField] LayerMask playerLayer;
 
@@ -67,7 +67,10 @@ public class Boss : Enemy
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(playerDetectionTransform.position, playerDetectionSize);
+        foreach (var detection in playerDetectionTransform)
+        {
+            Gizmos.DrawWireCube(detection.position, playerDetectionSize);
+        }
     }
 
     protected override void OnCollisionEnter2D(Collision2D other)
@@ -111,7 +114,7 @@ public class Boss : Enemy
     {
         magazine.Clear();
 
-        if (Physics2D.OverlapBox(playerDetectionTransform.position, playerDetectionSize, 0f, playerLayer))
+        if (IsThereHavePlayer())
         {
             magazine.Add(projectiles[0]);
         }
@@ -129,6 +132,17 @@ public class Boss : Enemy
                 }
             }
         }
+    }
+
+    private Collider2D IsThereHavePlayer()
+    {
+        Collider2D result;
+        foreach (var detection in playerDetectionTransform)
+        {
+            result = Physics2D.OverlapBox(detection.position, playerDetectionSize, 0f, playerLayer);
+            if (result) return result;
+        }
+        return null;
     }
 
     private void ActivateBeamWeapon()

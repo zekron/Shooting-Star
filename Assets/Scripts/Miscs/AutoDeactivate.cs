@@ -15,7 +15,12 @@ public class AutoDeactivate : MonoBehaviour
 
     void OnEnable()
     {
-        StartCoroutine(DeactivateCoroutine());
+        StartCoroutine(nameof(DeactivateCoroutine));
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(nameof(DeactivateCoroutine));
     }
 
     IEnumerator DeactivateCoroutine()
@@ -26,7 +31,7 @@ public class AutoDeactivate : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else 
+        else
         {
             gameObject.SetActive(false);
         }

@@ -15,7 +15,11 @@ public class Projectile : MonoBehaviour, IMoveable, IRotate
 
     protected virtual void OnEnable()
     {
-        StartCoroutine(MoveDirectlyCoroutine());
+        StartCoroutine(nameof(MoveDirectlyCoroutine));
+    }
+    protected virtual void OnDisable()
+    {
+        StopCoroutine(nameof(MoveDirectlyCoroutine));
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
