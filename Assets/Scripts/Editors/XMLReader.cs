@@ -22,6 +22,7 @@ public class XMLReader
     private const string RELATIVE_PATH = "Assets" + PATH_TO_SCRIPTABLEOBJECT;
     private const string PATH_TO_SCRIPTABLEOBJECT = "/ScriptableObjects/Profiles";
     private const string EXPANSION_NAME = ".asset";
+    private const string ROOT_NODE = "root";
 
     [MenuItem("Custom Menu/XML Reader/Load All Character Profiles")]
     private static void LoadXMLToSO()
@@ -35,6 +36,7 @@ public class XMLReader
     private static List<string> enemyProfiles = new List<string>();
     private const string PATH_TO_ENEMYXML = "EnemyProfile";
     private const string FILE_NAME_ENEMY = "EnemyProfile SO";
+
     [MenuItem("Custom Menu/XML Reader/Load Enemy Profiles")]
     private static void LoadEnemyXMLToSO()
     {
@@ -44,7 +46,7 @@ public class XMLReader
             enemyProfiles.Clear();
 
             xmlDoc.LoadXml(xml.text);
-            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            nodeList = xmlDoc.SelectSingleNode(ROOT_NODE).ChildNodes;
             for (int i = 0; i < nodeList.Count; i++)
             {
                 sb.Clear();
@@ -74,7 +76,7 @@ public class XMLReader
             playerProfiles.Clear();
 
             xmlDoc.LoadXml(xml.text);
-            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            nodeList = xmlDoc.SelectSingleNode(ROOT_NODE).ChildNodes;
             for (int i = 0; i < nodeList.Count; i++)
             {
                 sb.Clear();
@@ -103,7 +105,7 @@ public class XMLReader
             bossProfiles.Clear();
 
             xmlDoc.LoadXml(xml.text);
-            nodeList = xmlDoc.SelectSingleNode("root").ChildNodes;
+            nodeList = xmlDoc.SelectSingleNode(ROOT_NODE).ChildNodes;
             for (int i = 0; i < nodeList.Count; i++)
             {
                 sb.Clear();
