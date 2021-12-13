@@ -48434,12 +48434,15 @@ MonoBehaviour:
   updatePlayerEnergyEventSO: {fileID: 11400000, guid: 4ef29a78d0592224a9d64d19a2f4fc22, type: 2}
   enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyProfile: {fileID: 11400000, guid: 9332b3cbd8586bb46b4ce895efbb4c9f, type: 2}
-  inventoryPackage: {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
+  inventoryPackage:
+  - {fileID: 11400000, guid: c942d303f6745d34da5385b7836a97c1, type: 2}
+  - {fileID: 11400000, guid: 341c563d56a2a244698a51d6af6a6351, type: 2}
+  - {fileID: 11400000, guid: 8883a5472bd95ab47b37be072b840732, type: 2}
   levelUpFactor: 50
   playerDetectionTransform:
   - {fileID: 5964867277906254833}
   - {fileID: 6368266674038144999}
-  playerDetectionSize: {x: 1, y: 15, z: 0}
+  playerDetectionSize: {x: 0.6, y: 15, z: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -63142,7 +63145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d70aae2f523eba4a80392f85144d669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 40
   hitVFX: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
 --- !u!1 &5964867277906254832
 GameObject:
@@ -72956,7 +72959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d70aae2f523eba4a80392f85144d669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 40
   hitVFX: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
 --- !u!1 &6913540779187514564
 GameObject:

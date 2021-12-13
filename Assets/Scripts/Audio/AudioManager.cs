@@ -70,4 +70,9 @@ public class AudioManager : PersistentSingleton<AudioManager>
     {
         PlayNormalPitchSFX(audioData.audioClip[Random.Range(0, audioData.audioClip.Length)], audioData.volume);
     }
+
+    internal void PlaySFX(object dropInventorySFX)
+    {
+        throw new System.NotImplementedException();
+    }
 }

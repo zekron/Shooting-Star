@@ -10,6 +10,7 @@ public class Player : Character
     [SerializeField] private PlayerProfileSO playerProfile;
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
+    [SerializeField] private FloatEventChannelSO restoreShieldEventSO;
     [SerializeField] private IntEventChannelSO updatePlayerEnergyEventSO;
     [SerializeField] private PlayerInputSO input;
 
@@ -86,6 +87,7 @@ public class Player : Character
         upgradeMainWeaponPowerEventSO.OnEventRaised += UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised += UpgradeSubWeaponPower;
         updatePlayerEnergyEventSO.OnEventRaised += GetEnergy;
+        restoreShieldEventSO.OnEventRaised += GetHealing;
 
         SetProfile();
     }
@@ -106,6 +108,7 @@ public class Player : Character
         upgradeMainWeaponPowerEventSO.OnEventRaised -= UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised -= UpgradeSubWeaponPower;
         updatePlayerEnergyEventSO.OnEventRaised -= GetEnergy;
+        restoreShieldEventSO.OnEventRaised -= GetHealing;
 
         base.OnDisable();
     }
@@ -145,9 +148,9 @@ public class Player : Character
 #endif
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+        if (collision.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
             interactable.Activate(this);
         }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
@@ -10,12 +11,12 @@ public class Enemy : Character
     [SerializeField] private IntEventChannelSO enemyLevelUpEventSO;
 
     [SerializeField] protected EnemyProfileSO enemyProfile;
-    [SerializeField] protected InventoryPackage inventoryPackage;
+    [SerializeField] protected InventoryPackage[] inventoryPackage;
 
     [SerializeField] protected int levelUpFactor = 2;
 
     protected EnemyController enemyController;
-    private Inventory currentDropInventory;
+    private List<Inventory> currentDropInventory = new List<Inventory>();
 
     private int deathEnergyBonus;
     private int scorePoint;
@@ -109,13 +110,25 @@ public class Enemy : Character
 
     private void SetDropInventory()
     {
-        currentDropInventory = inventoryPackage.CanDrop();
+        currentDropInventory.Clear();
+        Inventory temp;
+        for (int i = 0; i < inventoryPackage.Length; i++)
+        {
+            temp = inventoryPackage[i].CanDrop();
+            if (temp)
+            {
+                currentDropInventory.Add(temp);
+            }
+        }
     }
 
     private void DropInventory()
     {
-        if (!currentDropInventory) return;
+        if (currentDropInventory.Count <= 0) return;
 
-        ObjectPoolManager.Release(currentDropInventory.gameObject, transform.position);
+        foreach (var inventory in currentDropInventory)
+        {
+            inventory.Drop(transform.position);
+        }
     }
 }

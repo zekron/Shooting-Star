@@ -31372,6 +31372,7 @@ MonoBehaviour:
   playerProfile: {fileID: 11400000, guid: 126c468a7022bbd489adfc96a002bff2, type: 2}
   shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
   shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
+  restoreShieldEventSO: {fileID: 11400000, guid: e0b214bb8d4ca8e4db7c950e3c15fad6, type: 2}
   updatePlayerEnergyEventSO: {fileID: 11400000, guid: 4ef29a78d0592224a9d64d19a2f4fc22, type: 2}
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
   regenerateHealth: 1

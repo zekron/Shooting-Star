@@ -43,7 +43,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  dropInventorySFX: {fileID: 11400000, guid: 02514629679dab045bcdee041f698511, type: 2}
   updateTotalScoreEventSO: {fileID: 11400000, guid: 78a5130902011bd46beddc471ce43b84, type: 2}
   bonusScore: 100
 --- !u!1 &4799217561880287018

@@ -102,11 +102,16 @@ public class Character : MonoBehaviour, IHealth, IShooting, IMoveable, IRotate
 
     public virtual void GetHealing(float healing)
     {
-        if (Health == maxHealth) return;
+        if (!CanHeal()) return;
 
         // health += value;
         // health = Mathf.Clamp(health, 0f, maxHealth);
         Health = Mathf.Clamp(Health + healing, 0f, maxHealth);
+    }
+
+    public bool CanHeal()
+    {
+        return Health < maxHealth;
     }
 
     public virtual void GetDie()

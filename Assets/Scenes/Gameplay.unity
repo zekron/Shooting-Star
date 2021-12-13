@@ -403,25 +403,25 @@ MonoBehaviour:
     size: 10
   playerProjectilePools:
   - prefab: {fileID: 3667453350895143958, guid: 671b036955107b34caead1ece7a7e305, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: 9f1a2b812c52aac429b2a810b94a3b62, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: ff53911a3ca982c4a84d3bef3991a779, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: 200a316b35175824891f12110227d61a, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: c7ed13d33dcd825429c6b58fbc7f6127, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: 1a5f35e67a0c9f74aa7e4a0a5d75971a, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3667453350895143958, guid: eefc2e853add3d847bfe0769cc42e50c, type: 3}
-    size: 50
+    size: 76
   - prefab: {fileID: 3989932396471808366, guid: 145842f0d93b6794eaed7d853dde5f77, type: 3}
     size: 2
   - prefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
-    size: 32
+    size: 40
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-    size: 139
+    size: 196
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
     size: 24
   - prefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
@@ -451,9 +451,9 @@ MonoBehaviour:
   - prefab: {fileID: 2342042931496088306, guid: 97b415311529fa145aacd3eedaac728e, type: 3}
     size: 25
   - prefab: {fileID: 5060298685065931927, guid: 6775c68a79b34db4fa2fd4db2a4cdf74, type: 3}
-    size: 104
+    size: 180
   - prefab: {fileID: 5060298685065931927, guid: 4ae5f9473779fab4386aa5e30a25fb17, type: 3}
-    size: 151
+    size: 235
   - prefab: {fileID: 4801493125213720806, guid: 94d3dff6247d98e4cb4d8d6f0be5e291, type: 3}
     size: 3
   - prefab: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287, type: 3}
@@ -466,6 +466,8 @@ MonoBehaviour:
   - prefab: {fileID: 1993272356339634, guid: e3df14a44368b9c47a6175eebd31535d, type: 3}
     size: 5
   - prefab: {fileID: 181565217884288539, guid: 398ff2800ce102447b9489a90ae5be5f, type: 3}
+    size: 5
+  - prefab: {fileID: 8683246525794642124, guid: aea1f18d920a4b544abd063e9e6017ee, type: 3}
     size: 5
   playerModelPools:
   - prefab: {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}

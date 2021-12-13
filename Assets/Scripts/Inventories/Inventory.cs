@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour, IMoveable, IRotate
 {
     [Header("Basic Inventory")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private AudioDataSO dropInventorySFX;
 
     protected float paddingX;
     protected float paddingY;
@@ -57,5 +58,10 @@ public class Inventory : MonoBehaviour, IMoveable, IRotate
     public void Rotate(Quaternion moveRotation)
     {
         transform.rotation = moveRotation;
+    }
+    public void Drop(Vector3 position)
+    {
+        ObjectPoolManager.Release(gameObject, position);
+        AudioManager.Instance.PlaySFX(dropInventorySFX);
     }
 }

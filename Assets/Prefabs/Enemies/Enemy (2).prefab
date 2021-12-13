@@ -118,7 +118,8 @@ MonoBehaviour:
   updatePlayerEnergyEventSO: {fileID: 11400000, guid: 4ef29a78d0592224a9d64d19a2f4fc22, type: 2}
   enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyProfile: {fileID: 11400000, guid: 4772ee3970dc82d46b4c1f26dea3ab52, type: 2}
-  inventoryPackage: {fileID: 11400000, guid: c0591e2b6d1bb3f4da15a37ffb07d7c6, type: 2}
+  inventoryPackage:
+  - {fileID: 11400000, guid: c0591e2b6d1bb3f4da15a37ffb07d7c6, type: 2}
   levelUpFactor: 2
 --- !u!1 &6141127440874144652
 GameObject:
