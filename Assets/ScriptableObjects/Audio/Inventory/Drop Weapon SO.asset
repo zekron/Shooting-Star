@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 162e94fec10fac54b82e3e83419ec872, type: 3}
-  m_Name: Drop Score SO
+  m_Name: Drop Weapon SO
   m_EditorClassIdentifier: 
-  audioClip: []
-  volume: 0
+  audioClip:
+  - {fileID: 8300000, guid: 38d3eae6efaa12e49af0352ec20699b3, type: 3}
+  volume: 1

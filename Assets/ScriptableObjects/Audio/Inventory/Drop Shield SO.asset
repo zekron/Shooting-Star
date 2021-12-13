@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162e94fec10fac54b82e3e83419ec872, type: 3}
   m_Name: Drop Shield SO
   m_EditorClassIdentifier: 
-  audioClip: []
-  volume: 0
+  audioClip:
+  - {fileID: 8300000, guid: 6e444225a0ed6bb44a93fe9ecc48e3dc, type: 3}
+  volume: 1
