@@ -45,7 +45,7 @@ public static class SaveSystem
         }
     }
 
-    public static void DeleteSaveFile(string saveFileName)
+    public static bool DeleteSaveFile(string saveFileName)
     {
         var path = Path.Combine(Application.persistentDataPath, saveFileName);
 
@@ -57,8 +57,10 @@ public static class SaveSystem
         {
             #if UNITY_EDITOR
             Debug.LogError($"Failed to delete {path}. \n{exception}");
+            return false;
             #endif
         }
+        return true;
     }
 
     public static bool SaveFileExists(string saveFileName)

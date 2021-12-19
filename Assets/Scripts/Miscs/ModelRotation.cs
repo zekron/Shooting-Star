@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ModelRotation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ModelRotation : MonoBehaviour
 {
-    [SerializeField] private PlayerProfileSO profile;
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private ProfileEventChannelSO profileEventSO;
-
+    [SerializeField] private BooleanEventChannelSO setCanRotateEventSO;
+    
     private bool canRotate = true;
 
-    public void OnPointerClick(PointerEventData eventData)
+    private void OnEnable()
     {
+        setCanRotateEventSO.OnEventRaised += SetCanRotation;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void OnDisable()
     {
-        profileEventSO.RaiseEvent(profile, playerPrefab);
-        canRotate = false;
+        setCanRotateEventSO.OnEventRaised -= SetCanRotation;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        canRotate = true;
-    }
-    void Start() { transform.parent.gameObject.SetActive(true); }
     void FixedUpdate()
     {
         if (canRotate && gameObject.activeSelf)
@@ -34,4 +28,8 @@ public class ModelRotation : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
+    private void SetCanRotation(bool value)
+    {
+        canRotate = value;
+    }
 }

@@ -2,58 +2,92 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class IPointerTest : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler
+public class IPointerTest : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector2 moveDirection;
-    private Vector3 targetDirection;
+    [SerializeField] private float boundWidth = 0.5f;
+    [SerializeField] private float maxValue = 5;
+    [SerializeField, Range(3, 36)] private int verticAmount = 4;
+    [SerializeField] private MeshFilter filter;
+    [SerializeField] private List<LinePoint> linePoints = new List<LinePoint>();
 
-    public void OnPointerDown(PointerEventData eventData)
+    private float delta;
+    private void Awake()
     {
-        Debug.Log("Down");
+    }
+    private void OnValidate()
+    {
+        linePoints.Clear();
+        Draw();
+    }
+    [ContextMenu("TestDraw")]
+    private void Draw()
+    {
+        Material material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        material.SetColor("_BaseColor", Color.red);
+
+        GetComponent<Renderer>().material = material;
+        delta = Mathf.PI * 2 / verticAmount;
+        using (VertexHelper vh = new VertexHelper())
+        {
+            vh.Clear();
+            float x = 0, y = 0, a = 0, b = 0;
+            for (int i = 0; i < verticAmount; i++)
+            {
+                //第一个点从Y轴开始 Start from axisY
+                x = Mathf.Cos(i * delta) * maxValue;
+                y = Mathf.Sin(i * delta) * maxValue;
+
+                if (i > 0)  //线框第二个顶点处理
+                {
+                    //加一份前个顶点的旋转量
+                    linePoints.Add(new LinePoint(new Vector3(x, y),
+                    new Vector3(x + a, y + b),
+                    LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
+
+                    //两个顶点连线
+                    LinePoint.DrawLine(vh, linePoints[i - 1], linePoints[i], Color.green);
+                }
+
+                //新的旋转量
+                a = Mathf.Cos(delta / 2 + delta * i) * boundWidth;
+                b = Mathf.Sin(delta / 2 + delta * i) * boundWidth;
+
+                if (i == 0)
+                {
+                    linePoints.Add(new LinePoint(new Vector3(x, y),
+                        new Vector3(x + a, y + b),
+                        LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
+                }
+                else
+                {
+                    linePoints[i].AddVertics(new Vector3(x + a, y + b),
+                        LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI));
+                }
+
+                if (i == verticAmount - 1)
+                {
+                    linePoints[0].AddVertics(new Vector3(linePoints[0].Center.x + a, linePoints[0].Center.y + b),
+                        LinePoint.RotateAroundPoint(new Vector3(linePoints[0].Center.x + a, linePoints[0].Center.y + b), linePoints[0].Center, Mathf.PI));
+                    LinePoint.DrawLine(vh, linePoints[i], linePoints[0], Color.green);
+                }
+            }
+
+            Mesh mesh = new Mesh();
+            mesh.name = "Quad";
+            vh.FillMesh(mesh);
+            filter.mesh = mesh;
+        }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void OnDrawGizmosSelected()
     {
-        Debug.Log("Enter");
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("Up");
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Check();
-    }
-    [ContextMenu("Check")]
-    private void Check()
-    {
-        if (moveDirection != Vector2.right)
-            transform.GetChild(0).rotation = Quaternion.FromToRotation(Vector2.right, moveDirection);
-    }
-
-    [ContextMenu("TranslateWorld")]
-    private void TranslateWorld()
-    {
-        transform.Translate(moveDirection * Time.deltaTime, Space.World);
-    }
-
-    [ContextMenu("TranslateSelf")]
-    private void TranslateSelf()
-    {
-        transform.Translate(moveDirection * Time.deltaTime, Space.Self);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.DrawLine(target.transform.position, transform.position, Color.red);
-        targetDirection = target.transform.position - transform.position;
-        transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(targetDirection.y, targetDirection.x) - Mathf.PI / 2) * Mathf.Rad2Deg, Vector3.forward)
-       * Quaternion.Euler(0f, 0f, 0);
+        for (int i = 0; i < linePoints.Count; i++)
+        {
+            Debug.DrawRay(linePoints[i].Center, Vector3.right, Color.red);
+            Debug.DrawRay(linePoints[i].Center, Vector3.up, Color.green);
+        }
     }
 }
+

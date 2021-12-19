@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class StaticData
 {
+    public static int LAYER_OUTUI = LayerMask.GetMask("OutUI");
+    public static int LAYER_UI = LayerMask.GetMask("UI");
     public static MuzzlePower GetShotGunPower(MainWeaponPower weaponPower)
     {
         switch (weaponPower)

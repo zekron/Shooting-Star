@@ -8,7 +8,6 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Canvas mainMenuCanvas;
     [SerializeField] private Canvas playerSelectionCanvas;
     [SerializeField] private Canvas tipsCanvas;
-    [SerializeField] private GameObject playerModel;
 
     [Header("==== BUTTONS ====")]
     [SerializeField] private Button buttonStart;
@@ -54,16 +53,23 @@ public class MainMenuUIController : MonoBehaviour
 
     private void OnButtonStartClicked()
     {
+        //mainMenuCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_UI;
+        //tipsCanvas.gameObject.layer = StaticData.LAYER_UI;
         mainMenuCanvas.enabled = false;
-        playerModel.SetActive(true);
-        UIInput.Instance.SelectUI(buttonSubmit);
+        playerSelectionCanvas.enabled = true;
         tipsCanvas.enabled = true;
+
+        UIInput.Instance.SelectUI(buttonSubmit);
     }
 
     private void OnButtonOptionsClicked()
     {
+        //optionCanvas.gameObject.layer = StaticData.LAYER_UI;
+        //mainMenuCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
         optionCanvas.enabled = true;
         mainMenuCanvas.enabled = false;
+
         UIInput.Instance.SelectUI(buttonOptions);
     }
 
@@ -78,13 +84,17 @@ public class MainMenuUIController : MonoBehaviour
 
     private void CloseOptionCanvas()
     {
+        //optionCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        //mainMenuCanvas.gameObject.layer = StaticData.LAYER_UI;
         optionCanvas.enabled = false;
         mainMenuCanvas.enabled = true;
+
         UIInput.Instance.SelectUI(buttonStart);
     }
 
     private void RefreshSelectionPanel(PlayerProfileSO profile, GameObject gameObject)
     {
+        //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_UI;
         playerSelectionCanvas.enabled = true;
         //TODO
         profileGraphic.SetValues(profile.DataNormalization(profile.MaxHealth, profile.MoveSpeed, profile.FireInterval, profile.DodgeCost));
@@ -94,18 +104,22 @@ public class MainMenuUIController : MonoBehaviour
     }
     private void OnButtonSubmitClicked()
     {
+        //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        //tipsCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
         playerSelectionCanvas.enabled = false;
         tipsCanvas.enabled = false;
-        playerModel.SetActive(false);
 
         SceneLoader.Instance.LoadGameplayScene();
     }
     private void OnButtonCancelClicked()
     {
-        playerModel.SetActive(false);
+        //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        //tipsCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        //mainMenuCanvas.gameObject.layer = StaticData.LAYER_UI;
         playerSelectionCanvas.enabled = false;
         tipsCanvas.enabled = false;
         mainMenuCanvas.enabled = true;
+
         UIInput.Instance.SelectUI(buttonStart);
     }
 }
