@@ -22,18 +22,6 @@ public class ObjectPoolManager : MonoBehaviour
         Initialize(vFXPools);
         Initialize(itemPools);
         Initialize(playerModelPools);
-
-#if UNITY_EDITOR
-        if (!GameObject.FindGameObjectWithTag("Player"))
-        {
-            if (GameManager.Instance.CurrentPlayerModel)
-                Release(GameManager.Instance.CurrentPlayerModel);
-            else
-                Release(playerModelPools[0].Prefab);
-        }
-#else
-        Release(GameManager.Instance.CurrentPlayerModel);
-#endif
     }
 
 #if UNITY_EDITOR

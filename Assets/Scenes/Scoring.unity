@@ -544,7 +544,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.4
+  orthographic size: 7.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1362,6 +1362,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3815438893467597882, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815438893467597882, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815438893467597882, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815438893467597882, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4094699596545411725, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1503,6 +1519,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4995500063061946816, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282577205063517181, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282577205063517181, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282577205063517181, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282577205063517181, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

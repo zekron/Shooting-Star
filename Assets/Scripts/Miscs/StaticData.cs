@@ -55,6 +55,15 @@ public static class StaticData
     }
 
 }
+
+public enum GameState
+{
+    MainMenu,
+    Playing,
+    Paused,
+    GameOver,
+    Scoring
+}
 public enum MainWeaponPower
 {
     DEBUG = -1,

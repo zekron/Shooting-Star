@@ -75,7 +75,7 @@ public class TimeController : Singleton<TimeController>
 
         while (timer < duration)
         {
-            if (GameManager.CurrentGameState != GameState.Paused)
+            if (GameManager.Instance.CurrentGameState != GameState.Paused)
             {
                 timer += Time.unscaledDeltaTime;
                 Time.timeScale = Mathf.Lerp(defaultTimeScale, bulletTimeScale, timer / duration);
@@ -92,7 +92,7 @@ public class TimeController : Singleton<TimeController>
 
         while (timer < duration)
         {
-            if (GameManager.CurrentGameState != GameState.Paused)
+            if (GameManager.Instance.CurrentGameState != GameState.Paused)
             {
                 timer += Time.unscaledDeltaTime;
                 Time.timeScale = Mathf.Lerp(bulletTimeScale, defaultTimeScale, timer / duration);

@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
-    public static System.Action onGameOver;
+    [SerializeField] private GameState gameState = GameState.MainMenu;
+    [SerializeField] private GameStateEventChannelSO setGameStateEventSO;
 
-    public static GameState CurrentGameState { get => Instance.gameState; set => Instance.gameState = value; }
+    private GameObject currentPlayerModel;
 
-    [SerializeField] private GameState gameState = GameState.Playing;
-    public GameObject CurrentPlayerModel;
+    public GameState CurrentGameState
+    {
+        get => gameState;
+        set
+        {
+            gameState = value;
+            setGameStateEventSO.RaiseEvent(value);
+        }
+    }
+
+    public GameObject CurrentPlayerModel { get => currentPlayerModel; set => currentPlayerModel = value; }
 
     private void OnEnable()
     {
@@ -16,18 +26,24 @@ public class GameManager : PersistentSingleton<GameManager>
 #if !UNITY_EDITOR
         Application.targetFrameRate = 60;
 #endif
+
+        setGameStateEventSO.OnEventRaised += ReleasePlayer;
     }
 
-    private void SetCurrentPlayerModel(GameObject gameObject)
+    private void ReleasePlayer(GameState state)
     {
-        CurrentPlayerModel = gameObject;
-    }
-}
+        if (state != GameState.Playing) return;
 
-public enum GameState
-{
-    Playing,
-    Paused,
-    GameOver,
-    Scoring
+#if UNITY_EDITOR
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            if (currentPlayerModel)
+                ObjectPoolManager.Release(currentPlayerModel);
+            else
+                throw new System.Exception("Null Player model.");
+        }
+#else
+        ObjectPoolManager.Release(CurrentPlayerModel);
+#endif
+    }
 }

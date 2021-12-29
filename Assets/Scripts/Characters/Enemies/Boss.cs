@@ -97,7 +97,7 @@ public class Boss : Enemy
     {
         while (isActiveAndEnabled)
         {
-            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
+            if (GameManager.Instance.CurrentGameState == GameState.GameOver) yield break;
 
             if (isBeamReady)
             {
@@ -178,7 +178,7 @@ public class Boss : Enemy
 
         while (continuousFireTimer < continuousFireDuration)
         {
-            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
+            if (GameManager.Instance.CurrentGameState == GameState.GameOver) yield break;
             for (int i = 0; i < muzzles.Length; i++)
             {
                 foreach (var projectile in magazine)

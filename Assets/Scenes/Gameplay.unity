@@ -4023,10 +4023,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMgr
       objectReference: {fileID: 0}
-    - target: {fileID: 2378928769012308529, guid: 89976ebcbb7ef1743aac89813407f286, type: 3}
-      propertyPath: CurrentPlayerModel
-      value: 
-      objectReference: {fileID: 5908416648923392752, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
     - target: {fileID: 2378928769012308530, guid: 89976ebcbb7ef1743aac89813407f286, type: 3}
       propertyPath: m_RootOrder
       value: 9

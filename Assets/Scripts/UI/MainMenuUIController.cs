@@ -47,7 +47,7 @@ public class MainMenuUIController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
-        GameManager.CurrentGameState = GameState.Playing;
+        GameManager.Instance.CurrentGameState = GameState.MainMenu;
         UIInput.Instance.SelectUI(buttonStart);
     }
 
@@ -106,6 +106,7 @@ public class MainMenuUIController : MonoBehaviour
     {
         //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
         //tipsCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
+        if (!GameManager.Instance.CurrentPlayerModel) return;
         playerSelectionCanvas.enabled = false;
         tipsCanvas.enabled = false;
 

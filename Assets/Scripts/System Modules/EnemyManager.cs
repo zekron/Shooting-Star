@@ -20,7 +20,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private VoidEventChannelSO animationClipFinishedEventSO;
 
-    private int waveNumber = 1;
+    private int waveNumber = 0;
     private int enemyAmount;
     private int currentEnemyAmount;
 
@@ -47,12 +47,13 @@ public class EnemyManager : Singleton<EnemyManager>
     private void Start()
     {
         //updateWaveEventSO.RaiseEvent(waveNumber);
-        RandomlySpawnEnemies();
+        updateWaveEventSO.RaiseEvent(waveNumber++);
+        //RandomlySpawnEnemies();
     }
 
     private void RandomlySpawnEnemies()
     {
-        if (!spawnEnemy || GameManager.CurrentGameState != GameState.Playing) return;
+        if (!spawnEnemy || GameManager.Instance.CurrentGameState != GameState.Playing) return;
 
         if (waveNumber % bossWave == 0)
         {

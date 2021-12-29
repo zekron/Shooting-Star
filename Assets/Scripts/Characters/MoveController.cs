@@ -43,7 +43,7 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.CurrentGameState != GameState.Playing) return;
+        if (GameManager.Instance.CurrentGameState != GameState.Playing) return;
         if (!canMove && tempPlayerVelocity == Vector2.zero) return;
 
         tempPlayerVelocity = Vector2.Lerp(tempPlayerVelocity, finalMoveDirection, Time.deltaTime * moveSpeed * shiftFactor);

@@ -11,6 +11,8 @@ public class GameOverScreen : MonoBehaviour
 
     [SerializeField] private AudioDataSO confirmGameOverSound;
 
+    [SerializeField] private GameStateEventChannelSO setGameStateEventSO;
+
     private int exitStateID = Animator.StringToHash("GameOverScreenExit");
 
     private Canvas canvasGameOver;
@@ -28,20 +30,20 @@ public class GameOverScreen : MonoBehaviour
 
     void OnEnable()
     {
-        GameManager.onGameOver += OnGameOver;
-
+        setGameStateEventSO.OnEventRaised += OnGameOver;
         input.onConfirmGameOver += OnConfirmGameOver;
     }
 
     void OnDisable()
     {
-        GameManager.onGameOver -= OnGameOver;
-
+        setGameStateEventSO.OnEventRaised -= OnGameOver;
         input.onConfirmGameOver -= OnConfirmGameOver;
     }
 
-    void OnGameOver()
+    void OnGameOver(GameState state)
     {
+        if (state != GameState.GameOver) return;
+
         canvasHUD.enabled = false;
         canvasGameOver.enabled = true;
         animator.enabled = true;

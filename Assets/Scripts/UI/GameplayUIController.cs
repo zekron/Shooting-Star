@@ -70,11 +70,16 @@ public class GameplayUIController : MonoBehaviour
         ButtonPressedBehavior.buttonFunctionTable.Clear();
     }
 
+    private void Start()
+    {
+        GameManager.Instance.CurrentGameState = GameState.Playing;
+    }
+
     private void Pause()
     {
         hUDCanvas.enabled = false;
         menusCanvas.enabled = true;
-        GameManager.CurrentGameState = GameState.Paused;
+        GameManager.Instance.CurrentGameState = GameState.Paused;
         TimeController.Instance.Pause();
         playerInput.EnablePauseMenuInput();
         playerInput.SwitchToDynamicUpdateMode();
@@ -93,7 +98,7 @@ public class GameplayUIController : MonoBehaviour
     {
         hUDCanvas.enabled = true;
         menusCanvas.enabled = false;
-        GameManager.CurrentGameState = GameState.Playing;
+        GameManager.Instance.CurrentGameState = GameState.Playing;
         TimeController.Instance.Unpause();
         playerInput.EnableGameplayInput();
         playerInput.SwitchToFixedUpdateMode();

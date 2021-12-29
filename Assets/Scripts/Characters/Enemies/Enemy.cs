@@ -63,7 +63,7 @@ public class Enemy : Character
         {
             yield return new WaitForSeconds(Random.Range(minFireInterval, maxFireInterval));
 
-            if (GameManager.CurrentGameState == GameState.GameOver) yield break;
+            if (GameManager.Instance.CurrentGameState == GameState.GameOver) yield break;
 
             foreach (var projectile in projectiles)
             {

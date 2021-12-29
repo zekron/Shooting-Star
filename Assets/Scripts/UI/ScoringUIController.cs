@@ -41,7 +41,7 @@ public class ScoringUIController : MonoBehaviour
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.GetInstanceID(), OnButtonSubmitClicked);
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.GetInstanceID(), HideNewHighScoreScreen);
 
-        GameManager.CurrentGameState = GameState.Scoring;
+        GameManager.Instance.CurrentGameState = GameState.Scoring;
     }
 
     void OnDisable()

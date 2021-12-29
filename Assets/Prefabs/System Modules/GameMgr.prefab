@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  setGameStateEventSO: {fileID: 11400000, guid: ca52aa229d7b86d41b85436807a32a04, type: 2}

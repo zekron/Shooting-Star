@@ -210,8 +210,7 @@ public class Player : Character
 
     public override void GetDie()
     {
-        GameManager.onGameOver?.Invoke();
-        GameManager.CurrentGameState = GameState.GameOver;
+        GameManager.Instance.CurrentGameState = GameState.GameOver;
         shieldUpdateEventSO.RaiseEvent(Health = 0);
         base.GetDie();
     }
