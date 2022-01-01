@@ -5,7 +5,7 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameState gameState = GameState.MainMenu;
     [SerializeField] private GameStateEventChannelSO setGameStateEventSO;
 
-    private GameObject currentPlayerModel;
+    [SerializeField] private GameObject currentPlayerModel;
 
     public GameState CurrentGameState
     {

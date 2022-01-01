@@ -55,6 +55,7 @@ public class Enemy : Character
     {
         StopAllCoroutines();
         base.OnDisable();
+        enemyDestroyEventSO.RaiseEvent();
     }
 
     protected override IEnumerator FireCoroutine()
@@ -90,7 +91,6 @@ public class Enemy : Character
         base.GetDie();
         DropInventory();
         updateTotalScoreEventSO.RaiseEvent(scorePoint);
-        enemyDestroyEventSO.RaiseEvent();
     }
 
     public override void Move(Vector2 movement)

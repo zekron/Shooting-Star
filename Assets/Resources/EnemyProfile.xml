@@ -27,4 +27,13 @@
 		<ScorePoint>100</ScorePoint>
 		<DeathEnergyBonus>3</DeathEnergyBonus>
 	</Enemy>
+	<Enemy ID="4">
+		<MaxHealth>5</MaxHealth>
+		<MoveSpeed>7</MoveSpeed>
+		<MoveRotationAngle>35</MoveRotationAngle>
+		<MinFireInterval>1</MinFireInterval>
+		<MaxFireInterval>1</MaxFireInterval>
+		<ScorePoint>100</ScorePoint>
+		<DeathEnergyBonus>3</DeathEnergyBonus>
+	</Enemy>
 </root>

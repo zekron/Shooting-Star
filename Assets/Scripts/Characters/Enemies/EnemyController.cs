@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     protected float moveSpeed = 2f;
-    private float moveRotationAngle = 25f;
+    protected float moveRotationAngle = 25f;
 
     protected Character character;
 
@@ -37,6 +37,17 @@ public class EnemyController : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
+    protected virtual void GenerateTargetPosition(float x = float.MaxValue, float y = float.MaxValue)
+    {
+        if (x == float.MaxValue && y == float.MaxValue)
+            targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
+        else
+        {
+            targetPosition.x = x;
+            targetPosition.y = y;
+        }
+    }
+
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -44,7 +55,7 @@ public class EnemyController : MonoBehaviour
 
     protected virtual IEnumerator RandomlyMovingCoroutine()
     {
-        targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
+        GenerateTargetPosition();
 
         while (gameObject.activeSelf)
         {
@@ -55,7 +66,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
+                GenerateTargetPosition();
             }
 
             yield return null;
@@ -76,8 +87,7 @@ public class EnemyController : MonoBehaviour
         {
             if (!playerTransform) TryGetPlayerTransform();
 
-            targetPosition.x = playerTransform.position.x;
-            targetPosition.y = Viewport.MaxY - paddingY;
+            GenerateTargetPosition(playerTransform.position.x, Viewport.MaxY - paddingY);
 
             yield return null;
         }

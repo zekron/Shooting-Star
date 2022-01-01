@@ -401,6 +401,8 @@ MonoBehaviour:
     size: 10
   - prefab: {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
     size: 10
+  - prefab: {fileID: 578449712315536124, guid: 043c50ba956a528459ad2b419d981c72, type: 3}
+    size: 10
   playerProjectilePools:
   - prefab: {fileID: 3667453350895143958, guid: 671b036955107b34caead1ece7a7e305, type: 3}
     size: 76
@@ -3605,6 +3607,7 @@ MonoBehaviour:
   - {fileID: 214778051926960383, guid: a624a0e3000461e4286965f8a65aedb6, type: 3}
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
   - {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
+  - {fileID: 578449712315536124, guid: 043c50ba956a528459ad2b419d981c72, type: 3}
   bossPrefabs:
   - {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
   - {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
