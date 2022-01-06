@@ -121,7 +121,7 @@ public class GameplayUIController : MonoBehaviour
 
     private void UpdateWave(int value)
     {
-        waveUI.gameObject.SetActive(true);
+        waveUI.UpdateWave(value);
     }
 
     private void UpdateScoreText(int value)

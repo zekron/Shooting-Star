@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveController : MonoBehaviour
 {
     [SerializeField] private PlayerInputSO inputEvent;
+    [SerializeField] private Vector3EventChannelSO playerMoveInputEventSO;
 
     [Header("Move")]
     private float moveSpeed = 20f;
@@ -64,6 +65,8 @@ public class MoveController : MonoBehaviour
     private void Move(Vector2 moveInput)
     {
         canMove = true;
+        playerMoveInputEventSO.RaiseEvent(moveInput);
+        playerMoveInputEventSO.RaiseEvent(moveInput);
         finalMoveDirection = moveInput * moveSpeed;
         finalMoveRotation = Quaternion.AngleAxis(-moveRotationAngle * moveInput.x, Vector3.up);
     }
@@ -72,6 +75,7 @@ public class MoveController : MonoBehaviour
     {
         canMove = false;
         finalMoveDirection = Vector2.zero;
+        playerMoveInputEventSO.RaiseEvent(Vector2.zero);
         finalMoveRotation = Quaternion.identity;
     }
 

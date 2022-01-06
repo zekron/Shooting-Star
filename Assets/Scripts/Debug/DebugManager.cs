@@ -1,42 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DebugManager : MonoBehaviour
 {
-    [SerializeField] private Text fpsText;
-    WaitForSeconds waitForRefreshFPS = new WaitForSeconds(0.5f);
+    [SerializeField] private PlayerInputSO inputEvent;
+    [SerializeField] private Canvas debugCanvas;
 
-    int frames = 0;
-    private float updateInterval = 0.05f;
-    private float lastUpdateTime;
-    private float fps;
-    private float frameDeltaTime;
+    private bool isOpenDebugCanvas = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        inputEvent.onSetDebugMode += InputEvent_onSetDebugMode;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-#if DEBUG_MODE
-        CheckFPS();
-#endif
+        inputEvent.onSetDebugMode -= InputEvent_onSetDebugMode;
     }
 
-    private void CheckFPS()
+    private void InputEvent_onSetDebugMode()
     {
-        frames++;
-        if (Time.realtimeSinceStartup - lastUpdateTime >= updateInterval)
+        if (!debugCanvas)
         {
-            fps = frames / (Time.realtimeSinceStartup - lastUpdateTime);
-            frameDeltaTime = (Time.realtimeSinceStartup - lastUpdateTime) / frames;
-            frames = 0;
-            lastUpdateTime = Time.realtimeSinceStartup;
-            fpsText.text = $"FPS: {fps:N0} DeltaTime: {frameDeltaTime:F4}";
+            debugCanvas = Instantiate(Resources.Load<Canvas>("Prefabs/Canvas_Debug"), GameObject.FindGameObjectWithTag("MainCanvas").transform);
         }
+
+        debugCanvas.gameObject.SetActive(isOpenDebugCanvas = !isOpenDebugCanvas);
     }
 }

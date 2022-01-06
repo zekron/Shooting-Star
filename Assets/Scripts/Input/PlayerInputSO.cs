@@ -3,7 +3,12 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "Scriptable Object/Player Input SO")]
-public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActions, PlayerInputActions.IPauseMenuActions, PlayerInputActions.IGameOverScreenActions
+public class PlayerInputSO :
+    ScriptableObject,
+    PlayerInputActions.IGameplayActions,
+    PlayerInputActions.IPauseMenuActions,
+    PlayerInputActions.IGameOverScreenActions,
+    PlayerInputActions.IDebugModeActions
 {
     public event UnityAction<Vector2> onMove = delegate { };
     public event UnityAction onStopMove = delegate { };
@@ -15,6 +20,7 @@ public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActio
     public event UnityAction onUnpause = delegate { };
     public event UnityAction onLaunchMissile = delegate { };
     public event UnityAction onConfirmGameOver = delegate { };
+    public event UnityAction onSetDebugMode = delegate { };
 
     PlayerInputActions inputActions;
 
@@ -25,6 +31,7 @@ public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActio
         inputActions.Gameplay.SetCallbacks(this);
         inputActions.PauseMenu.SetCallbacks(this);
         inputActions.GameOverScreen.SetCallbacks(this);
+        inputActions.DebugMode.SetCallbacks(this);
     }
 
     void OnDisable()
@@ -36,6 +43,11 @@ public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActio
     {
         inputActions.Disable();
         actionMap.Enable();
+
+#if DEBUG_MODE
+        inputActions.DebugMode.Enable();
+        isUIInput = true;
+#endif
 
         if (isUIInput)
         {
@@ -140,6 +152,14 @@ public class PlayerInputSO : ScriptableObject, PlayerInputActions.IGameplayActio
         if (context.performed)
         {
             onOverdrive.Invoke();
+        }
+    }
+
+    public void OnDebugCanvas(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onSetDebugMode.Invoke();
         }
     }
 }

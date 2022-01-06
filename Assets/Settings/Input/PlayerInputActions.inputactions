@@ -704,6 +704,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug Mode",
+            "id": "f64584c4-152d-496a-ab3b-3300974c3a40",
+            "actions": [
+                {
+                    "name": "Debug Canvas",
+                    "type": "Button",
+                    "id": "608c9f11-7853-4f56-9310-183c39bac307",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f14813b4-99c5-4583-86e5-e15ba45212d7",
+                    "path": "<Keyboard>/f12",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Debug Canvas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

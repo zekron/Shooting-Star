@@ -68236,6 +68236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
+  playerMoveInputEventSO: {fileID: 11400000, guid: 5083045758575944999e7f8a77567240, type: 2}
   shiftFactor: 1
 --- !u!114 &3404107430769109482
 MonoBehaviour:

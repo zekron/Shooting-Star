@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
         paddingY = size.y / 2f;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         TryGetPlayerTransform();
         transform.position = Viewport.RandomEnemySpawnPosition(paddingX, paddingY);
@@ -43,12 +43,12 @@ public class EnemyController : MonoBehaviour
             targetPosition = Viewport.RandomTopHalfPosition(paddingX, paddingY);
         else
         {
-            targetPosition.x = x;
-            targetPosition.y = y;
+            targetPosition.x = Mathf.Clamp(x, Viewport.MinX + paddingX, Viewport.MaxX - paddingX);
+            targetPosition.y = Mathf.Clamp(y, Viewport.MinY + paddingY, Viewport.MaxY - paddingY);
         }
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         StopAllCoroutines();
     }

@@ -3,13 +3,25 @@ using UnityEngine;
 
 public class AimingEnemyController : EnemyController
 {
+    [SerializeField] private Vector3EventChannelSO playerMoveInputEventSO;
+    [SerializeField] private Vector3 offset;
+    protected override void OnEnable()
+    {
+        playerMoveInputEventSO.OnEventRaised += SetOffset;
+        base.OnEnable();
+    }
+    protected override void OnDisable()
+    {
+        playerMoveInputEventSO.OnEventRaised -= SetOffset;
+        base.OnDisable();
+    }
+    private void SetOffset(Vector3 value)
+    {
+        offset = value;
+    }
     protected override void GenerateTargetPosition(float x = float.MaxValue, float y = float.MaxValue)
     {
-        //float angle = Vector2.Angle(Vector2.right, playerTransform.position- transform.position);
-        //Debug.Log($"{name} {angle}");
-        //targetPosition.x = Mathf.Cos(angle) * 50 + transform.position.x;
-        //targetPosition.y = Mathf.Cos(angle) * 50 + transform.position.y;
-        targetPosition = (playerTransform.position - transform.position).normalized * 20;
+        targetPosition = (playerTransform.position + offset - transform.position)/*.normalized*/ * 20;
     }
 
     protected override IEnumerator RandomlyMovingCoroutine()

@@ -9,6 +9,9 @@ public class Viewport
     private static float middleX;
     private static float middleY;
 
+    public static float MinX => minX;
+    public static float MaxX => maxX;
+    public static float MinY => minY;
     public static float MaxY => maxY;
 
     public static void Initialize()

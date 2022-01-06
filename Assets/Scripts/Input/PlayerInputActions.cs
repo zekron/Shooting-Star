@@ -717,6 +717,33 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug Mode"",
+            ""id"": ""f64584c4-152d-496a-ab3b-3300974c3a40"",
+            ""actions"": [
+                {
+                    ""name"": ""Debug Canvas"",
+                    ""type"": ""Button"",
+                    ""id"": ""608c9f11-7853-4f56-9310-183c39bac307"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f14813b4-99c5-4583-86e5-e15ba45212d7"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Debug Canvas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -768,6 +795,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         // Game Over Screen
         m_GameOverScreen = asset.FindActionMap("Game Over Screen", throwIfNotFound: true);
         m_GameOverScreen_ConfirmGameOver = m_GameOverScreen.FindAction("ConfirmGameOver", throwIfNotFound: true);
+        // Debug Mode
+        m_DebugMode = asset.FindActionMap("Debug Mode", throwIfNotFound: true);
+        m_DebugMode_DebugCanvas = m_DebugMode.FindAction("Debug Canvas", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -952,6 +982,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public GameOverScreenActions @GameOverScreen => new GameOverScreenActions(this);
+
+    // Debug Mode
+    private readonly InputActionMap m_DebugMode;
+    private IDebugModeActions m_DebugModeActionsCallbackInterface;
+    private readonly InputAction m_DebugMode_DebugCanvas;
+    public struct DebugModeActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public DebugModeActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DebugCanvas => m_Wrapper.m_DebugMode_DebugCanvas;
+        public InputActionMap Get() { return m_Wrapper.m_DebugMode; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugModeActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugModeActions instance)
+        {
+            if (m_Wrapper.m_DebugModeActionsCallbackInterface != null)
+            {
+                @DebugCanvas.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
+                @DebugCanvas.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
+                @DebugCanvas.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
+            }
+            m_Wrapper.m_DebugModeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @DebugCanvas.started += instance.OnDebugCanvas;
+                @DebugCanvas.performed += instance.OnDebugCanvas;
+                @DebugCanvas.canceled += instance.OnDebugCanvas;
+            }
+        }
+    }
+    public DebugModeActions @DebugMode => new DebugModeActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -986,5 +1049,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     public interface IGameOverScreenActions
     {
         void OnConfirmGameOver(InputAction.CallbackContext context);
+    }
+    public interface IDebugModeActions
+    {
+        void OnDebugCanvas(InputAction.CallbackContext context);
     }
 }

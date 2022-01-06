@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
-    public GameObject RandomEnemy => enemyList.Count == 0 ? null : enemyList[Random.Range(0, enemyList.Count)];
-    public float TimeBetweenWaves => timeBetweenWaves;
-
-    [SerializeField] private bool spawnEnemy = true;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private GameObject[] bossPrefabs;
     [SerializeField] private float timeBetweenWaves = 1f;
@@ -20,11 +16,16 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private VoidEventChannelSO animationClipFinishedEventSO;
 
+    private bool spawnEnemy = true;
     private int waveNumber = 0;
     private int enemyAmount;
     private int currentEnemyAmount;
 
     private List<GameObject> enemyList;
+
+    public GameObject RandomEnemy => enemyList.Count == 0 ? null : enemyList[Random.Range(0, enemyList.Count)];
+    public float TimeBetweenWaves => timeBetweenWaves;
+    public bool SpawnEnemy { get => spawnEnemy; set => spawnEnemy = value; }
 
     protected override void Awake()
     {
@@ -53,7 +54,10 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void RandomlySpawnEnemies()
     {
-        if (!spawnEnemy || GameManager.Instance.CurrentGameState != GameState.Playing) return;
+#if DEBUG_MODE
+        if (!spawnEnemy) return;
+#endif
+        if (GameManager.Instance.CurrentGameState != GameState.Playing) return;
 
         if (waveNumber % bossWave == 0)
         {
@@ -83,5 +87,14 @@ public class EnemyManager : Singleton<EnemyManager>
             else
                 RandomlySpawnEnemies();
         }
+    }
+
+    public void SpawnEnemyNow()
+    {
+#if DEBUG_MODE
+        spawnEnemy = true;
+        RandomlySpawnEnemies();
+        spawnEnemy = false;
+#endif
     }
 }

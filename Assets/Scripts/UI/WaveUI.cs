@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class WaveUI : MonoBehaviour
 {
-    [SerializeField] private IntEventChannelSO updateWaveEventSO;
     [SerializeField] private VoidEventChannelSO animationClipFinishedEventSO;
 
     private Text waveText;
@@ -15,16 +14,8 @@ public class WaveUI : MonoBehaviour
         waveText = GetComponentInChildren<Text>();
         animator = GetComponent<Animator>();
     }
-    private void OnEnable()
-    {
-        updateWaveEventSO.OnEventRaised += UpdateWave;
-    }
-    private void OnDisable()
-    {
-        updateWaveEventSO.OnEventRaised -= UpdateWave;
-    }
 
-    private void UpdateWave(int value)
+    public void UpdateWave(int value)
     {
         if (value == 0)
         {
@@ -45,7 +36,7 @@ public class WaveUI : MonoBehaviour
     private void OnAnimationFinished()
     {
         animationClipFinishedEventSO.RaiseEvent();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
     #endregion
 }

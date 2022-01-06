@@ -21,7 +21,7 @@ public class BossController : EnemyController
                 {
                     if (!playerTransform) TryGetPlayerTransform();
 
-                    targetPosition.x = playerTransform.position.x;
+                    GenerateTargetPosition(playerTransform.position.x, targetPosition.y);
                 }
                 yield return null;
             }
