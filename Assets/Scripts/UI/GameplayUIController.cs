@@ -46,8 +46,8 @@ public class GameplayUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.onPause += Pause;
-        playerInput.onUnpause += Unpause;
+        playerInput.eventOnPause += Pause;
+        playerInput.eventOnUnpause += Unpause;
 
         updateWaveEventSO.OnEventRaised += UpdateWave;
         updateTotalScoreEventSO.OnEventRaised += UpdateScoreText;
@@ -60,8 +60,8 @@ public class GameplayUIController : MonoBehaviour
 
     private void OnDisable()
     {
-        playerInput.onPause -= Pause;
-        playerInput.onUnpause -= Unpause;
+        playerInput.eventOnPause -= Pause;
+        playerInput.eventOnUnpause -= Unpause;
 
         updateWaveEventSO.OnEventRaised -= UpdateWave;
         updateTotalScoreEventSO.OnEventRaised -= UpdateScoreText;

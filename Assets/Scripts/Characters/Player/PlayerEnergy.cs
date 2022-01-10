@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,16 @@ public class PlayerEnergy : MonoBehaviour, IEnergy
     [SerializeField] private float overdriveInterval = 0.1f;
     [SerializeField] private IntEventChannelSO energyInitEventSO;
     [SerializeField] private IntEventChannelSO energyUpdateEventSO;
+    [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
+
+    [Header("Overdrive")]
+    [SerializeField] private FloatEventChannelSO overdriveOnEvent;
+    [SerializeField] private VoidEventChannelSO overdriveOffEvent;
 
     bool available = true;
 
     public const int MAX = 100;
+    public const int EMPTY = 0;
     public const int PERCENT = 1;
     int energy;
 
@@ -23,14 +30,18 @@ public class PlayerEnergy : MonoBehaviour, IEnergy
 
     void OnEnable()
     {
-        PlayerOverdrive.On += OpenPlayerOverdrive;
-        PlayerOverdrive.Off += StopPlayerOverdrive;
+        setInfiniteEnergyEvent.OnEventRaised += SetInfiniteEnergy;
+
+        overdriveOnEvent.OnEventRaised += OpenPlayerOverdrive;
+        overdriveOffEvent.OnEventRaised += StopPlayerOverdrive;
     }
 
     void OnDisable()
     {
-        PlayerOverdrive.On -= OpenPlayerOverdrive;
-        PlayerOverdrive.Off -= StopPlayerOverdrive;
+        setInfiniteEnergyEvent.OnEventRaised -= SetInfiniteEnergy;
+
+        overdriveOnEvent.OnEventRaised -= OpenPlayerOverdrive;
+        overdriveOffEvent.OnEventRaised -= StopPlayerOverdrive;
     }
 
     void Start()
@@ -41,7 +52,7 @@ public class PlayerEnergy : MonoBehaviour, IEnergy
 
     public void GainEnergy(int value)
     {
-        if (energy == MAX || !available || !gameObject.activeSelf) return;
+        if (energy == MAX/* || !available*/ || !gameObject.activeSelf) return;
 
         energy = Mathf.Clamp(energy + value, 0, MAX);
         energyUpdateEventSO.RaiseEvent(energy);
@@ -56,14 +67,21 @@ public class PlayerEnergy : MonoBehaviour, IEnergy
         if (energy == 0 && !available)
         {
             // player stop overdriving
-            PlayerOverdrive.Off.Invoke();
+            overdriveOffEvent.RaiseEvent();
         }
     }
 
     public bool IsEnough(int value) => energy >= value;
 
-    void OpenPlayerOverdrive()
+    private void SetInfiniteEnergy(bool value)
     {
+        GainEnergy(value ? MAX : 0);
+    }
+
+    void OpenPlayerOverdrive(float duration)
+    {
+        overdriveInterval = duration / MAX;
+        waitForOverdriveInterval = new WaitForSeconds(duration / MAX);
         available = false;
         StartCoroutine(nameof(KeepUsingCoroutine));
     }

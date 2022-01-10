@@ -1718,6 +1718,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_Scoring
       objectReference: {fileID: 0}
+    - target: {fileID: 5470189990539133758, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
+      propertyPath: m_TagString
+      value: MainCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 5470189990740076959, guid: 257972d1b67e2d04b8716b0c56c9b12d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

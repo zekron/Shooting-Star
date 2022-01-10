@@ -34,10 +34,10 @@ public class Inventory : MonoBehaviour, IMoveable, IRotate
         while (gameObject.activeSelf)
         {
             // if has not arrived targetPosition
-            if (Vector3.Distance(transform.position, targetPosition) >= MoveSpeed * Time.fixedDeltaTime)
+            if (Vector3.Distance(transform.position, targetPosition) >= MoveSpeed * Time.deltaTime)
             {
                 // keep moving to targetPosition
-                Move(Vector2.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.fixedDeltaTime));
+                Move(Vector2.MoveTowards(transform.position, targetPosition, MoveSpeed * Time.deltaTime));
                 Rotate(Quaternion.AngleAxis(Time.realtimeSinceStartup * 100 % 360, Vector3.up));
             }
             else

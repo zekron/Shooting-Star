@@ -710,9 +710,49 @@
             "id": "f64584c4-152d-496a-ab3b-3300974c3a40",
             "actions": [
                 {
-                    "name": "Debug Canvas",
+                    "name": "Set Debug Mode",
                     "type": "Button",
                     "id": "608c9f11-7853-4f56-9310-183c39bac307",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Set Player Invincible",
+                    "type": "Button",
+                    "id": "53e1715b-aff2-40ea-8d5a-a0c58629be40",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Set Infinite Energy",
+                    "type": "Button",
+                    "id": "a17c306c-d5b7-4d89-b489-094378ddf258",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Spawn Enemy Now",
+                    "type": "Button",
+                    "id": "88ac002d-bfde-4200-b27b-a0fe596d8ed8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Spawn Boss Now",
+                    "type": "Button",
+                    "id": "66ab2420-0e62-46cd-b6fc-39d7a571b47d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Need Spawn Enemy",
+                    "type": "Button",
+                    "id": "d1a62571-19d5-48d1-a991-a03e0e9fb649",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -726,7 +766,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Debug Canvas",
+                    "action": "Set Debug Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4be4df5-3785-451d-ba13-a345e134faad",
+                    "path": "<Keyboard>/f9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Spawn Enemy Now",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "790d02ba-9433-4ac5-94e6-864d2013ac64",
+                    "path": "<Keyboard>/f10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Spawn Boss Now",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4efb9801-b4d4-4b94-8849-330ab1b09faa",
+                    "path": "<Keyboard>/f11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Need Spawn Enemy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3078434f-3401-4276-8b64-d72b66219818",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Set Player Invincible",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b02b7ca-b51d-4b36-bdac-9bf34e48737b",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Set Infinite Energy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,31 +2,33 @@ using UnityEngine;
 
 public class OverdriveMaterialController : MonoBehaviour
 {
+    [SerializeField] private FloatEventChannelSO overdriveOnEvent;
+    [SerializeField] private VoidEventChannelSO overdriveOffEvent;
     [SerializeField] Material overdriveMaterial;
-    
+
     Material defaultMaterial;
 
     new Renderer renderer;
-    
+
     void Awake()
     {
         renderer = GetComponent<Renderer>();
         defaultMaterial = renderer.material;
     }
-    
+
     void OnEnable()
     {
-        PlayerOverdrive.On += PlayerOverdriveOn;
-        PlayerOverdrive.Off += PlayerOverdriveOff;
+        overdriveOnEvent.OnEventRaised += PlayerOverdriveOn;
+        overdriveOffEvent.OnEventRaised += PlayerOverdriveOff;
     }
 
     void OnDisable()
     {
-        PlayerOverdrive.On -= PlayerOverdriveOn;
-        PlayerOverdrive.Off -= PlayerOverdriveOff;     
+        overdriveOnEvent.OnEventRaised -= PlayerOverdriveOn;
+        overdriveOffEvent.OnEventRaised -= PlayerOverdriveOff;
     }
 
-    void PlayerOverdriveOn() => renderer.material = overdriveMaterial;
+    void PlayerOverdriveOn(float unused) => renderer.material = overdriveMaterial;
 
     void PlayerOverdriveOff() => renderer.material = defaultMaterial;
 }

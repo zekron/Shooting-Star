@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class PlayerOverdrive : MonoBehaviour
 {
-    public static UnityAction On = delegate { };
-    public static UnityAction Off = delegate { };
+    [SerializeField] private FloatEventChannelSO overdriveOnEvent;
+    [SerializeField] private VoidEventChannelSO overdriveOffEvent;
 
     [SerializeField] private GameObject triggerVFX;
     [SerializeField] private GameObject engineVFXNormal;
@@ -15,17 +15,17 @@ public class PlayerOverdrive : MonoBehaviour
 
     private void Awake()
     {
-        On += Open;
-        Off += Stop;
+        overdriveOnEvent.OnEventRaised += Open;
+        overdriveOffEvent.OnEventRaised += Stop;
     }
 
     private void OnDestroy()
     {
-        On -= Open;
-        Off -= Stop;
+        overdriveOnEvent.OnEventRaised -= Open;
+        overdriveOffEvent.OnEventRaised -= Stop;
     }
 
-    private void Open()
+    private void Open(float unused)
     {
         triggerVFX.SetActive(true);
         engineVFXNormal.SetActive(false);

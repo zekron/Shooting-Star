@@ -39,6 +39,13 @@ public class Enemy : Character
         StartCoroutine(nameof(FireCoroutine));
     }
 
+    protected override void OnDisable()
+    {
+        StopAllCoroutines();
+        base.OnDisable();
+        enemyDestroyEventSO.RaiseEvent();
+    }
+
     protected override void SetProfile()
     {
         maxHealth = enemyProfile.MaxHealth;
@@ -49,13 +56,6 @@ public class Enemy : Character
         maxFireInterval = enemyProfile.MaxFireInterval;
         deathEnergyBonus = enemyProfile.DeathEnergyBonus;
         scorePoint = enemyProfile.ScorePoint;
-    }
-
-    protected override void OnDisable()
-    {
-        StopAllCoroutines();
-        base.OnDisable();
-        enemyDestroyEventSO.RaiseEvent();
     }
 
     protected override IEnumerator FireCoroutine()
@@ -87,8 +87,9 @@ public class Enemy : Character
 
     public override void GetDie()
     {
-        updatePlayerEnergyEventSO.RaiseEvent(deathEnergyBonus);
         base.GetDie();
+
+        updatePlayerEnergyEventSO.RaiseEvent(deathEnergyBonus);
         DropInventory();
         updateTotalScoreEventSO.RaiseEvent(scorePoint);
     }

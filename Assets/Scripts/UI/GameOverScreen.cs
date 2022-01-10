@@ -31,13 +31,13 @@ public class GameOverScreen : MonoBehaviour
     void OnEnable()
     {
         setGameStateEventSO.OnEventRaised += OnGameOver;
-        input.onConfirmGameOver += OnConfirmGameOver;
+        input.eventOnConfirmGameOver += OnConfirmGameOver;
     }
 
     void OnDisable()
     {
         setGameStateEventSO.OnEventRaised -= OnGameOver;
-        input.onConfirmGameOver -= OnConfirmGameOver;
+        input.eventOnConfirmGameOver -= OnConfirmGameOver;
     }
 
     void OnGameOver(GameState state)

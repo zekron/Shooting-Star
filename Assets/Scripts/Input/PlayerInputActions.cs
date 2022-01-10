@@ -723,9 +723,49 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
             ""id"": ""f64584c4-152d-496a-ab3b-3300974c3a40"",
             ""actions"": [
                 {
-                    ""name"": ""Debug Canvas"",
+                    ""name"": ""Set Debug Mode"",
                     ""type"": ""Button"",
                     ""id"": ""608c9f11-7853-4f56-9310-183c39bac307"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Set Player Invincible"",
+                    ""type"": ""Button"",
+                    ""id"": ""53e1715b-aff2-40ea-8d5a-a0c58629be40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Set Infinite Energy"",
+                    ""type"": ""Button"",
+                    ""id"": ""a17c306c-d5b7-4d89-b489-094378ddf258"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Spawn Enemy Now"",
+                    ""type"": ""Button"",
+                    ""id"": ""88ac002d-bfde-4200-b27b-a0fe596d8ed8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Spawn Boss Now"",
+                    ""type"": ""Button"",
+                    ""id"": ""66ab2420-0e62-46cd-b6fc-39d7a571b47d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Need Spawn Enemy"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1a62571-19d5-48d1-a991-a03e0e9fb649"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -739,7 +779,62 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Debug Canvas"",
+                    ""action"": ""Set Debug Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4be4df5-3785-451d-ba13-a345e134faad"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Spawn Enemy Now"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""790d02ba-9433-4ac5-94e6-864d2013ac64"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Spawn Boss Now"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4efb9801-b4d4-4b94-8849-330ab1b09faa"",
+                    ""path"": ""<Keyboard>/f11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Need Spawn Enemy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3078434f-3401-4276-8b64-d72b66219818"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Set Player Invincible"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b02b7ca-b51d-4b36-bdac-9bf34e48737b"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Set Infinite Energy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -797,7 +892,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_GameOverScreen_ConfirmGameOver = m_GameOverScreen.FindAction("ConfirmGameOver", throwIfNotFound: true);
         // Debug Mode
         m_DebugMode = asset.FindActionMap("Debug Mode", throwIfNotFound: true);
-        m_DebugMode_DebugCanvas = m_DebugMode.FindAction("Debug Canvas", throwIfNotFound: true);
+        m_DebugMode_SetDebugMode = m_DebugMode.FindAction("Set Debug Mode", throwIfNotFound: true);
+        m_DebugMode_SetPlayerInvincible = m_DebugMode.FindAction("Set Player Invincible", throwIfNotFound: true);
+        m_DebugMode_SetInfiniteEnergy = m_DebugMode.FindAction("Set Infinite Energy", throwIfNotFound: true);
+        m_DebugMode_SpawnEnemyNow = m_DebugMode.FindAction("Spawn Enemy Now", throwIfNotFound: true);
+        m_DebugMode_SpawnBossNow = m_DebugMode.FindAction("Spawn Boss Now", throwIfNotFound: true);
+        m_DebugMode_NeedSpawnEnemy = m_DebugMode.FindAction("Need Spawn Enemy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -986,12 +1086,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     // Debug Mode
     private readonly InputActionMap m_DebugMode;
     private IDebugModeActions m_DebugModeActionsCallbackInterface;
-    private readonly InputAction m_DebugMode_DebugCanvas;
+    private readonly InputAction m_DebugMode_SetDebugMode;
+    private readonly InputAction m_DebugMode_SetPlayerInvincible;
+    private readonly InputAction m_DebugMode_SetInfiniteEnergy;
+    private readonly InputAction m_DebugMode_SpawnEnemyNow;
+    private readonly InputAction m_DebugMode_SpawnBossNow;
+    private readonly InputAction m_DebugMode_NeedSpawnEnemy;
     public struct DebugModeActions
     {
         private @PlayerInputActions m_Wrapper;
         public DebugModeActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @DebugCanvas => m_Wrapper.m_DebugMode_DebugCanvas;
+        public InputAction @SetDebugMode => m_Wrapper.m_DebugMode_SetDebugMode;
+        public InputAction @SetPlayerInvincible => m_Wrapper.m_DebugMode_SetPlayerInvincible;
+        public InputAction @SetInfiniteEnergy => m_Wrapper.m_DebugMode_SetInfiniteEnergy;
+        public InputAction @SpawnEnemyNow => m_Wrapper.m_DebugMode_SpawnEnemyNow;
+        public InputAction @SpawnBossNow => m_Wrapper.m_DebugMode_SpawnBossNow;
+        public InputAction @NeedSpawnEnemy => m_Wrapper.m_DebugMode_NeedSpawnEnemy;
         public InputActionMap Get() { return m_Wrapper.m_DebugMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1001,16 +1111,46 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_DebugModeActionsCallbackInterface != null)
             {
-                @DebugCanvas.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
-                @DebugCanvas.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
-                @DebugCanvas.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnDebugCanvas;
+                @SetDebugMode.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetDebugMode;
+                @SetDebugMode.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetDebugMode;
+                @SetDebugMode.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetDebugMode;
+                @SetPlayerInvincible.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetPlayerInvincible;
+                @SetPlayerInvincible.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetPlayerInvincible;
+                @SetPlayerInvincible.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetPlayerInvincible;
+                @SetInfiniteEnergy.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
+                @SetInfiniteEnergy.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
+                @SetInfiniteEnergy.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
+                @SpawnEnemyNow.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
+                @SpawnEnemyNow.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
+                @SpawnEnemyNow.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
+                @SpawnBossNow.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnBossNow;
+                @SpawnBossNow.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnBossNow;
+                @SpawnBossNow.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnBossNow;
+                @NeedSpawnEnemy.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnNeedSpawnEnemy;
+                @NeedSpawnEnemy.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnNeedSpawnEnemy;
+                @NeedSpawnEnemy.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnNeedSpawnEnemy;
             }
             m_Wrapper.m_DebugModeActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @DebugCanvas.started += instance.OnDebugCanvas;
-                @DebugCanvas.performed += instance.OnDebugCanvas;
-                @DebugCanvas.canceled += instance.OnDebugCanvas;
+                @SetDebugMode.started += instance.OnSetDebugMode;
+                @SetDebugMode.performed += instance.OnSetDebugMode;
+                @SetDebugMode.canceled += instance.OnSetDebugMode;
+                @SetPlayerInvincible.started += instance.OnSetPlayerInvincible;
+                @SetPlayerInvincible.performed += instance.OnSetPlayerInvincible;
+                @SetPlayerInvincible.canceled += instance.OnSetPlayerInvincible;
+                @SetInfiniteEnergy.started += instance.OnSetInfiniteEnergy;
+                @SetInfiniteEnergy.performed += instance.OnSetInfiniteEnergy;
+                @SetInfiniteEnergy.canceled += instance.OnSetInfiniteEnergy;
+                @SpawnEnemyNow.started += instance.OnSpawnEnemyNow;
+                @SpawnEnemyNow.performed += instance.OnSpawnEnemyNow;
+                @SpawnEnemyNow.canceled += instance.OnSpawnEnemyNow;
+                @SpawnBossNow.started += instance.OnSpawnBossNow;
+                @SpawnBossNow.performed += instance.OnSpawnBossNow;
+                @SpawnBossNow.canceled += instance.OnSpawnBossNow;
+                @NeedSpawnEnemy.started += instance.OnNeedSpawnEnemy;
+                @NeedSpawnEnemy.performed += instance.OnNeedSpawnEnemy;
+                @NeedSpawnEnemy.canceled += instance.OnNeedSpawnEnemy;
             }
         }
     }
@@ -1052,6 +1192,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     }
     public interface IDebugModeActions
     {
-        void OnDebugCanvas(InputAction.CallbackContext context);
+        void OnSetDebugMode(InputAction.CallbackContext context);
+        void OnSetPlayerInvincible(InputAction.CallbackContext context);
+        void OnSetInfiniteEnergy(InputAction.CallbackContext context);
+        void OnSpawnEnemyNow(InputAction.CallbackContext context);
+        void OnSpawnBossNow(InputAction.CallbackContext context);
+        void OnNeedSpawnEnemy(InputAction.CallbackContext context);
     }
 }

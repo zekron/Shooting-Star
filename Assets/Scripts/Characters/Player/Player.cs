@@ -45,7 +45,10 @@ public class Player : Character
     private float maxRoll;
 
     [Header("OverDrive")]
+    [SerializeField] private FloatEventChannelSO overdriveOnEvent;
+    [SerializeField] private VoidEventChannelSO overdriveOffEvent;
     [SerializeField] private Material[] laserMaterials;
+    private float overdriveDuration = 10;
     private int overdriveDodgeFactor = 2;
     private float overdriveSpeedFactor = 1.2f;
     private float overdriveFireFactor = 1.2f;
@@ -67,20 +70,24 @@ public class Player : Character
     private WaitForSeconds waitForOverdriveFireInterval;
     private WaitForSeconds waitHealthRegenerateTime;
     private WaitForSeconds waitInvincibleTime;
+    private WaitForSeconds waitForOverdriveInterval;
     private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+
+    public bool IsInfiniteEnergy = false;
+    public bool IsInvincible = false;
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        input.onFire += Fire;
-        input.onStopFire += StopFire;
-        input.onDodge += Dodge;
-        input.onOverdrive += OverDrive;
-        input.onLaunchMissile += LaunchMissile;
+        input.eventOnFire += Fire;
+        input.eventOnStopFire += StopFire;
+        input.eventOnDodge += Dodge;
+        input.eventOnOverdrive += OverDrive;
+        input.eventOnLaunchMissile += LaunchMissile;
 
-        PlayerOverdrive.On += OpenOverdrive;
-        PlayerOverdrive.Off += StopOverdrive;
+        overdriveOnEvent.OnEventRaised += OpenOverdrive;
+        overdriveOffEvent.OnEventRaised += StopOverdrive;
 
         setMainWeaponTypeEventSO.OnEventRaised += SetMainWeaponType;
         setSubWeaponTypeEventSO.OnEventRaised += SetSubWeaponType;
@@ -94,14 +101,14 @@ public class Player : Character
 
     protected override void OnDisable()
     {
-        input.onFire -= Fire;
-        input.onStopFire -= StopFire;
-        input.onDodge -= Dodge;
-        input.onOverdrive -= OverDrive;
-        input.onLaunchMissile -= LaunchMissile;
+        input.eventOnFire -= Fire;
+        input.eventOnStopFire -= StopFire;
+        input.eventOnDodge -= Dodge;
+        input.eventOnOverdrive -= OverDrive;
+        input.eventOnLaunchMissile -= LaunchMissile;
 
-        PlayerOverdrive.On -= OpenOverdrive;
-        PlayerOverdrive.Off -= StopOverdrive;
+        overdriveOnEvent.OnEventRaised -= OpenOverdrive;
+        overdriveOffEvent.OnEventRaised -= StopOverdrive;
 
         setMainWeaponTypeEventSO.OnEventRaised -= SetMainWeaponType;
         setSubWeaponTypeEventSO.OnEventRaised -= SetSubWeaponType;
@@ -183,6 +190,8 @@ public class Player : Character
     #region HEALTH
     public override void GetDamage(float damage)
     {
+        if (IsInvincible) return;
+
         base.GetDamage(damage);
         shieldUpdateEventSO.RaiseEvent(Health);
         TimeController.Instance.BulletTime(slowMotionDuration);
@@ -210,6 +219,8 @@ public class Player : Character
 
     public override void GetDie()
     {
+        if (IsInvincible) return;
+
         GameManager.Instance.CurrentGameState = GameState.GameOver;
         shieldUpdateEventSO.RaiseEvent(Health = 0);
         base.GetDie();
@@ -281,13 +292,13 @@ public class Player : Character
         }
     }
 
-    PlayerLaser laser;
+    private PlayerLaser laser;
+
     private void ReloadLaser()
     {
         if (!laser)
         {
-            laser = ObjectPoolManager.Release(
-                 isOverdriving ? projectileOverdrive : projectiles[projectiles.Length - 1],
+            laser = ObjectPoolManager.Release(projectiles[projectiles.Length - 1],
                  multiMuzzles[0].muzzle.position).GetComponent<PlayerLaser>();
         }
 
@@ -360,7 +371,7 @@ public class Player : Character
     {
         isDodging = true;
         AudioManager.Instance.PlaySFX(dodgeSFX);
-        playerEnergy.DrainEnergy(dodgeEnergyCost);
+        if (!IsInfiniteEnergy) playerEnergy.DrainEnergy(dodgeEnergyCost);
         playerCollider.isTrigger = true;
         currentRoll = 0f;
         TimeController.Instance.BulletTime(slowMotionDuration, slowMotionDuration);
@@ -382,12 +393,23 @@ public class Player : Character
     #region OverDrive
     private void OverDrive()
     {
-        if (!playerEnergy.IsEnough(PlayerEnergy.MAX)) return;
-
-        PlayerOverdrive.On.Invoke();
+        if (playerEnergy.IsEnough(PlayerEnergy.PERCENT))
+        {
+            if (!playerEnergy.IsEnough(PlayerEnergy.MAX))
+                if (isOverdriving)
+                {
+                    overdriveOffEvent.RaiseEvent();
+                }
+                else
+                {
+                    overdriveOnEvent.RaiseEvent(overdriveDuration / 2);
+                }
+            else
+                overdriveOnEvent.RaiseEvent(overdriveDuration);
+        }
     }
 
-    private void OpenOverdrive()
+    private void OpenOverdrive(float unused)
     {
         isOverdriving = true;
         dodgeEnergyCost *= overdriveDodgeFactor;
@@ -400,6 +422,8 @@ public class Player : Character
         isOverdriving = false;
         dodgeEnergyCost /= overdriveDodgeFactor;
         moveController.SetMoveSpeedByFactor(1 / overdriveSpeedFactor);
+
+        if (IsInfiniteEnergy) playerEnergy.GainEnergy(PlayerEnergy.MAX);
     }
     #endregion
 

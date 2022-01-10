@@ -11,16 +11,21 @@ public class PlayerInputSO :
     PlayerInputActions.IDebugModeActions
 {
     public event UnityAction<Vector2> onMove = delegate { };
-    public event UnityAction onStopMove = delegate { };
-    public event UnityAction onFire = delegate { };
-    public event UnityAction onStopFire = delegate { };
-    public event UnityAction onDodge = delegate { };
-    public event UnityAction onOverdrive = delegate { };
-    public event UnityAction onPause = delegate { };
-    public event UnityAction onUnpause = delegate { };
-    public event UnityAction onLaunchMissile = delegate { };
-    public event UnityAction onConfirmGameOver = delegate { };
-    public event UnityAction onSetDebugMode = delegate { };
+    public event UnityAction eventOnStopMove = delegate { };
+    public event UnityAction eventOnFire = delegate { };
+    public event UnityAction eventOnStopFire = delegate { };
+    public event UnityAction eventOnDodge = delegate { };
+    public event UnityAction eventOnOverdrive = delegate { };
+    public event UnityAction eventOnPause = delegate { };
+    public event UnityAction eventOnUnpause = delegate { };
+    public event UnityAction eventOnLaunchMissile = delegate { };
+    public event UnityAction eventOnConfirmGameOver = delegate { };
+    public event UnityAction eventOnSetDebugMode = delegate { };
+    public event UnityAction eventOnNeedSpawnEnemy = delegate { };
+    public event UnityAction eventOnSpawnEnemyNow = delegate { };
+    public event UnityAction eventOnSpawnBossNow = delegate { };
+    public event UnityAction eventOnSetPlayerInvincible = delegate { };
+    public event UnityAction eventOnSetInfiniteEnergy = delegate { };
 
     PlayerInputActions inputActions;
 
@@ -82,7 +87,7 @@ public class PlayerInputSO :
 
         if (context.canceled)
         {
-            onStopMove.Invoke();
+            eventOnStopMove.Invoke();
         }
     }
 
@@ -90,12 +95,12 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onFire.Invoke();
+            eventOnFire.Invoke();
         }
 
         if (context.canceled)
         {
-            onStopFire.Invoke();
+            eventOnStopFire.Invoke();
         }
     }
 
@@ -103,7 +108,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onDodge.Invoke();
+            eventOnDodge.Invoke();
         }
     }
 
@@ -111,7 +116,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onOverdrive.Invoke();
+            eventOnOverdrive.Invoke();
         }
     }
 
@@ -119,7 +124,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onPause.Invoke();
+            eventOnPause.Invoke();
         }
     }
 
@@ -127,7 +132,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onUnpause.Invoke();
+            eventOnUnpause.Invoke();
         }
     }
 
@@ -135,7 +140,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onLaunchMissile.Invoke();
+            eventOnLaunchMissile.Invoke();
         }
     }
 
@@ -143,7 +148,7 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onConfirmGameOver.Invoke();
+            eventOnConfirmGameOver.Invoke();
         }
     }
 
@@ -151,15 +156,55 @@ public class PlayerInputSO :
     {
         if (context.performed)
         {
-            onOverdrive.Invoke();
+            eventOnOverdrive.Invoke();
         }
     }
 
-    public void OnDebugCanvas(InputAction.CallbackContext context)
+    public void OnSetDebugMode(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            onSetDebugMode.Invoke();
+            eventOnSetDebugMode.Invoke();
+        }
+    }
+
+    public void OnNeedSpawnEnemy(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnNeedSpawnEnemy.Invoke();
+        }
+    }
+
+    public void OnSpawnEnemyNow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnSpawnEnemyNow.Invoke();
+        }
+    }
+
+    public void OnSpawnBossNow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnSpawnBossNow.Invoke();
+        }
+    }
+
+    public void OnSetPlayerInvincible(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnSetPlayerInvincible.Invoke();
+        }
+    }
+
+    public void OnSetInfiniteEnergy(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnSetInfiniteEnergy.Invoke();
         }
     }
 }

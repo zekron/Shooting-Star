@@ -27,12 +27,12 @@ public class MoveController : MonoBehaviour
     private void OnEnable()
     {
         inputEvent.onMove += Move;
-        inputEvent.onStopMove += StopMove;
+        inputEvent.eventOnStopMove += StopMove;
     }
     private void OnDisable()
     {
         inputEvent.onMove -= Move;
-        inputEvent.onStopMove -= StopMove;
+        inputEvent.eventOnStopMove -= StopMove;
     }
 
     private void Awake()

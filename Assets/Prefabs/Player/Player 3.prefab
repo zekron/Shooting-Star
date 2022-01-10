@@ -70384,9 +70384,13 @@ MonoBehaviour:
   dodgeDuration: 1
   rollSpeed: 360
   dodgeScale: {x: 0.2, y: 0.2, z: 0.2}
+  overdriveOnEvent: {fileID: 11400000, guid: bd23668414a33804fa41a30a44c2b729, type: 2}
+  overdriveOffEvent: {fileID: 11400000, guid: d5ec1c8f76e18e347bef74038f2b933d, type: 2}
   laserMaterials:
   - {fileID: 2100000, guid: b0a2ce8628373864c9be203fff1837ec, type: 2}
   - {fileID: 2100000, guid: 2694f347c83ac4f4591713ffa4ddb498, type: 2}
+  IsInfiniteEnergy: 0
+  IsInvincible: 0
 --- !u!114 &344478492671050572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70417,6 +70421,9 @@ MonoBehaviour:
   overdriveInterval: 0.1
   energyInitEventSO: {fileID: 11400000, guid: 27449d7f18274054b877bd2a14241d0f, type: 2}
   energyUpdateEventSO: {fileID: 11400000, guid: 469ac5717f30b394e834acfd5979edac, type: 2}
+  setInfiniteEnergyEvent: {fileID: 11400000, guid: df2c816dc6c76634a94210f2968c920b, type: 2}
+  overdriveOnEvent: {fileID: 11400000, guid: bd23668414a33804fa41a30a44c2b729, type: 2}
+  overdriveOffEvent: {fileID: 11400000, guid: d5ec1c8f76e18e347bef74038f2b933d, type: 2}
 --- !u!114 &2148827660997324025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70429,6 +70436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8e5dee3d2add048a3fc292b5ac96f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overdriveOnEvent: {fileID: 11400000, guid: bd23668414a33804fa41a30a44c2b729, type: 2}
+  overdriveOffEvent: {fileID: 11400000, guid: d5ec1c8f76e18e347bef74038f2b933d, type: 2}
   triggerVFX: {fileID: 7169958185934230126}
   engineVFXNormal: {fileID: 5976628405493846407}
   engineVFXOverdrive: {fileID: 127147061781381378}

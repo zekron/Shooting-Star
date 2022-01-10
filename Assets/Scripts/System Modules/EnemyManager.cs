@@ -30,7 +30,7 @@ public class EnemyManager : Singleton<EnemyManager>
     protected override void Awake()
     {
         base.Awake();
-        enemyList = new List<GameObject>();
+        enemyList = new List<GameObject>(maxEnemyAmount);
     }
 
     private void OnEnable()
@@ -61,6 +61,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
         if (waveNumber % bossWave == 0)
         {
+            currentEnemyAmount = enemyAmount = 1;
+
             ObjectPoolManager.Release(bossPrefabs[Random.Range(0, bossPrefabs.Length)]);
         }
         else
@@ -79,7 +81,9 @@ public class EnemyManager : Singleton<EnemyManager>
         currentEnemyAmount--;
         if (currentEnemyAmount <= 0)
         {
-            if ((++waveNumber - bossWave) % bossWave == 1)
+            ++waveNumber;
+
+            if ((waveNumber - bossWave) % bossWave == 1)
                 enemyLevelUpEventSO.RaiseEvent(waveNumber);
 
             if (waveNumber % bossWave == 0)
@@ -92,9 +96,21 @@ public class EnemyManager : Singleton<EnemyManager>
     public void SpawnEnemyNow()
     {
 #if DEBUG_MODE
-        spawnEnemy = true;
-        RandomlySpawnEnemies();
-        spawnEnemy = false;
+        enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / bossWave, maxEnemyAmount);
+        currentEnemyAmount += enemyAmount;
+
+        for (int i = 0; i < enemyAmount; i++)
+        {
+            ObjectPoolManager.Release(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
+        }
 #endif
     }
+    public void SpawnBossNow()
+    {
+#if DEBUG_MODE
+        currentEnemyAmount += 1;
+
+        ObjectPoolManager.Release(bossPrefabs[Random.Range(0, bossPrefabs.Length)]);
+    }
+#endif
 }

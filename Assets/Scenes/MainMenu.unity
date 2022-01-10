@@ -4037,6 +4037,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6124537643131850987, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537643131850987, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537643131850987, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537643131850987, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537644888538210, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537644888538210, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537644888538210, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124537644888538210, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7158519930889847459, guid: 91f42bfce0c6ee64c87925d7a9545d08, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4078,7 +4110,7 @@ GameObject:
   - component: {fileID: 8652643179162552691}
   m_Layer: 5
   m_Name: Canvas_HUD
-  m_TagString: Untagged
+  m_TagString: MainCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
