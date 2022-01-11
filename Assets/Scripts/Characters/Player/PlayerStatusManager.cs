@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class PlayerStatusManager : MonoBehaviour
 {
+    [Header("Shield")]
     [SerializeField] private ShieldStatsBar shieldBar;
-    [SerializeField] private EnergyStatsBar energyBar;
-    [SerializeField] private MissileDisplay missileDisplay;
-
     [SerializeField] private FloatEventChannelSO shieldInitEventSO;
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
+    [Header("Energy")]
+    [SerializeField] private EnergyStatsBar energyBar;
     [SerializeField] private IntEventChannelSO energyInitEventSO;
     [SerializeField] private IntEventChannelSO energyUpdateEventSO;
+    [Header("Missile")]
+    [SerializeField] private MissileDisplay missileDisplay;
     [SerializeField] private IntEventChannelSO missileUpdateEventSO;
     [SerializeField] private FloatEventChannelSO missileCooldownTimeEventSO;
 

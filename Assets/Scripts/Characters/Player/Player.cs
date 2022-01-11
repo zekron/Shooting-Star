@@ -52,13 +52,13 @@ public class Player : Character
     private int overdriveDodgeFactor = 2;
     private float overdriveSpeedFactor = 1.2f;
     private float overdriveFireFactor = 1.2f;
-    private MissileSystem missile;
     private bool isOverdriving = false;
 
     private Rigidbody2D playerRigidbody;
     private Collider2D playerCollider;
     private MoveController moveController;
     private PlayerEnergy playerEnergy;
+    private MissileSystem missile;
 
     private readonly float slowMotionDuration = 1f;
     private readonly float invincibleTime = 1f;
