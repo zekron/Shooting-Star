@@ -4,16 +4,16 @@ public class OverdriveMaterialController : MonoBehaviour
 {
     [SerializeField] private FloatEventChannelSO overdriveOnEvent;
     [SerializeField] private VoidEventChannelSO overdriveOffEvent;
-    [SerializeField] Material overdriveMaterial;
+    [SerializeField] private Material overdriveMaterial;
 
-    Material defaultMaterial;
+    private Material defaultMaterial;
 
-    new Renderer renderer;
+    private Renderer overdriveRenderer;
 
     void Awake()
     {
-        renderer = GetComponent<Renderer>();
-        defaultMaterial = renderer.material;
+        overdriveRenderer = GetComponent<Renderer>();
+        defaultMaterial = overdriveRenderer.material;
     }
 
     void OnEnable()
@@ -28,7 +28,7 @@ public class OverdriveMaterialController : MonoBehaviour
         overdriveOffEvent.OnEventRaised -= PlayerOverdriveOff;
     }
 
-    void PlayerOverdriveOn(float unused) => renderer.material = overdriveMaterial;
+    void PlayerOverdriveOn(float unused) => overdriveRenderer.material = overdriveMaterial;
 
-    void PlayerOverdriveOff() => renderer.material = defaultMaterial;
+    void PlayerOverdriveOff() => overdriveRenderer.material = defaultMaterial;
 }

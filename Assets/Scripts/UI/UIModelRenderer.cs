@@ -18,15 +18,18 @@ public class UIModelRenderer : UIBehaviour
 
     protected override void Awake()
     {
-        //CreateRenderer();
+#if !UNITY_EDITOR
+        CreateRenderer();
+#endif
         base.Awake();
     }
-
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         CreateRenderer();
         base.OnValidate();
     }
+#endif
 
     private void SetCenter(Vector3[] vector3Array, Vector3 center)
     {
