@@ -734,6 +734,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Set Infinite Missile",
+                    "type": "Button",
+                    "id": "ef98c885-c017-41ad-a0f5-d28e45801eac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Spawn Enemy Now",
                     "type": "Button",
                     "id": "88ac002d-bfde-4200-b27b-a0fe596d8ed8",
@@ -822,6 +830,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Set Infinite Energy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4e48e47-93b1-41af-8bc8-b0b06617a474",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Set Infinite Missile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

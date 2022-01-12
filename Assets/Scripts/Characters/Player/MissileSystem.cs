@@ -40,15 +40,16 @@ public class MissileSystem : MonoBehaviour
         StartCoroutine(nameof(CooldownCoroutine));
     }
 
-    public void Launch(Transform muzzleTransform)
+    public void Launch(Transform muzzleTransform, bool isDebugMode = false)
     {
-        if (amount == 0 || !isReady) return;    // TODO: Add SFX && UI VFX here
+        if (!isDebugMode && (amount == 0 || !isReady)) return;    // TODO: Add SFX && UI VFX here
 
         isReady = false;
         ObjectPoolManager.Release(missilePrefab, muzzleTransform.position);
         AudioManager.Instance.PlaySFX(launchSFX);
 
-        missileUpdateEventSO.RaiseEvent(--amount);
+        if (!isDebugMode) amount--;
+        missileUpdateEventSO.RaiseEvent(amount);
 
         StartCoroutine(nameof(CooldownCoroutine));
     }

@@ -75,6 +75,7 @@ public class Player : Character
     private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     public bool IsInfiniteEnergy = false;
+    public bool IsInfiniteBomb = false;
     public bool IsInvincible = false;
 
     protected override void OnEnable()
@@ -440,7 +441,7 @@ public class Player : Character
 
     private void LaunchMissile()
     {
-        missile.Launch(multiMuzzles[0].muzzle);
+        missile.Launch(multiMuzzles[0].muzzle, isDebugMode: IsInfiniteBomb);
     }
     #endregion
 }

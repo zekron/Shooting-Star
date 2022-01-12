@@ -26,6 +26,7 @@ public class PlayerInputSO :
     public event UnityAction eventOnSpawnBossNow = delegate { };
     public event UnityAction eventOnSetPlayerInvincible = delegate { };
     public event UnityAction eventOnSetInfiniteEnergy = delegate { };
+    public event UnityAction eventOnSetInfiniteMissile = delegate { };
 
     PlayerInputActions inputActions;
 
@@ -205,6 +206,14 @@ public class PlayerInputSO :
         if (context.performed)
         {
             eventOnSetInfiniteEnergy.Invoke();
+        }
+    }
+
+    public void OnSetInfiniteMissile(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            eventOnSetInfiniteMissile.Invoke();
         }
     }
 }

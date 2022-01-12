@@ -747,6 +747,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Set Infinite Missile"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef98c885-c017-41ad-a0f5-d28e45801eac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Spawn Enemy Now"",
                     ""type"": ""Button"",
                     ""id"": ""88ac002d-bfde-4200-b27b-a0fe596d8ed8"",
@@ -837,6 +845,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Set Infinite Energy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4e48e47-93b1-41af-8bc8-b0b06617a474"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Set Infinite Missile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -895,6 +914,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_DebugMode_SetDebugMode = m_DebugMode.FindAction("Set Debug Mode", throwIfNotFound: true);
         m_DebugMode_SetPlayerInvincible = m_DebugMode.FindAction("Set Player Invincible", throwIfNotFound: true);
         m_DebugMode_SetInfiniteEnergy = m_DebugMode.FindAction("Set Infinite Energy", throwIfNotFound: true);
+        m_DebugMode_SetInfiniteMissile = m_DebugMode.FindAction("Set Infinite Missile", throwIfNotFound: true);
         m_DebugMode_SpawnEnemyNow = m_DebugMode.FindAction("Spawn Enemy Now", throwIfNotFound: true);
         m_DebugMode_SpawnBossNow = m_DebugMode.FindAction("Spawn Boss Now", throwIfNotFound: true);
         m_DebugMode_NeedSpawnEnemy = m_DebugMode.FindAction("Need Spawn Enemy", throwIfNotFound: true);
@@ -1089,6 +1109,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_DebugMode_SetDebugMode;
     private readonly InputAction m_DebugMode_SetPlayerInvincible;
     private readonly InputAction m_DebugMode_SetInfiniteEnergy;
+    private readonly InputAction m_DebugMode_SetInfiniteMissile;
     private readonly InputAction m_DebugMode_SpawnEnemyNow;
     private readonly InputAction m_DebugMode_SpawnBossNow;
     private readonly InputAction m_DebugMode_NeedSpawnEnemy;
@@ -1099,6 +1120,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @SetDebugMode => m_Wrapper.m_DebugMode_SetDebugMode;
         public InputAction @SetPlayerInvincible => m_Wrapper.m_DebugMode_SetPlayerInvincible;
         public InputAction @SetInfiniteEnergy => m_Wrapper.m_DebugMode_SetInfiniteEnergy;
+        public InputAction @SetInfiniteMissile => m_Wrapper.m_DebugMode_SetInfiniteMissile;
         public InputAction @SpawnEnemyNow => m_Wrapper.m_DebugMode_SpawnEnemyNow;
         public InputAction @SpawnBossNow => m_Wrapper.m_DebugMode_SpawnBossNow;
         public InputAction @NeedSpawnEnemy => m_Wrapper.m_DebugMode_NeedSpawnEnemy;
@@ -1120,6 +1142,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @SetInfiniteEnergy.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
                 @SetInfiniteEnergy.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
                 @SetInfiniteEnergy.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteEnergy;
+                @SetInfiniteMissile.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteMissile;
+                @SetInfiniteMissile.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteMissile;
+                @SetInfiniteMissile.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSetInfiniteMissile;
                 @SpawnEnemyNow.started -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
                 @SpawnEnemyNow.performed -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
                 @SpawnEnemyNow.canceled -= m_Wrapper.m_DebugModeActionsCallbackInterface.OnSpawnEnemyNow;
@@ -1142,6 +1167,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @SetInfiniteEnergy.started += instance.OnSetInfiniteEnergy;
                 @SetInfiniteEnergy.performed += instance.OnSetInfiniteEnergy;
                 @SetInfiniteEnergy.canceled += instance.OnSetInfiniteEnergy;
+                @SetInfiniteMissile.started += instance.OnSetInfiniteMissile;
+                @SetInfiniteMissile.performed += instance.OnSetInfiniteMissile;
+                @SetInfiniteMissile.canceled += instance.OnSetInfiniteMissile;
                 @SpawnEnemyNow.started += instance.OnSpawnEnemyNow;
                 @SpawnEnemyNow.performed += instance.OnSpawnEnemyNow;
                 @SpawnEnemyNow.canceled += instance.OnSpawnEnemyNow;
@@ -1195,6 +1223,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSetDebugMode(InputAction.CallbackContext context);
         void OnSetPlayerInvincible(InputAction.CallbackContext context);
         void OnSetInfiniteEnergy(InputAction.CallbackContext context);
+        void OnSetInfiniteMissile(InputAction.CallbackContext context);
         void OnSpawnEnemyNow(InputAction.CallbackContext context);
         void OnSpawnBossNow(InputAction.CallbackContext context);
         void OnNeedSpawnEnemy(InputAction.CallbackContext context);

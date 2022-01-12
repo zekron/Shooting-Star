@@ -9,6 +9,7 @@ public class DebugManager : MonoBehaviour
     [SerializeField] private BooleanEventChannelSO needSpawnEnemyEvent;
     [SerializeField] private BooleanEventChannelSO invincibleTextEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
+    [SerializeField] private BooleanEventChannelSO setInfiniteBombEvent;
 
     [SerializeField] private Canvas debugCanvas;
 
@@ -23,6 +24,7 @@ public class DebugManager : MonoBehaviour
         inputEvent.eventOnSpawnBossNow += InputEvent_onSpawnBossNow;
         inputEvent.eventOnSetPlayerInvincible += InputEvent_eventOnSetPlayerInvincible;
         inputEvent.eventOnSetInfiniteEnergy += InputEvent_eventOnSetInfiniteEnergy;
+        inputEvent.eventOnSetInfiniteMissile += InputEvent_eventOnSetInfiniteMissile;
     }
 
     private void OnDestroy()
@@ -33,6 +35,7 @@ public class DebugManager : MonoBehaviour
         inputEvent.eventOnSpawnBossNow -= InputEvent_onSpawnBossNow;
         inputEvent.eventOnSetPlayerInvincible -= InputEvent_eventOnSetPlayerInvincible;
         inputEvent.eventOnSetInfiniteEnergy -= InputEvent_eventOnSetInfiniteEnergy;
+        inputEvent.eventOnSetInfiniteMissile += InputEvent_eventOnSetInfiniteMissile;
     }
 
     private void InputEvent_onSetDebugMode()
@@ -50,6 +53,7 @@ public class DebugManager : MonoBehaviour
         needSpawnEnemyEvent.RaiseEvent(EnemyManager.Instance.SpawnEnemy);
         invincibleTextEvent.RaiseEvent(player.IsInvincible);
         setInfiniteEnergyEvent.RaiseEvent(player.IsInfiniteEnergy);
+        setInfiniteBombEvent.RaiseEvent(player.IsInfiniteBomb);
     }
 
     private void InputEvent_onNeedSpawnEnemy()
@@ -89,6 +93,14 @@ public class DebugManager : MonoBehaviour
         if (isOpenDebugCanvas)
         {
             setInfiniteEnergyEvent.RaiseEvent(player.IsInfiniteEnergy = !player.IsInfiniteEnergy);
+        }
+    }
+
+    private void InputEvent_eventOnSetInfiniteMissile()
+    {
+        if (isOpenDebugCanvas)
+        {
+            setInfiniteBombEvent.RaiseEvent(player.IsInfiniteBomb = !player.IsInfiniteBomb);
         }
     }
 }

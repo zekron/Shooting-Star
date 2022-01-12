@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if DEBUG_MODE
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +7,13 @@ public class DebugCanvasController : MonoBehaviour
     [SerializeField] private BooleanEventChannelSO needSpawnEnemyEvent;
     [SerializeField] private BooleanEventChannelSO invincibleTextEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
+    [SerializeField] private BooleanEventChannelSO setInfiniteBombEvent;
 
     [SerializeField] private Text fpsText;
     [SerializeField] private Text needSpawnEnemyText;
     [SerializeField] private Text invincibleText;
     [SerializeField] private Text infiniteEnergyText;
+    [SerializeField] private Text infiniteBombText;
 
     int frames = 0;
     private float updateInterval = 0.05f;
@@ -27,6 +27,7 @@ public class DebugCanvasController : MonoBehaviour
         needSpawnEnemyEvent.OnEventRaised += SetSpawnEnemy;
         invincibleTextEvent.OnEventRaised += SetPlayerInvincible;
         setInfiniteEnergyEvent.OnEventRaised += SetInfiniteEnergy;
+        setInfiniteBombEvent.OnEventRaised += SetInfiniteBomb;
     }
 
     private void OnDisable()
@@ -34,6 +35,7 @@ public class DebugCanvasController : MonoBehaviour
         needSpawnEnemyEvent.OnEventRaised -= SetSpawnEnemy;
         invincibleTextEvent.OnEventRaised -= SetPlayerInvincible;
         setInfiniteEnergyEvent.OnEventRaised -= SetInfiniteEnergy;
+        setInfiniteBombEvent.OnEventRaised -= SetInfiniteBomb;
     }
 
     void Start()
@@ -42,9 +44,7 @@ public class DebugCanvasController : MonoBehaviour
 
     void Update()
     {
-#if DEBUG_MODE
         CheckFPS();
-#endif
     }
     #endregion
 
@@ -66,6 +66,12 @@ public class DebugCanvasController : MonoBehaviour
         infiniteEnergyText.color = value ? Color.green : Color.red;
     }
 
+    private void SetInfiniteBomb(bool value)
+    {
+        infiniteBombText.text = string.Format("(F3){0}", value ? "Infinite Missile: ON" : "Infinite Missile: OFF");
+        infiniteBombText.color = value ? Color.green : Color.red;
+    }
+
     private void CheckFPS()
     {
         frames++;
@@ -79,3 +85,4 @@ public class DebugCanvasController : MonoBehaviour
         }
     }
 }
+#endif

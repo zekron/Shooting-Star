@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyProjectile_Aiming : Projectile
+public class EnemyProjectile_Aiming : EnemyProjectile
 {
     void Awake()
     {
