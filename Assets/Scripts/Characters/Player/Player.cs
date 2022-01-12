@@ -12,6 +12,7 @@ public class Player : Character
     [SerializeField] private FloatEventChannelSO shieldUpdateEventSO;
     [SerializeField] private FloatEventChannelSO restoreShieldEventSO;
     [SerializeField] private IntEventChannelSO updatePlayerEnergyEventSO;
+    [SerializeField] private IntEventChannelSO updateBombEventSO;
     [SerializeField] private PlayerInputSO input;
 
     [Header("Regeneration")]
@@ -93,8 +94,9 @@ public class Player : Character
         setSubWeaponTypeEventSO.OnEventRaised += SetSubWeaponType;
         upgradeMainWeaponPowerEventSO.OnEventRaised += UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised += UpgradeSubWeaponPower;
-        updatePlayerEnergyEventSO.OnEventRaised += GetEnergy;
         restoreShieldEventSO.OnEventRaised += GetHealing;
+        updatePlayerEnergyEventSO.OnEventRaised += GetEnergy;
+        updateBombEventSO.OnEventRaised += GetMissile;
 
         SetProfile();
     }
@@ -114,8 +116,9 @@ public class Player : Character
         setSubWeaponTypeEventSO.OnEventRaised -= SetSubWeaponType;
         upgradeMainWeaponPowerEventSO.OnEventRaised -= UpgradeMainWeaponPower;
         upgradeSubWeaponPowerEventSO.OnEventRaised -= UpgradeSubWeaponPower;
-        updatePlayerEnergyEventSO.OnEventRaised -= GetEnergy;
         restoreShieldEventSO.OnEventRaised -= GetHealing;
+        updatePlayerEnergyEventSO.OnEventRaised -= GetEnergy;
+        updateBombEventSO.OnEventRaised -= GetMissile;
 
         base.OnDisable();
     }
@@ -428,6 +431,13 @@ public class Player : Character
     #endregion
 
     #region Launch Missile
+    public bool CanGainMissile() => missile.CanGainMissile();
+
+    private void GetMissile(int value)
+    {
+        missile.UpdateMissile(value);
+    }
+
     private void LaunchMissile()
     {
         missile.Launch(multiMuzzles[0].muzzle);

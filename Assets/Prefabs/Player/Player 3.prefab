@@ -70368,6 +70368,7 @@ MonoBehaviour:
   shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
   restoreShieldEventSO: {fileID: 11400000, guid: e0b214bb8d4ca8e4db7c950e3c15fad6, type: 2}
   updatePlayerEnergyEventSO: {fileID: 11400000, guid: 4ef29a78d0592224a9d64d19a2f4fc22, type: 2}
+  updateBombEventSO: {fileID: 11400000, guid: 74d45d1065045a44abfd45f437a9e0e6, type: 2}
   input: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
   regenerateHealth: 1
   healthRegenerateTime: 12
@@ -70455,7 +70456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c4765bf60ac6b43b94805fcb8e0d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAmount: 5
+  maxAmount: 5
   cooldownTime: 1
   missilePrefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
   launchSFX: {fileID: 11400000, guid: e48405936bcb2f3409e2ae6f7fc43e32, type: 2}

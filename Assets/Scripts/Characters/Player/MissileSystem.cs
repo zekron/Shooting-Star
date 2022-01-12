@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MissileSystem : MonoBehaviour
 {
-    [SerializeField] private int defaultAmount = 5;
+    [SerializeField] private int maxAmount = 5;
     [SerializeField] private float cooldownTime = 1f;
     [SerializeField] private GameObject missilePrefab = null;
     [SerializeField] private AudioDataSO launchSFX = null;
@@ -19,7 +20,7 @@ public class MissileSystem : MonoBehaviour
 
     void Awake()
     {
-        amount = defaultAmount;
+        amount = maxAmount;
 
         waitForCooldownInterval = new WaitForSeconds(cooldownTime);
     }
@@ -30,6 +31,15 @@ public class MissileSystem : MonoBehaviour
         missileCooldownTimeEventSO.RaiseEvent(cooldownTime);
     }
 
+    public bool CanGainMissile() => amount < maxAmount;
+
+    public void UpdateMissile(int value)
+    {
+        missileUpdateEventSO.RaiseEvent(amount += value);
+
+        StartCoroutine(nameof(CooldownCoroutine));
+    }
+
     public void Launch(Transform muzzleTransform)
     {
         if (amount == 0 || !isReady) return;    // TODO: Add SFX && UI VFX here
@@ -37,8 +47,8 @@ public class MissileSystem : MonoBehaviour
         isReady = false;
         ObjectPoolManager.Release(missilePrefab, muzzleTransform.position);
         AudioManager.Instance.PlaySFX(launchSFX);
-        amount--;
-        missileUpdateEventSO.RaiseEvent(amount);
+
+        missileUpdateEventSO.RaiseEvent(--amount);
 
         StartCoroutine(nameof(CooldownCoroutine));
     }

@@ -29,8 +29,10 @@ public class PlayerMiniNuke : PlayerProjectile
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision);
         PhysicsOverlapDetection();
+        ObjectPoolManager.Release(hitVFX, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
+        AudioManager.Instance.PlaySFX(hitSFX);
+        gameObject.SetActive(false);
     }
 
     IEnumerator VariableSpeedCoroutine()

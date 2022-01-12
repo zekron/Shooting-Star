@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerBomb : PlayerMiniNuke
@@ -6,13 +7,36 @@ public class PlayerBomb : PlayerMiniNuke
     [SerializeField] private GameObject explosionVFX = null;
     [SerializeField] private AudioDataSO explosionSFX = null;
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnEnable()
     {
+        StartCoroutine(nameof(DelayDetonation));
+        base.OnEnable();
+    }
+
+    private IEnumerator DelayDetonation()
+    {
+        yield return new WaitForSeconds(0.5f);
+
         // Spawn a explosion VFX
         ObjectPoolManager.Release(explosionVFX, transform.position);
         // Play explosion SFX
         AudioManager.Instance.PlaySFX(explosionSFX);
-        base.OnCollisionEnter2D(collision);
+
+        PhysicsOverlapDetection();
+        gameObject.SetActive(false);
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        StopCoroutine(nameof(DelayDetonation));
+
+        // Spawn a explosion VFX
+        ObjectPoolManager.Release(explosionVFX, transform.position);
+        // Play explosion SFX
+        AudioManager.Instance.PlaySFX(explosionSFX);
+
+        PhysicsOverlapDetection();
+        gameObject.SetActive(false);
     }
     protected override void PhysicsOverlapDetection()
     {

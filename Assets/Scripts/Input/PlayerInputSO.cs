@@ -49,7 +49,7 @@ public class PlayerInputSO :
         inputActions.Disable();
         actionMap.Enable();
 
-#if DEBUG_MODE
+#if DEBUG_MODE && UNITY_EDITOR
         inputActions.DebugMode.Enable();
         isUIInput = true;
 #endif

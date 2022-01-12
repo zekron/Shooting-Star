@@ -4990,13 +4990,13 @@ MonoBehaviour:
   lowSpeed: 8
   highSpeed: 25
   variableSpeedDelay: 0.5
-  explosionVFX: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287, type: 3}
-  explosionSFX: {fileID: 11400000, guid: 92a2d43a361c4bb4aba94912c94547ed, type: 2}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 640
-  explosionRadius: 5
+  explosionRadius: 7
   explosionDamage: 100
+  explosionVFX: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287, type: 3}
+  explosionSFX: {fileID: 11400000, guid: 92a2d43a361c4bb4aba94912c94547ed, type: 2}
 --- !u!1 &2108740612527279824
 GameObject:
   m_ObjectHideFlags: 0

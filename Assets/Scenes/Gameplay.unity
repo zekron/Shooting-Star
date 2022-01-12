@@ -230,7 +230,7 @@ MonoBehaviour:
   - prefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023, type: 3}
     size: 40
   - prefab: {fileID: 3667453350895143958, guid: 584c9d8dbb4f83a4d8aa18f038eb66c5, type: 3}
-    size: 196
+    size: 330
   - prefab: {fileID: 1903784873512752901, guid: 0fffb4dde295eee438452da4cf4bbde3, type: 3}
     size: 24
   - prefab: {fileID: 1903784873512752901, guid: e1ebdc8775fe4a240be94631e72e41a0, type: 3}
@@ -249,7 +249,7 @@ MonoBehaviour:
   - prefab: {fileID: 3292915022085376402, guid: ac9c24e9acc06e04696443498bf6cb63, type: 3}
     size: 28
   - prefab: {fileID: 3292915022085376402, guid: a1c517236c5eff245877c6c6ee730119, type: 3}
-    size: 28
+    size: 32
   - prefab: {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
     size: 1
   - prefab: {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
@@ -277,6 +277,8 @@ MonoBehaviour:
   - prefab: {fileID: 181565217884288539, guid: 398ff2800ce102447b9489a90ae5be5f, type: 3}
     size: 5
   - prefab: {fileID: 8683246525794642124, guid: aea1f18d920a4b544abd063e9e6017ee, type: 3}
+    size: 5
+  - prefab: {fileID: 1993272356339634, guid: d178ff6c3e8791f4eb7bf3443392bcab, type: 3}
     size: 5
   playerModelPools:
   - prefab: {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
@@ -4700,12 +4702,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldBar: {fileID: 8652643179514650794}
-  energyBar: {fileID: 458327432}
-  missileDisplay: {fileID: 663292173}
   shieldInitEventSO: {fileID: 11400000, guid: 482d558b673946b4fa9f02020e4f7973, type: 2}
   shieldUpdateEventSO: {fileID: 11400000, guid: a157b56d4b5bba849a8d289d568d1a33, type: 2}
+  energyBar: {fileID: 458327432}
   energyInitEventSO: {fileID: 11400000, guid: 27449d7f18274054b877bd2a14241d0f, type: 2}
   energyUpdateEventSO: {fileID: 11400000, guid: 469ac5717f30b394e834acfd5979edac, type: 2}
+  missileDisplay: {fileID: 663292173}
   missileUpdateEventSO: {fileID: 11400000, guid: df53a1ba6c376b244b6d67a5ca082219, type: 2}
   missileCooldownTimeEventSO: {fileID: 11400000, guid: 31aada15e1a484d4699df57775086261, type: 2}
 --- !u!223 &8652643179162552700
