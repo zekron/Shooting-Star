@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  profileIndexEventSO: {fileID: 11400000, guid: aa19f20b9bc9d2044875971dd7be72f5, type: 2}
   setGameStateEventSO: {fileID: 11400000, guid: ca52aa229d7b86d41b85436807a32a04, type: 2}
-  currentPlayerModel: {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
+  playerModels:
+  - {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
+  - {fileID: 5908416648923392752, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
+  - {fileID: 5976628406566106873, guid: 8834d7a6309102d44a2066c7cf30be4f, type: 3}

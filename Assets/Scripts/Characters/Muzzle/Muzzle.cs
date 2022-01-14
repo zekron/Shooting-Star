@@ -26,11 +26,3 @@ public class Muzzle : MonoBehaviour
         return result;
     }
 }
-
-public enum MuzzlePower
-{
-    Single,
-    Double,
-    Triple,
-    Quadruple,
-}

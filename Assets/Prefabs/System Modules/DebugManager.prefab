@@ -45,7 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputEvent: {fileID: 11400000, guid: 6e574b67783a784478e4cbd412a644b5, type: 2}
   needSpawnEnemyEvent: {fileID: 11400000, guid: 5d3e4e4425e3a554fa19229ae1fe371d, type: 2}
-  invincibleTextEvent: {fileID: 11400000, guid: 4434ac554f824b64782ce6348bd2dc14, type: 2}
+  spawnEnemyNowEvent: {fileID: 11400000, guid: 1734caa24fd862f499f9e0c6d8bcb122, type: 2}
+  spawnBossNowEvent: {fileID: 11400000, guid: 02a87be50f58fbc4084abbbb3d49c92d, type: 2}
+  setinvincibleEvent: {fileID: 11400000, guid: 6f78e8966de0814498486926ec452cbf, type: 2}
   setInfiniteEnergyEvent: {fileID: 11400000, guid: df2c816dc6c76634a94210f2968c920b, type: 2}
   setInfiniteBombEvent: {fileID: 11400000, guid: 8cab72d2e886f5549926635577481fc1, type: 2}
   debugCanvas: {fileID: 0}

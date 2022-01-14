@@ -16,7 +16,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private VoidEventChannelSO enemyDestroyEventSO;
     [SerializeField] private VoidEventChannelSO animationClipFinishedEventSO;
 
-    private bool spawnEnemy = true;
+    private bool needSpawnEnemy = true;
     private int waveNumber = 0;
     private int enemyAmount;
     private int currentEnemyAmount;
@@ -25,7 +25,6 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public GameObject RandomEnemy => enemyList.Count == 0 ? null : enemyList[Random.Range(0, enemyList.Count)];
     public float TimeBetweenWaves => timeBetweenWaves;
-    public bool SpawnEnemy { get => spawnEnemy; set => spawnEnemy = value; }
 
     protected override void Awake()
     {
@@ -37,12 +36,24 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         animationClipFinishedEventSO.OnEventRaised += RandomlySpawnEnemies;
         enemyDestroyEventSO.OnEventRaised += RemoveFromList;
+
+#if DEBUG_MODE
+        spawnEnemyNowEvent.OnEventRaised += SpawnEnemyNow;
+        spawnBossNowEvent.OnEventRaised += SpawnBossNow;
+        needSpawnEnemyEvent.OnEventRaised += SetNeedSpawnEnemy;
+#endif
     }
 
     private void OnDisable()
     {
         animationClipFinishedEventSO.OnEventRaised -= RandomlySpawnEnemies;
         enemyDestroyEventSO.OnEventRaised -= RemoveFromList;
+
+#if DEBUG_MODE
+        spawnEnemyNowEvent.OnEventRaised -= SpawnEnemyNow;
+        spawnBossNowEvent.OnEventRaised -= SpawnBossNow;
+        needSpawnEnemyEvent.OnEventRaised -= SetNeedSpawnEnemy;
+#endif
     }
 
     private void Start()
@@ -55,7 +66,7 @@ public class EnemyManager : Singleton<EnemyManager>
     private void RandomlySpawnEnemies()
     {
 #if DEBUG_MODE
-        if (!spawnEnemy) return;
+        if (!needSpawnEnemy) return;
 #endif
         if (GameManager.Instance.CurrentGameState != GameState.Playing) return;
 
@@ -93,9 +104,14 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
-    public void SpawnEnemyNow()
-    {
+    #region Debug
 #if DEBUG_MODE
+    [Header("DEBUG")]
+    [SerializeField] private BooleanEventChannelSO needSpawnEnemyEvent;
+    [SerializeField] private VoidEventChannelSO spawnEnemyNowEvent;
+    [SerializeField] private VoidEventChannelSO spawnBossNowEvent;
+    private void SpawnEnemyNow()
+    {
         enemyAmount = Mathf.Clamp(enemyAmount, minEnemyAmount + waveNumber / bossWave, maxEnemyAmount);
         currentEnemyAmount += enemyAmount;
 
@@ -103,14 +119,17 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             ObjectPoolManager.Release(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]);
         }
-#endif
     }
-    public void SpawnBossNow()
+    private void SpawnBossNow()
     {
-#if DEBUG_MODE
         currentEnemyAmount += 1;
 
         ObjectPoolManager.Release(bossPrefabs[Random.Range(0, bossPrefabs.Length)]);
     }
+    private void SetNeedSpawnEnemy(bool value)
+    {
+        needSpawnEnemy = value;
+    }
 #endif
+    #endregion
 }

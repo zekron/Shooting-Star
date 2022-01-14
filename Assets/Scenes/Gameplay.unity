@@ -3434,6 +3434,9 @@ MonoBehaviour:
   enemyLevelUpEventSO: {fileID: 11400000, guid: 0f5e4a3a52f679c4bb1481a05fad350a, type: 2}
   enemyDestroyEventSO: {fileID: 11400000, guid: e9e2acc5f0afdc34bbef215a61e597cc, type: 2}
   animationClipFinishedEventSO: {fileID: 11400000, guid: 69ac34fb1692e5f46a568e039132f56f, type: 2}
+  needSpawnEnemyEvent: {fileID: 11400000, guid: 5d3e4e4425e3a554fa19229ae1fe371d, type: 2}
+  spawnEnemyNowEvent: {fileID: 11400000, guid: 1734caa24fd862f499f9e0c6d8bcb122, type: 2}
+  spawnBossNowEvent: {fileID: 11400000, guid: 02a87be50f58fbc4084abbbb3d49c92d, type: 2}
 --- !u!4 &1720380483
 Transform:
   m_ObjectHideFlags: 0

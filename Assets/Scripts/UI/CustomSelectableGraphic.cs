@@ -9,14 +9,13 @@ using UnityEngine.UI;
 public class CustomSelectableGraphic : Graphic, IPointerEnterHandler, IPointerExitHandler
 {
     [Space(), Header("Custom")]
-    [SerializeField] private PlayerProfileSO profile;
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private ProfileEventChannelSO profileEventSO;
+    [SerializeField] private IntEventChannelSO profileIndexEventSO;
     [SerializeField] private BooleanEventChannelSO[] booleanEventSO;
+    [SerializeField] private int profileIndex;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        profileEventSO.RaiseEvent(profile, playerPrefab);
+        profileIndexEventSO.RaiseEvent(profileIndex);
         for (int i = 0; i < booleanEventSO.Length; i++)
         {
             booleanEventSO[i].RaiseEvent(false);

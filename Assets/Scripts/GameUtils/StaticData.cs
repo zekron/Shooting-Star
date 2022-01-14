@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class StaticData
@@ -54,6 +51,14 @@ public static class StaticData
         return subWeaponType + 1 >= SubWeaponType.MAX ? 0 : subWeaponType + 1;
     }
 
+}
+
+public enum MuzzlePower
+{
+    Single,
+    Double,
+    Triple,
+    Quadruple,
 }
 
 public enum GameState

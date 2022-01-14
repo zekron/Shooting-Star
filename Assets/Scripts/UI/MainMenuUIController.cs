@@ -15,10 +15,12 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Button buttonQuit;
 
     [Header("==== PLAYERSELECTION ====")]
-    [SerializeField] private ProfileEventChannelSO profileEventSO;
+    [SerializeField] private PlayerProfileSO[] playerProfiles;
+    [SerializeField] private IntEventChannelSO profileIndexEventSO;
     [SerializeField] private PlayerProfileGraphic profileGraphic;
     [SerializeField] private Button buttonSubmit;
     [SerializeField] private Button buttonCancel;
+    private bool hasSelectedModel = false;
 
     [Header("Options")]
     [SerializeField] private Canvas optionCanvas;
@@ -32,15 +34,17 @@ public class MainMenuUIController : MonoBehaviour
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonSubmit.gameObject.GetInstanceID(), OnButtonSubmitClicked);
         ButtonPressedBehavior.buttonFunctionTable.Add(buttonCancel.gameObject.GetInstanceID(), OnButtonCancelClicked);
 
-        profileEventSO.OnEventRaised += RefreshSelectionPanel;
+        profileIndexEventSO.OnEventRaised += RefreshSelectionPanel;
         optionQuitEventSO.OnEventRaised += CloseOptionCanvas;
+
+        hasSelectedModel = false;
     }
 
     void OnDisable()
     {
         ButtonPressedBehavior.buttonFunctionTable.Clear();
 
-        profileEventSO.OnEventRaised -= RefreshSelectionPanel;
+        profileIndexEventSO.OnEventRaised -= RefreshSelectionPanel;
         optionQuitEventSO.OnEventRaised -= CloseOptionCanvas;
     }
 
@@ -92,21 +96,23 @@ public class MainMenuUIController : MonoBehaviour
         UIInput.Instance.SelectUI(buttonStart);
     }
 
-    private void RefreshSelectionPanel(PlayerProfileSO profile, GameObject gameObject)
+    private void RefreshSelectionPanel(int index)
     {
         //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_UI;
         playerSelectionCanvas.enabled = true;
-        //TODO
+
+        PlayerProfileSO profile = playerProfiles[index];
         profileGraphic.SetValues(profile.DataNormalization(profile.MaxHealth, profile.MoveSpeed, profile.FireInterval, profile.DodgeCost));
-        GameManager.Instance.CurrentPlayerModel = gameObject;
 
         UIInput.Instance.SelectUI(buttonSubmit);
+        hasSelectedModel = true;
     }
     private void OnButtonSubmitClicked()
     {
         //playerSelectionCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
         //tipsCanvas.gameObject.layer = StaticData.LAYER_OUTUI;
-        if (!GameManager.Instance.CurrentPlayerModel) return;
+        if (!hasSelectedModel) return;
+
         playerSelectionCanvas.enabled = false;
         tipsCanvas.enabled = false;
 

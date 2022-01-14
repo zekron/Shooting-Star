@@ -1,0 +1,17 @@
+{
+    "name": "ShootingStar.Audio",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b45ae0958457c00498474bcbb6e64ffe",
+        "GUID:7e35d5909e6590b408108d026ba85f32"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

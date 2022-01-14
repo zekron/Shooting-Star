@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class DebugCanvasController : MonoBehaviour
 {
     [SerializeField] private BooleanEventChannelSO needSpawnEnemyEvent;
-    [SerializeField] private BooleanEventChannelSO invincibleTextEvent;
+    [SerializeField] private BooleanEventChannelSO SetInvincibleEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteBombEvent;
 
@@ -25,7 +25,7 @@ public class DebugCanvasController : MonoBehaviour
     private void OnEnable()
     {
         needSpawnEnemyEvent.OnEventRaised += SetSpawnEnemy;
-        invincibleTextEvent.OnEventRaised += SetPlayerInvincible;
+        SetInvincibleEvent.OnEventRaised += SetPlayerInvincible;
         setInfiniteEnergyEvent.OnEventRaised += SetInfiniteEnergy;
         setInfiniteBombEvent.OnEventRaised += SetInfiniteBomb;
     }
@@ -33,7 +33,7 @@ public class DebugCanvasController : MonoBehaviour
     private void OnDisable()
     {
         needSpawnEnemyEvent.OnEventRaised -= SetSpawnEnemy;
-        invincibleTextEvent.OnEventRaised -= SetPlayerInvincible;
+        SetInvincibleEvent.OnEventRaised -= SetPlayerInvincible;
         setInfiniteEnergyEvent.OnEventRaised -= SetInfiniteEnergy;
         setInfiniteBombEvent.OnEventRaised -= SetInfiniteBomb;
     }

@@ -70390,8 +70390,9 @@ MonoBehaviour:
   laserMaterials:
   - {fileID: 2100000, guid: b0a2ce8628373864c9be203fff1837ec, type: 2}
   - {fileID: 2100000, guid: 2694f347c83ac4f4591713ffa4ddb498, type: 2}
-  IsInfiniteEnergy: 0
-  IsInvincible: 0
+  setinvincibleEvent: {fileID: 11400000, guid: 6f78e8966de0814498486926ec452cbf, type: 2}
+  setInfiniteEnergyEvent: {fileID: 11400000, guid: df2c816dc6c76634a94210f2968c920b, type: 2}
+  setInfiniteBombEvent: {fileID: 11400000, guid: 8cab72d2e886f5549926635577481fc1, type: 2}
 --- !u!114 &344478492671050572
 MonoBehaviour:
   m_ObjectHideFlags: 0

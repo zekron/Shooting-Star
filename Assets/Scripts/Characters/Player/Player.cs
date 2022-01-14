@@ -74,10 +74,6 @@ public class Player : Character
     private WaitForSeconds waitForOverdriveInterval;
     private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    public bool IsInfiniteEnergy = false;
-    public bool IsInfiniteBomb = false;
-    public bool IsInvincible = false;
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -98,6 +94,12 @@ public class Player : Character
         restoreShieldEventSO.OnEventRaised += GetHealing;
         updatePlayerEnergyEventSO.OnEventRaised += GetEnergy;
         updateBombEventSO.OnEventRaised += GetMissile;
+
+#if DEBUG_MODE
+        setinvincibleEvent.OnEventRaised += SetInvincible;
+        setInfiniteEnergyEvent.OnEventRaised += SetInfiniteEnergy;
+        setInfiniteBombEvent.OnEventRaised += SetInfiniteBomb;
+#endif
 
         SetProfile();
     }
@@ -120,6 +122,12 @@ public class Player : Character
         restoreShieldEventSO.OnEventRaised -= GetHealing;
         updatePlayerEnergyEventSO.OnEventRaised -= GetEnergy;
         updateBombEventSO.OnEventRaised -= GetMissile;
+
+#if DEBUG_MODE
+        setinvincibleEvent.OnEventRaised -= SetInvincible;
+        setInfiniteEnergyEvent.OnEventRaised -= SetInfiniteEnergy;
+        setInfiniteBombEvent.OnEventRaised -= SetInfiniteBomb;
+#endif
 
         base.OnDisable();
     }
@@ -443,5 +451,22 @@ public class Player : Character
     {
         missile.Launch(multiMuzzles[0].muzzle, isDebugMode: IsInfiniteBomb);
     }
+    #endregion
+
+    #region Debug
+#if DEBUG_MODE
+    [Header("DEBUG")]
+    [SerializeField] private BooleanEventChannelSO setinvincibleEvent;
+    [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
+    [SerializeField] private BooleanEventChannelSO setInfiniteBombEvent;
+
+    private bool IsInfiniteEnergy = false;
+    private bool IsInfiniteBomb = false;
+    private bool IsInvincible = false;
+
+    private void SetInvincible(bool value) { IsInvincible = value; }
+    private void SetInfiniteEnergy(bool value) { IsInfiniteEnergy = value; }
+    private void SetInfiniteBomb(bool value) { IsInfiniteBomb = value; }
+#endif
     #endregion
 }

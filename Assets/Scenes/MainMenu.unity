@@ -296,11 +296,10 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  profile: {fileID: 11400000, guid: 9a07e7d85722c824ba7589a778ed8b9f, type: 2}
-  playerPrefab: {fileID: 5976628406566106873, guid: 8834d7a6309102d44a2066c7cf30be4f, type: 3}
-  profileEventSO: {fileID: 11400000, guid: 3ca5468680492864eb159a9d67272fee, type: 2}
+  profileIndexEventSO: {fileID: 11400000, guid: aa19f20b9bc9d2044875971dd7be72f5, type: 2}
   booleanEventSO:
   - {fileID: 11400000, guid: 0d526fc050bc8e344a3fc9c35ea65785, type: 2}
+  profileIndex: 2
 --- !u!222 &140361232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -500,11 +499,10 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  profile: {fileID: 11400000, guid: c3cc9e27c3520ca43aa9be8c87c957cf, type: 2}
-  playerPrefab: {fileID: 5908416648923392752, guid: 0129793477750d147937d6fc933d7b8a, type: 3}
-  profileEventSO: {fileID: 11400000, guid: 3ca5468680492864eb159a9d67272fee, type: 2}
+  profileIndexEventSO: {fileID: 11400000, guid: aa19f20b9bc9d2044875971dd7be72f5, type: 2}
   booleanEventSO:
   - {fileID: 11400000, guid: 89400fef0b2a6cc4bb5a24dd84ab5a52, type: 2}
+  profileIndex: 1
 --- !u!222 &377629929
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1109,11 +1107,10 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  profile: {fileID: 11400000, guid: 126c468a7022bbd489adfc96a002bff2, type: 2}
-  playerPrefab: {fileID: 6435389010079767255, guid: 69bf9c8dfe6a9e5479d5093236b17108, type: 3}
-  profileEventSO: {fileID: 11400000, guid: 3ca5468680492864eb159a9d67272fee, type: 2}
+  profileIndexEventSO: {fileID: 11400000, guid: aa19f20b9bc9d2044875971dd7be72f5, type: 2}
   booleanEventSO:
   - {fileID: 11400000, guid: a88fb12bdb6ea694dbdf5ec6ffaad71b, type: 2}
+  profileIndex: 0
 --- !u!222 &787071474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3426,7 +3423,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -4150,7 +4147,11 @@ MonoBehaviour:
   buttonStart: {fileID: 587049127}
   buttonOptions: {fileID: 942587086}
   buttonQuit: {fileID: 1298710818}
-  profileEventSO: {fileID: 11400000, guid: 3ca5468680492864eb159a9d67272fee, type: 2}
+  playerProfiles:
+  - {fileID: 11400000, guid: 126c468a7022bbd489adfc96a002bff2, type: 2}
+  - {fileID: 11400000, guid: c3cc9e27c3520ca43aa9be8c87c957cf, type: 2}
+  - {fileID: 11400000, guid: 9a07e7d85722c824ba7589a778ed8b9f, type: 2}
+  profileIndexEventSO: {fileID: 11400000, guid: aa19f20b9bc9d2044875971dd7be72f5, type: 2}
   profileGraphic: {fileID: 1103412681}
   buttonSubmit: {fileID: 1329773064}
   buttonCancel: {fileID: 832326385}

@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
     [SerializeField] private GameState gameState = GameState.MainMenu;
+    [SerializeField] private IntEventChannelSO profileIndexEventSO;
     [SerializeField] private GameStateEventChannelSO setGameStateEventSO;
 
-    [SerializeField] private GameObject currentPlayerModel;
+    [SerializeField] private GameObject[] playerModels;
+
+    private int playerModelIndex;
 
     public GameState CurrentGameState
     {
@@ -17,8 +21,6 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
-    public GameObject CurrentPlayerModel { get => currentPlayerModel; set => currentPlayerModel = value; }
-
     private void OnEnable()
     {
         Viewport.Initialize();
@@ -28,6 +30,12 @@ public class GameManager : PersistentSingleton<GameManager>
 #endif
 
         setGameStateEventSO.OnEventRaised += ReleasePlayer;
+        profileIndexEventSO.OnEventRaised += RefreshPlayerModelIndex;
+    }
+
+    private void RefreshPlayerModelIndex(int value)
+    {
+        playerModelIndex = value;
     }
 
     private void ReleasePlayer(GameState state)
@@ -37,13 +45,10 @@ public class GameManager : PersistentSingleton<GameManager>
 #if UNITY_EDITOR
         if (!GameObject.FindGameObjectWithTag("Player"))
         {
-            if (currentPlayerModel)
-                ObjectPoolManager.Release(currentPlayerModel);
-            else
-                throw new System.Exception("Null Player model.");
+            ObjectPoolManager.Release(playerModels[playerModelIndex]);
         }
 #else
-        ObjectPoolManager.Release(CurrentPlayerModel);
+        ObjectPoolManager.Release(playerModels[playerModelIndex]);
 #endif
     }
 }

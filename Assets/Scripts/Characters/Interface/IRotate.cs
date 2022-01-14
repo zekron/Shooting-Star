@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-interface IRotate
+public interface IRotate
 {
     void Rotate(Quaternion moveRotation);
 }

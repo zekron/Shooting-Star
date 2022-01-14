@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needSpawnEnemyEvent: {fileID: 11400000, guid: 5d3e4e4425e3a554fa19229ae1fe371d, type: 2}
-  invincibleTextEvent: {fileID: 11400000, guid: 4434ac554f824b64782ce6348bd2dc14, type: 2}
+  SetInvincibleEvent: {fileID: 11400000, guid: 6f78e8966de0814498486926ec452cbf, type: 2}
   setInfiniteEnergyEvent: {fileID: 11400000, guid: df2c816dc6c76634a94210f2968c920b, type: 2}
   setInfiniteBombEvent: {fileID: 11400000, guid: 8cab72d2e886f5549926635577481fc1, type: 2}
   fpsText: {fileID: 6042447953882364329}

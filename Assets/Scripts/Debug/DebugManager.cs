@@ -7,14 +7,20 @@ public class DebugManager : MonoBehaviour
 {
     [SerializeField] private PlayerInputSO inputEvent;
     [SerializeField] private BooleanEventChannelSO needSpawnEnemyEvent;
-    [SerializeField] private BooleanEventChannelSO invincibleTextEvent;
+    [SerializeField] private VoidEventChannelSO spawnEnemyNowEvent;
+    [SerializeField] private VoidEventChannelSO spawnBossNowEvent;
+    [SerializeField] private BooleanEventChannelSO setinvincibleEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteEnergyEvent;
     [SerializeField] private BooleanEventChannelSO setInfiniteBombEvent;
 
     [SerializeField] private Canvas debugCanvas;
 
     private bool isOpenDebugCanvas = false;
-    private Player player;
+
+    private bool playerIsInvincible = false;
+    private bool playerIsInfiniteEnergy = false;
+    private bool playerIsInfiniteBomb = false;
+    private bool enemyIsSpawnEnemyAuto = true;
 
     private void Start()
     {
@@ -44,23 +50,19 @@ public class DebugManager : MonoBehaviour
         {
             debugCanvas = Instantiate(Resources.Load<Canvas>("Prefabs/Canvas_Debug"), GameObject.FindGameObjectWithTag("MainCanvas").transform);
         }
-        if (!player)
-        {
-            player = FindObjectOfType<Player>();
-        }
 
         debugCanvas.gameObject.SetActive(isOpenDebugCanvas = !isOpenDebugCanvas);
-        needSpawnEnemyEvent.RaiseEvent(EnemyManager.Instance.SpawnEnemy);
-        invincibleTextEvent.RaiseEvent(player.IsInvincible);
-        setInfiniteEnergyEvent.RaiseEvent(player.IsInfiniteEnergy);
-        setInfiniteBombEvent.RaiseEvent(player.IsInfiniteBomb);
+        needSpawnEnemyEvent.RaiseEvent(enemyIsSpawnEnemyAuto);
+        setinvincibleEvent.RaiseEvent(playerIsInvincible);
+        setInfiniteEnergyEvent.RaiseEvent(playerIsInfiniteEnergy);
+        setInfiniteBombEvent.RaiseEvent(playerIsInfiniteBomb);
     }
 
     private void InputEvent_onNeedSpawnEnemy()
     {
         if (isOpenDebugCanvas)
         {
-            needSpawnEnemyEvent.RaiseEvent(EnemyManager.Instance.SpawnEnemy = !EnemyManager.Instance.SpawnEnemy);
+            needSpawnEnemyEvent.RaiseEvent(enemyIsSpawnEnemyAuto = !enemyIsSpawnEnemyAuto);
         }
     }
 
@@ -68,7 +70,7 @@ public class DebugManager : MonoBehaviour
     {
         if (isOpenDebugCanvas)
         {
-            EnemyManager.Instance.SpawnEnemyNow();
+            spawnEnemyNowEvent.RaiseEvent();
         }
     }
 
@@ -76,7 +78,7 @@ public class DebugManager : MonoBehaviour
     {
         if (isOpenDebugCanvas)
         {
-            EnemyManager.Instance.SpawnBossNow();
+            spawnBossNowEvent.RaiseEvent();
         }
     }
 
@@ -84,7 +86,7 @@ public class DebugManager : MonoBehaviour
     {
         if (isOpenDebugCanvas)
         {
-            invincibleTextEvent.RaiseEvent(player.IsInvincible = !player.IsInvincible);
+            setinvincibleEvent.RaiseEvent(playerIsInvincible = !playerIsInvincible);
         }
     }
 
@@ -92,7 +94,7 @@ public class DebugManager : MonoBehaviour
     {
         if (isOpenDebugCanvas)
         {
-            setInfiniteEnergyEvent.RaiseEvent(player.IsInfiniteEnergy = !player.IsInfiniteEnergy);
+            setInfiniteEnergyEvent.RaiseEvent(playerIsInfiniteEnergy = !playerIsInfiniteEnergy);
         }
     }
 
@@ -100,7 +102,7 @@ public class DebugManager : MonoBehaviour
     {
         if (isOpenDebugCanvas)
         {
-            setInfiniteBombEvent.RaiseEvent(player.IsInfiniteBomb = !player.IsInfiniteBomb);
+            setInfiniteBombEvent.RaiseEvent(playerIsInfiniteBomb = !playerIsInfiniteBomb);
         }
     }
 }
