@@ -210,6 +210,8 @@ MonoBehaviour:
     size: 10
   - prefab: {fileID: 578449712315536124, guid: 043c50ba956a528459ad2b419d981c72, type: 3}
     size: 10
+  - prefab: {fileID: 7401954985551557210, guid: b9fcfcaa85d2384489aa9b6f66e97679, type: 3}
+    size: 10
   playerProjectilePools:
   - prefab: {fileID: 3667453350895143958, guid: 671b036955107b34caead1ece7a7e305, type: 3}
     size: 76
@@ -1202,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1320105520496248032, guid: f7970e0732a6cde439b6731404bd83cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1320105520496248032, guid: f7970e0732a6cde439b6731404bd83cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3423,6 +3425,7 @@ MonoBehaviour:
   - {fileID: 8921546478736950322, guid: 2ab3ff156c8f1c149a4d4fe513936685, type: 3}
   - {fileID: 578449712315536124, guid: c09767a80c39dca498c95b2e5be1afd8, type: 3}
   - {fileID: 578449712315536124, guid: 043c50ba956a528459ad2b419d981c72, type: 3}
+  - {fileID: 7401954985551557210, guid: b9fcfcaa85d2384489aa9b6f66e97679, type: 3}
   bossPrefabs:
   - {fileID: 5735159873588532432, guid: 0c16c635e0e176a4ea06b212dbb5b996, type: 3}
   - {fileID: 4854162662032890326, guid: bb85ad33d68908b4f87b6c5615831140, type: 3}
@@ -3843,6 +3846,10 @@ PrefabInstance:
     - target: {fileID: 2378928769012308528, guid: 89976ebcbb7ef1743aac89813407f286, type: 3}
       propertyPath: m_Name
       value: GameMgr
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378928769012308529, guid: 89976ebcbb7ef1743aac89813407f286, type: 3}
+      propertyPath: playerModelIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2378928769012308530, guid: 89976ebcbb7ef1743aac89813407f286, type: 3}
       propertyPath: m_RootOrder

@@ -28,6 +28,7 @@ public class XMLReader
     private static void LoadXMLToSO()
     {
         LoadEnemyXMLToSO();
+        LoadEnemyGroupXMLToSO();
         LoadPlayerXMLToSO();
         LoadBossXMLToSO();
     }
@@ -53,6 +54,37 @@ public class XMLReader
                 XmlElement xmlElement = nodeList[i] as XmlElement;
                 UpdateProfiles(sb, xmlElement, enemyProfiles);
                 isSuccess = PutInProfileSO<EnemyProfileSO>(XMLElement.Enemy, enemyProfiles, FILE_NAME_ENEMY);
+            }
+        }
+
+        if (isSuccess)
+            Debug.Log(string.Format("<color=green>Load <color=yellow>{0}.xml</color> success!</color>", xml.name));
+        else
+            Debug.LogError(string.Format("<color=red>Fail to load <color=yellow>{0}.xml</color> into profile!</color>", xml.name));
+    }
+    #endregion
+
+    #region EnemyGroup
+    private static List<string> enemyGroupProfiles = new List<string>();
+    private const string PATH_TO_ENEMYGROUPXML = "EnemyGroupProfile";
+    private const string FILE_NAME_ENEMYGROUP = "EnemyGroupProfile SO";
+
+    [MenuItem("Custom Menu/XML Reader/Load Enemy Group Profiles")]
+    private static void LoadEnemyGroupXMLToSO()
+    {
+        bool isSuccess = false;
+        if (CheckXML(out xml, PATH_TO_ENEMYGROUPXML))
+        {
+            enemyGroupProfiles.Clear();
+
+            xmlDoc.LoadXml(xml.text);
+            nodeList = xmlDoc.SelectSingleNode(ROOT_NODE).ChildNodes;
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                sb.Clear();
+                XmlElement xmlElement = nodeList[i] as XmlElement;
+                UpdateProfiles(sb, xmlElement, enemyGroupProfiles);
+                isSuccess = PutInProfileSO<EnemyProfileSO>(XMLElement.Enemy, enemyGroupProfiles, FILE_NAME_ENEMYGROUP);
             }
         }
 

@@ -32,6 +32,11 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(nameof(RandomlyMovingCoroutine));
     }
 
+    protected virtual void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     protected void TryGetPlayerTransform()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -46,11 +51,6 @@ public class EnemyController : MonoBehaviour
             targetPosition.x = Mathf.Clamp(x, Viewport.MinX + paddingX, Viewport.MaxX - paddingX);
             targetPosition.y = Mathf.Clamp(y, Viewport.MinY + paddingY, Viewport.MaxY - paddingY);
         }
-    }
-
-    protected virtual void OnDisable()
-    {
-        StopAllCoroutines();
     }
 
     protected virtual IEnumerator RandomlyMovingCoroutine()

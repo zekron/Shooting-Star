@@ -8,7 +8,9 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] private GameStateEventChannelSO setGameStateEventSO;
 
     [SerializeField] private GameObject[] playerModels;
-
+#if UNITY_EDITOR
+    [SerializeField]
+#endif
     private int playerModelIndex;
 
     public GameState CurrentGameState

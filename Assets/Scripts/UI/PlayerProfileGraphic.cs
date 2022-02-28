@@ -21,7 +21,7 @@ public class PlayerProfileGraphic : Graphic
     [SerializeField] private float boundWidth = 5;
 
     private List<Vector3> verticesPoints = new List<Vector3>();
-    private List<LinePoint> boundPoints = new List<LinePoint>();
+    private List<LineMesh> boundPoints = new List<LineMesh>();
     private Coroutine valueCoroutine;
 
     private float[] currentValues;
@@ -112,12 +112,12 @@ public class PlayerProfileGraphic : Graphic
             if (i > 0)  //线框第二个顶点处理
             {
                 //加一份前个顶点的旋转量
-                boundPoints.Add(new LinePoint(center,
+                boundPoints.Add(new LineMesh(center,
                 vertices,
-                LinePoint.RotateAroundPoint(vertices, center, Mathf.PI)));
+                MyMath.LinePoint.RotateAroundPoint(vertices, center, Mathf.PI)));
 
                 //两个顶点连线
-                LinePoint.DrawLine(vh, boundPoints[i - 1], boundPoints[i], boundColor);
+                LineMesh.DrawLine(vh, boundPoints[i - 1], boundPoints[i], boundColor);
             }
 
             //新的旋转量
@@ -128,14 +128,14 @@ public class PlayerProfileGraphic : Graphic
 
             if (i == 0)
             {
-                boundPoints.Add(new LinePoint(center,
+                boundPoints.Add(new LineMesh(center,
                     vertices,
-                    LinePoint.RotateAroundPoint(vertices, center, Mathf.PI)));
+                    MyMath.LinePoint.RotateAroundPoint(vertices, center, Mathf.PI)));
             }
             else
             {
                 boundPoints[i].AddVertics(vertices,
-                    LinePoint.RotateAroundPoint(vertices, center, Mathf.PI));
+                    MyMath.LinePoint.RotateAroundPoint(vertices, center, Mathf.PI));
             }
 
             if (i == vertexAmount - 1)
@@ -144,8 +144,8 @@ public class PlayerProfileGraphic : Graphic
                 vertices.y = boundPoints[0].Center.y + b;
 
                 boundPoints[0].AddVertics(vertices,
-                    LinePoint.RotateAroundPoint(vertices, boundPoints[0].Center, Mathf.PI));
-                LinePoint.DrawLine(vh, boundPoints[i], boundPoints[0], boundColor);
+                    MyMath.LinePoint.RotateAroundPoint(vertices, boundPoints[0].Center, Mathf.PI));
+                LineMesh.DrawLine(vh, boundPoints[i], boundPoints[0], boundColor);
             }
         }
     }

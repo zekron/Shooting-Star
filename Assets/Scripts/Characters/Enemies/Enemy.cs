@@ -14,6 +14,7 @@ public class Enemy : Character
     [SerializeField] protected InventoryPackage[] inventoryPackage;
 
     [SerializeField] protected int levelUpFactor = 2;
+    [SerializeField] protected bool isInGroup = false;
 
     protected EnemyController enemyController;
     private List<Inventory> currentDropInventory = new List<Inventory>();
@@ -43,7 +44,7 @@ public class Enemy : Character
     {
         StopAllCoroutines();
         base.OnDisable();
-        enemyDestroyEventSO.RaiseEvent();
+        if (!isInGroup) enemyDestroyEventSO.RaiseEvent();
     }
 
     protected override void SetProfile()
@@ -51,7 +52,7 @@ public class Enemy : Character
         maxHealth = enemyProfile.MaxHealth;
         MoveSpeed = enemyProfile.MoveSpeed;
         MoveRotationAngle = enemyProfile.MoveRotationAngle;
-        enemyController.SetMoveProfile(MoveSpeed, MoveRotationAngle);
+        enemyController?.SetMoveProfile(MoveSpeed, MoveRotationAngle);
         minFireInterval = enemyProfile.MinFireInterval;
         maxFireInterval = enemyProfile.MaxFireInterval;
         deathEnergyBonus = enemyProfile.DeathEnergyBonus;

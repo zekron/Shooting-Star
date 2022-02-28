@@ -13,6 +13,7 @@ public class PlayerLaser : PlayerProjectile
     private float laserWidth = 0.5f;
     private Vector2 defaultOffset = new Vector2(0, DEFAULT_LENGTH / 2);
     private Vector2 defaultSize = new Vector2(0.2f, DEFAULT_LENGTH);
+    private Vector2 edgePosition = new Vector2();
     private Transform movefollow;
 
     protected override void OnEnable()
@@ -41,11 +42,14 @@ public class PlayerLaser : PlayerProjectile
             }
             else
             {
-                laserRenderer.SetPosition(0, transform.position);
-                laserRenderer.SetPosition(1, transform.position + Vector3.up * 50);
+                edgePosition.x = transform.position.x;
+                edgePosition.y = Viewport.MaxY + 1;
 
-                defaultOffset.y = DEFAULT_LENGTH / 2;
-                defaultSize.y = DEFAULT_LENGTH;
+                laserRenderer.SetPosition(0, transform.position);
+                laserRenderer.SetPosition(1, edgePosition);
+
+                defaultOffset.y = (Viewport.MaxY + 1 - transform.position.y) / 2;
+                defaultSize.y = Viewport.MaxY + 1 - transform.position.y;
             }
             laserCollider.offset = defaultOffset;
             laserCollider.size = defaultSize;

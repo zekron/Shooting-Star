@@ -10,7 +10,7 @@ public class IPointerTest : MonoBehaviour
     [SerializeField] private float maxValue = 5;
     [SerializeField, Range(3, 36)] private int verticAmount = 4;
     [SerializeField] private MeshFilter filter;
-    [SerializeField] private List<LinePoint> linePoints = new List<LinePoint>();
+    [SerializeField] private List<LineMesh> linePoints = new List<LineMesh>();
 
     private float delta;
     private void Awake()
@@ -42,12 +42,12 @@ public class IPointerTest : MonoBehaviour
                 if (i > 0)  //线框第二个顶点处理
                 {
                     //加一份前个顶点的旋转量
-                    linePoints.Add(new LinePoint(new Vector3(x, y),
+                    linePoints.Add(new LineMesh(new Vector3(x, y),
                     new Vector3(x + a, y + b),
-                    LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
+                    MyMath.LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
 
                     //两个顶点连线
-                    LinePoint.DrawLine(vh, linePoints[i - 1], linePoints[i], Color.green);
+                    LineMesh.DrawLine(vh, linePoints[i - 1], linePoints[i], Color.green);
                 }
 
                 //新的旋转量
@@ -56,21 +56,21 @@ public class IPointerTest : MonoBehaviour
 
                 if (i == 0)
                 {
-                    linePoints.Add(new LinePoint(new Vector3(x, y),
+                    linePoints.Add(new LineMesh(new Vector3(x, y),
                         new Vector3(x + a, y + b),
-                        LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
+                        MyMath.LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI)));
                 }
                 else
                 {
                     linePoints[i].AddVertics(new Vector3(x + a, y + b),
-                        LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI));
+                        MyMath.LinePoint.RotateAroundPoint(new Vector3(x + a, y + b), new Vector3(x, y), Mathf.PI));
                 }
 
                 if (i == verticAmount - 1)
                 {
                     linePoints[0].AddVertics(new Vector3(linePoints[0].Center.x + a, linePoints[0].Center.y + b),
-                        LinePoint.RotateAroundPoint(new Vector3(linePoints[0].Center.x + a, linePoints[0].Center.y + b), linePoints[0].Center, Mathf.PI));
-                    LinePoint.DrawLine(vh, linePoints[i], linePoints[0], Color.green);
+                        MyMath.LinePoint.RotateAroundPoint(new Vector3(linePoints[0].Center.x + a, linePoints[0].Center.y + b), linePoints[0].Center, Mathf.PI));
+                    LineMesh.DrawLine(vh, linePoints[i], linePoints[0], Color.green);
                 }
             }
 
